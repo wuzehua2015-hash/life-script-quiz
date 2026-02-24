@@ -492,6 +492,9 @@
     function showShareModal() {
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
+        
+        // 生成分享链接（包含结果参数）
+        const shareUrl = `https://wuzehua2015-hash.github.io/life-script-quiz/?result=${state.result.archetype}`;
 
         // 生成分享海报HTML
         elements.modal.sharePosterContainer.innerHTML = `
@@ -500,12 +503,22 @@
                 <h2 style="font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: #d4af37; margin-bottom: 0.5rem;">人生剧本测试</h2>
                 <div style="font-size: 2rem; font-weight: 700; color: #f5f5f5; margin: 1rem 0;">${archetype.name}</div>
                 <div style="font-size: 0.9rem; color: #a0a0b0; margin-bottom: 1.5rem; font-style: italic;">${archetype.tagline}</div>
-                <div style="width: 100px; height: 100px; background: white; margin: 1rem auto; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0a0a0f; font-size: 0.7rem;">
-                    扫码测试<br>你的剧本
-                </div>
-                <div style="font-size: 0.75rem; color: #6a6a7a; margin-top: 1rem;">wuzehua2015-hash.github.io/life-script-quiz</div>
+                <div id="qrcode-container" style="width: 120px; height: 120px; margin: 1rem auto; background: white; padding: 8px; border-radius: 8px;"></div>
+                <div style="font-size: 0.75rem; color: #6a6a7a; margin-top: 1rem;">扫码测试你的人生剧本</div>
             </div>
         `;
+
+        // 生成真实二维码
+        setTimeout(() => {
+            new QRCode(document.getElementById('qrcode-container'), {
+                text: shareUrl,
+                width: 104,
+                height: 104,
+                colorDark: '#0a0a0f',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }, 100);
 
         elements.modal.shareModal.classList.add('active');
     }
