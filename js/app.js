@@ -434,7 +434,42 @@
             </div>
         `).join('');
 
-        // 维度标签
+        // 维度详细解读卡片
+        const dimensionCardsHtml = Object.entries(dims).map(([dim, type]) => {
+            const dimData = data.DIMENSIONS[dim];
+            const typeData = dimData.types[type];
+            return `
+                <div class="dimension-detail-card">
+                    <div class="dim-header">
+                        <span class="dim-title">${dimData.name}</span>
+                        <span class="dim-type">${typeData.name}</span>
+                    </div>
+                    <div class="dim-content">
+                        <p class="dim-desc">${typeData.fullDesc}</p>
+                        <div class="dim-scene">
+                            <span class="scene-label">💭 日常场景</span>
+                            <p>${typeData.dailyScene}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // 插入维度解读到页面
+        const dimAnalysisContainer = document.getElementById('dimension-analysis-container');
+        if (dimAnalysisContainer) {
+            dimAnalysisContainer.innerHTML = `
+                <div class="dimension-analysis-section">
+                    <h3>📊 你的四维画像详解</h3>
+                    <p class="analysis-intro">以下是你四个维度的详细解读。看看这些描述，是不是有一种「这就是我」的感觉？</p>
+                    <div class="dimension-cards-grid">
+                        ${dimensionCardsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // 维度标签（简化版）
         const dimNames = {
             drive: '核心驱动力',
             world: '与世界的关系',
