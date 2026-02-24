@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>算法测试</title>
+</head>
+<body>
+    <h1>人生剧本算法测试</h1>
+    <div id="result"></div>
+    
+    <script src="js/data.js"></script>
+    <script>
+        // 模拟测试数据
+        const testScores = {
+            drive: { achievement: 6, relationship: 0, security: 0, unique: 0, service: 0 },
+            world: { battle: 6, victim: 0, cooperation: 0, detachment: 0, control: 0 },
+            self: { perfection: 6, inferiority: 0, narcissism: 0, authenticity: 0, lost: 0 },
+            time: { chasing: 6, stagnation: 0, exploration: 0, fate: 0, creation: 0 }
+        };
+        
+        // 计算每个维度的最高分型
+        const dimensionResults = {};
+        Object.keys(testScores).forEach(dim => {
+            const scores = testScores[dim];
+            const maxType = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            dimensionResults[dim] = maxType;
+        });
+        
+        console.log('维度结果:', dimensionResults);
+        
+        // 检查 QUIZ_DATA
+        console.log('QUIZ_DATA:', window.QUIZ_DATA);
+        console.log('DYNAMIC_DESCRIPTIONS:', window.QUIZ_DATA?.DYNAMIC_DESCRIPTIONS);
+        
+        // 显示结果
+        document.getElementById('result').innerHTML = `
+            <p>核心驱动力: ${dimensionResults.drive}</p>
+            <p>与世界关系: ${dimensionResults.world}</p>
+            <p>与自我关系: ${dimensionResults.self}</p>
+            <p>与时间关系: ${dimensionResults.time}</p>
+            <p>DYNAMIC_DESCRIPTIONS: ${window.QUIZ_DATA?.DYNAMIC_DESCRIPTIONS ? '存在' : '不存在'}</p>
+        `;
+    </script>
+</body>
+</html>
