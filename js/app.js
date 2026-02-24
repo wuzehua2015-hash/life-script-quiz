@@ -257,23 +257,28 @@
     function finishQuiz() {
         switchScreen('loading');
         
-        // 模拟计算时间
-        setTimeout(() => {
+        // 确保数据已加载后再计算和渲染
+        const checkAndCalculate = () => {
+            if (!window.QUIZ_DATA) {
+                setTimeout(checkAndCalculate, 100);
+                return;
+            }
             calculateResult();
             renderResult();
             switchScreen('result');
-        }, 2000);
+        };
+        
+        // 模拟计算时间
+        setTimeout(checkAndCalculate, 2000);
     }
 
     // 计算结果 - 改进版：计算匹配度和动态描述
     function calculateResult() {
-        // 等待数据加载
-        if (!window.QUIZ_DATA) {
-            setTimeout(calculateResult, 100);
+        const data = window.QUIZ_DATA;
+        if (!data) {
+            console.error('QUIZ_DATA not loaded');
             return;
         }
-        
-        const data = window.QUIZ_DATA;
         
         // 计算每个维度的详细结果（包括得分和百分比）
         const dimensionResults = {};
@@ -318,6 +323,8 @@
             allMatches: archetypeMatches,
             dynamicDescription: dynamicDescription
         };
+        
+        console.log('计算结果:', state.result);
     }
 
     // 计算与所有原型的匹配度
