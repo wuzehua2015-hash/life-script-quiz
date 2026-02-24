@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>人生剧本测试 - 你正在主演哪部剧？</title>
-    <meta name="description" content="基于PTK人生剧本理论的互动测试，发现你正在主演的人生剧本">
+    <title>人生剧本测试 v2.0 - 你正在主演哪部剧？</title>
+    <meta name="description" content="基于PTK人生剧本理论的互动测试，发现你正在主演的人生剧本，匹配80个经典影视角色">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -14,6 +14,7 @@
         <div class="film-grain"></div>
         <div class="spotlight"></div>
         <div class="intro-content">
+            <div class="version-badge">v2.0 角色觉醒</div>
             <div class="clapperboard">
                 <div class="clapper-top">
                     <span>SCENE 1</span>
@@ -29,6 +30,22 @@
                 <p>你以为你在随机应变，其实你的「编剧」早已写好了剧本</p>
             </div>
             
+            <!-- v2.0 新增特性展示 -->
+            <div class="v2-features">
+                <div class="v2-feature-item">
+                    <span class="v2-feature-icon">🎭</span>
+                    <span class="v2-feature-text">80个经典角色</span>
+                </div>
+                <div class="v2-feature-item">
+                    <span class="v2-feature-icon">🔮</span>
+                    <span class="v2-feature-text">智能混合匹配</span>
+                </div>
+                <div class="v2-feature-item">
+                    <span class="v2-feature-icon">📸</span>
+                    <span class="v2-feature-text">精美分享海报</span>
+                </div>
+            </div>
+
             <!-- 理论介绍 -->
             <div class="theory-intro">
                 <h3>🎭 这个测试会告诉你什么</h3>
@@ -39,9 +56,9 @@
                         <div class="theory-desc">是孤军奋战的励志片、讨好别人的苦情戏，还是随遇而安的文艺片？</div>
                     </div>
                     <div class="theory-card">
-                        <div class="theory-icon">👥</div>
-                        <div class="theory-title">你吸引了什么人</div>
-                        <div class="theory-desc">为什么总是遇到相似的人？你的剧本里写了什么样的配角？</div>
+                        <div class="theory-icon">👤</div>
+                        <div class="theory-title">你像哪个角色</div>
+                        <div class="theory-desc">从80个经典影视角色中找到最像你的人物，看看TA的故事给你什么启示</div>
                     </div>
                     <div class="theory-card">
                         <div class="theory-icon">📝</div>
@@ -50,12 +67,30 @@
                     </div>
                 </div>
                 <div class="theory-tip">
-                    <p>💡 <strong>测试提示</strong>：12道题，每题一个生活场景，选择你最真实的反应。没有对错，只有「现在的你」。</p>
-                    <p>可以返回修改，但最终结果基于你的第一直觉最准确。</p>
+                    <p>💡 <strong>测试提示</strong>：4道基础问题 + 12道场景问答，选择你最真实的反应。没有对错，只有「现在的你」。</p>
                 </div>
             </div>
             <button id="start-btn" class="btn-primary">
                 <span>🎬 开始试镜</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 前置问题页面 -->
+    <div id="basic-screen" class="screen">
+        <div class="basic-header">
+            <h2>基础信息</h2>
+            <p>帮助我们为你匹配最合适的角色</p>
+        </div>
+        <div class="basic-progress-bar">
+            <div class="basic-progress-fill" id="basic-progress"></div>
+        </div>
+        <div class="basic-container" id="basic-questions-container">
+            <!-- 动态生成基础问题 -->
+        </div>
+        <div class="basic-footer">
+            <button id="basic-next-btn" class="btn-primary">
+                <span>下一步 →</span>
             </button>
         </div>
     </div>
@@ -111,7 +146,8 @@
                 <div class="reel"></div>
                 <div class="reel"></div>
             </div>
-            <p>正在剪辑你的专属剧本...</p>
+            <p>正在分析你的人生剧本...</p>
+            <p class="loading-sub">从80个角色中寻找最匹配的你</p>
         </div>
     </div>
 
@@ -119,15 +155,42 @@
     <div id="result-screen" class="screen">
         <div class="result-poster" id="result-poster">
             <div class="poster-header">
-                <div class="rating-badge" id="rating-badge">PG-13</div>
+                <div class="rating-badge" id="rating-badge">v2.0</div>
                 <h2 class="movie-title" id="movie-title">孤勇者传说</h2>
                 <p class="tagline" id="tagline">「只有赢才能证明我活着」</p>
             </div>
             
             <div class="poster-content">
+                <!-- v2.0 新增：角色匹配卡片 -->
+                <div id="match-percentage"></div>
+                
+                <div id="character-card" class="result-section character-section">
+                    <!-- 动态插入角色卡片 -->
+                </div>
+
                 <div class="archetype-badge" id="archetype-badge">
                     <span class="archetype-name" id="archetype-name">孤勇者</span>
                     <span class="archetype-subtitle" id="archetype-subtitle">Achievement + Battle</span>
+                </div>
+
+                <!-- v2.0 新增：相似点分析 -->
+                <div class="result-section" id="similarity-points">
+                    <!-- 动态插入相似点 -->
+                </div>
+
+                <!-- v2.0 新增：角色故事 -->
+                <div class="result-section" id="character-story">
+                    <!-- 动态插入角色故事 -->
+                </div>
+
+                <!-- v2.0 新增：人生预测 -->
+                <div class="result-section" id="life-prediction">
+                    <!-- 动态插入人生预测 -->
+                </div>
+
+                <!-- v2.0 新增：角色建议 -->
+                <div class="result-section" id="character-advice">
+                    <!-- 动态插入建议 -->
                 </div>
 
                 <!-- 当前主演的烂片 -->
@@ -172,14 +235,11 @@
                         <!-- 动态内容 -->
                     </div>
                 </div>
-
-                <!-- 维度详细解读 -->
-                <div id="dimension-analysis-container"></div>
             </div>
 
             <div class="poster-footer">
                 <p class="director-credit">导演：你的潜意识编剧</p>
-                <p class="studio-logo">PTK LIFE SCRIPT STUDIOS</p>
+                <p class="studio-logo">PTK LIFE SCRIPT STUDIOS v2.0</p>
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 /**
- * 人生剧本测试 - 主应用逻辑
+ * 人生剧本测试 v2.0 - 主应用逻辑
+ * 新增：前置问题、80角色库、混合原型匹配、海报分享
  */
 
 (function() {
@@ -7,6 +8,8 @@
 
     // 应用状态
     const state = {
+        currentScreen: 'intro',
+        basicInfo: {},
         currentQuestion: 0,
         answers: [],
         scores: {
@@ -15,7 +18,8 @@
             self: {},
             time: {}
         },
-        result: null
+        result: null,
+        matchedCharacter: null
     };
 
     // DOM 元素引用
@@ -32,6 +36,7 @@
     function cacheElements() {
         elements.screens = {
             intro: document.getElementById('intro-screen'),
+            basic: document.getElementById('basic-screen'),
             quiz: document.getElementById('quiz-screen'),
             loading: document.getElementById('loading-screen'),
             result: document.getElementById('result-screen')
@@ -39,6 +44,12 @@
 
         elements.intro = {
             startBtn: document.getElementById('start-btn')
+        };
+
+        elements.basic = {
+            container: document.getElementById('basic-questions-container'),
+            nextBtn: document.getElementById('basic-next-btn'),
+            progress: document.getElementById('basic-progress')
         };
 
         elements.quiz = {
@@ -67,7 +78,14 @@
             radarChart: document.getElementById('radar-chart'),
             dimensionTags: document.getElementById('dimension-tags'),
             shareBtn: document.getElementById('share-btn'),
-            retakeBtn: document.getElementById('retake-btn')
+            retakeBtn: document.getElementById('retake-btn'),
+            // v2.0 新增
+            characterCard: document.getElementById('character-card'),
+            similarityPoints: document.getElementById('similarity-points'),
+            characterStory: document.getElementById('character-story'),
+            lifePrediction: document.getElementById('life-prediction'),
+            characterAdvice: document.getElementById('character-advice'),
+            matchPercentage: document.getElementById('match-percentage')
         };
 
         elements.modal = {
@@ -79,7 +97,7 @@
 
     // 绑定事件
     function bindEvents() {
-        elements.intro.startBtn.addEventListener('click', startQuiz);
+        elements.intro.startBtn.addEventListener('click', startBasicQuestions);
         elements.result.shareBtn.addEventListener('click', showShareModal);
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
@@ -93,35 +111,17 @@
         });
     }
 
-    // 返回上一题
-    function goToPrevQuestion() {
-        if (state.currentQuestion > 0) {
-            // 清除上一题的答案和分数
-            const lastAnswer = state.answers.pop();
-            if (lastAnswer) {
-                state.scores[lastAnswer.dimension][lastAnswer.choice.type] -= lastAnswer.choice.score;
-            }
-            // 回退到上一题
-            state.currentQuestion--;
-            renderQuestion(state.currentQuestion);
-        }
-    }
-
     // 初始化分数
     function initScores() {
-        // 等待数据加载
         if (!window.QUIZ_DATA) {
             setTimeout(initScores, 100);
             return;
         }
         
         const data = window.QUIZ_DATA;
-        
-        // 初始化每个维度的分数
         Object.keys(data.DIMENSIONS).forEach(dim => {
             state.scores[dim] = {};
             const types = data.DIMENSIONS[dim].types;
-            // 支持对象或数组格式
             const typeKeys = Array.isArray(types) ? types : Object.keys(types);
             typeKeys.forEach(type => {
                 state.scores[dim][type] = 0;
@@ -129,36 +129,112 @@
         });
     }
 
-    // 开始测试
+    // ==================== 前置问题流程 ====================
+    
+    function startBasicQuestions() {
+        switchScreen('basic');
+        renderBasicQuestions();
+    }
+
+    function renderBasicQuestions() {
+        const data = window.QUIZ_DATA;
+        const container = elements.basic.container;
+        container.innerHTML = '';
+
+        data.BASIC_QUESTIONS.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'basic-question';
+            questionDiv.dataset.questionId = q.id;
+            
+            let optionsHtml = '';
+            q.options.forEach(opt => {
+                optionsHtml += `
+                    <button class="basic-option" data-value="${opt.value}">
+                        <span class="option-icon">${opt.icon}</span>
+                        <span class="option-label">${opt.label}</span>
+                    </button>
+                `;
+            });
+
+            questionDiv.innerHTML = `
+                <div class="basic-question-header">
+                    <span class="basic-question-number">${index + 1}</span>
+                    <h3>${q.title}</h3>
+                </div>
+                <p class="basic-question-desc">${q.description}</p>
+                <div class="basic-options">
+                    ${optionsHtml}
+                </div>
+            `;
+
+            container.appendChild(questionDiv);
+
+            // 绑定选项点击事件
+            questionDiv.querySelectorAll('.basic-option').forEach(btn => {
+                btn.addEventListener('click', () => selectBasicOption(q.id, btn.dataset.value, btn));
+            });
+        });
+
+        // 绑定下一步按钮
+        elements.basic.nextBtn.addEventListener('click', () => {
+            if (Object.keys(state.basicInfo).length === data.BASIC_QUESTIONS.length) {
+                startQuiz();
+            } else {
+                showToast('请回答所有问题');
+            }
+        });
+
+        updateBasicProgress();
+    }
+
+    function selectBasicOption(questionId, value, btn) {
+        state.basicInfo[questionId] = value;
+        
+        // 更新UI
+        const questionDiv = btn.closest('.basic-question');
+        questionDiv.querySelectorAll('.basic-option').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        
+        updateBasicProgress();
+    }
+
+    function updateBasicProgress() {
+        const data = window.QUIZ_DATA;
+        const answered = Object.keys(state.basicInfo).length;
+        const total = data.BASIC_QUESTIONS.length;
+        const percent = (answered / total) * 100;
+        
+        elements.basic.progress.style.width = `${percent}%`;
+        
+        if (answered === total) {
+            elements.basic.nextBtn.classList.add('active');
+        }
+    }
+
+    // ==================== 测试流程 ====================
+
     function startQuiz() {
         switchScreen('quiz');
         renderQuestion(0);
     }
 
-    // 切换屏幕
     function switchScreen(screenName) {
         Object.values(elements.screens).forEach(screen => {
-            screen.classList.remove('active');
+            if (screen) screen.classList.remove('active');
         });
-        elements.screens[screenName].classList.add('active');
+        if (elements.screens[screenName]) {
+            elements.screens[screenName].classList.add('active');
+        }
     }
 
-    // 渲染问题
     function renderQuestion(index) {
-        console.log('Rendering question', index);
-        console.log('QUIZ_DATA available:', !!window.QUIZ_DATA);
-        
-        // 等待数据加载
         if (!window.QUIZ_DATA) {
-            console.log('Data not loaded, retrying...');
             setTimeout(() => renderQuestion(index), 100);
             return;
         }
         
         const data = window.QUIZ_DATA;
-        console.log('QUESTIONS length:', data.QUESTIONS.length);
         const question = data.QUESTIONS[index];
-        console.log('Current question:', question);
 
         // 更新进度
         const progress = ((index + 1) / data.QUESTIONS.length) * 100;
@@ -166,7 +242,6 @@
         elements.quiz.currentScene.textContent = index + 1;
         elements.quiz.sceneNumber.textContent = index + 1;
 
-        // 更新当前题号
         state.currentQuestion = index;
         elements.quiz.sceneCard.style.animation = 'none';
         setTimeout(() => {
@@ -178,7 +253,6 @@
 
         // 渲染对话
         elements.quiz.sceneDialogue.innerHTML = '';
-        
         question.dialogue.forEach((line, i) => {
             const lineDiv = document.createElement('div');
             lineDiv.className = 'dialogue-line';
@@ -190,7 +264,6 @@
             elements.quiz.sceneDialogue.appendChild(lineDiv);
         });
 
-        // 渲染旁白
         if (question.narration) {
             const narrationDiv = document.createElement('div');
             narrationDiv.className = 'narration';
@@ -213,17 +286,10 @@
             elements.quiz.choicesContainer.appendChild(btn);
         });
 
-        // 显示/隐藏返回按钮
-        if (index > 0) {
-            elements.quiz.prevBtn.style.display = 'inline-flex';
-        } else {
-            elements.quiz.prevBtn.style.display = 'none';
-        }
+        elements.quiz.prevBtn.style.display = index > 0 ? 'inline-flex' : 'none';
     }
 
-    // 处理选择
     function handleChoice(questionIndex, choice) {
-        // 等待数据加载
         if (!window.QUIZ_DATA) {
             setTimeout(() => handleChoice(questionIndex, choice), 100);
             return;
@@ -232,20 +298,15 @@
         const data = window.QUIZ_DATA;
         const question = data.QUESTIONS[questionIndex];
 
-        // 记录答案
         state.answers.push({
             questionId: question.id,
             dimension: question.dimension,
             choice: choice
         });
 
-        // 更新分数
         state.scores[question.dimension][choice.type] += choice.score;
-
-        // 更新当前题号
         state.currentQuestion = questionIndex + 1;
 
-        // 下一题或结束
         if (questionIndex < data.QUESTIONS.length - 1) {
             renderQuestion(state.currentQuestion);
         } else {
@@ -253,34 +314,37 @@
         }
     }
 
-    // 完成测试
+    function goToPrevQuestion() {
+        if (state.currentQuestion > 0) {
+            const lastAnswer = state.answers.pop();
+            if (lastAnswer) {
+                state.scores[lastAnswer.dimension][lastAnswer.choice.type] -= lastAnswer.choice.score;
+            }
+            state.currentQuestion--;
+            renderQuestion(state.currentQuestion);
+        }
+    }
+
     function finishQuiz() {
         switchScreen('loading');
         
-        // 确保数据已加载后再计算和渲染
-        const checkAndCalculate = () => {
+        setTimeout(() => {
             if (!window.QUIZ_DATA) {
-                setTimeout(checkAndCalculate, 100);
+                setTimeout(finishQuiz, 100);
                 return;
             }
             calculateResult();
             renderResult();
             switchScreen('result');
-        };
-        
-        // 模拟计算时间
-        setTimeout(checkAndCalculate, 2000);
+        }, 2000);
     }
 
-    // 计算结果 - 改进版：计算匹配度和动态描述
+    // ==================== 结果计算 ====================
+
     function calculateResult() {
         const data = window.QUIZ_DATA;
-        if (!data) {
-            console.error('QUIZ_DATA not loaded');
-            return;
-        }
         
-        // 计算每个维度的详细结果（包括得分和百分比）
+        // 计算维度结果
         const dimensionResults = {};
         const dimensionDetails = {};
         
@@ -289,11 +353,7 @@
             const types = Object.keys(scores);
             const maxScore = Math.max(...types.map(t => scores[t]));
             const totalScore = types.reduce((sum, t) => sum + scores[t], 0);
-            
-            // 找出最高分的类型
             const maxType = types.reduce((a, b) => scores[a] > scores[b] ? a : b);
-            
-            // 计算百分比
             const percentage = totalScore > 0 ? Math.round((maxScore / totalScore) * 100) : 0;
             
             dimensionResults[dim] = maxType;
@@ -306,28 +366,40 @@
             };
         });
 
-        // 计算与每个原型的匹配度
+        // 计算原型匹配度
         const archetypeMatches = calculateArchetypeMatches(dimensionResults);
-        
-        // 找出最佳匹配
         const bestMatch = archetypeMatches[0];
         
-        // 生成动态描述
-        const dynamicDescription = generateDynamicDescription(dimensionResults);
+        // 检查是否混合原型
+        let isMixed = false;
+        let mixedArchetypes = null;
+        if (archetypeMatches.length > 1) {
+            const secondMatch = archetypeMatches[1];
+            if (bestMatch.percentage - secondMatch.percentage < 10) {
+                isMixed = true;
+                mixedArchetypes = [bestMatch.archetype, secondMatch.archetype];
+            }
+        }
+
+        // 匹配角色
+        const matchedCharacter = matchCharacter(bestMatch.archetype, isMixed ? mixedArchetypes : null);
+
+        // 计算综合匹配度
+        const totalMatchPercentage = calculateTotalMatchPercentage(bestMatch.percentage, matchedCharacter);
 
         state.result = {
             archetype: bestMatch.archetype,
-            matchPercentage: bestMatch.percentage,
+            isMixed: isMixed,
+            mixedArchetypes: mixedArchetypes,
+            matchPercentage: totalMatchPercentage,
+            archetypeMatchPercentage: bestMatch.percentage,
             dimensions: dimensionResults,
             dimensionDetails: dimensionDetails,
             allMatches: archetypeMatches,
-            dynamicDescription: dynamicDescription
+            character: matchedCharacter
         };
-        
-        console.log('计算结果:', state.result);
     }
 
-    // 计算与所有原型的匹配度
     function calculateArchetypeMatches(dimensionResults) {
         const data = window.QUIZ_DATA;
         const matches = [];
@@ -352,163 +424,214 @@
             });
         }
         
-        // 按匹配度排序
         return matches.sort((a, b) => b.percentage - a.percentage);
     }
 
-    // 生成动态描述
-    function generateDynamicDescription(dimensionResults) {
+    function matchCharacter(archetypeKey, mixedArchetypes) {
         const data = window.QUIZ_DATA;
-        const desc = data.DYNAMIC_DESCRIPTIONS;
-        const transitions = data.COMBINATION_TRANSITIONS;
+        const characters = data.CHARACTER_LIBRARY[archetypeKey] || [];
         
-        // 从每个维度随机选择一个描述片段
-        const driveDesc = getRandomItem(desc.drive[dimensionResults.drive]);
-        const worldDesc = getRandomItem(desc.world[dimensionResults.world]);
-        const selfDesc = getRandomItem(desc.self[dimensionResults.self]);
-        const timeDesc = getRandomItem(desc.time[dimensionResults.time]);
+        if (characters.length === 0) return null;
+
+        // 根据基础信息筛选和排序
+        let scoredCharacters = characters.map(char => {
+            let score = 0;
+            
+            // 性别匹配 (15%)
+            if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) {
+                score += 15;
+            }
+            
+            // 年龄匹配 (15%)
+            if (char.age.includes(state.basicInfo.age)) {
+                score += 15;
+            }
+            
+            // 职业匹配 (15%)
+            if (char.career.includes(state.basicInfo.career)) {
+                score += 15;
+            }
+            
+            // 人生阶段匹配 (15%)
+            if (char.stage.includes(state.basicInfo.life_stage)) {
+                score += 15;
+            }
+            
+            return { character: char, score: score };
+        });
+
+        // 按分数排序，返回最佳匹配
+        scoredCharacters.sort((a, b) => b.score - a.score);
+        return scoredCharacters[0]?.character || characters[0];
+    }
+
+    function calculateTotalMatchPercentage(archetypePercentage, character) {
+        // 基础匹配度计算
+        // 原型匹配 40% + 角色属性匹配（性别15% + 年龄15% + 职业15% + 人生阶段15%）
         
-        // 组合成段落
-        const parts = [
-            `你是一个${driveDesc}的人，`,
-            `${worldDesc}。`,
-            `${getRandomItem(transitions)}${selfDesc}，`,
-        ];
+        let attributeScore = 0;
+        if (character) {
+            if (character.gender.includes(state.basicInfo.gender) || character.gender.includes('other')) attributeScore += 15;
+            if (character.age.includes(state.basicInfo.age)) attributeScore += 15;
+            if (character.career.includes(state.basicInfo.career)) attributeScore += 15;
+            if (character.stage.includes(state.basicInfo.life_stage)) attributeScore += 15;
+        }
+
+        // 原型匹配占40%，属性匹配占60%
+        const totalScore = (archetypePercentage * 0.4) + (attributeScore * 0.6);
         
-        // 根据时间维度类型调整结尾
-        if (dimensionResults.time === 'chasing') {
-            parts.push(`总是在${timeDesc}。`);
-        } else if (dimensionResults.time === 'stagnation') {
-            parts.push(`常常${timeDesc}。`);
+        // 根据单一原型或混合原型调整范围
+        if (!state.result?.isMixed) {
+            // 单一原型：70-95%
+            return Math.min(95, Math.max(70, Math.round(totalScore)));
         } else {
-            parts.push(`${timeDesc}。`);
+            // 混合原型：60-85%
+            return Math.min(85, Math.max(60, Math.round(totalScore)));
         }
-        
-        return parts.join('');
     }
 
-    // 辅助函数：随机选择数组元素
-    function getRandomItem(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
+    // ==================== 渲染结果 ====================
 
-    // 匹配原型
-    function matchArchetype(dimensionResults) {
-        const data = window.QUIZ_DATA;
-        
-        for (const rule of data.ARCHETYPE_MATCHING_RULES) {
-            let match = true;
-            for (const [dim, allowedTypes] of Object.entries(rule.conditions)) {
-                if (!allowedTypes.includes(dimensionResults[dim])) {
-                    match = false;
-                    break;
-                }
-            }
-            if (match) {
-                return rule.archetype;
-            }
-        }
-        return null;
-    }
-
-    // 找最接近的原型
-    function findClosestArchetype(dimensionResults) {
-        const data = window.QUIZ_DATA;
-        let bestMatch = 'awakened'; // 默认
-        let maxMatches = 0;
-
-        for (const rule of data.ARCHETYPE_MATCHING_RULES) {
-            let matches = 0;
-            for (const [dim, allowedTypes] of Object.entries(rule.conditions)) {
-                if (allowedTypes.includes(dimensionResults[dim])) {
-                    matches++;
-                }
-            }
-            if (matches > maxMatches) {
-                maxMatches = matches;
-                bestMatch = rule.archetype;
-            }
-        }
-
-        return bestMatch;
-    }
-
-    // 渲染结果
     function renderResult() {
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
+        const character = state.result.character;
         const dims = state.result.dimensions;
 
-        // 基本信息
+        // 基础信息
         elements.result.movieTitle.textContent = archetype.movieTitle;
         elements.result.tagline.textContent = archetype.tagline;
         elements.result.archetypeName.textContent = archetype.name;
-        elements.result.archetypeSubtitle.textContent = archetype.englishName;
-
-        // 动态描述
-        const dynamicDescHtml = state.result.dynamicDescription ? `
-            <div class="dynamic-description">
-                <h4>🎭 你的专属画像</h4>
-                <p class="dynamic-text">${state.result.dynamicDescription}</p>
-            </div>
-        ` : '';
+        elements.result.archetypeSubtitle.textContent = state.result.isMixed ? 
+            `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` : 
+            archetype.englishName;
 
         // 匹配度显示
-        const matchPercentHtml = state.result.matchPercentage ? `
-            <div class="match-percentage">
-                <span class="match-label">原型匹配度</span>
-                <span class="match-value">${state.result.matchPercentage}%</span>
-            </div>
-        ` : '';
+        if (elements.result.matchPercentage) {
+            elements.result.matchPercentage.innerHTML = `
+                <div class="match-percentage-large">
+                    <span class="match-value">${state.result.matchPercentage}%</span>
+                    <span class="match-label">角色匹配度</span>
+                </div>
+            `;
+        }
 
-        // 日常场景代入
-        const dailyScenesHtml = archetype.dailyScenes ? `
-            <div class="daily-scenes">
-                <h4>💭 这些场景，你是不是很熟悉？</h4>
-                <ul>
-                    ${archetype.dailyScenes.map(s => `<li>${s}</li>`).join('')}
-                </ul>
-            </div>
-        ` : '';
+        // 渲染角色卡片
+        renderCharacterCard(character, archetype);
 
+        // 渲染相似点
+        renderSimilarityPoints(character);
+
+        // 渲染角色故事
+        renderCharacterStory(character);
+
+        // 渲染人生预测
+        renderLifePrediction(character, archetype);
+
+        // 渲染建议
+        renderAdvice(character);
+
+        // 渲染原有的原型分析
+        renderArchetypeAnalysis(archetype, dims, data);
+
+        // 绘制雷达图
+        drawRadarChart();
+    }
+
+    function renderCharacterCard(character, archetype) {
+        if (!character || !elements.result.characterCard) return;
+
+        const isMixed = state.result.isMixed;
+        const mixedText = isMixed ? `<span class="mixed-badge">混合原型</span>` : '';
+
+        elements.result.characterCard.innerHTML = `
+            <div class="character-card-v2">
+                <div class="character-image-placeholder">
+                    <div class="character-avatar">${character.name.charAt(0)}</div>
+                    <div class="character-work">${character.work}</div>
+                </div>
+                <div class="character-info">
+                    <h2 class="character-name">${character.name}</h2>
+                    ${mixedText}
+                    <p class="character-quote">「${character.quote}」</p>
+                    <div class="character-match">
+                        <span class="match-percent">${state.result.matchPercentage}%</span>
+                        <span class="match-text">匹配度</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderSimilarityPoints(character) {
+        if (!character || !elements.result.similarityPoints) return;
+
+        const points = character.similarity || [];
+        elements.result.similarityPoints.innerHTML = `
+            <h4>🎭 为什么你像${character.name}</h4>
+            <ul class="similarity-list">
+                ${points.map(point => `<li><span class="similarity-dot">◆</span>${point}</li>`).join('')}
+            </ul>
+        `;
+    }
+
+    function renderCharacterStory(character) {
+        if (!character || !elements.result.characterStory) return;
+
+        elements.result.characterStory.innerHTML = `
+            <h4>📖 ${character.name}的人生剧本</h4>
+            <p class="story-text">${character.story}</p>
+        `;
+    }
+
+    function renderLifePrediction(character, archetype) {
+        if (!elements.result.lifePrediction) return;
+
+        const predictions = generateLifePredictions(archetype, character);
+        elements.result.lifePrediction.innerHTML = `
+            <h4>🔮 你的人生剧本预测</h4>
+            <div class="prediction-list">
+                ${predictions.map(p => `
+                    <div class="prediction-item">
+                        <span class="prediction-icon">${p.icon}</span>
+                        <p>${p.text}</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function generateLifePredictions(archetype, character) {
+        const predictions = [
+            { icon: "🌟", text: `你像${character.name}一样，${character.similarity?.[0] || '有着独特的魅力'}` },
+            { icon: "⚠️", text: `需要注意：${archetype.badMovie.symptoms[0]}` },
+            { icon: "💡", text: `转机时刻：当你学会${archetype.newScript.keyChanges[0].replace('从', '').split('到')[1] || '接纳自己'}时` }
+        ];
+        return predictions;
+    }
+
+    function renderAdvice(character) {
+        if (!character || !elements.result.characterAdvice) return;
+
+        elements.result.characterAdvice.innerHTML = `
+            <h4>💌 来自${character.name}的启示</h4>
+            <div class="advice-box">
+                <p class="advice-text">${character.advice}</p>
+            </div>
+        `;
+    }
+
+    function renderArchetypeAnalysis(archetype, dims, data) {
         // 当前主演的烂片
         elements.result.badMovieContent.innerHTML = `
-            ${matchPercentHtml}
-            ${dynamicDescHtml}
             <p class="quote">${archetype.badMovie.synopsis}</p>
-            ${dailyScenesHtml}
             <p><strong>你可能有的体验：</strong></p>
             <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
                 ${archetype.badMovie.symptoms.map(s => `<li style="margin-bottom: 0.5rem;">${s}</li>`).join('')}
             </ul>
         `;
 
-        // 4维详细解读
-        const dimensionAnalysisHtml = archetype.dimensionAnalysis ? `
-            <div class="dimension-analysis">
-                <h4>🔍 你的四维画像详解</h4>
-                <div class="dim-analysis-grid">
-                    <div class="dim-analysis-item">
-                        <span class="dim-label">核心驱动力</span>
-                        <p>${archetype.dimensionAnalysis.drive}</p>
-                    </div>
-                    <div class="dim-analysis-item">
-                        <span class="dim-label">与世界的关系</span>
-                        <p>${archetype.dimensionAnalysis.world}</p>
-                    </div>
-                    <div class="dim-analysis-item">
-                        <span class="dim-label">与自我的关系</span>
-                        <p>${archetype.dimensionAnalysis.self}</p>
-                    </div>
-                    <div class="dim-analysis-item">
-                        <span class="dim-label">与时间的关系</span>
-                        <p>${archetype.dimensionAnalysis.time}</p>
-                    </div>
-                </div>
-            </div>
-        ` : '';
-
-        // 剧组卡司表 - 优化版
+        // 剧组卡司表
         elements.result.castGrid.innerHTML = `
             <div class="cast-section">
                 <h4>👨‍👩‍👧 先天配角：父母/原生家庭</h4>
@@ -534,7 +657,6 @@
                     `).join('')}
                 </div>
             </div>
-            ${dimensionAnalysisHtml}
         `;
 
         // 新剧本大纲
@@ -546,7 +668,7 @@
             </ul>
         `;
 
-        // 明日拍摄计划
+        // 行动计划
         elements.result.actionPlan.innerHTML = archetype.actionPlan.map(action => `
             <div class="action-item">
                 <span class="action-icon">${action.icon}</span>
@@ -554,42 +676,7 @@
             </div>
         `).join('');
 
-        // 维度详细解读卡片
-        const dimensionCardsHtml = Object.entries(dims).map(([dim, type]) => {
-            const dimData = data.DIMENSIONS[dim];
-            const typeData = dimData.types[type];
-            return `
-                <div class="dimension-detail-card">
-                    <div class="dim-header">
-                        <span class="dim-title">${dimData.name}</span>
-                        <span class="dim-type">${typeData.name}</span>
-                    </div>
-                    <div class="dim-content">
-                        <p class="dim-desc">${typeData.fullDesc}</p>
-                        <div class="dim-scene">
-                            <span class="scene-label">💭 日常场景</span>
-                            <p>${typeData.dailyScene}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        // 插入维度解读到页面
-        const dimAnalysisContainer = document.getElementById('dimension-analysis-container');
-        if (dimAnalysisContainer) {
-            dimAnalysisContainer.innerHTML = `
-                <div class="dimension-analysis-section">
-                    <h3>📊 你的四维画像详解</h3>
-                    <p class="analysis-intro">以下是你四个维度的详细解读。看看这些描述，是不是有一种「这就是我」的感觉？</p>
-                    <div class="dimension-cards-grid">
-                        ${dimensionCardsHtml}
-                    </div>
-                </div>
-            `;
-        }
-
-        // 维度标签（简化版）
+        // 维度标签
         const dimNames = {
             drive: '核心驱动力',
             world: '与世界的关系',
@@ -603,27 +690,22 @@
                 <span class="dim-value">${data.DIMENSION_TYPE_NAMES[dim][type]}</span>
             </div>
         `).join('');
-
-        // 绘制雷达图
-        drawRadarChart();
     }
 
-    // 绘制雷达图
     function drawRadarChart() {
         const canvas = elements.result.radarChart;
+        if (!canvas) return;
+        
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
         const radius = 100;
 
-        // 清空画布
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 维度标签
         const labels = ['核心驱动力', '与世界的关系', '与自我的关系', '与时间的关系'];
         const dims = ['drive', 'world', 'self', 'time'];
 
-        // 计算每个维度的得分百分比
         const scores = dims.map(dim => {
             const dimScores = state.scores[dim];
             const maxScore = Math.max(...Object.values(dimScores));
@@ -631,7 +713,6 @@
             return maxScore / totalScore;
         });
 
-        // 绘制背景网格
         ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
         ctx.lineWidth = 1;
 
@@ -642,17 +723,13 @@
                 const angle = (Math.PI * 2 / 4) * j - Math.PI / 2;
                 const x = centerX + r * Math.cos(angle);
                 const y = centerY + r * Math.sin(angle);
-                if (j === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
+                if (j === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
             }
             ctx.closePath();
             ctx.stroke();
         }
 
-        // 绘制轴线
         for (let i = 0; i < 4; i++) {
             const angle = (Math.PI * 2 / 4) * i - Math.PI / 2;
             const x = centerX + radius * Math.cos(angle);
@@ -662,7 +739,6 @@
             ctx.lineTo(x, y);
             ctx.stroke();
 
-            // 绘制标签
             const labelX = centerX + (radius + 25) * Math.cos(angle);
             const labelY = centerY + (radius + 25) * Math.sin(angle);
             ctx.fillStyle = '#d4af37';
@@ -672,7 +748,6 @@
             ctx.fillText(labels[i], labelX, labelY);
         }
 
-        // 绘制数据区域
         ctx.beginPath();
         ctx.fillStyle = 'rgba(212, 175, 55, 0.3)';
         ctx.strokeStyle = '#d4af37';
@@ -683,17 +758,13 @@
             const r = radius * scores[i];
             const x = centerX + r * Math.cos(angle);
             const y = centerY + r * Math.sin(angle);
-            if (i === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
         }
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
 
-        // 绘制数据点
         for (let i = 0; i < 4; i++) {
             const angle = (Math.PI * 2 / 4) * i - Math.PI / 2;
             const r = radius * scores[i];
@@ -706,43 +777,51 @@
         }
     }
 
-    // 显示分享模态框
+    // ==================== 分享功能 ====================
+
     function showShareModal() {
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
+        const character = state.result.character;
         
-        // 生成分享链接（包含结果参数）
         const shareUrl = `https://wuzehua2015-hash.github.io/life-script-quiz/?result=${state.result.archetype}`;
 
-        // 生成分享海报HTML（用于生成图片）
         const posterHtml = `
-            <div id="poster-capture" style="background: linear-gradient(135deg, #1a1a25 0%, #12121a 100%); padding: 40px; text-align: center; border-radius: 16px; width: 300px;">
-                <div style="font-size: 12px; color: #d4af37; margin-bottom: 10px; letter-spacing: 2px;">PTK LIFE SCRIPT STUDIOS</div>
-                <h2 style="font-family: 'Noto Serif SC', serif; font-size: 24px; color: #d4af37; margin-bottom: 20px; margin-top: 0;">人生剧本测试</h2>
-                <div style="font-size: 32px; font-weight: 700; color: #f5f5f5; margin: 20px 0;">${archetype.name}</div>
-                <div style="font-size: 14px; color: #a0a0b0; margin-bottom: 30px; font-style: italic;">${archetype.tagline}</div>
-                <div id="qrcode-container" style="width: 140px; height: 140px; margin: 20px auto; background: white; padding: 10px; border-radius: 8px;"></div>
-                <div style="font-size: 12px; color: #6a6a7a; margin-top: 20px;">扫码测试你的人生剧本</div>
-                <div style="font-size: 10px; color: #4a4a5a; margin-top: 10px;">wuzehua2015-hash.github.io</div>
+            <div id="poster-capture" style="background: linear-gradient(135deg, #1a1a25 0%, #12121a 100%); padding: 40px; text-align: center; border-radius: 16px; width: 320px;">
+                <div style="font-size: 10px; color: #d4af37; margin-bottom: 10px; letter-spacing: 2px;">PTK LIFE SCRIPT STUDIOS v2.0</div>
+                <h2 style="font-family: 'Noto Serif SC', serif; font-size: 22px; color: #d4af37; margin-bottom: 15px; margin-top: 0;">人生剧本测试</h2>
+                
+                <div style="background: rgba(212, 175, 55, 0.1); border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid rgba(212, 175, 55, 0.3);">
+                    <div style="font-size: 14px; color: #a0a0b0; margin-bottom: 8px;">你的角色匹配</div>
+                    <div style="font-size: 36px; font-weight: 700; color: #f5f5f5; margin: 10px 0;">${character ? character.name : archetype.name}</div>
+                    <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character ? character.work : ''}</div>
+                    <div style="font-size: 28px; font-weight: 700; color: #d4af37; margin: 15px 0;">${state.result.matchPercentage}%</div>
+                    <div style="font-size: 12px; color: #6a6a7a;">匹配度</div>
+                </div>
+                
+                <div style="font-size: 13px; color: #a0a0b0; margin: 20px 0; font-style: italic; padding: 0 10px;">
+                    「${character ? character.quote.substring(0, 30) + '...' : archetype.tagline.substring(1, archetype.tagline.length - 1)}」
+                </div>
+                
+                <div id="qrcode-container" style="width: 100px; height: 100px; margin: 15px auto; background: white; padding: 8px; border-radius: 8px;"></div>
+                <div style="font-size: 11px; color: #6a6a7a; margin-top: 15px;">扫码测试你的人生剧本</div>
+                <div style="font-size: 9px; color: #4a4a5a; margin-top: 8px;">wuzehua2015-hash.github.io</div>
             </div>
         `;
 
         elements.modal.sharePosterContainer.innerHTML = posterHtml;
 
-        // 生成二维码
         new QRCode(document.getElementById('qrcode-container'), {
             text: shareUrl,
-            width: 120,
-            height: 120,
+            width: 84,
+            height: 84,
             colorDark: '#0a0a0f',
             colorLight: '#ffffff',
             correctLevel: QRCode.CorrectLevel.M
         });
 
-        // 显示模态框
         elements.modal.shareModal.classList.add('active');
 
-        // 使用 html2canvas 生成图片
         setTimeout(() => {
             const posterElement = document.getElementById('poster-capture');
             if (posterElement && typeof html2canvas !== 'undefined') {
@@ -752,40 +831,43 @@
                     useCORS: true,
                     allowTaint: true
                 }).then(canvas => {
-                    // 将 canvas 转为图片
                     const imgData = canvas.toDataURL('image/png');
-                    
-                    // 替换为图片
                     elements.modal.sharePosterContainer.innerHTML = `
                         <img src="${imgData}" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
-                        <div style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">👆 长按上方图片保存</div>
+                        <div style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">👆 长按上方图片保存分享</div>
                     `;
                 }).catch(err => {
                     console.error('生成图片失败:', err);
-                    // 如果生成失败，保持原样
                 });
             }
         }, 500);
     }
 
-    // 隐藏分享模态框
     function hideShareModal() {
         elements.modal.shareModal.classList.remove('active');
     }
 
-    // 重新测试
     function retakeQuiz() {
-        // 重置状态
         state.currentQuestion = 0;
         state.answers = [];
-        initScores();
+        state.basicInfo = {};
         state.result = null;
-
-        // 返回开始页面
+        state.matchedCharacter = null;
+        initScores();
         switchScreen('intro');
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.remove();
+        }, 2000);
     }
 
     // 启动应用
     document.addEventListener('DOMContentLoaded', init);
 })();
-// cache bust Tue Feb 24 05:44:04 PM CST 2026
+// v2.0 - 80 characters, mixed archetypes, enhanced matching
