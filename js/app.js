@@ -96,8 +96,11 @@
     // 返回上一题
     function goToPrevQuestion() {
         if (state.currentQuestion > 0) {
-            // 清除当前题的答案
-            state.answers.pop();
+            // 清除上一题的答案和分数
+            const lastAnswer = state.answers.pop();
+            if (lastAnswer) {
+                state.scores[lastAnswer.dimension][lastAnswer.choice.type] -= lastAnswer.choice.score;
+            }
             // 回退到上一题
             state.currentQuestion--;
             renderQuestion(state.currentQuestion);
@@ -117,7 +120,10 @@
         // 初始化每个维度的分数
         Object.keys(data.DIMENSIONS).forEach(dim => {
             state.scores[dim] = {};
-            data.DIMENSIONS[dim].types.forEach(type => {
+            const types = data.DIMENSIONS[dim].types;
+            // 支持对象或数组格式
+            const typeKeys = Array.isArray(types) ? types : Object.keys(types);
+            typeKeys.forEach(type => {
                 state.scores[dim][type] = 0;
             });
         });
@@ -160,7 +166,8 @@
         elements.quiz.currentScene.textContent = index + 1;
         elements.quiz.sceneNumber.textContent = index + 1;
 
-        // 场景切换动画
+        // 更新当前题号
+        state.currentQuestion = index;
         elements.quiz.sceneCard.style.animation = 'none';
         setTimeout(() => {
             elements.quiz.sceneCard.style.animation = 'card-enter 0.5s ease-out';
@@ -235,9 +242,12 @@
         // 更新分数
         state.scores[question.dimension][choice.type] += choice.score;
 
+        // 更新当前题号
+        state.currentQuestion = questionIndex + 1;
+
         // 下一题或结束
         if (questionIndex < data.QUESTIONS.length - 1) {
-            renderQuestion(questionIndex + 1);
+            renderQuestion(state.currentQuestion);
         } else {
             finishQuiz();
         }
