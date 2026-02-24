@@ -1199,6 +1199,51 @@ const ARCHETYPE_MATCHING_RULES = [
     }
 ];
 
+// 动态组合描述 - 根据4维组合生成个性化描述
+const DYNAMIC_DESCRIPTIONS = {
+    // 驱动维度描述片段
+    drive: {
+        achievement: ["追求卓越", "渴望证明价值", "目标导向", "竞争意识强"],
+        relationship: ["重视连接", "渴望被接纳", "关系优先", "害怕被孤立"],
+        security: ["追求稳定", "规避风险", "谨慎保守", "重视可预期性"],
+        unique: ["追求与众不同", "害怕平庸", "创意十足", "反传统"],
+        service: ["乐于助人", "通过付出获得价值", "关怀他人", "富有同情心"]
+    },
+    // 世界维度描述片段
+    world: {
+        battle: ["把世界当作战场", "随时准备战斗", "不信任他人", "戒备心强"],
+        victim: ["觉得世界不公平", "好事轮不到我", "无力感", "被动接受"],
+        cooperation: ["相信共赢", "重视合作", "寻求共识", "避免冲突"],
+        detachment: ["保持距离", "旁观者心态", "不参与", "自我保护"],
+        control: ["需要掌控", "厌恶失控", "计划性强", "追求确定性"]
+    },
+    // 自我维度描述片段
+    self: {
+        perfection: ["对自己苛刻", "永不满足", "内心批评者", "高标准"],
+        inferiority: ["觉得自己不够好", "需要认可", "常比较", "自我怀疑"],
+        narcissism: ["需要关注", "害怕被忽视", "享受焦点", "形象管理"],
+        authenticity: ["接纳真实自己", "不伪装", "自我认知清晰", "内心平和"],
+        lost: ["不清楚自己是谁", "迷茫", "寻找方向", "尝试不同角色"]
+    },
+    // 时间维度描述片段
+    time: {
+        chasing: ["总觉得时间不够", "必须不断奔跑", "活在未来", "难以放松"],
+        stagnation: ["觉得人生定型", "改变很难", "无力感", "接受现状"],
+        exploration: ["享受过程", "好奇新事物", "喜欢尝试", "活在当下"],
+        fate: ["顺其自然", "听天由命", "接受安排", "不焦虑未来"],
+        creation: ["主动创造", "相信努力", "目标明确", "掌控未来"]
+    }
+};
+
+// 维度组合过渡语
+const COMBINATION_TRANSITIONS = [
+    "同时，",
+    "另一方面，",
+    "与此同时，",
+    "而且，",
+    "此外，"
+];
+
 // 混合原型描述（当得分接近时）
 const MIXED_ARCHETYPE_DESCRIPTIONS = {
     "lone_hero-warrior": "你拥有孤勇者的拼搏精神和战士的自我接纳。你在追求卓越的同时，也在学习如何享受过程。",
@@ -1218,7 +1263,9 @@ if (typeof window !== 'undefined') {
         ARCHETYPES,
         DIMENSION_TYPE_NAMES,
         ARCHETYPE_MATCHING_RULES,
-        MIXED_ARCHETYPE_DESCRIPTIONS
+        MIXED_ARCHETYPE_DESCRIPTIONS,
+        DYNAMIC_DESCRIPTIONS,
+        COMBINATION_TRANSITIONS
     };
 }
 // rebuild Tue Feb 24 03:34:16 PM CST 2026

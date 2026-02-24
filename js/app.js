@@ -265,7 +265,7 @@
         }, 2000);
     }
 
-    // 计算结果
+    // 计算结果 - 改进版：计算匹配度和动态描述
     function calculateResult() {
         // 等待数据加载
         if (!window.QUIZ_DATA) {
@@ -275,29 +275,114 @@
         
         const data = window.QUIZ_DATA;
         
-        // 找出每个维度得分最高的类型
+        // 计算每个维度的详细结果（包括得分和百分比）
         const dimensionResults = {};
+        const dimensionDetails = {};
+        
         Object.keys(state.scores).forEach(dim => {
             const scores = state.scores[dim];
-            const maxType = Object.keys(scores).reduce((a, b) => 
-                scores[a] > scores[b] ? a : b
-            );
+            const types = Object.keys(scores);
+            const maxScore = Math.max(...types.map(t => scores[t]));
+            const totalScore = types.reduce((sum, t) => sum + scores[t], 0);
+            
+            // 找出最高分的类型
+            const maxType = types.reduce((a, b) => scores[a] > scores[b] ? a : b);
+            
+            // 计算百分比
+            const percentage = totalScore > 0 ? Math.round((maxScore / totalScore) * 100) : 0;
+            
             dimensionResults[dim] = maxType;
+            dimensionDetails[dim] = {
+                type: maxType,
+                score: maxScore,
+                total: totalScore,
+                percentage: percentage,
+                allScores: scores
+            };
         });
 
-        // 匹配原型
-        let matchedArchetype = matchArchetype(dimensionResults);
+        // 计算与每个原型的匹配度
+        const archetypeMatches = calculateArchetypeMatches(dimensionResults);
         
-        // 如果没有精确匹配，找最接近的
-        if (!matchedArchetype) {
-            matchedArchetype = findClosestArchetype(dimensionResults);
-        }
+        // 找出最佳匹配
+        const bestMatch = archetypeMatches[0];
+        
+        // 生成动态描述
+        const dynamicDescription = generateDynamicDescription(dimensionResults);
 
         state.result = {
-            archetype: matchedArchetype,
+            archetype: bestMatch.archetype,
+            matchPercentage: bestMatch.percentage,
             dimensions: dimensionResults,
-            scores: state.scores
+            dimensionDetails: dimensionDetails,
+            allMatches: archetypeMatches,
+            dynamicDescription: dynamicDescription
         };
+    }
+
+    // 计算与所有原型的匹配度
+    function calculateArchetypeMatches(dimensionResults) {
+        const data = window.QUIZ_DATA;
+        const matches = [];
+        
+        for (const rule of data.ARCHETYPE_MATCHING_RULES) {
+            let matchCount = 0;
+            let totalWeight = 0;
+            
+            for (const [dim, allowedTypes] of Object.entries(rule.conditions)) {
+                totalWeight++;
+                if (allowedTypes.includes(dimensionResults[dim])) {
+                    matchCount++;
+                }
+            }
+            
+            const percentage = totalWeight > 0 ? Math.round((matchCount / totalWeight) * 100) : 0;
+            matches.push({
+                archetype: rule.archetype,
+                percentage: percentage,
+                matched: matchCount,
+                total: totalWeight
+            });
+        }
+        
+        // 按匹配度排序
+        return matches.sort((a, b) => b.percentage - a.percentage);
+    }
+
+    // 生成动态描述
+    function generateDynamicDescription(dimensionResults) {
+        const data = window.QUIZ_DATA;
+        const desc = data.DYNAMIC_DESCRIPTIONS;
+        const transitions = data.COMBINATION_TRANSITIONS;
+        
+        // 从每个维度随机选择一个描述片段
+        const driveDesc = getRandomItem(desc.drive[dimensionResults.drive]);
+        const worldDesc = getRandomItem(desc.world[dimensionResults.world]);
+        const selfDesc = getRandomItem(desc.self[dimensionResults.self]);
+        const timeDesc = getRandomItem(desc.time[dimensionResults.time]);
+        
+        // 组合成段落
+        const parts = [
+            `你是一个${driveDesc}的人，`,
+            `${worldDesc}。`,
+            `${getRandomItem(transitions)}${selfDesc}，`,
+        ];
+        
+        // 根据时间维度类型调整结尾
+        if (dimensionResults.time === 'chasing') {
+            parts.push(`总是在${timeDesc}。`);
+        } else if (dimensionResults.time === 'stagnation') {
+            parts.push(`常常${timeDesc}。`);
+        } else {
+            parts.push(`${timeDesc}。`);
+        }
+        
+        return parts.join('');
+    }
+
+    // 辅助函数：随机选择数组元素
+    function getRandomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
     }
 
     // 匹配原型
@@ -353,6 +438,22 @@
         elements.result.archetypeName.textContent = archetype.name;
         elements.result.archetypeSubtitle.textContent = archetype.englishName;
 
+        // 动态描述
+        const dynamicDescHtml = state.result.dynamicDescription ? `
+            <div class="dynamic-description">
+                <h4>🎭 你的专属画像</h4>
+                <p class="dynamic-text">${state.result.dynamicDescription}</p>
+            </div>
+        ` : '';
+
+        // 匹配度显示
+        const matchPercentHtml = state.result.matchPercentage ? `
+            <div class="match-percentage">
+                <span class="match-label">原型匹配度</span>
+                <span class="match-value">${state.result.matchPercentage}%</span>
+            </div>
+        ` : '';
+
         // 日常场景代入
         const dailyScenesHtml = archetype.dailyScenes ? `
             <div class="daily-scenes">
@@ -365,6 +466,7 @@
 
         // 当前主演的烂片
         elements.result.badMovieContent.innerHTML = `
+            ${dynamicDescHtml}
             <p class="quote">${archetype.badMovie.synopsis}</p>
             ${dailyScenesHtml}
             <p><strong>你可能有的体验：</strong></p>

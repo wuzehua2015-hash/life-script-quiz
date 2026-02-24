@@ -998,6 +998,52 @@ body {
     color: var(--accent-gold);
 }
 
+/* 动态描述 */
+.dynamic-description {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.dynamic-description h4 {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+}
+
+.dynamic-text {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* 匹配度显示 */
+.match-percentage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: rgba(18, 18, 26, 0.8);
+    border-radius: 25px;
+}
+
+.match-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.match-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
 .dim-content {
     padding: 1rem;
 }
