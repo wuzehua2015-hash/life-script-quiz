@@ -343,35 +343,78 @@
         elements.result.archetypeName.textContent = archetype.name;
         elements.result.archetypeSubtitle.textContent = archetype.englishName;
 
+        // 日常场景代入
+        const dailyScenesHtml = archetype.dailyScenes ? `
+            <div class="daily-scenes">
+                <h4>💭 这些场景，你是不是很熟悉？</h4>
+                <ul>
+                    ${archetype.dailyScenes.map(s => `<li>${s}</li>`).join('')}
+                </ul>
+            </div>
+        ` : '';
+
         // 当前主演的烂片
         elements.result.badMovieContent.innerHTML = `
             <p class="quote">${archetype.badMovie.synopsis}</p>
+            ${dailyScenesHtml}
             <p><strong>你可能有的体验：</strong></p>
             <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
                 ${archetype.badMovie.symptoms.map(s => `<li style="margin-bottom: 0.5rem;">${s}</li>`).join('')}
             </ul>
         `;
 
-        // 剧组卡司表
+        // 4维详细解读
+        const dimensionAnalysisHtml = archetype.dimensionAnalysis ? `
+            <div class="dimension-analysis">
+                <h4>🔍 你的四维画像详解</h4>
+                <div class="dim-analysis-grid">
+                    <div class="dim-analysis-item">
+                        <span class="dim-label">核心驱动力</span>
+                        <p>${archetype.dimensionAnalysis.drive}</p>
+                    </div>
+                    <div class="dim-analysis-item">
+                        <span class="dim-label">与世界的关系</span>
+                        <p>${archetype.dimensionAnalysis.world}</p>
+                    </div>
+                    <div class="dim-analysis-item">
+                        <span class="dim-label">与自我的关系</span>
+                        <p>${archetype.dimensionAnalysis.self}</p>
+                    </div>
+                    <div class="dim-analysis-item">
+                        <span class="dim-label">与时间的关系</span>
+                        <p>${archetype.dimensionAnalysis.time}</p>
+                    </div>
+                </div>
+            </div>
+        ` : '';
+
+        // 剧组卡司表 - 优化版
         elements.result.castGrid.innerHTML = `
-            <div class="cast-item">
-                <span class="cast-role">${archetype.cast.innate.role}</span>
-                <div class="cast-info">
+            <div class="cast-section">
+                <h4>👨‍👩‍👧 先天配角：父母/原生家庭</h4>
+                <p class="cast-intro">这些人塑造了你最初的「剧本」，他们的行为模式成为你潜意识里的「默认设置」。</p>
+                <div class="cast-list">
                     ${archetype.cast.innate.parts.map(p => `
-                        <h4>${p.name}</h4>
-                        <p>${p.desc}</p>
+                        <div class="cast-item-detailed">
+                            <span class="cast-name">${p.name}</span>
+                            <p>${p.desc}</p>
+                        </div>
                     `).join('')}
                 </div>
             </div>
-            <div class="cast-item">
-                <span class="cast-role">${archetype.cast.acquired.role}</span>
-                <div class="cast-info">
+            <div class="cast-section">
+                <h4>👥 后天配角：你吸引来的人</h4>
+                <p class="cast-intro">你的剧本会吸引特定的人进入你的生活。看看你现在身边有没有这些角色：</p>
+                <div class="cast-list">
                     ${archetype.cast.acquired.parts.map(p => `
-                        <h4>${p.name}</h4>
-                        <p>${p.desc}</p>
+                        <div class="cast-item-detailed">
+                            <span class="cast-name">${p.name}</span>
+                            <p>${p.desc}</p>
+                        </div>
                     `).join('')}
                 </div>
             </div>
+            ${dimensionAnalysisHtml}
         `;
 
         // 新剧本大纲

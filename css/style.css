@@ -747,6 +747,129 @@ body {
     flex-shrink: 0;
 }
 
+/* 优化后的卡司表 */
+.cast-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(18, 18, 26, 0.5);
+    border-radius: 12px;
+    border: 1px solid var(--film-border);
+}
+
+.cast-section h4 {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cast-intro {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.cast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.cast-item-detailed {
+    padding: 0.8rem;
+    background: rgba(26, 26, 37, 0.6);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.cast-item-detailed .cast-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.cast-item-detailed p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 日常场景 */
+.daily-scenes {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.daily-scenes h4 {
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+}
+
+.daily-scenes ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.daily-scenes li {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* 四维解读 */
+.dimension-analysis {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(26, 26, 37, 0.6);
+    border-radius: 12px;
+}
+
+.dimension-analysis h4 {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.dim-analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.dim-analysis-item {
+    padding: 0.8rem;
+    background: rgba(18, 18, 26, 0.5);
+    border-radius: 8px;
+}
+
+.dim-analysis-item .dim-label {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.dim-analysis-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    .dim-analysis-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .cast-info h4 {
     font-size: 0.9rem;
     color: var(--text-primary);
