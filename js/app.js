@@ -559,31 +559,58 @@
         // 生成分享链接（包含结果参数）
         const shareUrl = `https://wuzehua2015-hash.github.io/life-script-quiz/?result=${state.result.archetype}`;
 
-        // 生成分享海报HTML
-        elements.modal.sharePosterContainer.innerHTML = `
-            <div class="share-poster" style="background: linear-gradient(135deg, #1a1a25 0%, #12121a 100%); padding: 2rem; text-align: center; border-radius: 12px;">
-                <div style="font-size: 0.8rem; color: #d4af37; margin-bottom: 0.5rem;">PTK LIFE SCRIPT STUDIOS</div>
-                <h2 style="font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: #d4af37; margin-bottom: 0.5rem;">人生剧本测试</h2>
-                <div style="font-size: 2rem; font-weight: 700; color: #f5f5f5; margin: 1rem 0;">${archetype.name}</div>
-                <div style="font-size: 0.9rem; color: #a0a0b0; margin-bottom: 1.5rem; font-style: italic;">${archetype.tagline}</div>
-                <div id="qrcode-container" style="width: 120px; height: 120px; margin: 1rem auto; background: white; padding: 8px; border-radius: 8px;"></div>
-                <div style="font-size: 0.75rem; color: #6a6a7a; margin-top: 1rem;">扫码测试你的人生剧本</div>
+        // 生成分享海报HTML（用于生成图片）
+        const posterHtml = `
+            <div id="poster-capture" style="background: linear-gradient(135deg, #1a1a25 0%, #12121a 100%); padding: 40px; text-align: center; border-radius: 16px; width: 300px;">
+                <div style="font-size: 12px; color: #d4af37; margin-bottom: 10px; letter-spacing: 2px;">PTK LIFE SCRIPT STUDIOS</div>
+                <h2 style="font-family: 'Noto Serif SC', serif; font-size: 24px; color: #d4af37; margin-bottom: 20px; margin-top: 0;">人生剧本测试</h2>
+                <div style="font-size: 32px; font-weight: 700; color: #f5f5f5; margin: 20px 0;">${archetype.name}</div>
+                <div style="font-size: 14px; color: #a0a0b0; margin-bottom: 30px; font-style: italic;">${archetype.tagline}</div>
+                <div id="qrcode-container" style="width: 140px; height: 140px; margin: 20px auto; background: white; padding: 10px; border-radius: 8px;"></div>
+                <div style="font-size: 12px; color: #6a6a7a; margin-top: 20px;">扫码测试你的人生剧本</div>
+                <div style="font-size: 10px; color: #4a4a5a; margin-top: 10px;">wuzehua2015-hash.github.io</div>
             </div>
         `;
 
-        // 生成真实二维码
-        setTimeout(() => {
-            new QRCode(document.getElementById('qrcode-container'), {
-                text: shareUrl,
-                width: 104,
-                height: 104,
-                colorDark: '#0a0a0f',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.M
-            });
-        }, 100);
+        elements.modal.sharePosterContainer.innerHTML = posterHtml;
 
+        // 生成二维码
+        new QRCode(document.getElementById('qrcode-container'), {
+            text: shareUrl,
+            width: 120,
+            height: 120,
+            colorDark: '#0a0a0f',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        // 显示模态框
         elements.modal.shareModal.classList.add('active');
+
+        // 使用 html2canvas 生成图片
+        setTimeout(() => {
+            const posterElement = document.getElementById('poster-capture');
+            if (posterElement && typeof html2canvas !== 'undefined') {
+                html2canvas(posterElement, {
+                    backgroundColor: null,
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true
+                }).then(canvas => {
+                    // 将 canvas 转为图片
+                    const imgData = canvas.toDataURL('image/png');
+                    
+                    // 替换为图片
+                    elements.modal.sharePosterContainer.innerHTML = `
+                        <img src="${imgData}" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
+                        <div style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">👆 长按上方图片保存</div>
+                    `;
+                }).catch(err => {
+                    console.error('生成图片失败:', err);
+                    // 如果生成失败，保持原样
+                });
+            }
+        }, 500);
     }
 
     // 隐藏分享模态框
