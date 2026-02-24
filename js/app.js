@@ -48,7 +48,8 @@
             sceneLocation: document.getElementById('scene-location'),
             sceneDialogue: document.getElementById('scene-dialogue'),
             choicesContainer: document.getElementById('choices-container'),
-            sceneCard: document.getElementById('scene-card')
+            sceneCard: document.getElementById('scene-card'),
+            prevBtn: document.getElementById('prev-btn')
         };
 
         elements.result = {
@@ -82,6 +83,7 @@
         elements.result.shareBtn.addEventListener('click', showShareModal);
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
+        elements.quiz.prevBtn.addEventListener('click', goToPrevQuestion);
         
         // 点击模态框外部关闭
         elements.modal.shareModal.addEventListener('click', (e) => {
@@ -89,6 +91,17 @@
                 hideShareModal();
             }
         });
+    }
+
+    // 返回上一题
+    function goToPrevQuestion() {
+        if (state.currentQuestion > 0) {
+            // 清除当前题的答案
+            state.answers.pop();
+            // 回退到上一题
+            state.currentQuestion--;
+            renderQuestion(state.currentQuestion);
+        }
     }
 
     // 初始化分数
@@ -192,6 +205,13 @@
             btn.addEventListener('click', () => handleChoice(index, choice));
             elements.quiz.choicesContainer.appendChild(btn);
         });
+
+        // 显示/隐藏返回按钮
+        if (index > 0) {
+            elements.quiz.prevBtn.style.display = 'inline-flex';
+        } else {
+            elements.quiz.prevBtn.style.display = 'none';
+        }
     }
 
     // 处理选择

@@ -219,6 +219,77 @@ body {
     background: rgba(212, 175, 55, 0.1);
 }
 
+/* 理论介绍 */
+.theory-intro {
+    background: rgba(26, 26, 37, 0.8);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fade-in-up 1s ease-out 0.8s both;
+}
+
+.theory-intro h3 {
+    color: var(--accent-gold);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.theory-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.theory-card {
+    background: rgba(18, 18, 26, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.theory-card:hover {
+    background: rgba(18, 18, 26, 0.8);
+    transform: translateX(5px);
+}
+
+.theory-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.theory-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.theory-desc {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.theory-tip {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.theory-tip strong {
+    color: var(--accent-gold);
+}
+
 #start-btn {
     animation: fade-in-up 1s ease-out 1.2s both;
 }
@@ -441,6 +512,32 @@ body {
 .choice-btn:hover .choice-letter {
     background: var(--accent-gold);
     color: var(--bg-primary);
+}
+
+/* 导航按钮 */
+.quiz-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--film-border);
+}
+
+.btn-nav {
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--film-border);
+}
+
+.btn-nav:hover {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
 }
 
 /* ========================================

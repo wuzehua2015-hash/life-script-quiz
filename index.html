@@ -26,8 +26,33 @@
             </div>
             <div class="intro-text">
                 <p>每个人的人生都是一部自编自导自演的电影</p>
-                <p>你以为你在随机应变</p>
-                <p>其实你的「编剧」早已写好了剧本</p>
+                <p>你以为你在随机应变，其实你的「编剧」早已写好了剧本</p>
+            </div>
+            
+            <!-- 理论介绍 -->
+            <div class="theory-intro">
+                <h3>🎭 这个测试会告诉你什么</h3>
+                <div class="theory-cards">
+                    <div class="theory-card">
+                        <div class="theory-icon">🎬</div>
+                        <div class="theory-title">你正在演什么戏</div>
+                        <div class="theory-desc">是孤军奋战的励志片、讨好别人的苦情戏，还是随遇而安的文艺片？</div>
+                    </div>
+                    <div class="theory-card">
+                        <div class="theory-icon">👥</div>
+                        <div class="theory-title">你吸引了什么人</div>
+                        <div class="theory-desc">为什么总是遇到相似的人？你的剧本里写了什么样的配角？</div>
+                    </div>
+                    <div class="theory-card">
+                        <div class="theory-icon">📝</div>
+                        <div class="theory-title">怎么改写剧本</div>
+                        <div class="theory-desc">如果不喜欢现在的剧情，你可以从哪一页开始重写？</div>
+                    </div>
+                </div>
+                <div class="theory-tip">
+                    <p>💡 <strong>测试提示</strong>：12道题，每题一个生活场景，选择你最真实的反应。没有对错，只有「现在的你」。</p>
+                    <p>可以返回修改，但最终结果基于你的第一直觉最准确。</p>
+                </div>
             </div>
             <button id="start-btn" class="btn-primary">
                 <span>🎬 开始试镜</span>
@@ -68,6 +93,12 @@
 
                 <div class="choices-container" id="choices-container">
                     <!-- 动态插入选项 -->
+                </div>
+                
+                <div class="quiz-nav" id="quiz-nav">
+                    <button id="prev-btn" class="btn-nav btn-prev" style="display: none;">
+                        <span>← 上一题</span>
+                    </button>
                 </div>
             </div>
         </div>
