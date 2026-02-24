@@ -466,6 +466,7 @@
 
         // 当前主演的烂片
         elements.result.badMovieContent.innerHTML = `
+            ${matchPercentHtml}
             ${dynamicDescHtml}
             <p class="quote">${archetype.badMovie.synopsis}</p>
             ${dailyScenesHtml}
