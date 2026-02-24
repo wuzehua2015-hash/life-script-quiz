@@ -1093,3 +1093,4 @@ if (typeof window !== 'undefined') {
         MIXED_ARCHETYPE_DESCRIPTIONS
     };
 }
+// rebuild Tue Feb 24 03:34:16 PM CST 2026
