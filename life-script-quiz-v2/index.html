@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>人生剧本测试 - 你正在主演哪部剧？</title>
+    <meta name="description" content="基于PTK人生剧本理论的互动测试，发现你正在主演的人生剧本">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 开场动画 -->
+    <div id="intro-screen" class="screen active">
+        <div class="film-grain"></div>
+        <div class="spotlight"></div>
+        <div class="intro-content">
+            <div class="clapperboard">
+                <div class="clapper-top">
+                    <span>SCENE 1</span>
+                    <span>TAKE 1</span>
+                </div>
+                <div class="clapper-bottom">
+                    <h1>人生剧本</h1>
+                    <p class="subtitle">你正在主演的剧</p>
+                </div>
+            </div>
+            <div class="intro-text">
+                <p>每个人的人生都是一部自编自导自演的电影</p>
+                <p>你以为你在随机应变</p>
+                <p>其实你的「编剧」早已写好了剧本</p>
+            </div>
+            <button id="start-btn" class="btn-primary">
+                <span>🎬 开始试镜</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 测试页面 -->
+    <div id="quiz-screen" class="screen">
+        <!-- 胶片进度条 -->
+        <div class="film-progress">
+            <div class="film-strip">
+                <div class="film-holes">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+            <div class="scene-counter">
+                <span id="current-scene">1</span> / 12
+            </div>
+        </div>
+
+        <!-- 场景内容 -->
+        <div class="scene-container">
+            <div class="scene-card" id="scene-card">
+                <div class="scene-header">
+                    <span class="scene-tag">第 <span id="scene-number">1</span> 场</span>
+                    <span class="scene-location" id="scene-location">INT. 办公室 - 早晨</span>
+                </div>
+                
+                <div class="scene-dialogue" id="scene-dialogue">
+                    <!-- 动态插入对话 -->
+                </div>
+
+                <div class="choices-container" id="choices-container">
+                    <!-- 动态插入选项 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载中 -->
+    <div id="loading-screen" class="screen">
+        <div class="loading-content">
+            <div class="film-reel">
+                <div class="reel"></div>
+                <div class="reel"></div>
+            </div>
+            <p>正在剪辑你的专属剧本...</p>
+        </div>
+    </div>
+
+    <!-- 结果页面 -->
+    <div id="result-screen" class="screen">
+        <div class="result-poster" id="result-poster">
+            <div class="poster-header">
+                <div class="rating-badge" id="rating-badge">PG-13</div>
+                <h2 class="movie-title" id="movie-title">孤勇者传说</h2>
+                <p class="tagline" id="tagline">「只有赢才能证明我活着」</p>
+            </div>
+            
+            <div class="poster-content">
+                <div class="archetype-badge" id="archetype-badge">
+                    <span class="archetype-name" id="archetype-name">孤勇者</span>
+                    <span class="archetype-subtitle" id="archetype-subtitle">Achievement + Battle</span>
+                </div>
+
+                <!-- 当前主演的烂片 -->
+                <div class="result-section">
+                    <h3>🎬 当前主演的烂片</h3>
+                    <div class="section-content" id="bad-movie-content">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+
+                <!-- 剧组卡司表 -->
+                <div class="result-section">
+                    <h3>🎭 你的剧组卡司表</h3>
+                    <div class="cast-grid" id="cast-grid">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+
+                <!-- 新剧本大纲 -->
+                <div class="result-section">
+                    <h3>📝 新剧本大纲</h3>
+                    <div class="section-content" id="new-script-content">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+
+                <!-- 明日拍摄计划 -->
+                <div class="result-section">
+                    <h3>🎬 明日拍摄计划</h3>
+                    <div class="action-plan" id="action-plan">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+
+                <!-- 维度雷达 -->
+                <div class="result-section">
+                    <h3>📊 你的四维画像</h3>
+                    <div class="radar-container">
+                        <canvas id="radar-chart" width="300" height="300"></canvas>
+                    </div>
+                    <div class="dimension-tags" id="dimension-tags">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="poster-footer">
+                <p class="director-credit">导演：你的潜意识编剧</p>
+                <p class="studio-logo">PTK LIFE SCRIPT STUDIOS</p>
+            </div>
+        </div>
+
+        <div class="result-actions">
+            <button id="share-btn" class="btn-secondary">
+                <span>📸 生成海报分享</span>
+            </button>
+            <button id="retake-btn" class="btn-primary">
+                <span>🔄 重新试镜</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 分享海报模态框 -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div id="share-poster-container">
+                <!-- 生成的分享海报 -->
+            </div>
+            <p class="share-tip">长按保存图片，分享给朋友</p>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

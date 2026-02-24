@@ -1,0 +1,28 @@
+# Stock Monitor Cron Job Configuration
+# 股票盯盘定时任务配置 - 高频版 (每分钟检查)
+# 
+# 安装方法:
+# 1. 复制以下内容到 crontab: crontab -e
+# 2. 或保存到 /etc/cron.d/stock-monitor (需要root权限)
+#
+# 交易时间: 周一至周五 9:30-15:00
+# 检查频率: 每分钟
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+WORKSPACE=/root/.openclaw/workspace
+LOG_FILE=/tmp/stock_monitor.log
+
+# 上午交易时段 9:30-11:30 (每分钟)
+30-59 9 * * 1-5 cd $WORKSPACE && python3 stock_skill/stock_skill.py monitor >> $LOG_FILE 2>&1
+* 10-11 * * 1-5 cd $WORKSPACE && python3 stock_skill/stock_skill.py monitor >> $LOG_FILE 2>&1
+
+# 下午交易时段 13:00-15:00 (每分钟)
+* 13-14 * * 1-5 cd $WORKSPACE && python3 stock_skill/stock_skill.py monitor >> $LOG_FILE 2>&1
+0-30 15 * * 1-5 cd $WORKSPACE && python3 stock_skill/stock_skill.py monitor >> $LOG_FILE 2>&1
+
+# 收盘后更新一次价格 (15:05)
+5 15 * * 1-5 cd $WORKSPACE && python3 stock_skill/stock_skill.py monitor >> $LOG_FILE 2>&1
+
+# 清理旧日志 (每周一凌晨)
+0 2 * * 1 truncate -s 0 $LOG_FILE

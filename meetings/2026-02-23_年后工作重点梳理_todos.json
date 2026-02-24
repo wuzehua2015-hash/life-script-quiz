@@ -1,0 +1,130 @@
+{
+  "date": "2026-02-24",
+  "source_file": "/root/.openclaw/workspace/meetings/2026-02-23_年后工作重点梳理.md",
+  "todos": [
+    {
+      "task": "会议纪要",
+      "owner": "",
+      "deadline": "",
+      "category": "一般",
+      "source": "# 会议纪要 - 2026-02-23"
+    },
+    {
+      "task": "会议要点",
+      "owner": "",
+      "deadline": "",
+      "category": "一般",
+      "source": "## 会议要点"
+    },
+    {
+      "task": "讲座结束后启动外贸人才培训班",
+      "owner": "",
+      "deadline": "",
+      "category": "一般",
+      "source": "- 后续：讲座结束后启动外贸人才培训班"
+    },
+    {
+      "task": "三月底前确定活动细节并开启报名",
+      "owner": "",
+      "deadline": "2026-03-31",
+      "category": "紧急",
+      "source": "-  deadline：三月底前确定活动细节并开启报名"
+    },
+    {
+      "task": "聊城公司注册与运营",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "### 2. 聊城公司注册与运营"
+    },
+    {
+      "task": "天津工商变更完成后",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "- **注册前提：** 天津工商变更完成后"
+    },
+    {
+      "task": "聊城本地公司注册",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "- **目标：** 聊城本地公司注册，业务分流"
+    },
+    {
+      "task": "海外投资调研",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "### 3. 海外投资调研"
+    },
+    {
+      "task": "利用联盟会资源转化为自有业务",
+      "owner": "",
+      "deadline": "",
+      "category": "一般",
+      "source": "- **资源：** 聘请专家顾问，利用联盟会资源转化为自有业务"
+    },
+    {
+      "task": "聊城公司注册",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "| 天津工商变更后 | 聊城公司注册 |"
+    },
+    {
+      "task": "三月底前确定东南亚考察活动细节并开启报名",
+      "owner": "",
+      "deadline": "2026-03-31",
+      "category": "紧急",
+      "source": "- [ ] 三月底前确定东南亚考察活动细节并开启报名"
+    },
+    {
+      "task": "梁羽萱确认外贸人才培训开始时间",
+      "owner": "梁羽萱",
+      "deadline": "",
+      "category": "一般",
+      "source": "- [ ] **梁羽萱确认外贸人才培训开始时间**（与娜姐）"
+    },
+    {
+      "task": "立项调研东南亚海外仓投资",
+      "owner": "",
+      "deadline": "",
+      "category": "重要",
+      "source": "- [ ] 立项调研东南亚海外仓投资"
+    },
+    {
+      "task": "专家顾问聘请",
+      "owner": "PTK",
+      "deadline": "",
+      "category": "一般",
+      "source": "- **PTK：** 整体统筹、客户对接、资源协调、专家顾问聘请"
+    },
+    {
+      "task": "进度跟进",
+      "owner": "梁羽萱",
+      "deadline": "",
+      "category": "一般",
+      "source": "- **梁羽萱：** 具体执行、文档整理、进度跟进、活动筹备、与娜姐确认培训时间"
+    },
+    {
+      "task": "活动筹备",
+      "owner": "梁羽萱",
+      "deadline": "",
+      "category": "一般",
+      "source": "- **梁羽萱：** 具体执行、文档整理、进度跟进、活动筹备、与娜姐确认培训时间"
+    },
+    {
+      "task": "与娜姐确认培训时间",
+      "owner": "梁羽萱",
+      "deadline": "",
+      "category": "一般",
+      "source": "- **梁羽萱：** 具体执行、文档整理、进度跟进、活动筹备、与娜姐确认培训时间"
+    }
+  ],
+  "summary": {
+    "urgent": 2,
+    "important": 6,
+    "normal": 9
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "rem_20260223213200_0",
+    "task_description": "联系娜姐确认外贸人才培训时间",
+    "remind_at": "2026-02-26T08:00:00",
+    "deadline": "2026-02-26T09:00:00",
+    "assignee": "梁羽萱",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_1",
+    "task_description": "拉群：东岳城市广场租房（刘丹）",
+    "remind_at": "2026-02-23T17:30:00",
+    "deadline": "2026-02-23T18:00:00",
+    "assignee": "PTK",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_2",
+    "task_description": "拉群：深圳商会张立新",
+    "remind_at": "2026-02-23T17:30:00",
+    "deadline": "2026-02-23T18:00:00",
+    "assignee": "PTK",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_3",
+    "task_description": "催星汉打款（艾特范总）",
+    "remind_at": "2026-02-24T08:00:00",
+    "deadline": "2026-02-24T09:00:00",
+    "assignee": "梁羽萱",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_4",
+    "task_description": "联系宗申动力",
+    "remind_at": "2026-02-24T08:00:00",
+    "deadline": "2026-02-24T09:00:00",
+    "assignee": "梁羽萱",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_5",
+    "task_description": "确定三月讲座时间、联系老师",
+    "remind_at": "2026-02-28T08:00:00",
+    "deadline": "2026-02-28T09:00:00",
+    "assignee": "PTK",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_6",
+    "task_description": "确定东南亚考察初步方案",
+    "remind_at": "2026-03-14T08:00:00",
+    "deadline": "2026-03-15T09:00:00",
+    "assignee": "梁羽萱",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213200_7",
+    "task_description": "联系李大志会长（50个中医）",
+    "remind_at": "2026-03-14T08:00:00",
+    "deadline": "2026-03-15T09:00:00",
+    "assignee": "PTK",
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:32:00",
+    "reminded_at": null
+  },
+  {
+    "id": "rem_20260223213749_8",
+    "task_description": "我们要确定三月讲座时间，决定",
+    "remind_at": "2026-02-23T21:42:49.529495",
+    "deadline": "2026-02-23T09:00:00",
+    "assignee": null,
+    "source_meeting": "/root/.openclaw/workspace/meetings/2026-02-23.md",
+    "status": "pending",
+    "created_at": "2026-02-23T21:37:49.529507",
+    "reminded_at": null
+  }
+]

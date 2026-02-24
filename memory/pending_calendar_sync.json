@@ -1,0 +1,10 @@
+{
+  "status": "pending_confirmation",
+  "pending": [
+    {"original": {"task": "三月底前确定东南亚考察活动细节并开启报名", "owner": "", "deadline": "2026-03-31", "category": "紧急", "source": "- [ ] 三月底前确定东南亚考察活动细节并开启报名"}, "refined_title": "三月底前确定东南亚考察活动细节并开启报名", "date": "2026-03-31"},
+    {"original": {"task": "立项调研东南亚海外仓投资", "owner": "", "deadline": "", "category": "重要", "source": "- [ ] 立项调研东南亚海外仓投资"}, "refined_title": "立项调研东南亚海外仓投资", "date": "2026-02-28"}
+  ],
+  "duplicates": [],
+  "total": 2,
+  "new": 2
+}

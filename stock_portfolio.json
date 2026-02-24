@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-24T09:43:00.000000",
+  "portfolio": [
+    {
+      "code": "000021",
+      "name": "深科技",
+      "quantity": 100,
+      "cost_price": 33.57,
+      "current_price": 33.57,
+      "last_update": "2026-02-24T09:43:00.000000",
+      "note": "今日新建仓"
+    }
+  ],
+  "watchlist": [
+    {
+      "code": "002196",
+      "name": "方正电机",
+      "category": "个股",
+      "tags": ["已清仓"],
+      "note": "2026-02-24卖出"
+    },
+    {
+      "code": "002044",
+      "name": "美年健康",
+      "category": "个股",
+      "tags": ["已清仓"],
+      "note": "2026-02-24卖出"
+    },
+    {
+      "code": "002586",
+      "name": "ST围海",
+      "category": "个股",
+      "tags": ["关注"],
+      "cost_price": 4.2,
+      "note": "关注标的，非持仓"
+    },
+    {
+      "code": "603882",
+      "name": "金域医学",
+      "category": "个股",
+      "tags": ["AI医疗", "医疗检测"]
+    },
+    {
+      "code": "BK0421",
+      "name": "半导体板块",
+      "category": "板块",
+      "tags": ["半导体", "芯片"]
+    },
+    {
+      "code": "BK1046",
+      "name": "存储芯片板块",
+      "category": "板块",
+      "tags": ["存储", "芯片"]
+    },
+    {
+      "code": "BK0868",
+      "name": "AI医疗板块",
+      "category": "板块",
+      "tags": ["AI", "医疗"]
+    }
+  ],
+  "monitoring": {
+    "enabled": true,
+    "checkInterval": 15,
+    "tradingHours": {
+      "start": "09:25",
+      "end": "15:00"
+    },
+    "alertThresholds": {
+      "priceChangePercent": 5.0,
+      "volumeMultiplier": 3.0,
+      "enableLimitUpAlert": true,
+      "enableLimitDownAlert": true,
+      "supportResistance": true,
+      "costPriceAlert": true
+    }
+  },
+  "signals": {
+    "enabled": true,
+    "analysisDimensions": ["技术面", "基本面", "资金流向", "市场情绪", "新闻事件"],
+    "ratingScale": {
+      "1星": "单一条件满足，观望",
+      "2星": "两个条件满足，关注",
+      "3星": "三个条件满足，可考虑",
+      "4星": "四个条件满足，积极关注",
+      "5星": "五个条件满足，强烈信号"
+    }
+  },
+  "alerts": [],
+  "trade_history": [
+    {
+      "date": "2026-02-24",
+      "action": "卖出",
+      "stock": "方正电机",
+      "code": "002196",
+      "quantity": 200,
+      "note": "清仓"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "卖出",
+      "stock": "美年健康",
+      "code": "002044",
+      "quantity": 200,
+      "note": "清仓"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "买入",
+      "stock": "深科技",
+      "code": "000021",
+      "quantity": 100,
+      "price": 33.57,
+      "note": "新建仓"
+    }
+  ]
+}
