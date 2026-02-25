@@ -11,7 +11,7 @@ const APP_CONFIG = {
     totalArchetypes: 12
 };
 
-// ==================== 前置问题配置 ====================
+// ==================== 后置问题配置（12题之后询问） ====================
 const BASIC_QUESTIONS = [
     {
         id: 'gender',
@@ -19,8 +19,7 @@ const BASIC_QUESTIONS = [
         description: '这将帮助我们匹配更适合你的角色',
         options: [
             { value: 'male', label: '男', icon: '👨' },
-            { value: 'female', label: '女', icon: '👩' },
-            { value: 'other', label: '多元', icon: '🌈' }
+            { value: 'female', label: '女', icon: '👩' }
         ]
     },
     {

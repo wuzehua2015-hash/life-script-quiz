@@ -97,7 +97,7 @@
 
     // 绑定事件
     function bindEvents() {
-        elements.intro.startBtn.addEventListener('click', startBasicQuestions);
+        elements.intro.startBtn.addEventListener('click', startQuiz);
         elements.result.shareBtn.addEventListener('click', showShareModal);
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
@@ -129,7 +129,7 @@
         });
     }
 
-    // ==================== 前置问题流程 ====================
+    // ==================== 基础问题流程（12题之后） ====================
     
     function startBasicQuestions() {
         switchScreen('basic');
@@ -178,7 +178,7 @@
         // 绑定下一步按钮
         elements.basic.nextBtn.addEventListener('click', () => {
             if (Object.keys(state.basicInfo).length === data.BASIC_QUESTIONS.length) {
-                startQuiz();
+                finishQuiz();
             } else {
                 showToast('请回答所有问题');
             }
@@ -310,7 +310,7 @@
         if (questionIndex < data.QUESTIONS.length - 1) {
             renderQuestion(state.currentQuestion);
         } else {
-            finishQuiz();
+            startBasicQuestions();
         }
     }
 
@@ -471,7 +471,7 @@
         
         let attributeScore = 0;
         if (character) {
-            if (character.gender.includes(state.basicInfo.gender) || character.gender.includes('other')) attributeScore += 15;
+            if (character.gender.includes(state.basicInfo.gender)) attributeScore += 15;
             if (character.age.includes(state.basicInfo.age)) attributeScore += 15;
             if (character.career.includes(state.basicInfo.career)) attributeScore += 15;
             if (character.stage.includes(state.basicInfo.life_stage)) attributeScore += 15;
@@ -534,8 +534,59 @@
         // 渲染原有的原型分析
         renderArchetypeAnalysis(archetype, dims, data);
 
+        // 渲染四维解读（新增）
+        renderDimensionAnalysis(data);
+
         // 绘制雷达图
         drawRadarChart();
+    }
+
+    // 新增：四维解读渲染函数
+    function renderDimensionAnalysis(data) {
+        const container = document.getElementById('dimension-analysis');
+        if (!container) return;
+
+        const dimNames = {
+            drive: { name: '核心驱动力', icon: '🔥' },
+            world: { name: '与世界的关系', icon: '🌍' },
+            self: { name: '与自我的关系', icon: '💫' },
+            time: { name: '与时间的关系', icon: '⏳' }
+        };
+
+        const dims = state.result.dimensions;
+        const dimensionDetails = state.result.dimensionDetails;
+
+        let html = '<h3>📊 四维深度解读</h3><div class="dimension-analysis-list">';
+
+        Object.entries(dims).forEach(([dim, type]) => {
+            const dimConfig = data.DIMENSIONS[dim];
+            const typeConfig = dimConfig.types[type];
+            const detail = dimensionDetails[dim];
+            const percentage = detail.percentage;
+
+            html += `
+                <div class="dimension-analysis-item">
+                    <div class="dim-analysis-header">
+                        <span class="dim-analysis-icon">${dimNames[dim].icon}</span>
+                        <div class="dim-analysis-title">
+                            <h4>${dimConfig.name}</h4>
+                            <span class="dim-analysis-type">${typeConfig.name}</span>
+                        </div>
+                        <div class="dim-analysis-score">${percentage}%</div>
+                    </div>
+                    <div class="dim-analysis-content">
+                        <p class="dim-short-desc">${typeConfig.shortDesc}</p>
+                        <p class="dim-full-desc">${typeConfig.fullDesc}</p>
+                        <div class="dim-daily-scene">
+                            <strong>💭 日常场景：</strong>${typeConfig.dailyScene}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += '</div>';
+        container.innerHTML = html;
     }
 
     function renderCharacterCard(character, archetype) {

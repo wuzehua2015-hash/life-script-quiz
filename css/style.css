@@ -1453,3 +1453,125 @@ body {
     font-style: italic;
     color: var(--text-secondary);
 }
+
+/* ========================================
+   四维深度解读样式（新增）
+   ======================================== */
+
+.dimension-analysis-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.dimension-analysis-item {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid var(--film-border);
+    transition: all 0.3s ease;
+}
+
+.dimension-analysis-item:hover {
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.dim-analysis-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--film-border);
+}
+
+.dim-analysis-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+.dim-analysis-title {
+    flex: 1;
+}
+
+.dim-analysis-title h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin: 0;
+}
+
+.dim-analysis-type {
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+.dim-analysis-score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.dim-analysis-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.dim-short-desc {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.dim-full-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.dim-daily-scene {
+    background: var(--bg-secondary);
+    padding: 0.875rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-blue);
+    margin-top: 0.5rem;
+}
+
+.dim-daily-scene strong {
+    color: var(--accent-blue);
+}
+
+@media (min-width: 768px) {
+    .dimension-analysis-list {
+        gap: 2rem;
+    }
+    
+    .dimension-analysis-item {
+        padding: 1.5rem;
+    }
+    
+    .dim-analysis-header {
+        gap: 1rem;
+    }
+    
+    .dim-analysis-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.75rem;
+    }
+}
