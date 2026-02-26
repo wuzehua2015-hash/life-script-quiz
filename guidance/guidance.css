@@ -1,0 +1,181 @@
+/* 行动指导系统样式 */
+
+/* 头部 */
+.guidance-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.guidance-header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px;
+    color: #d4af37;
+    margin: 20px 0 10px;
+}
+
+.guidance-header .subtitle {
+    color: #a0a0a0;
+    font-size: 16px;
+}
+
+.back-link {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* 主内容 */
+.guidance-main {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.container {
+    width: 100%;
+}
+
+/* 区块样式 */
+section {
+    margin-bottom: 50px;
+}
+
+section h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    color: #d4af37;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.section-desc {
+    color: #6a6a6a;
+    margin-bottom: 20px;
+}
+
+/* 简介 */
+.intro-section p {
+    line-height: 1.8;
+    color: #c0c0c0;
+}
+
+.intro-section strong {
+    color: #d4af37;
+}
+
+/* 原型网格 */
+.archetype-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.archetype-card {
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.archetype-card:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+}
+
+.archetype-card .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.archetype-card .name {
+    font-size: 16px;
+    color: #f5f5f5;
+    margin-bottom: 5px;
+}
+
+.archetype-card .desc {
+    font-size: 12px;
+    color: #6a6a6a;
+}
+
+/* 计划区域 */
+.plan-section {
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+}
+
+.plan-status {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%);
+    color: #1a1a2e;
+    border: none;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* 进度条 */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #b8960c);
+    transition: width 0.3s ease;
+}
+
+/* 底部 */
+.guidance-footer {
+    background: #0f0f1a;
+    padding: 30px;
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.guidance-footer p {
+    color: #6a6a6a;
+    font-size: 14px;
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+    .guidance-header h1 {
+        font-size: 24px;
+    }
+    
+    .archetype-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
