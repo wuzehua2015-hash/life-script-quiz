@@ -778,11 +778,10 @@ body {
     margin: 0 auto 1.5rem;
 }
 
-#loading-overlay .loading-text {
-    font-size: 1.1rem;
-    color: #d4af37;
-    font-family: 'Noto Serif SC', serif;
-    animation: pulse 1.5s ease-in-out infinite;
+#loading-overlay .loading-subtext {
+    font-size: 0.9rem;
+    color: #6a6a8a;
+    margin-top: 0.8rem;
 }
 
 @keyframes spinner-rotate {

@@ -267,7 +267,7 @@
         }
     }
     
-    // 显示加载动画
+    // 显示加载动画（带进度文字）
     function showLoading(text = '加载中...') {
         let loadingEl = document.getElementById('loading-overlay');
         if (!loadingEl) {
@@ -277,12 +277,23 @@
                 <div class="loading-content">
                     <div class="loading-spinner"></div>
                     <div class="loading-text">${text}</div>
+                    <div class="loading-subtext">从80个角色中寻找最匹配的你</div>
                 </div>
             `;
             document.body.appendChild(loadingEl);
         } else {
-            loadingEl.querySelector('.loading-text').textContent = text;
+            const textEl = loadingEl.querySelector('.loading-text');
+            if (textEl) textEl.textContent = text;
             loadingEl.style.display = 'flex';
+        }
+    }
+    
+    // 更新加载文字
+    function updateLoadingText(text) {
+        const loadingEl = document.getElementById('loading-overlay');
+        if (loadingEl) {
+            const textEl = loadingEl.querySelector('.loading-text');
+            if (textEl) textEl.textContent = text;
         }
     }
     
@@ -418,17 +429,27 @@
     }
 
     function finishQuiz() {
-        switchScreen('loading');
+        // 显示加载动画
+        showLoading('正在分析你的人生剧本...');
         
-        setTimeout(() => {
-            if (!window.QUIZ_DATA) {
-                setTimeout(finishQuiz, 100);
-                return;
-            }
-            calculateResult();
-            renderResult();
-            switchScreen('result');
-        }, 2000);
+        // 使用 requestAnimationFrame 确保UI更新后再计算
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                if (!window.QUIZ_DATA) {
+                    setTimeout(finishQuiz, 100);
+                    return;
+                }
+                
+                // 更新加载文字
+                const loadingText = document.querySelector('#loading-overlay .loading-text');
+                if (loadingText) loadingText.textContent = '正在匹配最适合你的角色...';
+                
+                calculateResult();
+                renderResult();
+                hideLoading();
+                switchScreen('result');
+            }, 100); // 减少延迟到100ms
+        });
     }
 
     // ==================== 结果计算 ====================
