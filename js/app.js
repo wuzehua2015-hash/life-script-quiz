@@ -15,7 +15,7 @@ window.finishQuizHandler = function() {
         
         if (window.lsqFinishQuiz) window.lsqFinishQuiz();
     } else {
-        alert('请回答所有问题');
+        console.log('请回答所有问题');
     }
     return false;
 };
@@ -457,8 +457,7 @@ window.finishQuizHandler = function() {
                 switchScreen('result');
                 
             } catch (e) {
-                alert('错误: ' + e.message);
-                console.error(e);
+                console.error('错误:', e.message);
             }
         }, 500);
     }
@@ -708,7 +707,6 @@ window.finishQuizHandler = function() {
             console.log('renderResult完成');
         } catch (e) {
             console.error('renderResult错误:', e);
-            alert('渲染结果时出错: ' + e.message);
         }
     }
 
@@ -724,32 +722,44 @@ window.finishQuizHandler = function() {
             time: { name: '与时间的关系', icon: '⏳' }
         };
 
-        const dims = state.result.dimensions;
-        const dimensionDetails = state.result.dimensionDetails;
+        const dims = state.result?.dimensions;
+        const dimensionDetails = state.result?.dimensionDetails;
+        
+        if (!dims || !dimensionDetails) {
+            console.error('维度数据不存在');
+            return;
+        }
 
         let html = '<h3>📊 四维深度解读</h3><div class="dimension-analysis-list">';
 
         Object.entries(dims).forEach(([dim, type]) => {
-            const dimConfig = data.DIMENSIONS[dim];
-            const typeConfig = dimConfig.types[type];
-            const detail = dimensionDetails[dim];
-            const percentage = detail.percentage;
+            const dimConfig = data?.DIMENSIONS?.[dim];
+            const typeConfig = dimConfig?.types?.[type];
+            const detail = dimensionDetails?.[dim];
+            
+            if (!dimConfig || !typeConfig || !detail) {
+                console.error('维度配置缺失:', dim, type);
+                return;
+            }
+            
+            const percentage = detail.percentage || 0;
+            const dimName = dimNames[dim] || { name: dim, icon: '❓' };
 
             html += `
                 <div class="dimension-analysis-item">
                     <div class="dim-analysis-header">
-                        <span class="dim-analysis-icon">${dimNames[dim].icon}</span>
+                        <span class="dim-analysis-icon">${dimName.icon}</span>
                         <div class="dim-analysis-title">
-                            <h4>${dimConfig.name}</h4>
-                            <span class="dim-analysis-type">${typeConfig.name}</span>
+                            <h4>${dimConfig.name || dim}</h4>
+                            <span class="dim-analysis-type">${typeConfig.name || type}</span>
                         </div>
                         <div class="dim-analysis-score">${percentage}%</div>
                     </div>
                     <div class="dim-analysis-content">
-                        <p class="dim-short-desc">${typeConfig.shortDesc}</p>
-                        <p class="dim-full-desc">${typeConfig.fullDesc}</p>
+                        <p class="dim-short-desc">${typeConfig.shortDesc || ''}</p>
+                        <p class="dim-full-desc">${typeConfig.fullDesc || ''}</p>
                         <div class="dim-daily-scene">
-                            <strong>💭 日常场景：</strong>${typeConfig.dailyScene}
+                            <strong>💭 日常场景：</strong>${typeConfig.dailyScene || ''}
                         </div>
                     </div>
                 </div>
