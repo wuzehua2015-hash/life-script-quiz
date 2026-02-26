@@ -3,25 +3,20 @@
  * 新增：前置问题、80角色库、混合原型匹配、海报分享
  */
 
-// 全局处理函数供HTML调用
-window.finishQuizHandler = function() {
-    
-    if (!window.QUIZ_DATA) {
-        // alert('QUIZ_DATA不存在');
-        return false;
-    }
-    const basicInfo = window.lsqState ? window.lsqState.basicInfo : {};
-    if (Object.keys(basicInfo).length === window.QUIZ_DATA.BASIC_QUESTIONS.length) {
-        
-        if (window.lsqFinishQuiz) window.lsqFinishQuiz();
-    } else {
-        console.log('请回答所有问题');
-    }
-    return false;
-};
-
 (function() {
     'use strict';
+
+    // 安全访问辅助函数
+    function safeGet(obj, path, defaultValue = '') {
+        if (!obj) return defaultValue;
+        const keys = path.split('.');
+        let result = obj;
+        for (const key of keys) {
+            if (result == null || typeof result !== 'object') return defaultValue;
+            result = result[key];
+        }
+        return result !== undefined && result !== null ? result : defaultValue;
+    }
 
     // 应用状态
     const state = {
@@ -737,29 +732,25 @@ window.finishQuizHandler = function() {
             const typeConfig = dimConfig?.types?.[type];
             const detail = dimensionDetails?.[dim];
             
-            if (!dimConfig || !typeConfig || !detail) {
-                console.error('维度配置缺失:', dim, type);
-                return;
-            }
-            
-            const percentage = detail.percentage || 0;
+            // 使用安全访问，如果配置缺失则使用默认值
+            const percentage = detail?.percentage || 0;
             const dimName = dimNames[dim] || { name: dim, icon: '❓' };
-
+            
             html += `
                 <div class="dimension-analysis-item">
                     <div class="dim-analysis-header">
                         <span class="dim-analysis-icon">${dimName.icon}</span>
                         <div class="dim-analysis-title">
-                            <h4>${dimConfig.name || dim}</h4>
-                            <span class="dim-analysis-type">${typeConfig.name || type}</span>
+                            <h4>${dimConfig?.name || dim}</h4>
+                            <span class="dim-analysis-type">${typeConfig?.name || type}</span>
                         </div>
                         <div class="dim-analysis-score">${percentage}%</div>
                     </div>
                     <div class="dim-analysis-content">
-                        <p class="dim-short-desc">${typeConfig.shortDesc || ''}</p>
-                        <p class="dim-full-desc">${typeConfig.fullDesc || ''}</p>
+                        <p class="dim-short-desc">${typeConfig?.shortDesc || ''}</p>
+                        <p class="dim-full-desc">${typeConfig?.fullDesc || ''}</p>
                         <div class="dim-daily-scene">
-                            <strong>💭 日常场景：</strong>${typeConfig.dailyScene || ''}
+                            <strong>💭 日常场景：</strong>${typeConfig?.dailyScene || ''}
                         </div>
                     </div>
                 </div>
@@ -1067,7 +1058,7 @@ window.finishQuizHandler = function() {
                     <!-- 经典台词 -->
                     <div style="background: rgba(255, 255, 255, 0.03); border-radius: 10px; padding: 15px; margin: 20px 0; border-left: 3px solid #d4af37;">
                         <div style="font-size: 13px; color: #a0a0b0; font-style: italic; line-height: 1.6;">
-                            「${character ? (character.quote.length > 40 ? character.quote.substring(0, 40) + '...' : character.quote) : archetype.tagline.substring(1, archetype.tagline.length - 1)}」
+                            「${safeGet(character, 'quote', safeGet(archetype, 'tagline', ''))}」
                         </div>
                     </div>
 
