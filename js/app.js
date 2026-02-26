@@ -236,7 +236,7 @@
             setTimeout(startQuiz, 100);
             return;
         }
-        
+
         // 重置分数
         Object.keys(window.QUIZ_DATA.DIMENSIONS).forEach(dim => {
             state.scores[dim] = {};
@@ -246,11 +246,11 @@
                 state.scores[dim][type] = 0;
             });
         });
-        
+
         // 重置其他状态
         state.answers = [];
         state.currentQuestion = 0;
-        
+
         // 随机选择12道题（每个维度3道）
         state.selectedQuestions = selectRandomQuestions();
         state.totalQuestions = state.selectedQuestions.length;
@@ -421,21 +421,23 @@
     }
 
     function finishQuiz() {
-        console.log('finishQuiz被调用');
+        alert('finishQuiz被调用');
         switchScreen('loading');
-
-        // 优化：减少等待时间从2000ms到500ms
+        
         setTimeout(() => {
+            alert('开始计算');
             if (!window.QUIZ_DATA) {
-                console.log('等待QUIZ_DATA...');
+                alert('QUIZ_DATA不存在');
                 setTimeout(finishQuiz, 100);
                 return;
             }
-            console.log('开始计算结果');
+            alert('QUIZ_DATA存在，开始calculateResult');
             calculateResult();
+            alert('calculateResult完成，开始renderResult');
             renderResult();
-            console.log('切换到结果页');
+            alert('renderResult完成，切换到result');
             switchScreen('result');
+            alert('切换完成');
         }, 500);
     }
 
@@ -444,21 +446,21 @@
     function calculateResult() {
         console.log('calculateResult开始');
         const data = window.QUIZ_DATA;
-        
+
         if (!data) {
             console.error('QUIZ_DATA不存在');
             return;
         }
-        
+
         if (!state.scores) {
             console.error('state.scores不存在');
             return;
         }
-        
+
         // 计算维度结果
         const dimensionResults = {};
         const dimensionDetails = {};
-        
+
         try {
             Object.keys(state.scores).forEach(dim => {
                 const scores = state.scores[dim];
@@ -467,7 +469,7 @@
                 const totalScore = types.reduce((sum, t) => sum + scores[t], 0);
                 const maxType = types.reduce((a, b) => scores[a] > scores[b] ? a : b);
                 const percentage = totalScore > 0 ? Math.round((maxScore / totalScore) * 100) : 0;
-                
+
                 dimensionResults[dim] = maxType;
                 dimensionDetails[dim] = {
                     type: maxType,
@@ -482,7 +484,7 @@
             console.error('维度计算错误:', e);
             return;
         }
-        
+
         // 计算原型匹配度
         let archetypeMatches;
         try {
@@ -492,9 +494,9 @@
             console.error('原型匹配计算错误:', e);
             return;
         }
-        
+
         const bestMatch = archetypeMatches[0];
-        
+
         // 检查是否混合原型
         let isMixed = false;
         let mixedArchetypes = null;
