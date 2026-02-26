@@ -103,7 +103,7 @@
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
         elements.quiz.prevBtn.addEventListener('click', goToPrevQuestion);
-        
+
         // 点击模态框外部关闭
         elements.modal.shareModal.addEventListener('click', (e) => {
             if (e.target === elements.modal.shareModal) {
@@ -118,7 +118,7 @@
             setTimeout(initScores, 100);
             return;
         }
-        
+
         const data = window.QUIZ_DATA;
         Object.keys(data.DIMENSIONS).forEach(dim => {
             state.scores[dim] = {};
@@ -131,7 +131,7 @@
     }
 
     // ==================== 基础问题流程（12题之后） ====================
-    
+
     function startBasicQuestions() {
         console.log('开始基础问题');
         if (!window.QUIZ_DATA) {
@@ -150,19 +150,19 @@
     function renderBasicQuestions() {
         const data = window.QUIZ_DATA;
         const container = elements.basic.container;
-        
+
         if (!data || !data.BASIC_QUESTIONS) {
             console.error('BASIC_QUESTIONS未找到');
             return;
         }
-        
+
         container.innerHTML = '';
 
         data.BASIC_QUESTIONS.forEach((q, index) => {
             const questionDiv = document.createElement('div');
             questionDiv.className = 'basic-question';
             questionDiv.dataset.questionId = q.id;
-            
+
             let optionsHtml = '';
             q.options.forEach(opt => {
                 optionsHtml += `
@@ -206,12 +206,12 @@
 
     function selectBasicOption(questionId, value, btn) {
         state.basicInfo[questionId] = value;
-        
+
         // 更新UI
         const questionDiv = btn.closest('.basic-question');
         questionDiv.querySelectorAll('.basic-option').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
-        
+
         updateBasicProgress();
     }
 
@@ -220,9 +220,9 @@
         const answered = Object.keys(state.basicInfo).length;
         const total = data.BASIC_QUESTIONS.length;
         const percent = (answered / total) * 100;
-        
+
         elements.basic.progress.style.width = `${percent}%`;
-        
+
         if (answered === total) {
             elements.basic.nextBtn.classList.add('active');
         }
@@ -231,19 +231,39 @@
     // ==================== 测试流程 ====================
 
     function startQuiz() {
+        // 确保分数已初始化
+        if (!window.QUIZ_DATA) {
+            setTimeout(startQuiz, 100);
+            return;
+        }
+        
+        // 重置分数
+        Object.keys(window.QUIZ_DATA.DIMENSIONS).forEach(dim => {
+            state.scores[dim] = {};
+            const types = window.QUIZ_DATA.DIMENSIONS[dim].types;
+            const typeKeys = Array.isArray(types) ? types : Object.keys(types);
+            typeKeys.forEach(type => {
+                state.scores[dim][type] = 0;
+            });
+        });
+        
+        // 重置其他状态
+        state.answers = [];
+        state.currentQuestion = 0;
+        
         // 随机选择12道题（每个维度3道）
         state.selectedQuestions = selectRandomQuestions();
         state.totalQuestions = state.selectedQuestions.length;
-        
+
         switchScreen('quiz');
         renderQuestion(0);
     }
-    
+
     // 随机选题函数：从30道中选12道，每维3道
     function selectRandomQuestions() {
         const data = window.QUIZ_DATA;
         if (!data || !data.QUESTIONS) return [];
-        
+
         // 按维度分组
         const byDimension = {
             drive: [],
@@ -251,13 +271,13 @@
             self: [],
             time: []
         };
-        
+
         data.QUESTIONS.forEach((q, idx) => {
             if (byDimension[q.dimension]) {
                 byDimension[q.dimension].push({ ...q, originalIndex: idx });
             }
         });
-        
+
         // 每个维度随机选3道
         const selected = [];
         Object.keys(byDimension).forEach(dim => {
@@ -270,13 +290,13 @@
             // 取前3道
             selected.push(...questions.slice(0, 3));
         });
-        
+
         // 打乱顺序
         for (let i = selected.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [selected[i], selected[j]] = [selected[j], selected[i]];
         }
-        
+
         return selected;
     }
 
@@ -294,11 +314,11 @@
             setTimeout(() => renderQuestion(index), 100);
             return;
         }
-        
+
         // 使用选中的题目
         const questions = state.selectedQuestions || window.QUIZ_DATA.QUESTIONS;
         const question = questions[index];
-        
+
         if (!question) {
             console.error('题目不存在:', index);
             return;
@@ -343,7 +363,7 @@
         // 渲染选项
         elements.quiz.choicesContainer.innerHTML = '';
         const letters = ['A', 'B', 'C', 'D', 'E'];
-        
+
         question.choices.forEach((choice, i) => {
             const btn = document.createElement('button');
             btn.className = 'choice-btn';
@@ -363,11 +383,11 @@
             setTimeout(() => handleChoice(questionIndex, choice), 100);
             return;
         }
-        
+
         // 使用选中的题目
         const questions = state.selectedQuestions || window.QUIZ_DATA.QUESTIONS;
         const question = questions[questionIndex];
-        
+
         if (!question) {
             console.error('题目不存在:', questionIndex);
             return;
@@ -403,7 +423,7 @@
     function finishQuiz() {
         console.log('finishQuiz被调用');
         switchScreen('loading');
-        
+
         // 优化：减少等待时间从2000ms到500ms
         setTimeout(() => {
             if (!window.QUIZ_DATA) {
@@ -422,32 +442,57 @@
     // ==================== 结果计算 ====================
 
     function calculateResult() {
+        console.log('calculateResult开始');
         const data = window.QUIZ_DATA;
+        
+        if (!data) {
+            console.error('QUIZ_DATA不存在');
+            return;
+        }
+        
+        if (!state.scores) {
+            console.error('state.scores不存在');
+            return;
+        }
         
         // 计算维度结果
         const dimensionResults = {};
         const dimensionDetails = {};
         
-        Object.keys(state.scores).forEach(dim => {
-            const scores = state.scores[dim];
-            const types = Object.keys(scores);
-            const maxScore = Math.max(...types.map(t => scores[t]));
-            const totalScore = types.reduce((sum, t) => sum + scores[t], 0);
-            const maxType = types.reduce((a, b) => scores[a] > scores[b] ? a : b);
-            const percentage = totalScore > 0 ? Math.round((maxScore / totalScore) * 100) : 0;
-            
-            dimensionResults[dim] = maxType;
-            dimensionDetails[dim] = {
-                type: maxType,
-                score: maxScore,
-                total: totalScore,
-                percentage: percentage,
-                allScores: scores
-            };
-        });
-
+        try {
+            Object.keys(state.scores).forEach(dim => {
+                const scores = state.scores[dim];
+                const types = Object.keys(scores);
+                const maxScore = Math.max(...types.map(t => scores[t]));
+                const totalScore = types.reduce((sum, t) => sum + scores[t], 0);
+                const maxType = types.reduce((a, b) => scores[a] > scores[b] ? a : b);
+                const percentage = totalScore > 0 ? Math.round((maxScore / totalScore) * 100) : 0;
+                
+                dimensionResults[dim] = maxType;
+                dimensionDetails[dim] = {
+                    type: maxType,
+                    score: maxScore,
+                    total: totalScore,
+                    percentage: percentage,
+                    allScores: scores
+                };
+            });
+            console.log('维度计算完成:', dimensionResults);
+        } catch (e) {
+            console.error('维度计算错误:', e);
+            return;
+        }
+        
         // 计算原型匹配度
-        const archetypeMatches = calculateArchetypeMatches(dimensionResults);
+        let archetypeMatches;
+        try {
+            archetypeMatches = calculateArchetypeMatches(dimensionResults);
+            console.log('原型匹配计算完成:', archetypeMatches);
+        } catch (e) {
+            console.error('原型匹配计算错误:', e);
+            return;
+        }
+        
         const bestMatch = archetypeMatches[0];
         
         // 检查是否混合原型
@@ -462,7 +507,14 @@
         }
 
         // 匹配角色
-        const matchedCharacter = matchCharacter(bestMatch.archetype, isMixed ? mixedArchetypes : null);
+        let matchedCharacter;
+        try {
+            matchedCharacter = matchCharacter(bestMatch.archetype, isMixed ? mixedArchetypes : null);
+            console.log('角色匹配完成:', matchedCharacter);
+        } catch (e) {
+            console.error('角色匹配错误:', e);
+            return;
+        }
 
         // 计算综合匹配度
         const totalMatchPercentage = calculateTotalMatchPercentage(bestMatch.percentage, matchedCharacter);
@@ -478,23 +530,24 @@
             allMatches: archetypeMatches,
             character: matchedCharacter
         };
+        console.log('calculateResult完成:', state.result);
     }
 
     function calculateArchetypeMatches(dimensionResults) {
         const data = window.QUIZ_DATA;
         const matches = [];
-        
+
         for (const rule of data.ARCHETYPE_MATCHING_RULES) {
             let matchCount = 0;
             let totalWeight = 0;
-            
+
             for (const [dim, allowedTypes] of Object.entries(rule.conditions)) {
                 totalWeight++;
                 if (allowedTypes.includes(dimensionResults[dim])) {
                     matchCount++;
                 }
             }
-            
+
             const percentage = totalWeight > 0 ? Math.round((matchCount / totalWeight) * 100) : 0;
             matches.push({
                 archetype: rule.archetype,
@@ -503,40 +556,40 @@
                 total: totalWeight
             });
         }
-        
+
         return matches.sort((a, b) => b.percentage - a.percentage);
     }
 
     function matchCharacter(archetypeKey, mixedArchetypes) {
         const data = window.QUIZ_DATA;
         const characters = data.CHARACTER_LIBRARY[archetypeKey] || [];
-        
+
         if (characters.length === 0) return null;
 
         // 根据基础信息筛选和排序
         let scoredCharacters = characters.map(char => {
             let score = 0;
-            
+
             // 性别匹配 (15%)
             if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) {
                 score += 15;
             }
-            
+
             // 年龄匹配 (15%)
             if (char.age.includes(state.basicInfo.age)) {
                 score += 15;
             }
-            
+
             // 职业匹配 (15%)
             if (char.career.includes(state.basicInfo.career)) {
                 score += 15;
             }
-            
+
             // 人生阶段匹配 (15%)
             if (char.stage.includes(state.basicInfo.life_stage)) {
                 score += 15;
             }
-            
+
             return { character: char, score: score };
         });
 
@@ -548,7 +601,7 @@
     function calculateTotalMatchPercentage(archetypePercentage, character) {
         // 基础匹配度计算 - 优化版本
         // 原型匹配 50% + 角色属性匹配 50%（性别12.5% + 年龄12.5% + 职业12.5% + 人生阶段12.5%）
-        
+
         let attributeScore = 0;
         if (character) {
             if (character.gender.includes(state.basicInfo.gender)) attributeScore += 12.5;
@@ -559,11 +612,11 @@
 
         // 原型匹配占50%，属性匹配占50%
         const totalScore = (archetypePercentage * 0.5) + attributeScore;
-        
+
         // 根据原型匹配度和属性匹配度综合计算，不再强制限制范围
         // 使用更平滑的映射：50-100% 范围
         const finalScore = Math.min(98, Math.max(52, Math.round(totalScore)));
-        
+
         return finalScore;
     }
 
@@ -579,8 +632,8 @@
         elements.result.movieTitle.textContent = archetype.movieTitle;
         elements.result.tagline.textContent = archetype.tagline;
         elements.result.archetypeName.textContent = archetype.name;
-        elements.result.archetypeSubtitle.textContent = state.result.isMixed ? 
-            `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` : 
+        elements.result.archetypeSubtitle.textContent = state.result.isMixed ?
+            `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` :
             archetype.englishName;
 
         // 匹配度显示 - 已移到角色卡片内显示，此处不再重复显示
@@ -824,7 +877,7 @@
     function drawRadarChart() {
         const canvas = elements.result.radarChart;
         if (!canvas) return;
-        
+
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
@@ -912,7 +965,7 @@
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
         const character = state.result.character;
-        
+
         const shareUrl = `https://wuzehua2015-hash.github.io/life-script-quiz/?result=${state.result.archetype}`;
 
         const posterHtml = `
@@ -923,7 +976,7 @@
                         ${Array(8).fill('<div style="width: 12px; height: 16px; background: #2a2a3a; border-radius: 2px;"></div>').join('')}
                     </div>
                 </div>
-                
+
                 <!-- 主内容区 -->
                 <div style="padding: 30px 25px; position: relative;">
                     <!-- 装饰角标 -->
@@ -931,41 +984,41 @@
                     <div style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; border-right: 2px solid #d4af37; border-top: 2px solid #d4af37;"></div>
                     <div style="position: absolute; bottom: 15px; left: 15px; width: 30px; height: 30px; border-left: 2px solid #d4af37; border-bottom: 2px solid #d4af37;"></div>
                     <div style="position: absolute; bottom: 15px; right: 15px; width: 30px; height: 30px; border-right: 2px solid #d4af37; border-bottom: 2px solid #d4af37;"></div>
-                    
+
                     <!-- 标题 -->
                     <div style="font-size: 9px; color: #d4af37; margin-bottom: 8px; letter-spacing: 3px; text-transform: uppercase;">PTK Life Script Studios</div>
                     <h2 style="font-family: 'Noto Serif SC', serif; font-size: 26px; color: #d4af37; margin: 0 0 5px 0; font-weight: 700; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);">人生剧本测试</h2>
                     <div style="font-size: 11px; color: #6a6a8a; margin-bottom: 20px;">v2.0 角色觉醒</div>
-                    
+
                     <!-- 角色卡片 -->
                     <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%); border-radius: 16px; padding: 25px 20px; margin: 20px 0; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; overflow: hidden;">
                         <!-- 装饰背景 -->
                         <div style="position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); pointer-events: none;"></div>
-                        
+
                         <div style="font-size: 11px; color: #8a8a9a; margin-bottom: 10px; letter-spacing: 1px;">YOUR CHARACTER MATCH</div>
-                        
+
                         <!-- 角色头像 -->
                         <div style="width: 70px; height: 70px; margin: 0 auto 15px; background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #1a1a2e; font-weight: 700; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);">
                             ${character ? character.name.charAt(0) : archetype.name.charAt(0)}
                         </div>
-                        
+
                         <div style="font-size: 28px; font-weight: 700; color: #f5f5f5; margin: 10px 0; font-family: 'Noto Serif SC', serif;">${character ? character.name : archetype.name}</div>
                         <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character ? character.work : archetype.englishName}</div>
-                        
+
                         <!-- 匹配度 -->
                         <div style="display: inline-block; background: rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 8px 20px; margin-top: 5px;">
                             <span style="font-size: 24px; font-weight: 700; color: #d4af37;">${state.result.matchPercentage}%</span>
                             <span style="font-size: 10px; color: #8a8a9a; margin-left: 4px;">匹配度</span>
                         </div>
                     </div>
-                    
+
                     <!-- 经典台词 -->
                     <div style="background: rgba(255, 255, 255, 0.03); border-radius: 10px; padding: 15px; margin: 20px 0; border-left: 3px solid #d4af37;">
                         <div style="font-size: 13px; color: #a0a0b0; font-style: italic; line-height: 1.6;">
                             「${character ? (character.quote.length > 40 ? character.quote.substring(0, 40) + '...' : character.quote) : archetype.tagline.substring(1, archetype.tagline.length - 1)}」
                         </div>
                     </div>
-                    
+
                     <!-- 二维码区域 -->
                     <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
                         <div id="qrcode-container" style="width: 80px; height: 80px; background: white; padding: 6px; border-radius: 8px; flex-shrink: 0;"></div>
@@ -975,7 +1028,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 电影胶片底部 -->
                 <div style="background: linear-gradient(90deg, #0a0a0f 0%, #1a1a25 50%, #0a0a0f 100%); padding: 12px 0; border-top: 2px solid #d4af37;">
                     <div style="display: flex; justify-content: center; gap: 8px;">
