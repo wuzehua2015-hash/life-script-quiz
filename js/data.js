@@ -430,6 +430,322 @@ const QUESTIONS = [
             { text: "该来的会来，该走的会走", type: "fate", score: 2 },
             { text: "新的一年，我要创造不一样的故事", type: "creation", score: 2 }
         ]
+    },
+
+    // ========== 新增题目（18道）==========
+    // 维度一：核心驱动力 (新增4题，共7题)
+    {
+        id: 13,
+        dimension: "drive",
+        location: "INT. 项目庆功宴 - 晚上",
+        dialogue: [
+            { character: "老板", line: "这次项目成功，大家都有功劳" },
+            { character: "你", line: "（看着奖杯）" }
+        ],
+        narration: "庆功宴上，你内心真正的想法是？",
+        choices: [
+            { text: "下一个项目我要做得更好，证明这不是运气", type: "achievement", score: 2 },
+            { text: "感谢团队，没有他们我不可能成功", type: "relationship", score: 2 },
+            { text: "终于结束了，可以好好休息了", type: "security", score: 2 },
+            { text: "这种重复性的成功没什么意思，我想尝试新领域", type: "unique", score: 2 },
+            { text: "能为公司创造价值，这就是我的使命", type: "service", score: 2 }
+        ]
+    },
+    {
+        id: 14,
+        dimension: "drive",
+        location: "INT. 深夜书房 - 凌晨",
+        dialogue: [
+            { character: "你", line: "（看着未完成的作品）" },
+            { character: "内心", line: "已经改了20遍了..." }
+        ],
+        narration: "创作遇到瓶颈，你会？",
+        choices: [
+            { text: "必须做到完美，否则不如不做", type: "achievement", score: 2 },
+            { text: "问问朋友的意见，也许他们能帮我", type: "relationship", score: 2 },
+            { text: "先放一放，别把自己逼太紧", type: "security", score: 2 },
+            { text: "这个方向可能不对，换个思路试试", type: "unique", score: 2 },
+            { text: "如果这能帮助到别人，就值得坚持", type: "service", score: 2 }
+        ]
+    },
+    {
+        id: 15,
+        dimension: "drive",
+        location: "INT. 健身房 - 傍晚",
+        dialogue: [
+            { character: "教练", line: "今天状态不错，要加练吗？" },
+            { character: "你", line: "（已经筋疲力尽）" }
+        ],
+        narration: "身体已经疲惫，但目标还没完成，你会？",
+        choices: [
+            { text: "坚持！不逼自己一把怎么突破极限", type: "achievement", score: 2 },
+            { text: "算了，教练都开口了，不好意思拒绝", type: "relationship", score: 2 },
+            { text: "该休息了，身体更重要", type: "security", score: 2 },
+            { text: "换个运动方式，也许更有趣", type: "unique", score: 2 },
+            { text: "坚持锻炼是为了能更好地照顾家人", type: "service", score: 2 }
+        ]
+    },
+    {
+        id: 16,
+        dimension: "drive",
+        location: "INT. 咖啡馆 - 下午",
+        dialogue: [
+            { character: "朋友", line: "你为什么要这么拼？" },
+            { character: "你", line: "（放下咖啡杯）" }
+        ],
+        narration: "面对朋友的疑问，你的真实想法是？",
+        choices: [
+            { text: "我不想平庸地过一生，要证明自己", type: "achievement", score: 2 },
+            { text: "不想让关心我的人失望", type: "relationship", score: 2 },
+            { text: "其实我也想躺平，但不敢", type: "security", score: 2 },
+            { text: "我在寻找真正属于我的人生", type: "unique", score: 2 },
+            { text: "我想为这个世界做点什么", type: "service", score: 2 }
+        ]
+    },
+
+    // 维度二：与世界的关系 (新增4题，共7题)
+    {
+        id: 17,
+        dimension: "world",
+        location: "INT. 地铁车厢 - 早高峰",
+        dialogue: [
+            { character: "陌生人", line: "（不小心撞到你）" },
+            { character: "你", line: "（看着拥挤的人群）" }
+        ],
+        narration: "在拥挤的地铁里，你的感受是？",
+        choices: [
+            { text: "这些人都是我的竞争对手，我要脱颖而出", type: "battle", score: 2 },
+            { text: "大家都挺不容易的，互相体谅吧", type: "collaboration", score: 2 },
+            { text: "好想逃离这一切，找个安静的地方", type: "retreat", score: 2 },
+            { text: "每个人都在上演自己的故事，真有趣", type: "observation", score: 2 },
+            { text: "如果我能帮助谁就好了", type: "care", score: 2 }
+        ]
+    },
+    {
+        id: 18,
+        dimension: "world",
+        location: "INT. 网络论坛 - 深夜",
+        dialogue: [
+            { character: "网友A", line: "这个世界没救了" },
+            { character: "网友B", line: "还是管好自己吧" },
+            { character: "你", line: "（看着屏幕）" }
+        ],
+        narration: "面对网络上的负面言论，你会？",
+        choices: [
+            { text: "弱者才抱怨，强者改变环境", type: "battle", score: 2 },
+            { text: "大家都有难处，互相理解吧", type: "collaboration", score: 2 },
+            { text: "关掉手机，眼不见为净", type: "retreat", score: 2 },
+            { text: "人性的复杂，真是耐人寻味", type: "observation", score: 2 },
+            { text: "也许我可以做点什么来改变", type: "care", score: 2 }
+        ]
+    },
+    {
+        id: 19,
+        dimension: "world",
+        location: "INT. 商场 - 周末",
+        dialogue: [
+            { character: "推销员", line: "这款是最新款，很多人排队买" },
+            { character: "你", line: "（看着人潮）" }
+        ],
+        narration: "面对消费主义的诱惑，你的想法是？",
+        choices: [
+            { text: "我也要拥有，不能落后于人", type: "battle", score: 2 },
+            { text: "大家都买的东西，应该不会错", type: "collaboration", score: 2 },
+            { text: "这些喧嚣与我无关", type: "retreat", score: 2 },
+            { text: "人们在追逐什么？值得思考", type: "observation", score: 2 },
+            { text: "我的钱可以帮助更需要的人", type: "care", score: 2 }
+        ]
+    },
+    {
+        id: 20,
+        dimension: "world",
+        location: "INT. 公园长椅 - 黄昏",
+        dialogue: [
+            { character: "老人", line: "年轻人，能帮我看看这个手机吗？" },
+            { character: "你", line: "（看着老人期待的眼神）" }
+        ],
+        narration: "陌生老人向你求助，你第一反应是？",
+        choices: [
+            { text: "会不会是骗子？先保持距离", type: "battle", score: 2 },
+            { text: "当然帮忙，谁都有老的时候", type: "collaboration", score: 2 },
+            { text: "抱歉，我不太会...（想离开）", type: "retreat", score: 2 },
+            { text: "老人与科技的鸿沟，社会的缩影", type: "observation", score: 2 },
+            { text: "耐心教他，让他不再无助", type: "care", score: 2 }
+        ]
+    },
+
+    // 维度三：与自我的关系 (新增5题，共8题)
+    {
+        id: 21,
+        dimension: "self",
+        location: "INT. 镜子前 - 早晨",
+        dialogue: [
+            { character: "你", line: "（看着镜中的自己）" },
+            { character: "内心", line: "今天又是新的一天..." }
+        ],
+        narration: "每天照镜子时，你对自己的感觉是？",
+        choices: [
+            { text: "还可以更好，不能松懈", type: "perfection", score: 2 },
+            { text: "不管什么样，我接受自己", type: "acceptance", score: 2 },
+            { text: "不想看，反正就这样了", type: "avoidance", score: 2 },
+            { text: "今天的我和昨天有什么不同？", type: "exploration", score: 2 },
+            { text: "我值得被善待，包括被自己", type: "compassion", score: 2 }
+        ]
+    },
+    {
+        id: 22,
+        dimension: "self",
+        location: "INT. 深夜卧室 - 凌晨",
+        dialogue: [
+            { character: "你", line: "（失眠中）" },
+            { character: "内心", line: "为什么总是我..." }
+        ],
+        narration: "失眠时自我对话，你倾向于？",
+        choices: [
+            { text: "复盘今天的失误，明天不能再犯", type: "perfection", score: 2 },
+            { text: "没关系，明天又是新的一天", type: "acceptance", score: 2 },
+            { text: "想那么多干嘛，反正没用", type: "avoidance", score: 2 },
+            { text: "这些情绪想告诉我什么？", type: "exploration", score: 2 },
+            { text: "我辛苦了，需要好好休息", type: "compassion", score: 2 }
+        ]
+    },
+    {
+        id: 23,
+        dimension: "self",
+        location: "INT. 生日派对 - 晚上",
+        dialogue: [
+            { character: "朋友", line: "许个愿吧！" },
+            { character: "你", line: "（看着蛋糕上的蜡烛）" }
+        ],
+        narration: "许愿时，你内心真正的愿望是？",
+        choices: [
+            { text: "成为更好的自己，不再犯错", type: "perfection", score: 2 },
+            { text: "希望爱我的人都能幸福", type: "acceptance", score: 2 },
+            { text: "愿望反正不会实现，随便吧", type: "avoidance", score: 2 },
+            { text: "明年这个时候我会在哪里？", type: "exploration", score: 2 },
+            { text: "希望自己能对自己好一点", type: "compassion", score: 2 }
+        ]
+    },
+    {
+        id: 24,
+        dimension: "self",
+        location: "INT. 心理咨询室 - 下午",
+        dialogue: [
+            { character: "咨询师", line: "你对自己满意吗？" },
+            { character: "你", line: "（沉默片刻）" }
+        ],
+        narration: "面对这个问题，你的真实答案是？",
+        choices: [
+            { text: "还不够，我知道自己可以更好", type: "perfection", score: 2 },
+            { text: "有满意也有不满意，这就是我吧", type: "acceptance", score: 2 },
+            { text: "没什么好说的，就这样", type: "avoidance", score: 2 },
+            { text: "我在慢慢了解自己是谁", type: "exploration", score: 2 },
+            { text: "我学会了原谅自己的不完美", type: "compassion", score: 2 }
+        ]
+    },
+    {
+        id: 25,
+        dimension: "self",
+        location: "INT. 旧物整理 - 周末",
+        dialogue: [
+            { character: "你", line: "（翻着旧照片）" },
+            { character: "回忆", line: "那时候的我..." }
+        ],
+        narration: "看到过去的自己，你的感受是？",
+        choices: [
+            { text: "那时候真傻，浪费了多少时间", type: "perfection", score: 2 },
+            { text: "每一步都是必经之路", type: "acceptance", score: 2 },
+            { text: "不想看，过去的就过去吧", type: "avoidance", score: 2 },
+            { text: "原来我经历了这么多变化", type: "exploration", score: 2 },
+            { text: "那个孩子已经尽力了", type: "compassion", score: 2 }
+        ]
+    },
+
+    // 维度四：与时间的关系 (新增5题，共8题)
+    {
+        id: 26,
+        dimension: "time",
+        location: "INT. 毕业十年聚会 - 晚上",
+        dialogue: [
+            { character: "老同学", line: "还记得我们的约定吗？" },
+            { character: "你", line: "（看着大家的变化）" }
+        ],
+        narration: "十年过去，你对自己的人生进度感到？",
+        choices: [
+            { text: "落后了，必须加速追赶", type: "chasing", score: 2 },
+            { text: "好像错过了很多机会", type: "stagnation", score: 2 },
+            { text: "人生不是赛跑，每个人都有自己的节奏", type: "exploration", score: 2 },
+            { text: "也许这就是命运的安排", type: "fate", score: 2 },
+            { text: "过去的每一步都在塑造现在的我", type: "creation", score: 2 }
+        ]
+    },
+    {
+        id: 27,
+        dimension: "time",
+        location: "INT. 父母家客厅 - 春节",
+        dialogue: [
+            { character: "父亲", line: "你小时候就在这里玩..." },
+            { character: "你", line: "（看着泛黄的墙壁）" }
+        ],
+        narration: "面对父母的衰老，你想到的是？",
+        choices: [
+            { text: "要更努力成功，让他们骄傲", type: "chasing", score: 2 },
+            { text: "时间过得真快，我什么都没做", type: "stagnation", score: 2 },
+            { text: "珍惜现在的每一刻相处", type: "exploration", score: 2 },
+            { text: "生老病死，自然规律", type: "fate", score: 2 },
+            { text: "我要创造更多美好的回忆", type: "creation", score: 2 }
+        ]
+    },
+    {
+        id: 28,
+        dimension: "time",
+        location: "INT. 机场候机厅 - 凌晨",
+        dialogue: [
+            { character: "广播", line: "航班延误，起飞时间待定" },
+            { character: "你", line: "（看着窗外停机坪）" }
+        ],
+        narration: "面对意外的延误，你的态度是？",
+        choices: [
+            { text: "又浪费了几小时，计划全乱了", type: "chasing", score: 2 },
+            { text: "反正我也控制不了，随便吧", type: "stagnation", score: 2 },
+            { text: "也许这是让我停下来思考的机会", type: "exploration", score: 2 },
+            { text: "航班延误也是命中注定的", type: "fate", score: 2 },
+            { text: "利用这段时间做点什么有意义的事", type: "creation", score: 2 }
+        ]
+    },
+    {
+        id: 29,
+        dimension: "time",
+        location: "INT. 深夜书房 - 生日前夜",
+        dialogue: [
+            { character: "你", line: "（看着日历）" },
+            { character: "内心", line: "又一年过去了..." }
+        ],
+        narration: "生日前夜，你对自己说的是？",
+        choices: [
+            { text: "明年必须完成今年的目标", type: "chasing", score: 2 },
+            { text: "一年又一年，好像没什么变化", type: "stagnation", score: 2 },
+            { text: "不知道明年会发生什么，期待", type: "exploration", score: 2 },
+            { text: "顺其自然，该来的会来", type: "fate", score: 2 },
+            { text: "新的一年，我要主动创造改变", type: "creation", score: 2 }
+        ]
+    },
+    {
+        id: 30,
+        dimension: "time",
+        location: "INT. 山顶观景台 - 日出时分",
+        dialogue: [
+            { character: "你", line: "（看着太阳升起）" },
+            { character: "内心", line: "新的一天开始了..." }
+        ],
+        narration: "面对日出，你对时间的感悟是？",
+        choices: [
+            { text: "时间宝贵，不能浪费一分一秒", type: "chasing", score: 2 },
+            { text: "日复一日，好像被困在循环里", type: "stagnation", score: 2 },
+            { text: "每一天都是独特的，值得体验", type: "exploration", score: 2 },
+            { text: "日出日落，自有定数", type: "fate", score: 2 },
+            { text: "今天是我创造未来的起点", type: "creation", score: 2 }
+        ]
     }
 ];
 
