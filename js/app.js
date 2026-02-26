@@ -133,6 +133,16 @@
     // ==================== 基础问题流程（12题之后） ====================
     
     function startBasicQuestions() {
+        console.log('开始基础问题');
+        if (!window.QUIZ_DATA) {
+            console.error('QUIZ_DATA未加载');
+            setTimeout(startBasicQuestions, 100);
+            return;
+        }
+        if (!elements.basic.container) {
+            console.error('basic container未找到');
+            return;
+        }
         switchScreen('basic');
         renderBasicQuestions();
     }
@@ -140,6 +150,12 @@
     function renderBasicQuestions() {
         const data = window.QUIZ_DATA;
         const container = elements.basic.container;
+        
+        if (!data || !data.BASIC_QUESTIONS) {
+            console.error('BASIC_QUESTIONS未找到');
+            return;
+        }
+        
         container.innerHTML = '';
 
         data.BASIC_QUESTIONS.forEach((q, index) => {
@@ -385,16 +401,20 @@
     }
 
     function finishQuiz() {
+        console.log('finishQuiz被调用');
         switchScreen('loading');
         
         // 优化：减少等待时间从2000ms到500ms
         setTimeout(() => {
             if (!window.QUIZ_DATA) {
+                console.log('等待QUIZ_DATA...');
                 setTimeout(finishQuiz, 100);
                 return;
             }
+            console.log('开始计算结果');
             calculateResult();
             renderResult();
+            console.log('切换到结果页');
             switchScreen('result');
         }, 500);
     }
