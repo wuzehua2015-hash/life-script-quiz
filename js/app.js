@@ -642,10 +642,30 @@ window.finishQuizHandler = function() {
     // ==================== 渲染结果 ====================
 
     function renderResult() {
+        alert('renderResult开始');
         const data = window.QUIZ_DATA;
+        
+        if (!data) {
+            alert('QUIZ_DATA不存在');
+            return;
+        }
+        if (!state.result) {
+            alert('state.result不存在');
+            return;
+        }
+        
+        alert('数据检查通过，开始渲染');
+        
         const archetype = data.ARCHETYPES[state.result.archetype];
         const character = state.result.character;
         const dims = state.result.dimensions;
+        
+        if (!archetype) {
+            alert('archetype不存在: ' + state.result.archetype);
+            return;
+        }
+        
+        alert('开始渲染基础信息');
 
         // 基础信息
         elements.result.movieTitle.textContent = archetype.movieTitle;
@@ -689,7 +709,9 @@ window.finishQuizHandler = function() {
         renderDimensionAnalysis(data);
 
         // 绘制雷达图
+        alert('开始绘制雷达图');
         drawRadarChart();
+        alert('renderResult完成');
     }
 
     // 新增：四维解读渲染函数
@@ -909,9 +931,12 @@ window.finishQuizHandler = function() {
 
         const scores = dims.map(dim => {
             const dimScores = state.scores[dim];
-            const maxScore = Math.max(...Object.values(dimScores));
-            const totalScore = Object.values(dimScores).reduce((a, b) => a + b, 0);
-            return maxScore / totalScore;
+            if (!dimScores) return 0;
+            const values = Object.values(dimScores);
+            if (values.length === 0) return 0;
+            const maxScore = Math.max(...values);
+            const totalScore = values.reduce((a, b) => a + b, 0);
+            return totalScore > 0 ? maxScore / totalScore : 0;
         });
 
         ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
