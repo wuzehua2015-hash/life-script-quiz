@@ -214,8 +214,53 @@
     // ==================== 测试流程 ====================
 
     function startQuiz() {
+        // 随机选择12道题（每个维度3道）
+        state.selectedQuestions = selectRandomQuestions();
+        state.totalQuestions = state.selectedQuestions.length;
+        
         switchScreen('quiz');
         renderQuestion(0);
+    }
+    
+    // 随机选题函数：从30道中选12道，每维3道
+    function selectRandomQuestions() {
+        const data = window.QUIZ_DATA;
+        if (!data || !data.QUESTIONS) return [];
+        
+        // 按维度分组
+        const byDimension = {
+            drive: [],
+            world: [],
+            self: [],
+            time: []
+        };
+        
+        data.QUESTIONS.forEach((q, idx) => {
+            if (byDimension[q.dimension]) {
+                byDimension[q.dimension].push({ ...q, originalIndex: idx });
+            }
+        });
+        
+        // 每个维度随机选3道
+        const selected = [];
+        Object.keys(byDimension).forEach(dim => {
+            const questions = byDimension[dim];
+            // Fisher-Yates洗牌
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+            // 取前3道
+            selected.push(...questions.slice(0, 3));
+        });
+        
+        // 打乱顺序
+        for (let i = selected.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [selected[i], selected[j]] = [selected[j], selected[i]];
+        }
+        
+        return selected;
     }
 
     function switchScreen(screenName) {
@@ -233,14 +278,20 @@
             return;
         }
         
-        const data = window.QUIZ_DATA;
-        const question = data.QUESTIONS[index];
+        // 使用选中的题目
+        const questions = state.selectedQuestions || window.QUIZ_DATA.QUESTIONS;
+        const question = questions[index];
+        
+        if (!question) {
+            console.error('题目不存在:', index);
+            return;
+        }
 
         // 更新进度
-        const progress = ((index + 1) / data.QUESTIONS.length) * 100;
+        const progress = ((index + 1) / questions.length) * 100;
         elements.quiz.progressFill.style.width = `${progress}%`;
         elements.quiz.currentScene.textContent = index + 1;
-        elements.quiz.sceneNumber.textContent = index + 1;
+        elements.quiz.sceneNumber.textContent = questions.length;
 
         state.currentQuestion = index;
         elements.quiz.sceneCard.style.animation = 'none';
@@ -295,8 +346,14 @@
             return;
         }
         
-        const data = window.QUIZ_DATA;
-        const question = data.QUESTIONS[questionIndex];
+        // 使用选中的题目
+        const questions = state.selectedQuestions || window.QUIZ_DATA.QUESTIONS;
+        const question = questions[questionIndex];
+        
+        if (!question) {
+            console.error('题目不存在:', questionIndex);
+            return;
+        }
 
         state.answers.push({
             questionId: question.id,
@@ -307,7 +364,7 @@
         state.scores[question.dimension][choice.type] += choice.score;
         state.currentQuestion = questionIndex + 1;
 
-        if (questionIndex < data.QUESTIONS.length - 1) {
+        if (questionIndex < questions.length - 1) {
             renderQuestion(state.currentQuestion);
         } else {
             startBasicQuestions();
