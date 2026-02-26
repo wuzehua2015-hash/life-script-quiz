@@ -194,6 +194,16 @@
 
     <main class="guidance-main">
         <div class="container">
+            <!-- 创建计划提示 -->
+            <div id="create-plan-section" style="display: none; text-align: center; padding: 60px 20px;">
+                <div style="font-size: 64px; margin-bottom: 20px;">🎯</div>
+                <h2 style="color: #d4af37; margin-bottom: 15px;">开始你的21天改变计划</h2>
+                <p style="color: #6a6a6a; margin-bottom: 30px;">选择一个原型，创建属于你的改变计划</p>
+                <a href="index.html" class="btn-primary" style="text-decoration: none;">选择人生剧本</a>
+            </div>
+
+            <!-- 计划内容 -->
+            <div id="plan-content">
             <!-- 第一周：觉察 -->
             <div class="week-section">
                 <div class="week-title">第一周：觉察</div>
@@ -211,6 +221,7 @@
                 <div class="week-title">第三周：巩固</div>
                 <div id="week3-days"></div>
             </div>
+            </div><!-- plan-content结束 -->
 
             <!-- 庆祝完成 -->
             <div id="celebration" class="celebration">
@@ -238,9 +249,16 @@
         (function() {
             const archetype = localStorage.getItem('lsq_selected_archetype');
             
-            if (!archetype || !window.GuidanceData) {
-                alert('请先选择你的人生剧本原型');
-                window.location.href = 'index.html';
+            if (!archetype) {
+                // 显示创建计划界面
+                document.getElementById('create-plan-section').style.display = 'block';
+                document.getElementById('plan-content').style.display = 'none';
+                document.querySelector('.plan-progress').style.display = 'none';
+                return;
+            }
+            
+            if (!window.GuidanceData) {
+                alert('数据加载失败，请刷新页面');
                 return;
             }
             
