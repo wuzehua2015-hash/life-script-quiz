@@ -466,28 +466,25 @@
     }
 
     function calculateTotalMatchPercentage(archetypePercentage, character) {
-        // 基础匹配度计算
-        // 原型匹配 40% + 角色属性匹配（性别15% + 年龄15% + 职业15% + 人生阶段15%）
+        // 基础匹配度计算 - 优化版本
+        // 原型匹配 50% + 角色属性匹配 50%（性别12.5% + 年龄12.5% + 职业12.5% + 人生阶段12.5%）
         
         let attributeScore = 0;
         if (character) {
-            if (character.gender.includes(state.basicInfo.gender)) attributeScore += 15;
-            if (character.age.includes(state.basicInfo.age)) attributeScore += 15;
-            if (character.career.includes(state.basicInfo.career)) attributeScore += 15;
-            if (character.stage.includes(state.basicInfo.life_stage)) attributeScore += 15;
+            if (character.gender.includes(state.basicInfo.gender)) attributeScore += 12.5;
+            if (character.age.includes(state.basicInfo.age)) attributeScore += 12.5;
+            if (character.career.includes(state.basicInfo.career)) attributeScore += 12.5;
+            if (character.stage.includes(state.basicInfo.life_stage)) attributeScore += 12.5;
         }
 
-        // 原型匹配占40%，属性匹配占60%
-        const totalScore = (archetypePercentage * 0.4) + (attributeScore * 0.6);
+        // 原型匹配占50%，属性匹配占50%
+        const totalScore = (archetypePercentage * 0.5) + attributeScore;
         
-        // 根据单一原型或混合原型调整范围
-        if (!state.result?.isMixed) {
-            // 单一原型：70-95%
-            return Math.min(95, Math.max(70, Math.round(totalScore)));
-        } else {
-            // 混合原型：60-85%
-            return Math.min(85, Math.max(60, Math.round(totalScore)));
-        }
+        // 根据原型匹配度和属性匹配度综合计算，不再强制限制范围
+        // 使用更平滑的映射：50-100% 范围
+        const finalScore = Math.min(98, Math.max(52, Math.round(totalScore)));
+        
+        return finalScore;
     }
 
     // ==================== 渲染结果 ====================
