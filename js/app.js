@@ -3,6 +3,23 @@
  * 新增：前置问题、80角色库、混合原型匹配、海报分享
  */
 
+// 全局处理函数供HTML调用
+window.finishQuizHandler = function() {
+    alert('按钮被点击');
+    if (!window.QUIZ_DATA) {
+        alert('QUIZ_DATA不存在');
+        return false;
+    }
+    const basicInfo = window.lsqState ? window.lsqState.basicInfo : {};
+    if (Object.keys(basicInfo).length === window.QUIZ_DATA.BASIC_QUESTIONS.length) {
+        alert('条件满足，调用finishQuiz');
+        if (window.lsqFinishQuiz) window.lsqFinishQuiz();
+    } else {
+        alert('请回答所有问题');
+    }
+    return false;
+};
+
 (function() {
     'use strict';
 
@@ -1100,5 +1117,9 @@
 
     // 启动应用
     document.addEventListener('DOMContentLoaded', init);
+    // 暴露到全局供调试
+    window.lsqState = state;
+    window.lsqFinishQuiz = finishQuiz;
+
 })();
 // v2.0 - 80 characters, mixed archetypes, enhanced matching
