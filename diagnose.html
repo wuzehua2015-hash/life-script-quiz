@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生剧本测试 - 诊断页面</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .ok { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>人生剧本测试 - 诊断页面</h1>
+    <div id="results"></div>
+    
+    <script src="js/data.js"></script>
+    <script>
+        const results = document.getElementById('results');
+        
+        function check(name, condition, details = '') {
+            const div = document.createElement('div');
+            div.className = 'status ' + (condition ? 'ok' : 'error');
+            div.innerHTML = `<strong>${name}:</strong> ${condition ? '✅ 正常' : '❌ 异常'} ${details}`;
+            results.appendChild(div);
+            return condition;
+        }
+        
+        // 检查 window.QUIZ_DATA
+        check('window.QUIZ_DATA 存在', typeof window.QUIZ_DATA !== 'undefined');
+        
+        if (window.QUIZ_DATA) {
+            check('APP_CONFIG 存在', typeof window.QUIZ_DATA.APP_CONFIG !== 'undefined');
+            check('BASIC_QUESTIONS 存在', typeof window.QUIZ_DATA.BASIC_QUESTIONS !== 'undefined');
+            check('QUESTIONS 存在', typeof window.QUIZ_DATA.QUESTIONS !== 'undefined');
+            check('ARCHETYPES 存在', typeof window.QUIZ_DATA.ARCHETYPES !== 'undefined');
+            check('CHARACTER_LIBRARY 存在', typeof window.QUIZ_DATA.CHARACTER_LIBRARY !== 'undefined');
+            
+            if (window.QUIZ_DATA.QUESTIONS) {
+                check('QUESTIONS 数量', window.QUIZ_DATA.QUESTIONS.length === 12, `(${window.QUIZ_DATA.QUESTIONS.length} 题)`);
+                
+                // 检查第一题结构
+                const q1 = window.QUIZ_DATA.QUESTIONS[0];
+                if (q1) {
+                    check('第一题有 location', !!q1.location);
+                    check('第一题有 dialogue', !!q1.dialogue);
+                    check('第一题有 narration', !!q1.narration);
+                    check('第一题有 choices', !!q1.choices);
+                    if (q1.choices) {
+                        check('第一题 choices 数量', q1.choices.length === 5, `(${q1.choices.length} 个选项)`);
+                    }
+                }
+            }
+            
+            if (window.QUIZ_DATA.CHARACTER_LIBRARY) {
+                const archetypes = Object.keys(window.QUIZ_DATA.CHARACTER_LIBRARY);
+                check('角色库原型数量', archetypes.length === 12, `(${archetypes.length} 个原型)`);
+                
+                let totalChars = 0;
+                archetypes.forEach(key => {
+                    totalChars += window.QUIZ_DATA.CHARACTER_LIBRARY[key].length;
+                });
+                check('角色总数', totalChars === 80, `(${totalChars} 个角色)`);
+            }
+        }
+        
+        // 显示详细信息
+        const details = document.createElement('div');
+        details.innerHTML = '<h2>详细信息</h2><pre>' + JSON.stringify({
+            appConfig: window.QUIZ_DATA?.APP_CONFIG,
+            questionsCount: window.QUIZ_DATA?.QUESTIONS?.length,
+            firstQuestion: window.QUIZ_DATA?.QUESTIONS?.[0] ? {
+                id: window.QUIZ_DATA.QUESTIONS[0].id,
+                dimension: window.QUIZ_DATA.QUESTIONS[0].dimension,
+                location: window.QUIZ_DATA.QUESTIONS[0].location,
+                hasDialogue: !!window.QUIZ_DATA.QUESTIONS[0].dialogue,
+                hasNarration: !!window.QUIZ_DATA.QUESTIONS[0].narration,
+                choicesCount: window.QUIZ_DATA.QUESTIONS[0].choices?.length
+            } : null
+        }, null, 2) + '</pre>';
+        results.appendChild(details);
+    </script>
+</body>
+</html>
