@@ -789,7 +789,7 @@ window.finishQuizHandler = function() {
 
         const points = character.similarity || [];
         elements.result.similarityPoints.innerHTML = `
-            <h4>🎭 为什么你像${character.name}</h4>
+            <h4>🎭 为什么你像${character.name || '这个角色'}</h4>
             <ul class="similarity-list">
                 ${points.map(point => `<li><span class="similarity-dot">◆</span>${point}</li>`).join('')}
             </ul>
@@ -800,8 +800,8 @@ window.finishQuizHandler = function() {
         if (!character || !elements.result.characterStory) return;
 
         elements.result.characterStory.innerHTML = `
-            <h4>📖 ${character.name}的人生剧本</h4>
-            <p class="story-text">${character.story}</p>
+            <h4>📖 ${character.name || '角色'}的人生剧本</h4>
+            <p class="story-text">${character.story || ''}</p>
         `;
     }
 
@@ -824,9 +824,9 @@ window.finishQuizHandler = function() {
 
     function generateLifePredictions(archetype, character) {
         const predictions = [
-            { icon: "🌟", text: `你像${character.name}一样，${character.similarity?.[0] || '有着独特的魅力'}` },
-            { icon: "⚠️", text: `需要注意：${archetype.badMovie.symptoms[0]}` },
-            { icon: "💡", text: `转机时刻：当你学会${archetype.newScript.keyChanges[0].replace('从', '').split('到')[1] || '接纳自己'}时` }
+            { icon: "🌟", text: `你像${character?.name || '这个角色'}一样，${character?.similarity?.[0] || '有着独特的魅力'}` },
+            { icon: "⚠️", text: `需要注意：${archetype?.badMovie?.symptoms?.[0] || '保持觉察'}` },
+            { icon: "💡", text: `转机时刻：当你学会${archetype?.newScript?.keyChanges?.[0]?.replace('从', '')?.split('到')?.[1] || '接纳自己'}时` }
         ];
         return predictions;
     }
@@ -835,9 +835,9 @@ window.finishQuizHandler = function() {
         if (!character || !elements.result.characterAdvice) return;
 
         elements.result.characterAdvice.innerHTML = `
-            <h4>💌 来自${character.name}的启示</h4>
+            <h4>💌 来自${character.name || '角色'}的启示</h4>
             <div class="advice-box">
-                <p class="advice-text">${character.advice}</p>
+                <p class="advice-text">${character.advice || ''}</p>
             </div>
         `;
     }
@@ -1041,11 +1041,11 @@ window.finishQuizHandler = function() {
 
                         <!-- 角色头像 -->
                         <div style="width: 70px; height: 70px; margin: 0 auto 15px; background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #1a1a2e; font-weight: 700; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);">
-                            ${character ? character.name.charAt(0) : archetype.name.charAt(0)}
+                            ${character?.name?.charAt(0) || archetype?.name?.charAt(0) || '?'}
                         </div>
 
-                        <div style="font-size: 28px; font-weight: 700; color: #f5f5f5; margin: 10px 0; font-family: 'Noto Serif SC', serif;">${character ? character.name : archetype.name}</div>
-                        <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character ? character.work : archetype.englishName}</div>
+                        <div style="font-size: 28px; font-weight: 700; color: #f5f5f5; margin: 10px 0; font-family: 'Noto Serif SC', serif;">${character?.name || archetype?.name || '未知'}</div>
+                        <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character?.work || archetype?.englishName || ''}</div>
 
                         <!-- 匹配度 -->
                         <div style="display: inline-block; background: rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 8px 20px; margin-top: 5px;">
