@@ -449,12 +449,17 @@ window.finishQuizHandler = function() {
                 return;
             }
             alert('QUIZ_DATA存在，开始calculateResult');
-            calculateResult();
-            alert('calculateResult完成，开始renderResult');
-            renderResult();
-            alert('renderResult完成，切换到result');
-            switchScreen('result');
-            alert('切换完成');
+            try {
+                calculateResult();
+                alert('calculateResult完成，开始renderResult');
+                renderResult();
+                alert('renderResult完成，切换到result');
+                switchScreen('result');
+                alert('切换完成');
+            } catch (e) {
+                alert('错误: ' + e.message);
+                console.error(e);
+            }
         }, 500);
     }
 
@@ -642,76 +647,69 @@ window.finishQuizHandler = function() {
     // ==================== 渲染结果 ====================
 
     function renderResult() {
-        alert('renderResult开始');
-        const data = window.QUIZ_DATA;
-        
-        if (!data) {
-            alert('QUIZ_DATA不存在');
-            return;
+        console.log('renderResult开始');
+        try {
+            const data = window.QUIZ_DATA;
+            
+            if (!data) {
+                console.error('QUIZ_DATA不存在');
+                return;
+            }
+            if (!state.result) {
+                console.error('state.result不存在');
+                return;
+            }
+            
+            console.log('数据检查通过，开始渲染');
+            
+            const archetype = data.ARCHETYPES[state.result.archetype];
+            const character = state.result.character;
+            const dims = state.result.dimensions;
+            
+            if (!archetype) {
+                console.error('archetype不存在:', state.result.archetype);
+                return;
+            }
+            
+            console.log('开始渲染基础信息');
+
+            // 基础信息
+            elements.result.movieTitle.textContent = archetype.movieTitle;
+            elements.result.tagline.textContent = archetype.tagline;
+            elements.result.archetypeName.textContent = archetype.name;
+            elements.result.archetypeSubtitle.textContent = state.result.isMixed ?
+                `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` :
+                archetype.englishName;
+
+            // 渲染角色卡片
+            renderCharacterCard(character, archetype);
+
+            // 渲染相似点
+            renderSimilarityPoints(character);
+
+            // 渲染角色故事
+            renderCharacterStory(character);
+
+            // 渲染人生预测
+            renderLifePrediction(character, archetype);
+
+            // 渲染建议
+            renderAdvice(character);
+
+            // 渲染原有的原型分析
+            renderArchetypeAnalysis(archetype, dims, data);
+
+            // 渲染四维解读（新增）
+            renderDimensionAnalysis(data);
+
+            // 绘制雷达图
+            console.log('开始绘制雷达图');
+            drawRadarChart();
+            console.log('renderResult完成');
+        } catch (e) {
+            console.error('renderResult错误:', e);
+            alert('渲染结果时出错: ' + e.message);
         }
-        if (!state.result) {
-            alert('state.result不存在');
-            return;
-        }
-        
-        alert('数据检查通过，开始渲染');
-        
-        const archetype = data.ARCHETYPES[state.result.archetype];
-        const character = state.result.character;
-        const dims = state.result.dimensions;
-        
-        if (!archetype) {
-            alert('archetype不存在: ' + state.result.archetype);
-            return;
-        }
-        
-        alert('开始渲染基础信息');
-
-        // 基础信息
-        elements.result.movieTitle.textContent = archetype.movieTitle;
-        elements.result.tagline.textContent = archetype.tagline;
-        elements.result.archetypeName.textContent = archetype.name;
-        elements.result.archetypeSubtitle.textContent = state.result.isMixed ?
-            `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` :
-            archetype.englishName;
-
-        // 匹配度显示 - 已移到角色卡片内显示，此处不再重复显示
-        /*
-        if (elements.result.matchPercentage) {
-            elements.result.matchPercentage.innerHTML = `
-                <div class="match-percentage-large">
-                    <span class="match-value">${state.result.matchPercentage}%</span>
-                    <span class="match-label">角色匹配度</span>
-                </div>
-            `;
-        }
-        */
-
-        // 渲染角色卡片
-        renderCharacterCard(character, archetype);
-
-        // 渲染相似点
-        renderSimilarityPoints(character);
-
-        // 渲染角色故事
-        renderCharacterStory(character);
-
-        // 渲染人生预测
-        renderLifePrediction(character, archetype);
-
-        // 渲染建议
-        renderAdvice(character);
-
-        // 渲染原有的原型分析
-        renderArchetypeAnalysis(archetype, dims, data);
-
-        // 渲染四维解读（新增）
-        renderDimensionAnalysis(data);
-
-        // 绘制雷达图
-        alert('开始绘制雷达图');
-        drawRadarChart();
-        alert('renderResult完成');
     }
 
     // 新增：四维解读渲染函数
