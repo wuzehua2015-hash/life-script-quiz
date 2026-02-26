@@ -5,14 +5,14 @@
 
 // 全局处理函数供HTML调用
 window.finishQuizHandler = function() {
-    alert('按钮被点击');
+    
     if (!window.QUIZ_DATA) {
-        alert('QUIZ_DATA不存在');
+        // alert('QUIZ_DATA不存在');
         return false;
     }
     const basicInfo = window.lsqState ? window.lsqState.basicInfo : {};
     if (Object.keys(basicInfo).length === window.QUIZ_DATA.BASIC_QUESTIONS.length) {
-        alert('条件满足，调用finishQuiz');
+        
         if (window.lsqFinishQuiz) window.lsqFinishQuiz();
     } else {
         alert('请回答所有问题');
@@ -438,24 +438,24 @@ window.finishQuizHandler = function() {
     }
 
     function finishQuiz() {
-        alert('finishQuiz被调用');
+        
         switchScreen('loading');
         
         setTimeout(() => {
-            alert('开始计算');
+            
             if (!window.QUIZ_DATA) {
-                alert('QUIZ_DATA不存在');
+                // alert('QUIZ_DATA不存在');
                 setTimeout(finishQuiz, 100);
                 return;
             }
-            alert('QUIZ_DATA存在，开始calculateResult');
+            
             try {
                 calculateResult();
-                alert('calculateResult完成，开始renderResult');
+                
                 renderResult();
-                alert('renderResult完成，切换到result');
+                
                 switchScreen('result');
-                alert('切换完成');
+                
             } catch (e) {
                 alert('错误: ' + e.message);
                 console.error(e);
