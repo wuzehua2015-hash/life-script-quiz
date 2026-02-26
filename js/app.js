@@ -452,28 +452,33 @@
         }
     }
 
-    function finishQuiz() {
+    async function finishQuiz() {
         // 显示加载动画
         showLoading('正在分析你的人生剧本...');
         
         // 使用 requestAnimationFrame 确保UI更新后再计算
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                if (!window.QUIZ_DATA) {
-                    setTimeout(finishQuiz, 100);
-                    return;
-                }
-                
-                // 更新加载文字
-                const loadingText = document.querySelector('#loading-overlay .loading-text');
-                if (loadingText) loadingText.textContent = '正在匹配最适合你的角色...';
-                
-                calculateResult();
-                renderResult();
-                hideLoading();
-                switchScreen('result');
-            }, 100); // 减少延迟到100ms
+        await new Promise(resolve => {
+            requestAnimationFrame(() => {
+                setTimeout(resolve, 100);
+            });
         });
+        
+        if (!window.QUIZ_DATA) {
+            setTimeout(finishQuiz, 100);
+            return;
+        }
+        
+        // 更新加载文字
+        updateLoadingText('正在匹配最适合你的角色...');
+        
+        // 计算结果
+        calculateResult();
+        
+        // 切换页面并渲染
+        switchScreen('result');
+        await renderResult();
+        
+        hideLoading();
     }
 
     // ==================== 结果计算 ====================
@@ -626,13 +631,13 @@
 
     // ==================== 渲染结果 ====================
 
-    function renderResult() {
+    async function renderResult() {
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
         const character = state.result.character;
         const dims = state.result.dimensions;
 
-        // 基础信息
+        // 基础信息 - 立即渲染
         elements.result.movieTitle.textContent = archetype.movieTitle;
         elements.result.tagline.textContent = archetype.tagline;
         elements.result.archetypeName.textContent = archetype.name;
@@ -640,41 +645,28 @@
             `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` : 
             archetype.englishName;
 
-        // 匹配度显示 - 已移到角色卡片内显示，此处不再重复显示
-        /*
-        if (elements.result.matchPercentage) {
-            elements.result.matchPercentage.innerHTML = `
-                <div class="match-percentage-large">
-                    <span class="match-value">${state.result.matchPercentage}%</span>
-                    <span class="match-label">角色匹配度</span>
-                </div>
-            `;
-        }
-        */
-
-        // 渲染角色卡片
+        // 核心内容 - 立即渲染
         renderCharacterCard(character, archetype);
-
-        // 渲染相似点
-        renderSimilarityPoints(character);
-
-        // 渲染角色故事
-        renderCharacterStory(character);
-
-        // 渲染人生预测
-        renderLifePrediction(character, archetype);
-
-        // 渲染建议
-        renderAdvice(character);
-
-        // 渲染原有的原型分析
-        renderArchetypeAnalysis(archetype, dims, data);
-
-        // 渲染四维解读（新增）
-        renderDimensionAnalysis(data);
-
-        // 绘制雷达图
         drawRadarChart();
+
+        // 其他内容 - 延迟渲染，避免卡顿
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderSimilarityPoints(character);
+        
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderCharacterStory(character);
+        
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderLifePrediction(character, archetype);
+        
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderAdvice(character);
+        
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderArchetypeAnalysis(archetype, dims, data);
+        
+        await new Promise(resolve => setTimeout(resolve, 50));
+        renderDimensionAnalysis(data);
     }
 
     // 新增：四维解读渲染函数
