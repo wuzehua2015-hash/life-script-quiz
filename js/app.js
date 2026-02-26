@@ -19,30 +19,17 @@
             time: {}
         },
         result: null,
-        matchedCharacter: null,
-        questions: [] // 动态加载的题目
+        matchedCharacter: null
     };
 
     // DOM 元素引用
     const elements = {};
 
     // 初始化
-    async function init() {
+    function init() {
         cacheElements();
         bindEvents();
         initScores();
-        
-        // 预加载动态题库（在后台静默加载）
-        if (window.QuestionBank) {
-            QuestionBank.init().then(() => {
-                console.log('动态题库预加载完成');
-                // 提前加载题目到缓存
-                QuestionBank.loadDimensionQuestions('drive');
-                QuestionBank.loadDimensionQuestions('world');
-                QuestionBank.loadDimensionQuestions('self');
-                QuestionBank.loadDimensionQuestions('time');
-            });
-        }
     }
 
     // 缓存DOM元素
@@ -110,15 +97,7 @@
 
     // 绑定事件
     function bindEvents() {
-        elements.intro.startBtn.addEventListener('click', () => {
-            startQuiz().catch(err => {
-                console.error('启动测试失败:', err);
-                // 降级：直接使用静态题目
-                state.questions = window.QUIZ_DATA.QUESTIONS;
-                switchScreen('quiz');
-                renderQuestion(0);
-            });
-        });
+        elements.intro.startBtn.addEventListener('click', startQuiz);
         elements.result.shareBtn.addEventListener('click', showShareModal);
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
@@ -197,10 +176,9 @@
         });
 
         // 绑定下一步按钮
-        elements.basic.nextBtn.addEventListener('click', async () => {
+        elements.basic.nextBtn.addEventListener('click', () => {
             if (Object.keys(state.basicInfo).length === data.BASIC_QUESTIONS.length) {
-                // 所有信息填写完成，生成报告
-                await finishQuiz();
+                finishQuiz();
             } else {
                 showToast('请回答所有问题');
             }
@@ -235,75 +213,9 @@
 
     // ==================== 测试流程 ====================
 
-    async function startQuiz() {
-        // 显示加载动画
-        showLoading('正在生成你的专属剧本...');
-        
-        try {
-            // 加载动态题目
-            if (window.QuestionBank) {
-                const excludeIds = [];
-                state.questions = await QuestionBank.selectQuestions({
-                    questionsPerDim: 3,
-                    excludeIds: excludeIds
-                });
-                console.log('加载题目:', state.questions.length, '道');
-            } else {
-                // 降级：使用静态题目
-                state.questions = window.QUIZ_DATA.QUESTIONS;
-            }
-            
-            // 隐藏加载动画
-            hideLoading();
-            
-            switchScreen('quiz');
-            renderQuestion(0);
-        } catch (error) {
-            console.error('加载题目失败:', error);
-            hideLoading();
-            // 降级处理
-            state.questions = window.QUIZ_DATA.QUESTIONS;
-            switchScreen('quiz');
-            renderQuestion(0);
-        }
-    }
-    
-    // 显示加载动画（带进度文字）
-    function showLoading(text = '加载中...') {
-        let loadingEl = document.getElementById('loading-overlay');
-        if (!loadingEl) {
-            loadingEl = document.createElement('div');
-            loadingEl.id = 'loading-overlay';
-            loadingEl.innerHTML = `
-                <div class="loading-content">
-                    <div class="loading-spinner"></div>
-                    <div class="loading-text">${text}</div>
-                    <div class="loading-subtext">从80个角色中寻找最匹配的你</div>
-                </div>
-            `;
-            document.body.appendChild(loadingEl);
-        } else {
-            const textEl = loadingEl.querySelector('.loading-text');
-            if (textEl) textEl.textContent = text;
-            loadingEl.style.display = 'flex';
-        }
-    }
-    
-    // 更新加载文字
-    function updateLoadingText(text) {
-        const loadingEl = document.getElementById('loading-overlay');
-        if (loadingEl) {
-            const textEl = loadingEl.querySelector('.loading-text');
-            if (textEl) textEl.textContent = text;
-        }
-    }
-    
-    // 隐藏加载动画
-    function hideLoading() {
-        const loadingEl = document.getElementById('loading-overlay');
-        if (loadingEl) {
-            loadingEl.style.display = 'none';
-        }
+    function startQuiz() {
+        switchScreen('quiz');
+        renderQuestion(0);
     }
 
     function switchScreen(screenName) {
@@ -322,26 +234,10 @@
         }
         
         const data = window.QUIZ_DATA;
-        const question = state.questions[index] || data.QUESTIONS[index];
-        
-        // 检查题目是否存在
-        if (!question) {
-            console.error('题目不存在:', index);
-            // 降级：重新使用静态题目
-            state.questions = data.QUESTIONS;
-            const fallbackQuestion = data.QUESTIONS[index];
-            if (!fallbackQuestion) {
-                console.error('静态题目也不存在');
-                return;
-            }
-            // 递归调用，使用降级后的题目
-            renderQuestion(index);
-            return;
-        }
+        const question = data.QUESTIONS[index];
 
         // 更新进度
-        const total = state.questions.length || data.QUESTIONS.length;
-        const progress = ((index + 1) / total) * 100;
+        const progress = ((index + 1) / data.QUESTIONS.length) * 100;
         elements.quiz.progressFill.style.width = `${progress}%`;
         elements.quiz.currentScene.textContent = index + 1;
         elements.quiz.sceneNumber.textContent = index + 1;
@@ -411,12 +307,9 @@
         state.scores[question.dimension][choice.type] += choice.score;
         state.currentQuestion = questionIndex + 1;
 
-        // 判断是否完成所有题目
-        const totalQuestions = state.questions.length > 0 ? state.questions.length : data.QUESTIONS.length;
-        if (state.currentQuestion < totalQuestions) {
+        if (questionIndex < data.QUESTIONS.length - 1) {
             renderQuestion(state.currentQuestion);
         } else {
-            // 完成所有题目，进入基础信息页面
             startBasicQuestions();
         }
     }
@@ -432,19 +325,18 @@
         }
     }
 
-    async function finishQuiz() {
-        // 直接计算并显示报告，不使用loading动画
-        if (!window.QUIZ_DATA) {
-            setTimeout(finishQuiz, 100);
-            return;
-        }
+    function finishQuiz() {
+        switchScreen('loading');
         
-        // 计算结果
-        calculateResult();
-        
-        // 切换页面并渲染
-        switchScreen('result');
-        await renderResult();
+        setTimeout(() => {
+            if (!window.QUIZ_DATA) {
+                setTimeout(finishQuiz, 100);
+                return;
+            }
+            calculateResult();
+            renderResult();
+            switchScreen('result');
+        }, 2000);
     }
 
     // ==================== 结果计算 ====================
@@ -597,13 +489,13 @@
 
     // ==================== 渲染结果 ====================
 
-    async function renderResult() {
+    function renderResult() {
         const data = window.QUIZ_DATA;
         const archetype = data.ARCHETYPES[state.result.archetype];
         const character = state.result.character;
         const dims = state.result.dimensions;
 
-        // 基础信息 - 立即渲染
+        // 基础信息
         elements.result.movieTitle.textContent = archetype.movieTitle;
         elements.result.tagline.textContent = archetype.tagline;
         elements.result.archetypeName.textContent = archetype.name;
@@ -611,28 +503,41 @@
             `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` : 
             archetype.englishName;
 
-        // 核心内容 - 立即渲染
-        renderCharacterCard(character, archetype);
-        drawRadarChart();
+        // 匹配度显示 - 已移到角色卡片内显示，此处不再重复显示
+        /*
+        if (elements.result.matchPercentage) {
+            elements.result.matchPercentage.innerHTML = `
+                <div class="match-percentage-large">
+                    <span class="match-value">${state.result.matchPercentage}%</span>
+                    <span class="match-label">角色匹配度</span>
+                </div>
+            `;
+        }
+        */
 
-        // 其他内容 - 延迟渲染，避免卡顿
-        await new Promise(resolve => setTimeout(resolve, 50));
+        // 渲染角色卡片
+        renderCharacterCard(character, archetype);
+
+        // 渲染相似点
         renderSimilarityPoints(character);
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 渲染角色故事
         renderCharacterStory(character);
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 渲染人生预测
         renderLifePrediction(character, archetype);
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 渲染建议
         renderAdvice(character);
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 渲染原有的原型分析
         renderArchetypeAnalysis(archetype, dims, data);
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 渲染四维解读（新增）
         renderDimensionAnalysis(data);
+
+        // 绘制雷达图
+        drawRadarChart();
     }
 
     // 新增：四维解读渲染函数
