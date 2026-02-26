@@ -197,9 +197,33 @@
         });
 
         // 绑定下一步按钮
-        elements.basic.nextBtn.addEventListener('click', () => {
+        elements.basic.nextBtn.addEventListener('click', async () => {
             if (Object.keys(state.basicInfo).length === data.BASIC_QUESTIONS.length) {
-                finishQuiz();
+                // 显示加载动画
+                showLoading('正在生成你的专属剧本...');
+                
+                try {
+                    // 异步加载题目
+                    if (window.QuestionBank) {
+                        state.questions = await QuestionBank.selectQuestions({
+                            questionsPerDim: 3,
+                            excludeIds: []
+                        });
+                    } else {
+                        state.questions = window.QUIZ_DATA.QUESTIONS;
+                    }
+                    
+                    hideLoading();
+                    switchScreen('quiz');
+                    renderQuestion(0);
+                } catch (error) {
+                    console.error('加载题目失败:', error);
+                    hideLoading();
+                    // 降级处理
+                    state.questions = window.QUIZ_DATA.QUESTIONS;
+                    switchScreen('quiz');
+                    renderQuestion(0);
+                }
             } else {
                 showToast('请回答所有问题');
             }
