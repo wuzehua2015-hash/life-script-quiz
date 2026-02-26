@@ -433,34 +433,28 @@
         
         if (characters.length === 0) return null;
 
-        // 第一步：严格按性别筛选（只保留匹配性别的角色）
-        const genderMatched = characters.filter(char => {
-            return char.gender.includes(state.basicInfo.gender);
-        });
-
-        // 如果性别筛选后没有角色，返回null（这种情况不应该发生）
-        if (genderMatched.length === 0) {
-            console.warn('No characters match gender:', state.basicInfo.gender);
-            return null;
-        }
-
-        // 第二步：在性别匹配的角色中，按其他属性排序
-        let scoredCharacters = genderMatched.map(char => {
+        // 根据基础信息筛选和排序
+        let scoredCharacters = characters.map(char => {
             let score = 0;
             
-            // 年龄匹配 (20%)
+            // 性别匹配 (15%)
+            if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) {
+                score += 15;
+            }
+            
+            // 年龄匹配 (15%)
             if (char.age.includes(state.basicInfo.age)) {
-                score += 20;
+                score += 15;
             }
             
-            // 职业匹配 (20%)
+            // 职业匹配 (15%)
             if (char.career.includes(state.basicInfo.career)) {
-                score += 20;
+                score += 15;
             }
             
-            // 人生阶段匹配 (20%)
+            // 人生阶段匹配 (15%)
             if (char.stage.includes(state.basicInfo.life_stage)) {
-                score += 20;
+                score += 15;
             }
             
             return { character: char, score: score };
@@ -468,7 +462,7 @@
 
         // 按分数排序，返回最佳匹配
         scoredCharacters.sort((a, b) => b.score - a.score);
-        return scoredCharacters[0]?.character || genderMatched[0];
+        return scoredCharacters[0]?.character || characters[0];
     }
 
     function calculateTotalMatchPercentage(archetypePercentage, character) {
