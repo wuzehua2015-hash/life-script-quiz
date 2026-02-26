@@ -110,7 +110,15 @@
 
     // 绑定事件
     function bindEvents() {
-        elements.intro.startBtn.addEventListener('click', startQuiz);
+        elements.intro.startBtn.addEventListener('click', () => {
+            startQuiz().catch(err => {
+                console.error('启动测试失败:', err);
+                // 降级：直接使用静态题目
+                state.questions = window.QUIZ_DATA.QUESTIONS;
+                switchScreen('quiz');
+                renderQuestion(0);
+            });
+        });
         elements.result.shareBtn.addEventListener('click', showShareModal);
         elements.result.retakeBtn.addEventListener('click', retakeQuiz);
         elements.modal.closeModal.addEventListener('click', hideShareModal);
@@ -303,6 +311,21 @@
         
         const data = window.QUIZ_DATA;
         const question = state.questions[index] || data.QUESTIONS[index];
+        
+        // 检查题目是否存在
+        if (!question) {
+            console.error('题目不存在:', index);
+            // 降级：重新使用静态题目
+            state.questions = data.QUESTIONS;
+            const fallbackQuestion = data.QUESTIONS[index];
+            if (!fallbackQuestion) {
+                console.error('静态题目也不存在');
+                return;
+            }
+            // 递归调用，使用降级后的题目
+            renderQuestion(index);
+            return;
+        }
 
         // 更新进度
         const total = state.questions.length || data.QUESTIONS.length;

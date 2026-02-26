@@ -87,8 +87,12 @@ const QuestionBank = {
     
     // 随机选择n个元素
     randomSelect(array, n) {
+        if (!array || array.length === 0) {
+            console.warn('题库为空，无法选题');
+            return [];
+        }
         const shuffled = this.shuffle([...array]);
-        return shuffled.slice(0, n);
+        return shuffled.slice(0, Math.min(n, array.length));
     },
     
     // 打乱数组
