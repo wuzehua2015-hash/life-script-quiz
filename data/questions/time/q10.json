@@ -1,0 +1,43 @@
+{
+  "id": 10,
+  "dimension": "time",
+  "location": "INT. 老同学聚会 - 周末",
+  "dialogue": [
+    {
+      "character": "老同学",
+      "line": "还记得我们当年的梦想吗？"
+    },
+    {
+      "character": "你",
+      "line": "（看着大家的变化）"
+    }
+  ],
+  "narration": "对比过去，你现在对人生的感受是？",
+  "choices": [
+    {
+      "text": "时间不够用，我要追赶那些被浪费的年头",
+      "type": "chasing",
+      "score": 2
+    },
+    {
+      "text": "人生就这样了，很难再有什么改变",
+      "type": "stagnation",
+      "score": 2
+    },
+    {
+      "text": "每个阶段都有不同风景，挺有意思的",
+      "type": "exploration",
+      "score": 2
+    },
+    {
+      "text": "命运自有安排，顺其自然就好",
+      "type": "fate",
+      "score": 2
+    },
+    {
+      "text": "未来由我决定，我可以创造想要的人生",
+      "type": "creation",
+      "score": 2
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": 5,
+  "dimension": "world",
+  "location": "EXT. 街角咖啡店 - 雨天",
+  "dialogue": [
+    {
+      "character": "朋友",
+      "line": "我最近好倒霉，工作丢了，对象也分手了..."
+    },
+    {
+      "character": "你",
+      "line": "（看着朋友憔悴的脸）"
+    }
+  ],
+  "narration": "朋友向你倾诉不幸，这让你想到什么？",
+  "choices": [
+    {
+      "text": "生活就是一场战斗，必须坚强面对",
+      "type": "battle",
+      "score": 2
+    },
+    {
+      "text": "世界真的太不公平了，好人没好报",
+      "type": "victim",
+      "score": 2
+    },
+    {
+      "text": "也许这是转机，我陪你一起想办法",
+      "type": "cooperation",
+      "score": 2
+    },
+    {
+      "text": "每个人有每个人的命，我帮不了太多",
+      "type": "detachment",
+      "score": 2
+    },
+    {
+      "text": "我们来分析一下问题出在哪里",
+      "type": "control",
+      "score": 2
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": 4,
+  "dimension": "world",
+  "location": "INT. 公司会议室 - 上午",
+  "dialogue": [
+    {
+      "character": "上司",
+      "line": "这个项目竞争很激烈，你们组能拿下吗？"
+    },
+    {
+      "character": "同事",
+      "line": "听说对手公司也在争取..."
+    },
+    {
+      "character": "你",
+      "line": "（看着项目资料）"
+    }
+  ],
+  "narration": "面对激烈的竞争，你的第一反应是？",
+  "choices": [
+    {
+      "text": "来啊，谁怕谁，我一定要赢",
+      "type": "battle",
+      "score": 2
+    },
+    {
+      "text": "为什么总是这么难，感觉要被压垮了",
+      "type": "victim",
+      "score": 2
+    },
+    {
+      "text": "看看能不能找到双赢的方案",
+      "type": "cooperation",
+      "score": 2
+    },
+    {
+      "text": "职场竞争而已，跟我关系不大",
+      "type": "detachment",
+      "score": 2
+    },
+    {
+      "text": "先制定详细计划，把每个环节控制住",
+      "type": "control",
+      "score": 2
+    }
+  ]
+}

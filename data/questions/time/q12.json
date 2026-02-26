@@ -1,0 +1,43 @@
+{
+  "id": 12,
+  "dimension": "time",
+  "location": "INT. 跨年倒数现场 - 23:59",
+  "dialogue": [
+    {
+      "character": "人群",
+      "line": "10、9、8..."
+    },
+    {
+      "character": "你",
+      "line": "（看着烟花绽放）"
+    }
+  ],
+  "narration": "新年钟声敲响时，你对自己说的是？",
+  "choices": [
+    {
+      "text": "新的一年，必须比去年更成功",
+      "type": "chasing",
+      "score": 2
+    },
+    {
+      "text": "年复一年，好像也没什么不同",
+      "type": "stagnation",
+      "score": 2
+    },
+    {
+      "text": "不知道会发生什么，期待新的体验",
+      "type": "exploration",
+      "score": 2
+    },
+    {
+      "text": "该来的会来，该走的会走",
+      "type": "fate",
+      "score": 2
+    },
+    {
+      "text": "新的一年，我要创造不一样的故事",
+      "type": "creation",
+      "score": 2
+    }
+  ]
+}

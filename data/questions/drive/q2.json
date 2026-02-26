@@ -1,0 +1,47 @@
+{
+  "id": 2,
+  "dimension": "drive",
+  "location": "INT. 家庭聚会 - 周末",
+  "dialogue": [
+    {
+      "character": "亲戚A",
+      "line": "小明现在月薪多少啊？"
+    },
+    {
+      "character": "亲戚B",
+      "line": "我家孩子刚买了第三套房"
+    },
+    {
+      "character": "你",
+      "line": "（感受到所有人的目光）"
+    }
+  ],
+  "narration": "面对亲戚们的「关心」，你内心真实的反应是？",
+  "choices": [
+    {
+      "text": "我要更努力，下次让他们刮目相看",
+      "type": "achievement",
+      "score": 2
+    },
+    {
+      "text": "好尴尬，希望有人能帮我解围",
+      "type": "relationship",
+      "score": 2
+    },
+    {
+      "text": "随便应付一下，反正我不在乎他们的评价",
+      "type": "security",
+      "score": 2
+    },
+    {
+      "text": "这种攀比真低级，我有自己的追求",
+      "type": "unique",
+      "score": 2
+    },
+    {
+      "text": "换个话题吧，问问长辈身体怎么样",
+      "type": "service",
+      "score": 2
+    }
+  ]
+}

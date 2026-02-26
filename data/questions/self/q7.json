@@ -1,0 +1,43 @@
+{
+  "id": 7,
+  "dimension": "self",
+  "location": "INT. 浴室镜子前 - 早晨",
+  "dialogue": [
+    {
+      "character": "你",
+      "line": "（看着镜中的自己）"
+    },
+    {
+      "character": "内心声音",
+      "line": "这就是真实的我吗？"
+    }
+  ],
+  "narration": "当你凝视镜中的自己，最常出现的念头是？",
+  "choices": [
+    {
+      "text": "这里不够好，那里还需要改进",
+      "type": "perfection",
+      "score": 2
+    },
+    {
+      "text": "为什么我总是不如别人",
+      "type": "inferiority",
+      "score": 2
+    },
+    {
+      "text": "虽然不完美，但我还是挺优秀的",
+      "type": "narcissism",
+      "score": 2
+    },
+    {
+      "text": "这就是我，有优点也有缺点",
+      "type": "authenticity",
+      "score": 2
+    },
+    {
+      "text": "说实话，我不太确定我是谁",
+      "type": "lost",
+      "score": 2
+    }
+  ]
+}
