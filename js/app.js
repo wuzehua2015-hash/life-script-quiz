@@ -55,6 +55,7 @@
         elements.quiz = {
             progressFill: document.getElementById('progress-fill'),
             currentScene: document.getElementById('current-scene'),
+            totalScenes: document.getElementById('total-scenes'),
             sceneNumber: document.getElementById('scene-number'),
             sceneLocation: document.getElementById('scene-location'),
             sceneDialogue: document.getElementById('scene-dialogue'),
@@ -291,7 +292,8 @@
         const progress = ((index + 1) / questions.length) * 100;
         elements.quiz.progressFill.style.width = `${progress}%`;
         elements.quiz.currentScene.textContent = index + 1;
-        elements.quiz.sceneNumber.textContent = questions.length;
+        elements.quiz.totalScenes.textContent = questions.length;
+        elements.quiz.sceneNumber.textContent = index + 1;
 
         state.currentQuestion = index;
         elements.quiz.sceneCard.style.animation = 'none';
