@@ -454,11 +454,12 @@
         // 计算结果
         calculateResult();
         
+        // 先隐藏loading，再切换页面
+        hideLoading();
+        
         // 切换页面并渲染
         switchScreen('result');
         await renderResult();
-        
-        hideLoading();
     }
 
     // ==================== 结果计算 ====================
