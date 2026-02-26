@@ -411,9 +411,12 @@
         state.scores[question.dimension][choice.type] += choice.score;
         state.currentQuestion = questionIndex + 1;
 
-        if (questionIndex < (state.questions.length || data.QUESTIONS.length) - 1) {
+        // 判断是否完成所有题目
+        const totalQuestions = state.questions.length > 0 ? state.questions.length : data.QUESTIONS.length;
+        if (state.currentQuestion < totalQuestions) {
             renderQuestion(state.currentQuestion);
         } else {
+            // 完成所有题目，进入基础信息页面
             startBasicQuestions();
         }
     }
