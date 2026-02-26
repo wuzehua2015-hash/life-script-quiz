@@ -1,0 +1,43 @@
+{
+  "id": 9,
+  "dimension": "self",
+  "location": "INT. 独处时刻 - 深夜",
+  "dialogue": [
+    {
+      "character": "你",
+      "line": "（一个人待着，没有手机，没有打扰）"
+    },
+    {
+      "character": "内心声音",
+      "line": "此刻，你和自己相处得如何？"
+    }
+  ],
+  "narration": "独处时，你最能感受到的是？",
+  "choices": [
+    {
+      "text": "还有很多事情没做，不能放松",
+      "type": "perfection",
+      "score": 2
+    },
+    {
+      "text": "空虚，需要找点事情填满",
+      "type": "inferiority",
+      "score": 2
+    },
+    {
+      "text": "享受这种独处的优越感",
+      "type": "narcissism",
+      "score": 2
+    },
+    {
+      "text": "平静，和自己在一起很舒服",
+      "type": "authenticity",
+      "score": 2
+    },
+    {
+      "text": "迷茫，不知道该做什么",
+      "type": "lost",
+      "score": 2
+    }
+  ]
+}

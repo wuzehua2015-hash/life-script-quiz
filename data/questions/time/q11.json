@@ -1,0 +1,43 @@
+{
+  "id": 11,
+  "dimension": "time",
+  "location": "INT. 医院走廊 - 下午",
+  "dialogue": [
+    {
+      "character": "医生",
+      "line": "检查结果显示需要住院观察"
+    },
+    {
+      "character": "你",
+      "line": "（看着窗外）"
+    }
+  ],
+  "narration": "面对突如其来的健康危机，你想到的是？",
+  "choices": [
+    {
+      "text": "完了，这会耽误我多少计划...",
+      "type": "chasing",
+      "score": 2
+    },
+    {
+      "text": "果然，我这个人就是容易出问题",
+      "type": "stagnation",
+      "score": 2
+    },
+    {
+      "text": "也许这是身体让我停下来休息的信号",
+      "type": "exploration",
+      "score": 2
+    },
+    {
+      "text": "听天由命吧，该来的总会来",
+      "type": "fate",
+      "score": 2
+    },
+    {
+      "text": "积极配合治疗，争取早日康复",
+      "type": "creation",
+      "score": 2
+    }
+  ]
+}

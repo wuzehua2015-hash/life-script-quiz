@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "dimension": "drive",
+  "location": "INT. 深夜办公室 - 23:00",
+  "dialogue": [
+    {
+      "character": "你",
+      "line": "终于改完第18版方案了..."
+    },
+    {
+      "character": "同事",
+      "line": "走吧，一起去吃宵夜？"
+    },
+    {
+      "character": "你",
+      "line": "（看着手机里的未读消息）"
+    }
+  ],
+  "narration": "你连续加班两周，身体已经很疲惫。此刻，什么念头最强烈？",
+  "choices": [
+    {
+      "text": "这个项目必须完美，否则之前的努力都白费了",
+      "type": "achievement",
+      "score": 2
+    },
+    {
+      "text": "同事邀请我，不去的话会不会显得不合群？",
+      "type": "relationship",
+      "score": 2
+    },
+    {
+      "text": "还是回家吧，熬夜太伤身体了",
+      "type": "security",
+      "score": 2
+    },
+    {
+      "text": "这种重复性工作真无聊，我想做点不一样的",
+      "type": "unique",
+      "score": 2
+    },
+    {
+      "text": "团队还在奋斗，我怎么能先走",
+      "type": "service",
+      "score": 2
+    }
+  ]
+}

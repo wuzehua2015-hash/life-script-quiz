@@ -1,0 +1,43 @@
+{
+  "id": 3,
+  "dimension": "drive",
+  "location": "INT. 心理咨询室 - 黄昏",
+  "dialogue": [
+    {
+      "character": "咨询师",
+      "line": "如果可以放下一切，你最想成为什么样的人？"
+    },
+    {
+      "character": "你",
+      "line": "（沉默良久）"
+    }
+  ],
+  "narration": "抛开所有外界期待，你内心真正的渴望是？",
+  "choices": [
+    {
+      "text": "成为一个被认可、有成就的人",
+      "type": "achievement",
+      "score": 2
+    },
+    {
+      "text": "被很多人爱着，有温暖的关系",
+      "type": "relationship",
+      "score": 2
+    },
+    {
+      "text": "过着安稳、没有波澜的生活",
+      "type": "security",
+      "score": 2
+    },
+    {
+      "text": "做一个与众不同、活出自我的人",
+      "type": "unique",
+      "score": 2
+    },
+    {
+      "text": "能够帮助他人、让世界更好的人",
+      "type": "service",
+      "score": 2
+    }
+  ]
+}

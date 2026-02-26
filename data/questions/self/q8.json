@@ -1,0 +1,43 @@
+{
+  "id": 8,
+  "dimension": "self",
+  "location": "INT. 生日派对 - 晚上",
+  "dialogue": [
+    {
+      "character": "朋友",
+      "line": "来，寿星许愿！"
+    },
+    {
+      "character": "你",
+      "line": "（闭上眼睛）"
+    }
+  ],
+  "narration": "如果只能许一个关于自己的愿望，你会希望？",
+  "choices": [
+    {
+      "text": "成为一个完美无缺的人",
+      "type": "perfection",
+      "score": 2
+    },
+    {
+      "text": "变得更优秀，让别人看得起我",
+      "type": "inferiority",
+      "score": 2
+    },
+    {
+      "text": "被更多人认可和崇拜",
+      "type": "narcissism",
+      "score": 2
+    },
+    {
+      "text": "接纳真实的自己，活出想要的人生",
+      "type": "authenticity",
+      "score": 2
+    },
+    {
+      "text": "找到真正的自己，知道想要什么",
+      "type": "lost",
+      "score": 2
+    }
+  ]
+}

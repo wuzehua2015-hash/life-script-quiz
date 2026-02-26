@@ -1,0 +1,30 @@
+{
+  "version": "3.0",
+  "totalQuestions": 50,
+  "dimensions": {
+    "drive": {
+      "name": "核心驱动力",
+      "description": "你做事的底层动力是什么？",
+      "questionCount": 12,
+      "types": ["achievement", "relationship", "security", "unique", "service"]
+    },
+    "world": {
+      "name": "与世界的关系",
+      "description": "你如何看待外部世界？",
+      "questionCount": 12,
+      "types": ["battle", "victim", "cooperation", "detachment", "control"]
+    },
+    "self": {
+      "name": "与自我的关系",
+      "description": "你如何看待自己？",
+      "questionCount": 13,
+      "types": ["perfection", "inferiority", "narcissism", "authenticity", "lost"]
+    },
+    "time": {
+      "name": "与时间的关系",
+      "description": "你如何看待人生进程？",
+      "questionCount": 13,
+      "types": ["chasing", "stagnation", "exploration", "fate", "creation"]
+    }
+  }
+}

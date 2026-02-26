@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生剧本测试报告</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 报告专用样式 */
+        .report-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .report-header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .report-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .report-subtitle {
+            font-size: 12px;
+            color: #6a6a8a;
+            letter-spacing: 2px;
+        }
+        
+        .report-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #8a8a9a;
+        }
+        
+        .report-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .character-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .character-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+        
+        .character-name {
+            font-size: 32px;
+            color: #f5f5f5;
+            margin-bottom: 8px;
+        }
+        
+        .character-work {
+            font-size: 14px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+        
+        .match-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: #d4af37;
+        }
+        
+        .match-label {
+            font-size: 14px;
+            color: #6a6a8a;
+        }
+        
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .dimension-item {
+            background: rgba(212, 175, 55, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #d4af37;
+        }
+        
+        .dimension-name {
+            font-size: 13px;
+            color: #8a8a9a;
+            margin-bottom: 5px;
+        }
+        
+        .dimension-value {
+            font-size: 16px;
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+        
+        .quote-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #d4af37;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #a0a0b0;
+            line-height: 1.8;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .action-number {
+            width: 24px;
+            height: 24px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #d4af37;
+            flex-shrink: 0;
+        }
+        
+        .report-footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 30px;
+        }
+        
+        .report-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-report {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%);
+            color: #1a1a2e;
+            border: none;
+            font-weight: 500;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+        
+        .btn-report:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* 打印样式 */
+        @media print {
+            body {
+                background: white;
+            }
+            .report-page {
+                background: white;
+                color: black;
+            }
+            .report-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-page">
+        <!-- 报告头部 -->
+        <div class="report-header">
+            <div class="report-subtitle">PTK LIFE SCRIPT STUDIOS</div>
+            <h1 class="report-title">人生剧本测试报告</h1>
+            <div class="report-meta">
+                <span>报告编号: <span id="report-id">--</span></span>
+                <span>测试日期: <span id="report-date">--</span></span>
+            </div>
+        </div>
+        
+        <!-- 角色匹配 -->
+        <div class="report-section">
+            <div class="section-title">
+                <span>🎭</span>
+                <span>你的角色匹配</span>
+            </div>
+            <div class="character-card">
+                <div class="character-avatar" id="character-avatar">?</div>
+                <div class="character-name" id="character-name">--</div>
+                <div class="character-work" id="character-work">--</div>
+                <div class="match-score" id="match-score">--%</div>
+                <div class="match-label">匹配度</div>
+            </div>
+            
+            <div class="quote-box" id="character-quote">
+                「加载中...」
+            </div>
+        </div>
+        
+        <!-- 四维画像 -->
+        <div class="report-section">
+            <div class="section-title">
+                <span>📊</span>
+                <span>你的四维画像</span>
+            </div>
+            <div class="dimension-grid" id="dimension-grid">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+        
+        <!-- 行动建议 -->
+        <div class="report-section">
+            <div class="section-title">
+                <span>🎯</span>
+                <span>行动建议</span>
+            </div>
+            <ul class="action-list" id="action-list">
+                <!-- 动态生成 -->
+            </ul>
+        </div>
+        
+        <!-- 报告底部 -->
+        <div class="report-footer">
+            <div class="report-actions">
+                <button class="btn-report btn-primary" onclick="printReport()">
+                    🖨️ 打印 / 保存为PDF
+                </button>
+                <button class="btn-report btn-secondary" onclick="shareReport()">
+                    📤 分享报告
+                </button>
+                <button class="btn-report btn-secondary" onclick="window.location.href='index.html'">
+                    🔄 重新测试
+                </button>
+            </div>
+            <div style="font-size: 12px; color: #4a4a5a;">
+                人生剧本测试 v3.0 | PTK Life Script Studios
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/data.js"></script>
+    <script>
+        // 从URL获取测试数据
+        function getTestDataFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const data = params.get('data');
+            if (data) {
+                try {
+                    return JSON.parse(atob(data));
+                } catch (e) {
+                    console.error('解析数据失败:', e);
+                }
+            }
+            return null;
+        }
+        
+        // 从LocalStorage获取测试数据
+        function getTestDataFromStorage() {
+            const testId = new URLSearchParams(window.location.search).get('id');
+            if (testId && window.LSQStorage) {
+                return window.LSQStorage.getTestById(testId);
+            }
+            return null;
+        }
+        
+        // 渲染报告
+        function renderReport() {
+            const testData = getTestDataFromUrl() || getTestDataFromStorage();
+            
+            if (!testData) {
+                document.body.innerHTML = '<div style="text-align:center;padding:50px;color:#d4af37;">' +
+                    '<h2>未找到测试数据</h2>' +
+                    '<p>请完成测试后查看报告</p>' +
+                    '<a href="index.html" style="color:#d4af37;">返回首页</a>' +
+                    '</div>';
+                return;
+            }
+            
+            const data = window.QUIZ_DATA;
+            const archetype = data.ARCHETYPES[testData.archetype];
+            const character = testData.character;
+            
+            // 填充数据
+            document.getElementById('report-id').textContent = testData.id || 'LS' + Date.now();
+            document.getElementById('report-date').textContent = new Date(testData.date).toLocaleDateString('zh-CN');
+            
+            document.getElementById('character-avatar').textContent = character ? character.name.charAt(0) : archetype.name.charAt(0);
+            document.getElementById('character-name').textContent = character ? character.name : archetype.name;
+            document.getElementById('character-work').textContent = character ? character.work : archetype.englishName;
+            document.getElementById('match-score').textContent = testData.matchPercentage + '%';
+            document.getElementById('character-quote').textContent = '「' + (character ? character.quote : archetype.tagline) + '」';
+            
+            // 渲染四维
+            const dimGrid = document.getElementById('dimension-grid');
+            const dimNames = {
+                drive: '核心驱动力',
+                world: '与世界的关系',
+                self: '与自我的关系',
+                time: '与时间的关系'
+            };
+            
+            for (const [dim, type] of Object.entries(testData.dimensions)) {
+                const dimConfig = data.DIMENSIONS[dim];
+                const typeConfig = dimConfig.types[type];
+                
+                const item = document.createElement('div');
+                item.className = 'dimension-item';
+                item.innerHTML = `
+                    <div class="dimension-name">${dimNames[dim]}</div>
+                    <div class="dimension-value">${typeConfig.name}</div>
+                `;
+                dimGrid.appendChild(item);
+            }
+            
+            // 渲染行动建议
+            const actionList = document.getElementById('action-list');
+            const actions = character ? character.advice.split('。').filter(s => s.trim()) : archetype.newScript.split('。').filter(s => s.trim());
+            
+            actions.slice(0, 5).forEach((action, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="action-number">${index + 1}</span>
+                    <span>${action.trim()}。</span>
+                `;
+                actionList.appendChild(li);
+            });
+        }
+        
+        // 打印报告
+        function printReport() {
+            window.print();
+        }
+        
+        // 分享报告
+        function shareReport() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: '我的人生剧本测试报告',
+                    text: '来看看我的人生剧本是什么！',
+                    url: url
+                });
+            } else {
+                // 复制链接
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('链接已复制到剪贴板');
+                });
+            }
+        }
+        
+        // 初始化
+        window.addEventListener('load', renderReport);
+    </script>
+</body>
+</html>
