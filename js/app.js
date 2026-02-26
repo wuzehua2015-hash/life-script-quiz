@@ -674,11 +674,11 @@ window.finishQuizHandler = function() {
             console.log('开始渲染基础信息');
 
             // 基础信息
-            elements.result.movieTitle.textContent = archetype.movieTitle;
-            elements.result.tagline.textContent = archetype.tagline;
-            elements.result.archetypeName.textContent = archetype.name;
+            elements.result.movieTitle.textContent = archetype.movieTitle || '';
+            elements.result.tagline.textContent = archetype.tagline || '';
+            elements.result.archetypeName.textContent = archetype.name || '';
             elements.result.archetypeSubtitle.textContent = state.result.isMixed ?
-                `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` :
+                `${state.result.mixedArchetypes.map(a => (data.ARCHETYPES[a] && data.ARCHETYPES[a].name) || a).join(' + ')}` :
                 archetype.englishName;
 
             // 渲染角色卡片
@@ -769,15 +769,15 @@ window.finishQuizHandler = function() {
         elements.result.characterCard.innerHTML = `
             <div class="character-card-v2">
                 <div class="character-image-placeholder">
-                    <div class="character-avatar">${character.name.charAt(0)}</div>
-                    <div class="character-work">${character.work}</div>
+                    <div class="character-avatar">${(character.name && character.name.charAt(0)) || '?'}</div>
+                    <div class="character-work">${character.work || ''}</div>
                 </div>
                 <div class="character-info">
-                    <h2 class="character-name">${character.name}</h2>
+                    <h2 class="character-name">${character.name || '未知角色'}</h2>
                     ${mixedText}
-                    <p class="character-quote">「${character.quote}」</p>
+                    <p class="character-quote">「${character.quote || ''}」</p>
                     <div class="character-match">
-                        <span class="match-percent">${state.result.matchPercentage}%</span>
+                        <span class="match-percent">${state.result.matchPercentage || 0}%</span>
                     </div>
                 </div>
             </div>
