@@ -19,17 +19,24 @@
             time: {}
         },
         result: null,
-        matchedCharacter: null
+        matchedCharacter: null,
+        questions: [] // 动态加载的题目
     };
 
     // DOM 元素引用
     const elements = {};
 
     // 初始化
-    function init() {
+    async function init() {
         cacheElements();
         bindEvents();
         initScores();
+        
+        // 初始化动态题库
+        if (window.QuestionBank) {
+            await QuestionBank.init();
+            console.log('动态题库初始化完成');
+        }
     }
 
     // 缓存DOM元素
@@ -213,7 +220,20 @@
 
     // ==================== 测试流程 ====================
 
-    function startQuiz() {
+    async function startQuiz() {
+        // 加载动态题目
+        if (window.QuestionBank) {
+            const excludeIds = [];
+            state.questions = await QuestionBank.selectQuestions({
+                questionsPerDim: 3,
+                excludeIds: excludeIds
+            });
+            console.log('加载题目:', state.questions.length, '道');
+        } else {
+            // 降级：使用静态题目
+            state.questions = window.QUIZ_DATA.QUESTIONS;
+        }
+        
         switchScreen('quiz');
         renderQuestion(0);
     }
@@ -234,10 +254,11 @@
         }
         
         const data = window.QUIZ_DATA;
-        const question = data.QUESTIONS[index];
+        const question = state.questions[index] || data.QUESTIONS[index];
 
         // 更新进度
-        const progress = ((index + 1) / data.QUESTIONS.length) * 100;
+        const total = state.questions.length || data.QUESTIONS.length;
+        const progress = ((index + 1) / total) * 100;
         elements.quiz.progressFill.style.width = `${progress}%`;
         elements.quiz.currentScene.textContent = index + 1;
         elements.quiz.sceneNumber.textContent = index + 1;
@@ -307,7 +328,7 @@
         state.scores[question.dimension][choice.type] += choice.score;
         state.currentQuestion = questionIndex + 1;
 
-        if (questionIndex < data.QUESTIONS.length - 1) {
+        if (questionIndex < (state.questions.length || data.QUESTIONS.length) - 1) {
             renderQuestion(state.currentQuestion);
         } else {
             startBasicQuestions();
