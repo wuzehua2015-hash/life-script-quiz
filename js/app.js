@@ -387,6 +387,7 @@
     function finishQuiz() {
         switchScreen('loading');
         
+        // 优化：减少等待时间从2000ms到500ms
         setTimeout(() => {
             if (!window.QUIZ_DATA) {
                 setTimeout(finishQuiz, 100);
@@ -395,7 +396,7 @@
             calculateResult();
             renderResult();
             switchScreen('result');
-        }, 2000);
+        }, 500);
     }
 
     // ==================== 结果计算 ====================
