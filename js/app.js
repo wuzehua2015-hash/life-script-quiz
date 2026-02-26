@@ -506,7 +506,8 @@
             `${state.result.mixedArchetypes.map(a => data.ARCHETYPES[a].name).join(' + ')}` : 
             archetype.englishName;
 
-        // 匹配度显示
+        // 匹配度显示 - 已移到角色卡片内显示，此处不再重复显示
+        /*
         if (elements.result.matchPercentage) {
             elements.result.matchPercentage.innerHTML = `
                 <div class="match-percentage-large">
@@ -515,6 +516,7 @@
                 </div>
             `;
         }
+        */
 
         // 渲染角色卡片
         renderCharacterCard(character, archetype);
