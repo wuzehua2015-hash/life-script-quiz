@@ -32,10 +32,16 @@
         bindEvents();
         initScores();
         
-        // 初始化动态题库
+        // 预加载动态题库（在后台静默加载）
         if (window.QuestionBank) {
-            await QuestionBank.init();
-            console.log('动态题库初始化完成');
+            QuestionBank.init().then(() => {
+                console.log('动态题库预加载完成');
+                // 提前加载题目到缓存
+                QuestionBank.loadDimensionQuestions('drive');
+                QuestionBank.loadDimensionQuestions('world');
+                QuestionBank.loadDimensionQuestions('self');
+                QuestionBank.loadDimensionQuestions('time');
+            });
         }
     }
 
@@ -221,21 +227,63 @@
     // ==================== 测试流程 ====================
 
     async function startQuiz() {
-        // 加载动态题目
-        if (window.QuestionBank) {
-            const excludeIds = [];
-            state.questions = await QuestionBank.selectQuestions({
-                questionsPerDim: 3,
-                excludeIds: excludeIds
-            });
-            console.log('加载题目:', state.questions.length, '道');
-        } else {
-            // 降级：使用静态题目
-            state.questions = window.QUIZ_DATA.QUESTIONS;
-        }
+        // 显示加载动画
+        showLoading('正在生成你的专属剧本...');
         
-        switchScreen('quiz');
-        renderQuestion(0);
+        try {
+            // 加载动态题目
+            if (window.QuestionBank) {
+                const excludeIds = [];
+                state.questions = await QuestionBank.selectQuestions({
+                    questionsPerDim: 3,
+                    excludeIds: excludeIds
+                });
+                console.log('加载题目:', state.questions.length, '道');
+            } else {
+                // 降级：使用静态题目
+                state.questions = window.QUIZ_DATA.QUESTIONS;
+            }
+            
+            // 隐藏加载动画
+            hideLoading();
+            
+            switchScreen('quiz');
+            renderQuestion(0);
+        } catch (error) {
+            console.error('加载题目失败:', error);
+            hideLoading();
+            // 降级处理
+            state.questions = window.QUIZ_DATA.QUESTIONS;
+            switchScreen('quiz');
+            renderQuestion(0);
+        }
+    }
+    
+    // 显示加载动画
+    function showLoading(text = '加载中...') {
+        let loadingEl = document.getElementById('loading-overlay');
+        if (!loadingEl) {
+            loadingEl = document.createElement('div');
+            loadingEl.id = 'loading-overlay';
+            loadingEl.innerHTML = `
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">${text}</div>
+                </div>
+            `;
+            document.body.appendChild(loadingEl);
+        } else {
+            loadingEl.querySelector('.loading-text').textContent = text;
+            loadingEl.style.display = 'flex';
+        }
+    }
+    
+    // 隐藏加载动画
+    function hideLoading() {
+        const loadingEl = document.getElementById('loading-overlay');
+        if (loadingEl) {
+            loadingEl.style.display = 'none';
+        }
     }
 
     function switchScreen(screenName) {
