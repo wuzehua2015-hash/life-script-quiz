@@ -839,25 +839,72 @@
         const shareUrl = `https://wuzehua2015-hash.github.io/life-script-quiz/?result=${state.result.archetype}`;
 
         const posterHtml = `
-            <div id="poster-capture" style="background: linear-gradient(135deg, #1a1a25 0%, #12121a 100%); padding: 40px; text-align: center; border-radius: 16px; width: 320px;">
-                <div style="font-size: 10px; color: #d4af37; margin-bottom: 10px; letter-spacing: 2px;">PTK LIFE SCRIPT STUDIOS v2.0</div>
-                <h2 style="font-family: 'Noto Serif SC', serif; font-size: 22px; color: #d4af37; margin-bottom: 15px; margin-top: 0;">人生剧本测试</h2>
-                
-                <div style="background: rgba(212, 175, 55, 0.1); border-radius: 12px; padding: 20px; margin: 20px 0; border: 1px solid rgba(212, 175, 55, 0.3);">
-                    <div style="font-size: 14px; color: #a0a0b0; margin-bottom: 8px;">你的角色匹配</div>
-                    <div style="font-size: 36px; font-weight: 700; color: #f5f5f5; margin: 10px 0;">${character ? character.name : archetype.name}</div>
-                    <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character ? character.work : ''}</div>
-                    <div style="font-size: 28px; font-weight: 700; color: #d4af37; margin: 15px 0;">${state.result.matchPercentage}%</div>
-                    <div style="font-size: 12px; color: #6a6a7a;">匹配度</div>
+            <div id="poster-capture" style="background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%); padding: 0; text-align: center; border-radius: 20px; width: 340px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);">
+                <!-- 电影胶片顶部 -->
+                <div style="background: linear-gradient(90deg, #0a0a0f 0%, #1a1a25 50%, #0a0a0f 100%); padding: 12px 0; border-bottom: 2px solid #d4af37;">
+                    <div style="display: flex; justify-content: center; gap: 8px;">
+                        ${Array(8).fill('<div style="width: 12px; height: 16px; background: #2a2a3a; border-radius: 2px;"></div>').join('')}
+                    </div>
                 </div>
                 
-                <div style="font-size: 13px; color: #a0a0b0; margin: 20px 0; font-style: italic; padding: 0 10px;">
-                    「${character ? character.quote.substring(0, 30) + '...' : archetype.tagline.substring(1, archetype.tagline.length - 1)}」
+                <!-- 主内容区 -->
+                <div style="padding: 30px 25px; position: relative;">
+                    <!-- 装饰角标 -->
+                    <div style="position: absolute; top: 15px; left: 15px; width: 30px; height: 30px; border-left: 2px solid #d4af37; border-top: 2px solid #d4af37;"></div>
+                    <div style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; border-right: 2px solid #d4af37; border-top: 2px solid #d4af37;"></div>
+                    <div style="position: absolute; bottom: 15px; left: 15px; width: 30px; height: 30px; border-left: 2px solid #d4af37; border-bottom: 2px solid #d4af37;"></div>
+                    <div style="position: absolute; bottom: 15px; right: 15px; width: 30px; height: 30px; border-right: 2px solid #d4af37; border-bottom: 2px solid #d4af37;"></div>
+                    
+                    <!-- 标题 -->
+                    <div style="font-size: 9px; color: #d4af37; margin-bottom: 8px; letter-spacing: 3px; text-transform: uppercase;">PTK Life Script Studios</div>
+                    <h2 style="font-family: 'Noto Serif SC', serif; font-size: 26px; color: #d4af37; margin: 0 0 5px 0; font-weight: 700; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);">人生剧本测试</h2>
+                    <div style="font-size: 11px; color: #6a6a8a; margin-bottom: 20px;">v2.0 角色觉醒</div>
+                    
+                    <!-- 角色卡片 -->
+                    <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%); border-radius: 16px; padding: 25px 20px; margin: 20px 0; border: 1px solid rgba(212, 175, 55, 0.3); position: relative; overflow: hidden;">
+                        <!-- 装饰背景 -->
+                        <div style="position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); pointer-events: none;"></div>
+                        
+                        <div style="font-size: 11px; color: #8a8a9a; margin-bottom: 10px; letter-spacing: 1px;">YOUR CHARACTER MATCH</div>
+                        
+                        <!-- 角色头像 -->
+                        <div style="width: 70px; height: 70px; margin: 0 auto 15px; background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #1a1a2e; font-weight: 700; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);">
+                            ${character ? character.name.charAt(0) : archetype.name.charAt(0)}
+                        </div>
+                        
+                        <div style="font-size: 28px; font-weight: 700; color: #f5f5f5; margin: 10px 0; font-family: 'Noto Serif SC', serif;">${character ? character.name : archetype.name}</div>
+                        <div style="font-size: 12px; color: #d4af37; margin-bottom: 15px;">${character ? character.work : archetype.englishName}</div>
+                        
+                        <!-- 匹配度 -->
+                        <div style="display: inline-block; background: rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 8px 20px; margin-top: 5px;">
+                            <span style="font-size: 24px; font-weight: 700; color: #d4af37;">${state.result.matchPercentage}%</span>
+                            <span style="font-size: 10px; color: #8a8a9a; margin-left: 4px;">匹配度</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 经典台词 -->
+                    <div style="background: rgba(255, 255, 255, 0.03); border-radius: 10px; padding: 15px; margin: 20px 0; border-left: 3px solid #d4af37;">
+                        <div style="font-size: 13px; color: #a0a0b0; font-style: italic; line-height: 1.6;">
+                            「${character ? (character.quote.length > 40 ? character.quote.substring(0, 40) + '...' : character.quote) : archetype.tagline.substring(1, archetype.tagline.length - 1)}」
+                        </div>
+                    </div>
+                    
+                    <!-- 二维码区域 -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div id="qrcode-container" style="width: 80px; height: 80px; background: white; padding: 6px; border-radius: 8px; flex-shrink: 0;"></div>
+                        <div style="text-align: left;">
+                            <div style="font-size: 12px; color: #d4af37; margin-bottom: 4px;">扫码测试</div>
+                            <div style="font-size: 10px; color: #6a6a8a; line-height: 1.5;">发现你的人生剧本<br/>匹配你的专属角色</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div id="qrcode-container" style="width: 100px; height: 100px; margin: 15px auto; background: white; padding: 8px; border-radius: 8px;"></div>
-                <div style="font-size: 11px; color: #6a6a7a; margin-top: 15px;">扫码测试你的人生剧本</div>
-                <div style="font-size: 9px; color: #4a4a5a; margin-top: 8px;">wuzehua2015-hash.github.io</div>
+                <!-- 电影胶片底部 -->
+                <div style="background: linear-gradient(90deg, #0a0a0f 0%, #1a1a25 50%, #0a0a0f 100%); padding: 12px 0; border-top: 2px solid #d4af37;">
+                    <div style="display: flex; justify-content: center; gap: 8px;">
+                        ${Array(8).fill('<div style="width: 12px; height: 16px; background: #2a2a3a; border-radius: 2px;"></div>').join('')}
+                    </div>
+                </div>
             </div>
         `;
 

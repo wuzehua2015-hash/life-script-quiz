@@ -1198,7 +1198,31 @@ body {
 .radar-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+/* 雷达图解读说明 */
+.radar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
     margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.legend-icon {
+    font-size: 0.9rem;
 }
 
 #radar-chart {
