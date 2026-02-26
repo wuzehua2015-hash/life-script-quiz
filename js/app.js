@@ -607,7 +607,6 @@
                     <p class="character-quote">「${character.quote}」</p>
                     <div class="character-match">
                         <span class="match-percent">${state.result.matchPercentage}%</span>
-                        <span class="match-text">匹配度</span>
                     </div>
                 </div>
             </div>
