@@ -433,23 +433,11 @@
     }
 
     async function finishQuiz() {
-        // 显示加载动画
-        showLoading('正在分析你的人生剧本...');
-        
-        // 使用 requestAnimationFrame 确保UI更新后再计算
-        await new Promise(resolve => {
-            requestAnimationFrame(() => {
-                setTimeout(resolve, 100);
-            });
-        });
-        
+        // 直接计算并显示报告，不使用loading动画
         if (!window.QUIZ_DATA) {
             setTimeout(finishQuiz, 100);
             return;
         }
-        
-        // 更新加载文字
-        updateLoadingText('正在匹配最适合你的角色...');
         
         // 计算结果
         calculateResult();
@@ -457,9 +445,6 @@
         // 切换页面并渲染
         switchScreen('result');
         await renderResult();
-        
-        // 渲染完成后再隐藏loading
-        hideLoading();
     }
 
     // ==================== 结果计算 ====================
