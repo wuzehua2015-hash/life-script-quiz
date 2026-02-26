@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型指导详情 - 改变你的人生剧本</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="guidance.css">
+    <style>
+        .detail-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+        
+        .archetype-icon-large {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+        
+        .archetype-name-large {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .challenge-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .strategy-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .practice-box {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .box-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .challenge-box .box-title { color: #ff6b6b; }
+        .strategy-box .box-title { color: #d4af37; }
+        .practice-box .box-title { color: #4caf50; }
+        
+        .strategy-list, .practice-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .strategy-list li, .practice-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .strategy-list li:last-child, .practice-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .strategy-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+        
+        .practice-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .resources-box {
+            background: rgba(100, 149, 237, 0.1);
+            border-left: 4px solid #6495ed;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .resources-box .box-title { color: #6495ed; }
+        
+        .start-plan-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+        
+        .start-plan-section h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="detail-header">
+        <a href="index.html" class="back-link">← 返回指导首页</a>
+        <div id="header-content">
+            <!-- 动态加载 -->
+        </div>
+    </header>
+
+    <main class="guidance-main">
+        <div class="container">
+            <!-- 核心挑战 -->
+            <div class="challenge-box">
+                <div class="box-title">⚠️ 核心挑战</div>
+                <p id="challenge-text"></p>
+            </div>
+
+            <!-- 改变策略 -->
+            <div class="strategy-box">
+                <div class="box-title">💡 改变策略</div>
+                <ul id="strategy-list" class="strategy-list"></ul>
+            </div>
+
+            <!-- 每日练习 -->
+            <div class="practice-box">
+                <div class="box-title">📝 前5天练习示例</div>
+                <ul id="practice-list" class="practice-list"></ul>
+            </div>
+
+            <!-- 推荐资源 -->
+            <div class="resources-box">
+                <div class="box-title">📚 推荐资源</div>
+                <ul id="resources-list" class="strategy-list"></ul>
+            </div>
+
+            <!-- 开始计划 -->
+            <div class="start-plan-section">
+                <h3>准备好开始改变了吗？</h3>
+                <p style="color: #6a6a6a; margin-bottom: 20px;">21天，每天一个小练习，逐步重塑你的人生剧本</p>
+                <button id="start-btn" class="btn-primary">开始21天改变计划</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="guidance-footer">
+        <div class="container">
+            <p>改变，从这一刻开始</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const archetypeKey = urlParams.get('type') || localStorage.getItem('lsq_selected_archetype');
+            
+            if (!archetypeKey || !window.GuidanceData) {
+                document.body.innerHTML = '<div style="text-align:center;padding:50px;"><h2>未找到原型数据</h2><a href="index.html">返回首页</a></div>';
+                return;
+            }
+            
+            const data = GuidanceData.archetypes[archetypeKey];
+            if (!data) {
+                document.body.innerHTML = '<div style="text-align:center;padding:50px;"><h2>原型不存在</h2><a href="index.html">返回首页</a></div>';
+                return;
+            }
+            
+            // 保存选择
+            localStorage.setItem('lsq_selected_archetype', archetypeKey);
+            
+            // 渲染头部
+            document.getElementById('header-content').innerHTML = `
+                <div class="archetype-icon-large">${data.icon}</div>
+                <div class="archetype-name-large">${data.name}</div>
+                <p style="color: #a0a0a0;">${data.shortDesc}</p>
+            `;
+            
+            // 渲染挑战
+            document.getElementById('challenge-text').textContent = data.challenge;
+            
+            // 渲染策略
+            document.getElementById('strategy-list').innerHTML = data.strategy
+                .map(s => `<li>${s}</li>`)
+                .join('');
+            
+            // 渲染练习
+            document.getElementById('practice-list').innerHTML = data.dailyPractice
+                .slice(0, 5)
+                .map(p => `<li>${p}</li>`)
+                .join('');
+            
+            // 渲染资源
+            document.getElementById('resources-list').innerHTML = data.resources
+                .map(r => `<li>${r}</li>`)
+                .join('');
+            
+            // 开始按钮
+            document.getElementById('start-btn').addEventListener('click', () => {
+                window.location.href = 'plan.html';
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -75,14 +75,9 @@
 
     // 显示原型详情
     function showArchetypeDetail(archetypeKey) {
-        const data = window.GuidanceData?.archetypes?.[archetypeKey];
-        if (!data) return;
-
-        // 保存选择
+        // 保存选择并跳转到详情页
         localStorage.setItem('lsq_selected_archetype', archetypeKey);
-
-        // 跳转到详情页（或显示模态框）
-        alert(`选择了：${data.name}\n\n核心挑战：${data.challenge}\n\n改变策略：\n${data.strategy.map(s => '• ' + s).join('\n')}`);
+        window.location.href = 'detail.html';
     }
 
     // 开始21天计划

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21天改变计划 - 改变你的人生剧本</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="guidance.css">
+    <style>
+        .plan-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .plan-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .plan-progress {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #a0a0a0;
+        }
+        
+        .progress-bar-large {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-fill-large {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #b8960c);
+            transition: width 0.5s ease;
+        }
+        
+        .week-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(212, 175, 55, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .week-title {
+            font-size: 20px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .day-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .day-item:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .day-item.completed {
+            opacity: 0.6;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .day-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #d4af37;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .day-item.completed .day-number {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .day-content {
+            flex: 1;
+        }
+        
+        .day-task {
+            color: #f5f5f5;
+            margin-bottom: 5px;
+        }
+        
+        .day-time {
+            font-size: 12px;
+            color: #6a6a6a;
+        }
+        
+        .day-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .day-check:hover {
+            border-color: #d4af37;
+        }
+        
+        .day-check.checked {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+        
+        .day-check.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+        
+        .celebration {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        
+        .celebration.show {
+            display: block;
+        }
+        
+        .celebration-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .certificate {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+        
+        .certificate h3 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="plan-header">
+        <a href="index.html" class="back-link">← 返回指导首页</a>
+        <h1 class="plan-title">📅 21天改变计划</h1>
+        <p style="color: #a0a0a0;">每天一个小练习，逐步重塑你的人生剧本</p>
+        
+        <div class="plan-progress">
+            <div class="progress-text">
+                <span>完成进度</span>
+                <span id="progress-percent">0/21</span>
+            </div>
+            <div class="progress-bar-large">
+                <div id="progress-fill" class="progress-fill-large" style="width: 0%"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="guidance-main">
+        <div class="container">
+            <!-- 第一周：觉察 -->
+            <div class="week-section">
+                <div class="week-title">第一周：觉察</div>
+                <div id="week1-days"></div>
+            </div>
+
+            <!-- 第二周：尝试 -->
+            <div class="week-section">
+                <div class="week-title">第二周：尝试</div>
+                <div id="week2-days"></div>
+            </div>
+
+            <!-- 第三周：巩固 -->
+            <div class="week-section">
+                <div class="week-title">第三周：巩固</div>
+                <div id="week3-days"></div>
+            </div>
+
+            <!-- 庆祝完成 -->
+            <div id="celebration" class="celebration">
+                <div class="celebration-icon">🎉</div>
+                <h2>恭喜你完成21天改变计划！</h2>
+                <div class="certificate">
+                    <h3>🏆 改变证书</h3>
+                    <p>你已完成21天人生剧本改变计划</p>
+                    <p id="cert-archetype" style="color: #d4af37; margin: 20px 0;"></p>
+                    <p id="cert-date" style="font-size: 12px; color: #6a6a6a;"></p>
+                </div>
+                <a href="index.html" class="btn-primary" style="display: inline-block; text-decoration: none; margin-top: 20px;">返回首页</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="guidance-footer">
+        <div class="container">
+            <p>改变，从这一刻开始</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        (function() {
+            const archetype = localStorage.getItem('lsq_selected_archetype');
+            
+            if (!archetype || !window.GuidanceData) {
+                alert('请先选择你的人生剧本原型');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // 初始化或加载计划
+            let plan = JSON.parse(localStorage.getItem('lsq_plan') || 'null');
+            if (!plan || plan.archetype !== archetype) {
+                plan = createPlan(archetype);
+                localStorage.setItem('lsq_plan', JSON.stringify(plan));
+            }
+            
+            renderPlan(plan);
+            updateProgress(plan);
+            
+            function createPlan(arch) {
+                const template = GuidanceData.planTemplate;
+                const days = [];
+                
+                template.weeks.forEach(week => {
+                    week.days.forEach(day => {
+                        days.push({
+                            day: day.day,
+                            task: day.task,
+                            time: day.time,
+                            completed: false,
+                            week: week.week,
+                            theme: week.theme
+                        });
+                    });
+                });
+                
+                return {
+                    archetype: arch,
+                    startDate: new Date().toISOString(),
+                    days: days
+                };
+            }
+            
+            function renderPlan(plan) {
+                const weeks = [[], [], []];
+                plan.days.forEach(day => {
+                    weeks[day.week - 1].push(day);
+                });
+                
+                weeks.forEach((weekDays, index) => {
+                    const container = document.getElementById(`week${index + 1}-days`);
+                    if (container) {
+                        container.innerHTML = weekDays.map(day => `
+                            <div class="day-item ${day.completed ? 'completed' : ''}" data-day="${day.day}">
+                                <div class="day-number">${day.day}</div>
+                                <div class="day-content">
+                                    <div class="day-task">${day.task}</div>
+                                    <div class="day-time">⏱️ ${day.time}</div>
+                                </div>
+                                <div class="day-check ${day.completed ? 'checked' : ''}" data-day="${day.day}"></div>
+                            </div>
+                        `).join('');
+                    }
+                });
+                
+                // 绑定打卡事件
+                document.querySelectorAll('.day-check').forEach(check => {
+                    check.addEventListener('click', () => {
+                        const dayNum = parseInt(check.dataset.day);
+                        toggleDay(plan, dayNum);
+                    });
+                });
+            }
+            
+            function toggleDay(plan, dayNum) {
+                const day = plan.days.find(d => d.day === dayNum);
+                if (day) {
+                    day.completed = !day.completed;
+                    localStorage.setItem('lsq_plan', JSON.stringify(plan));
+                    renderPlan(plan);
+                    updateProgress(plan);
+                }
+            }
+            
+            function updateProgress(plan) {
+                const completed = plan.days.filter(d => d.completed).length;
+                const total = plan.days.length;
+                const percent = Math.round(completed / total * 100);
+                
+                document.getElementById('progress-percent').textContent = `${completed}/${total}`;
+                document.getElementById('progress-fill').style.width = `${percent}%`;
+                
+                // 显示庆祝
+                if (completed >= total) {
+                    document.getElementById('celebration').classList.add('show');
+                    const archData = GuidanceData.archetypes[plan.archetype];
+                    document.getElementById('cert-archetype').textContent = 
+                        `原型：${archData ? archData.name : plan.archetype}`;
+                    document.getElementById('cert-date').textContent = 
+                        `完成日期：${new Date().toLocaleDateString('zh-CN')}`;
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
