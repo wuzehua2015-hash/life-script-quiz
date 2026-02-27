@@ -1,8 +1,9 @@
 {
   "project": "人生剧本测试系统 - 阿里云部署",
-  "description": "将现有项目从GitHub Pages迁移到阿里云域名",
+  "description": "将现有项目从GitHub Pages迁移到阿里云域名 lynkedu.com",
   "version": "2.3.1",
   "lastUpdated": "2026-02-27",
+  "domain": "lynkedu.com",
   "tasks": [
     {
       "id": 1,
@@ -10,14 +11,16 @@
       "description": "更新所有硬编码的GitHub Pages链接，配置阿里云域名",
       "steps": [
         "检查所有文件中的GitHub Pages链接",
-        "更新分享链接域名配置",
+        "更新分享链接域名配置 (js/app.js)",
         "更新二维码生成链接",
         "更新index.html中的meta标签",
         "检查guidance/目录下的链接"
       ],
-      "passes": false,
+      "passes": true,
       "priority": "high",
-      "estimatedTime": "1小时"
+      "estimatedTime": "1小时",
+      "completedAt": "2026-02-27",
+      "notes": "已将分享链接从 github.io 更新为 lynkedu.com"
     },
     {
       "id": 2,
@@ -27,7 +30,7 @@
         "创建阿里云OSS bucket",
         "配置静态网站托管",
         "配置CDN加速",
-        "绑定自定义域名",
+        "绑定自定义域名 lynkedu.com",
         "配置HTTPS证书"
       ],
       "passes": false,
@@ -41,7 +44,7 @@
       "steps": [
         "构建项目",
         "上传到阿里云OSS",
-        "验证首页访问",
+        "验证首页访问 https://lynkedu.com",
         "验证测试流程",
         "验证分享功能",
         "验证二维码生成",
