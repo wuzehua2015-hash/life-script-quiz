@@ -683,6 +683,9 @@
             // 渲染角色卡片
             renderCharacterCard(character, archetype);
 
+            // 渲染匹配逻辑解释（新增）
+            renderMatchExplanation(character, archetype, dims, state.result.dimensionDetails);
+
             // 渲染相似点
             renderSimilarityPoints(character);
 
@@ -810,6 +813,184 @@
                 ${points.map(point => `<li><span class="similarity-dot">◆</span>${point}</li>`).join('')}
             </ul>
         `;
+    }
+
+    // 新增：匹配逻辑解释
+    function renderMatchExplanation(character, archetype, dims, dimensionDetails) {
+        const container = document.getElementById('match-explanation');
+        if (!container) return;
+
+        const data = window.QUIZ_DATA;
+        if (!data || !data.DIMENSIONS) return;
+
+        // 找出得分最高的维度
+        let highestDim = null;
+        let highestType = null;
+        let highestPercentage = 0;
+
+        Object.entries(dimensionDetails || {}).forEach(([dim, detail]) => {
+            if (detail.percentage > highestPercentage) {
+                highestPercentage = detail.percentage;
+                highestDim = dim;
+                highestType = detail.type;
+            }
+        });
+
+        if (!highestDim || !highestType) return;
+
+        const dimConfig = data.DIMENSIONS[highestDim];
+        const typeConfig = dimConfig?.types?.[highestType];
+        const dimNameCN = data.DIMENSION_TYPE_NAMES?.[highestDim]?.[highestType] || highestType;
+
+        // 生成个性化解释文案
+        const explanations = generateMatchExplanation(highestDim, highestType, character, archetype);
+
+        container.innerHTML = `
+            <div class="match-explanation-card">
+                <h4>🔍 为什么你像${character.name || '这个角色'}？</h4>
+                <div class="explanation-content">
+                    <p class="explanation-intro">${explanations.intro}</p>
+                    <div class="explanation-highlight">
+                        <span class="highlight-label">你的核心${dimConfig?.name || '特质'}</span>
+                        <span class="highlight-value">${dimNameCN} (${highestPercentage}%)</span>
+                    </div>
+                    <p class="explanation-detail">${explanations.detail}</p>
+                    <div class="explanation-connection">
+                        <span class="connection-icon">🔗</span>
+                        <p>${explanations.connection}</p>
+                    </div>
+                </div>            </div>
+        `;
+    }
+
+    // 生成匹配解释文案
+    function generateMatchExplanation(dim, type, character, archetype) {
+        const dimNames = {
+            drive: '核心驱动力',
+            world: '与世界的关系',
+            self: '与自我的关系',
+            time: '与时间的关系'
+        };
+
+        const explanations = {
+            drive: {
+                achievement: {
+                    intro: '你的测试结果显示，你做事的底层动力来自对成就的追求。',
+                    detail: '你渴望证明自己，不断追求卓越。这种驱动力让你在面对挑战时不轻言放弃，但也可能让你忽视过程中的美好。',
+                    connection: `${character.name}也是如此。TA在${character.work}中展现出的执着和坚持，正是源于同样的成就驱动力。`
+                },
+                relationship: {
+                    intro: '你的测试结果显示，你最看重的是与他人的连接。',
+                    detail: '你做事的动力来自被接纳、被喜爱的渴望。关系对你来说比成就更重要，你常常为了维持和谐而委屈自己。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对关系的重视，与你如出一辙。`
+                },
+                security: {
+                    intro: '你的测试结果显示，你追求的是稳定和可预期的生活。',
+                    detail: '变化让你焦虑，你倾向于选择熟悉但可能不够好的选项。安全感是你做决定的优先考虑。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对稳定的追求，反映了同样的内心需求。`
+                },
+                unique: {
+                    intro: '你的测试结果显示，你渴望与众不同，害怕被淹没在人群中。',
+                    detail: '你不断寻找自己的独特标签，平凡对你来说像是一种死亡。你需要被看见、被记住。',
+                    connection: `${character.name}也是如此。TA在${character.work}中展现出的独特性，正是你内心渴望的投射。`
+                },
+                service: {
+                    intro: '你的测试结果显示，你通过帮助他人获得价值感。',
+                    detail: '被需要让你感到存在有意义。你常常把别人的需求放在自己之前，直到精疲力竭。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的付出和关怀，与你有着同样的初心。`
+                }
+            },
+            world: {
+                battle: {
+                    intro: '你的测试结果显示，你把世界看作竞技场。',
+                    detail: '人生就是一场接一场的战役，放松警惕意味着被击败。你很难信任他人，总是处于戒备状态。',
+                    connection: `${character.name}也是如此。TA在${character.work}中面对的每一个挑战，都是你内心战斗的写照。`
+                },
+                victim: {
+                    intro: '你的测试结果显示，你觉得世界对你不公平。',
+                    detail: '好事轮不到你，坏事总是找上门。你感到无力改变现状，常常陷入「为什么是我」的抱怨。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的遭遇，或许正是你内心恐惧的投射。`
+                },
+                cooperation: {
+                    intro: '你的测试结果显示，你相信世界可以共赢。',
+                    detail: '你重视关系，相信通过合作可以创造更好的结果。冲突让你不安，你倾向于寻求共识。',
+                    connection: `${character.name}也是如此。TA在${character.work}中建立的合作关系，正是你理想中的人际模式。`
+                },
+                detachment: {
+                    intro: '你的测试结果显示，你选择与世界保持距离。',
+                    detail: '不参与、不卷入，这样就不会受伤。你习惯做一个旁观者，观察但不投入。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的疏离感，正是你内心状态的映射。`
+                },
+                control: {
+                    intro: '你的测试结果显示，你需要掌控才有安全感。',
+                    detail: '未知和失控让你极度焦虑。你需要知道每一步的走向，讨厌 surprises。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对掌控的追求，反映了你同样的需求。`
+                }
+            },
+            self: {
+                perfection: {
+                    intro: '你的测试结果显示，你对自己有极高的标准。',
+                    detail: '永远觉得自己还不够好，不断鞭策自己。休息是奢侈，放松是堕落。你的内心住着一个严厉的批评者。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对自己的苛刻，正是你内心声音的投射。`
+                },
+                inferiority: {
+                    intro: '你的测试结果显示，你内心深处觉得自己不够好。',
+                    detail: '需要外界的认可来证明自己的价值。你常常拿自己和别人比较，总是看到别人比自己强的地方。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的挣扎，或许正是你内心自卑的写照。`
+                },
+                narcissism: {
+                    intro: '你的测试结果显示，你需要被关注、被看见。',
+                    detail: '被忽视对你来说像是一种惩罚。你习惯成为焦点，当注意力转移到别人身上时，你会感到失落。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对关注的渴望，与你如出一辙。`
+                },
+                authenticity: {
+                    intro: '你的测试结果显示，你对自己有比较客观的认知。',
+                    detail: '你接纳自己的优点和缺点，不会为了迎合别人而伪装自己。这种真实让你与众不同。',
+                    connection: `${character.name}也是如此。TA在${character.work}中展现出的真实，正是你内心追求的状态。`
+                },
+                lost: {
+                    intro: '你的测试结果显示，你不太确定自己是谁、想要什么。',
+                    detail: '你可能一直在按照别人的期待生活，或者不断尝试不同的角色，但始终没有找到真正的自己。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的迷茫，或许正是你内心状态的映射。`
+                }
+            },
+            time: {
+                chasing: {
+                    intro: '你的测试结果显示，你总觉得时间不够用。',
+                    detail: '必须不断奔跑，停下来意味着落后。你活在未来，很少享受当下。',
+                    connection: `${character.name}也是如此。TA在${character.work}中与时间的赛跑，正是你生活节奏的写照。`
+                },
+                stagnation: {
+                    intro: '你的测试结果显示，你觉得人生已经定型。',
+                    detail: '很难再有大的改变，感到一种深深的无力感。你可能有过梦想，但现在觉得「就这样吧」。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的停滞感，或许正是你内心状态的投射。`
+                },
+                exploration: {
+                    intro: '你的测试结果显示，你把人生看作一场探索的旅程。',
+                    detail: '重要的不是目的地，而是沿途的风景。你对新事物充满好奇，喜欢尝试不同的可能性。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的探索精神，与你如出一辙。`
+                },
+                fate: {
+                    intro: '你的测试结果显示，你相信「命里有时终须有」。',
+                    detail: '你倾向于接受现状，而不是强行改变。你相信一切都有安排，顺其自然就好。',
+                    connection: `${character.name}也是如此。TA在${character.work}中对命运的接纳，正是你人生态度的映射。`
+                },
+                creation: {
+                    intro: '你的测试结果显示，你相信未来是由自己创造的。',
+                    detail: '你有明确的目标，并愿意为之付出努力。你相信只要努力，就可以改变现状。',
+                    connection: `${character.name}也是如此。TA在${character.work}中的创造力，正是你内心力量的投射。`
+                }
+            }
+        };
+
+        const dimExplanations = explanations[dim] || {};
+        const typeExplanation = dimExplanations[type] || {
+            intro: `你的测试结果显示，你在${dimNames[dim] || '这个维度'}上有独特的倾向。`,
+            detail: '这种特质塑造了你独特的行为模式和人生选择。',
+            connection: `${character.name}在${character.work}中展现出的特质，与你有着惊人的相似之处。`
+        };
+
+        return typeExplanation;
     }
 
     function renderCharacterStory(character) {
