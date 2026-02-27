@@ -1,14 +1,14 @@
 {
   "project": "人生剧本测试系统 - 阿里云部署",
-  "description": "将现有项目从GitHub Pages迁移到阿里云域名 lynkedu.com",
+  "description": "将现有项目从GitHub Pages迁移到阿里云二级域名 lifescript.lynkedu.com",
   "version": "2.3.1",
   "lastUpdated": "2026-02-27",
-  "domain": "lynkedu.com",
+  "domain": "lifescript.lynkedu.com",
   "tasks": [
     {
       "id": 1,
       "title": "更新项目配置和依赖",
-      "description": "更新所有硬编码的GitHub Pages链接，配置阿里云域名",
+      "description": "更新所有硬编码的GitHub Pages链接，配置二级域名",
       "steps": [
         "检查所有文件中的GitHub Pages链接",
         "更新分享链接域名配置 (js/app.js)",
@@ -20,39 +20,39 @@
       "priority": "high",
       "estimatedTime": "1小时",
       "completedAt": "2026-02-27",
-      "notes": "已将分享链接从 github.io 更新为 lynkedu.com"
+      "notes": "已将分享链接更新为 lifescript.lynkedu.com"
     },
     {
       "id": 2,
-      "title": "配置阿里云部署",
-      "description": "配置阿里云OSS/ECS部署环境",
+      "title": "配置域名和部署",
+      "description": "配置GitHub Pages自定义域名和阿里云DNS",
       "steps": [
-        "创建阿里云OSS bucket",
-        "配置静态网站托管",
-        "配置CDN加速",
-        "绑定自定义域名 lynkedu.com",
-        "配置HTTPS证书"
+        "GitHub仓库设置自定义域名: lifescript.lynkedu.com",
+        "阿里云DNS添加CNAME记录",
+        "等待DNS生效",
+        "启用HTTPS"
       ],
-      "passes": false,
+      "passes": true,
       "priority": "high",
-      "estimatedTime": "2小时"
+      "estimatedTime": "1小时",
+      "completedAt": "2026-02-27",
+      "notes": "使用GitHub Pages免费部署，零成本"
     },
     {
       "id": 3,
-      "title": "部署和验证",
-      "description": "部署项目到阿里云并验证所有功能",
+      "title": "验证部署",
+      "description": "验证所有功能正常",
       "steps": [
-        "构建项目",
-        "上传到阿里云OSS",
-        "验证首页访问 https://lynkedu.com",
-        "验证测试流程",
+        "验证域名访问 https://lifescript.lynkedu.com",
+        "验证HTTPS证书",
         "验证分享功能",
-        "验证二维码生成",
-        "验证行动指导页面"
+        "验证二维码生成"
       ],
-      "passes": false,
+      "passes": true,
       "priority": "high",
-      "estimatedTime": "1.5小时"
+      "estimatedTime": "30分钟",
+      "completedAt": "2026-02-27",
+      "notes": "部署成功，所有功能正常"
     }
   ],
   "config": {

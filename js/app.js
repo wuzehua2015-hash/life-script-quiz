@@ -1592,7 +1592,7 @@
         const archetype = data.ARCHETYPES[state.result.archetype];
         const character = state.result.character;
 
-        const shareUrl = `https://lynkedu.com/life-script-quiz/?result=${state.result.archetype}`;
+        const shareUrl = `https://lifescript.lynkedu.com/?result=${state.result.archetype}`;
 
         const posterHtml = `
             <div id="poster-capture" style="background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%); padding: 0; text-align: center; border-radius: 20px; width: 340px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);">
