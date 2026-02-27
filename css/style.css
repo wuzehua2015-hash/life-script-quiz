@@ -1908,3 +1908,44 @@ body {
         min-width: 280px;
     }
 }
+
+/* ========================================
+   继续测试提示 - 数据持久化新增
+   ======================================== */
+
+.continue-prompt {
+    margin: 2rem 0;
+    animation: fade-in-up 0.5s ease-out;
+}
+
+.continue-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--accent-gold);
+    text-align: center;
+}
+
+.continue-card p {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.continue-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.continue-buttons .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+}
+
+.continue-buttons .btn-secondary:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}

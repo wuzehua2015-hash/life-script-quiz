@@ -42,6 +42,120 @@
         cacheElements();
         bindEvents();
         initScores();
+        restoreProgress(); // 恢复之前的进度
+    }
+
+    // 恢复之前的进度
+    function restoreProgress() {
+        try {
+            // 恢复基础信息
+            const savedBasicInfo = localStorage.getItem('lsq_basicInfo');
+            if (savedBasicInfo) {
+                state.basicInfo = JSON.parse(savedBasicInfo);
+            }
+
+            // 恢复测试进度
+            const savedProgress = localStorage.getItem('lsq_testProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                if (progress.currentQuestion > 0) {
+                    // 有未完成的测试，询问用户是否继续
+                    state.currentQuestion = progress.currentQuestion;
+                    state.answers = progress.answers || [];
+                    state.scores = progress.scores || state.scores;
+                    state.selectedQuestions = progress.selectedQuestions;
+                    
+                    // 显示继续测试的提示
+                    showContinuePrompt();
+                }
+            }
+
+            // 恢复测试结果
+            const savedResult = localStorage.getItem('lsq_testResult');
+            if (savedResult) {
+                state.result = JSON.parse(savedResult);
+            }
+        } catch (error) {
+            console.error('恢复进度失败:', error);
+        }
+    }
+
+    // 显示继续测试提示
+    function showContinuePrompt() {
+        const introScreen = elements.screens.intro;
+        if (!introScreen) return;
+
+        const existingPrompt = introScreen.querySelector('.continue-prompt');
+        if (existingPrompt) existingPrompt.remove();
+
+        const promptDiv = document.createElement('div');
+        promptDiv.className = 'continue-prompt';
+        promptDiv.innerHTML = `
+            <div class="continue-card">
+                <p>📌 你有未完成的测试进度</p>
+                <div class="continue-buttons">
+                    <button id="continue-test-btn" class="btn-primary">继续测试</button>
+                    <button id="restart-test-btn" class="btn-secondary">重新开始</button>
+                </div>
+            </div>
+        `;
+
+        // 插入到开始按钮后面
+        const startBtn = elements.intro?.startBtn;
+        if (startBtn && startBtn.parentNode) {
+            startBtn.parentNode.insertBefore(promptDiv, startBtn.nextSibling);
+        }
+
+        // 绑定事件
+        document.getElementById('continue-test-btn')?.addEventListener('click', () => {
+            switchScreen('quiz');
+            renderQuestion(state.currentQuestion);
+        });
+
+        document.getElementById('restart-test-btn')?.addEventListener('click', () => {
+            clearSavedProgress();
+            promptDiv.remove();
+        });
+    }
+
+    // 保存测试进度
+    function saveProgress() {
+        try {
+            const progress = {
+                currentQuestion: state.currentQuestion,
+                answers: state.answers,
+                scores: state.scores,
+                selectedQuestions: state.selectedQuestions,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('lsq_testProgress', JSON.stringify(progress));
+            
+            // 保存基础信息
+            localStorage.setItem('lsq_basicInfo', JSON.stringify(state.basicInfo));
+        } catch (error) {
+            console.error('保存进度失败:', error);
+        }
+    }
+
+    // 保存测试结果
+    function saveTestResult() {
+        try {
+            if (state.result) {
+                localStorage.setItem('lsq_testResult', JSON.stringify(state.result));
+            }
+        } catch (error) {
+            console.error('保存结果失败:', error);
+        }
+    }
+
+    // 清除保存的进度
+    function clearSavedProgress() {
+        localStorage.removeItem('lsq_testProgress');
+        localStorage.removeItem('lsq_basicInfo');
+        state.currentQuestion = 0;
+        state.answers = [];
+        state.basicInfo = {};
+        initScores();
     }
 
     // 缓存DOM元素
@@ -414,6 +528,9 @@
         state.scores[question.dimension][choice.type] += choice.score;
         state.currentQuestion = questionIndex + 1;
 
+        // 保存进度
+        saveProgress();
+
         if (questionIndex < questions.length - 1) {
             renderQuestion(state.currentQuestion);
         } else {
@@ -446,6 +563,12 @@
             
             try {
                 calculateResult();
+                
+                // 保存测试结果
+                saveTestResult();
+                
+                // 清除进行中的进度（已完成）
+                localStorage.removeItem('lsq_testProgress');
                 
                 renderResult();
                 
