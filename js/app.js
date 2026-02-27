@@ -739,6 +739,9 @@
             const typeConfig = dimConfig?.types?.[type];
             const detail = dimensionDetails[dim];
             
+            // 使用DIMENSION_TYPE_NAMES获取中文类型名
+            const typeNameCN = quizData.DIMENSION_TYPE_NAMES?.[dim]?.[type] || type;
+            
             // 使用安全访问，如果配置缺失则使用默认值
             const percentage = detail?.percentage || 0;
             const dimName = dimNames[dim] || { name: dim, icon: '❓' };
@@ -749,7 +752,7 @@
                         <span class="dim-analysis-icon">${dimName.icon}</span>
                         <div class="dim-analysis-title">
                             <h4>${dimConfig?.name || dimName.name || dim}</h4>
-                            <span class="dim-analysis-type">${typeConfig?.name || type}</span>
+                            <span class="dim-analysis-type">${typeNameCN}</span>
                         </div>
                         <div class="dim-analysis-score">${percentage}%</div>
                     </div>
