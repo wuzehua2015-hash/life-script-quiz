@@ -62,7 +62,14 @@
                     // 有未完成的测试，询问用户是否继续
                     state.currentQuestion = progress.currentQuestion;
                     state.answers = progress.answers || [];
-                    state.scores = progress.scores || state.scores;
+                    // 合并保存的scores，确保所有类型都存在
+                    if (progress.scores) {
+                        Object.keys(progress.scores).forEach(dim => {
+                            if (state.scores[dim]) {
+                                Object.assign(state.scores[dim], progress.scores[dim]);
+                            }
+                        });
+                    }
                     state.selectedQuestions = progress.selectedQuestions;
                     
                     // 显示继续测试的提示
@@ -77,7 +84,12 @@
                 state.result = result;
                 // 恢复scores用于绘制雷达图（优先使用保存的scores）
                 if (result.scores) {
-                    state.scores = result.scores;
+                    // 合并保存的scores，确保所有类型都存在
+                    Object.keys(result.scores).forEach(dim => {
+                        if (state.scores[dim]) {
+                            Object.assign(state.scores[dim], result.scores[dim]);
+                        }
+                    });
                 } else if (result.dimensions) {
                     // 兼容旧数据，从dimensions重建
                     state.scores = {
@@ -1716,20 +1728,16 @@
                 try {
                     const result = JSON.parse(savedResult);
                     state.result = result;
-                    // 恢复scores用于绘制雷达图（优先使用保存的scores）
-                    if (result.scores) {
-                        state.scores = result.scores;
-                    } else if (result.dimensions) {
-                        // 兼容旧数据
-                        state.scores = {
-                            drive: { [result.dimensions.drive]: 10 },
-                            world: { [result.dimensions.world]: 10 },
-                            self: { [result.dimensions.self]: 10 },
-                            time: { [result.dimensions.time]: 10 }
-                        };
-                    }
-                    // 先初始化再显示结果
+                    // 先初始化（会设置所有scores类型为0）
                     init();
+                    // 然后合并保存的scores
+                    if (result.scores) {
+                        Object.keys(result.scores).forEach(dim => {
+                            if (state.scores[dim]) {
+                                Object.assign(state.scores[dim], result.scores[dim]);
+                            }
+                        });
+                    }
                     // 延迟显示结果页，确保DOM渲染完成
                     setTimeout(() => {
                         renderResult();
