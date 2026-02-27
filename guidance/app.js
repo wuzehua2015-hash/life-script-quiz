@@ -5,9 +5,73 @@
 
     // 初始化
     function init() {
+        // 首先检查是否有测试结果中的原型
+        const testResult = localStorage.getItem('lsq_testResult');
+        const savedArchetype = localStorage.getItem('lsq_selected_archetype');
+        
+        if (testResult) {
+            try {
+                const result = JSON.parse(testResult);
+                if (result.archetype) {
+                    // 有测试结果，自动选中该原型
+                    localStorage.setItem('lsq_selected_archetype', result.archetype);
+                    // 显示预选提示
+                    showPreselectedArchetype(result.archetype);
+                    return;
+                }
+            } catch (e) {
+                console.error('解析测试结果失败:', e);
+            }
+        }
+        
+        // 没有测试结果，正常渲染选择界面
         renderArchetypeGrid();
         loadPlanStatus();
         bindEvents();
+    }
+    
+    // 显示预选中的原型
+    function showPreselectedArchetype(archetypeKey) {
+        const container = document.getElementById('archetype-grid')?.parentNode;
+        if (!container || !window.GuidanceData) return;
+        
+        const archetypeData = GuidanceData.archetypes[archetypeKey];
+        if (!archetypeData) {
+            renderArchetypeGrid();
+            return;
+        }
+        
+        // 显示预选提示和确认按钮
+        container.innerHTML = `
+            <div class="preselected-archetype" style="text-align: center; padding: 40px 20px;">
+                <h3 style="color: #d4af37; margin-bottom: 20px;">🎯 你的专属人生剧本</h3>
+                <div class="archetype-preview" style="background: rgba(212, 175, 55, 0.1); border-radius: 16px; padding: 30px; margin: 20px 0; border: 1px solid rgba(212, 175, 55, 0.3);">
+                    <div style="font-size: 48px; margin-bottom: 15px;">${archetypeData.icon}</div>
+                    <h2 style="color: #d4af37; margin-bottom: 10px;">${archetypeData.name}</h2>
+                    <p style="color: #a0a0a0; margin-bottom: 20px;">${archetypeData.shortDesc}</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left;">
+                        <p style="color: #f5f5f5; margin: 0; font-size: 14px;"><strong>核心挑战：</strong>${archetypeData.challenge}</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                    <button id="confirm-archetype-btn" class="btn-primary" style="padding: 12px 30px; font-size: 16px;">开始改变计划</button>
+                    <button id="change-archetype-btn" class="btn-secondary" style="padding: 12px 30px; font-size: 16px; background: transparent; border: 1px solid #6a6a6a; color: #6a6a6a;">选择其他原型</button>
+                </div>
+            </div>
+        `;
+        
+        // 绑定事件
+        document.getElementById('confirm-archetype-btn')?.addEventListener('click', () => {
+            window.location.href = 'detail.html';
+        });
+        
+        document.getElementById('change-archetype-btn')?.addEventListener('click', () => {
+            // 清除预选，显示全部原型
+            localStorage.removeItem('lsq_selected_archetype');
+            renderArchetypeGrid();
+            loadPlanStatus();
+            bindEvents();
+        });
     }
 
     // 渲染原型网格
@@ -70,6 +134,20 @@
         const startBtn = document.getElementById('start-plan-btn');
         if (startBtn) {
             startBtn.addEventListener('click', start21DayPlan);
+        }
+        
+        // 返回测试链接 - 如果有结果则回到结果页
+        const backLink = document.getElementById('back-link');
+        if (backLink) {
+            backLink.addEventListener('click', (e) => {
+                const testResult = localStorage.getItem('lsq_testResult');
+                if (testResult) {
+                    e.preventDefault();
+                    // 有测试结果，回到结果页
+                    window.location.href = '../index.html#result';
+                }
+                // 没有结果，正常跳转到测试首页
+            });
         }
     }
 

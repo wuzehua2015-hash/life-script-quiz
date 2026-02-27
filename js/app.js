@@ -676,6 +676,10 @@
             allMatches: archetypeMatches,
             character: matchedCharacter
         };
+        
+        // 同时保存原型到localStorage，供行动指导页面使用
+        localStorage.setItem('lsq_selected_archetype', bestMatch.archetype);
+        
         console.log('calculateResult完成:', state.result);
     }
 
@@ -1675,7 +1679,26 @@
     }
 
     // 启动应用
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+        init();
+        
+        // 处理URL hash，用于从行动指导返回结果页
+        if (window.location.hash === '#result') {
+            const savedResult = localStorage.getItem('lsq_testResult');
+            if (savedResult) {
+                try {
+                    state.result = JSON.parse(savedResult);
+                    // 延迟显示结果页，确保初始化完成
+                    setTimeout(() => {
+                        renderResult();
+                        switchScreen('result');
+                    }, 100);
+                } catch (e) {
+                    console.error('加载保存的结果失败:', e);
+                }
+            }
+        }
+    });
     // 暴露到全局供调试
     window.lsqState = state;
     window.lsqFinishQuiz = finishQuiz;
