@@ -41,6 +41,9 @@
             return;
         }
         
+        // 保存原始HTML以便恢复
+        const originalHTML = container.innerHTML;
+        
         // 显示预选提示和确认按钮
         container.innerHTML = `
             <div class="preselected-archetype" style="text-align: center; padding: 40px 20px;">
@@ -66,8 +69,9 @@
         });
         
         document.getElementById('change-archetype-btn')?.addEventListener('click', () => {
-            // 清除预选，显示全部原型
+            // 清除预选，恢复原始HTML并显示全部原型
             localStorage.removeItem('lsq_selected_archetype');
+            container.innerHTML = originalHTML;
             renderArchetypeGrid();
             loadPlanStatus();
             bindEvents();
