@@ -1680,24 +1680,28 @@
 
     // 启动应用
     document.addEventListener('DOMContentLoaded', () => {
-        init();
-        
-        // 处理URL hash，用于从行动指导返回结果页
+        // 首先检查是否需要显示结果页（从行动指导返回）
         if (window.location.hash === '#result') {
             const savedResult = localStorage.getItem('lsq_testResult');
             if (savedResult) {
                 try {
                     state.result = JSON.parse(savedResult);
-                    // 延迟显示结果页，确保初始化完成
+                    // 先初始化再显示结果
+                    init();
+                    // 延迟显示结果页，确保DOM渲染完成
                     setTimeout(() => {
                         renderResult();
                         switchScreen('result');
-                    }, 100);
+                    }, 200);
+                    return; // 跳过默认init流程
                 } catch (e) {
                     console.error('加载保存的结果失败:', e);
                 }
             }
         }
+        
+        // 正常初始化流程
+        init();
     });
     // 暴露到全局供调试
     window.lsqState = state;
