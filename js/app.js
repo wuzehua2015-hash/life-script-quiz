@@ -164,6 +164,7 @@
                     ...state.result,
                     scores: state.scores
                 };
+                console.log('保存测试结果:', resultWithScores);
                 localStorage.setItem('lsq_testResult', JSON.stringify(resultWithScores));
             }
         } catch (error) {
