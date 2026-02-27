@@ -82,40 +82,45 @@
 
     // 显示继续测试提示
     function showContinuePrompt() {
-        const introScreen = elements.screens.intro;
-        if (!introScreen) return;
+        // 延迟执行，确保DOM已加载
+        setTimeout(() => {
+            const introScreen = elements.screens.intro;
+            if (!introScreen) {
+                console.log('introScreen not found, retrying...');
+                setTimeout(showContinuePrompt, 500);
+                return;
+            }
 
-        const existingPrompt = introScreen.querySelector('.continue-prompt');
-        if (existingPrompt) existingPrompt.remove();
+            const existingPrompt = introScreen.querySelector('.continue-prompt');
+            if (existingPrompt) existingPrompt.remove();
 
-        const promptDiv = document.createElement('div');
-        promptDiv.className = 'continue-prompt';
-        promptDiv.innerHTML = `
-            <div class="continue-card">
-                <p>📌 你有未完成的测试进度</p>
-                <div class="continue-buttons">
+            const promptDiv = document.createElement('div');
+            promptDiv.className = 'continue-prompt';
+            promptDiv.style.cssText = 'margin: 2rem 0; padding: 1.5rem; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--accent-gold); text-align: center;';
+            promptDiv.innerHTML = `
+                <p style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">📌 你有未完成的测试进度（第${state.currentQuestion + 1}题）</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <button id="continue-test-btn" class="btn-primary">继续测试</button>
-                    <button id="restart-test-btn" class="btn-secondary">重新开始</button>
+                    <button id="restart-test-btn" class="btn-secondary" style="background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);">重新开始</button>
                 </div>
-            </div>
-        `;
+            `;
 
-        // 插入到开始按钮后面
-        const startBtn = elements.intro?.startBtn;
-        if (startBtn && startBtn.parentNode) {
-            startBtn.parentNode.insertBefore(promptDiv, startBtn.nextSibling);
-        }
+            // 插入到intro-screen中
+            introScreen.appendChild(promptDiv);
 
-        // 绑定事件
-        document.getElementById('continue-test-btn')?.addEventListener('click', () => {
-            switchScreen('quiz');
-            renderQuestion(state.currentQuestion);
-        });
+            // 绑定事件
+            document.getElementById('continue-test-btn')?.addEventListener('click', () => {
+                switchScreen('quiz');
+                renderQuestion(state.currentQuestion);
+            });
 
-        document.getElementById('restart-test-btn')?.addEventListener('click', () => {
-            clearSavedProgress();
-            promptDiv.remove();
-        });
+            document.getElementById('restart-test-btn')?.addEventListener('click', () => {
+                clearSavedProgress();
+                promptDiv.remove();
+            });
+            
+            console.log('Continue prompt shown successfully');
+        }, 500); // 延迟500ms确保DOM加载完成
     }
 
     // 保存测试进度
