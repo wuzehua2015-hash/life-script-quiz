@@ -1,0 +1,60 @@
+{
+  "project": "人生剧本测试系统 - 阿里云部署",
+  "description": "将现有项目从GitHub Pages迁移到阿里云域名",
+  "version": "2.3.1",
+  "lastUpdated": "2026-02-27",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "更新项目配置和依赖",
+      "description": "更新所有硬编码的GitHub Pages链接，配置阿里云域名",
+      "steps": [
+        "检查所有文件中的GitHub Pages链接",
+        "更新分享链接域名配置",
+        "更新二维码生成链接",
+        "更新index.html中的meta标签",
+        "检查guidance/目录下的链接"
+      ],
+      "passes": false,
+      "priority": "high",
+      "estimatedTime": "1小时"
+    },
+    {
+      "id": 2,
+      "title": "配置阿里云部署",
+      "description": "配置阿里云OSS/ECS部署环境",
+      "steps": [
+        "创建阿里云OSS bucket",
+        "配置静态网站托管",
+        "配置CDN加速",
+        "绑定自定义域名",
+        "配置HTTPS证书"
+      ],
+      "passes": false,
+      "priority": "high",
+      "estimatedTime": "2小时"
+    },
+    {
+      "id": 3,
+      "title": "部署和验证",
+      "description": "部署项目到阿里云并验证所有功能",
+      "steps": [
+        "构建项目",
+        "上传到阿里云OSS",
+        "验证首页访问",
+        "验证测试流程",
+        "验证分享功能",
+        "验证二维码生成",
+        "验证行动指导页面"
+      ],
+      "passes": false,
+      "priority": "high",
+      "estimatedTime": "1.5小时"
+    }
+  ],
+  "config": {
+    "developmentMode": "strict",
+    "testBeforeCommit": true,
+    "useBranch": false
+  }
+}
