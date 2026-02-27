@@ -273,19 +273,27 @@
             updateProgress(plan);
             
             function createPlan(arch) {
-                const template = GuidanceData.planTemplate;
+                // 获取原型专属的21天任务
+                const archetypeData = window.GuidanceData?.archetypes?.[arch];
+                const dailyPractice = archetypeData?.dailyPractice || [];
+                
                 const days = [];
                 
-                template.weeks.forEach(week => {
-                    week.days.forEach(day => {
-                        days.push({
-                            day: day.day,
-                            task: day.task,
-                            time: day.time,
-                            completed: false,
-                            week: week.week,
-                            theme: week.theme
-                        });
+                // 将21天分配到3周
+                dailyPractice.forEach((task, index) => {
+                    const day = index + 1;
+                    const week = Math.ceil(day / 7);
+                    let theme = '觉察';
+                    if (week === 2) theme = '尝试';
+                    if (week === 3) theme = '巩固';
+                    
+                    days.push({
+                        day: day,
+                        task: task,
+                        time: '5-10分钟',
+                        completed: false,
+                        week: week,
+                        theme: theme
                     });
                 });
                 
