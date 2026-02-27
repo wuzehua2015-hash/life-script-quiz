@@ -1465,7 +1465,12 @@
 
     function drawRadarChart() {
         const canvas = elements.result.radarChart;
-        if (!canvas) return;
+        if (!canvas) {
+            console.error('雷达图canvas不存在');
+            return;
+        }
+        
+        console.log('绘制雷达图, scores:', state.scores);
 
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
@@ -1479,13 +1484,18 @@
 
         const scores = dims.map(dim => {
             const dimScores = state.scores[dim];
+            console.log(`维度 ${dim} 分数:`, dimScores);
             if (!dimScores) return 0;
             const values = Object.values(dimScores);
             if (values.length === 0) return 0;
             const maxScore = Math.max(...values);
             const totalScore = values.reduce((a, b) => a + b, 0);
-            return totalScore > 0 ? maxScore / totalScore : 0;
+            const result = totalScore > 0 ? maxScore / totalScore : 0;
+            console.log(`维度 ${dim} 计算结果:`, result);
+            return result;
         });
+        
+        console.log('最终scores数组:', scores);
 
         ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
         ctx.lineWidth = 1;
