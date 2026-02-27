@@ -1490,8 +1490,6 @@
             console.error('雷达图canvas不存在');
             return;
         }
-        
-        console.log('绘制雷达图, scores:', state.scores);
 
         const ctx = canvas.getContext('2d');
         const centerX = canvas.width / 2;
@@ -1503,20 +1501,25 @@
         const labels = ['核心驱动力', '与世界的关系', '与自我的关系', '与时间的关系'];
         const dims = ['drive', 'world', 'self', 'time'];
 
-        const scores = dims.map(dim => {
-            const dimScores = state.scores[dim];
-            console.log(`维度 ${dim} 分数:`, dimScores);
-            if (!dimScores) return 0;
-            const values = Object.values(dimScores);
-            if (values.length === 0) return 0;
-            const maxScore = Math.max(...values);
-            const totalScore = values.reduce((a, b) => a + b, 0);
-            const result = totalScore > 0 ? maxScore / totalScore : 0;
-            console.log(`维度 ${dim} 计算结果:`, result);
-            return result;
-        });
-        
-        console.log('最终scores数组:', scores);
+        // 优先使用result.dimensionDetails中的百分比（和四维解读一致）
+        let scores;
+        if (state.result?.dimensionDetails) {
+            scores = dims.map(dim => {
+                const detail = state.result.dimensionDetails[dim];
+                return detail ? detail.percentage / 100 : 0;
+            });
+        } else {
+            // 兼容旧数据，使用state.scores计算
+            scores = dims.map(dim => {
+                const dimScores = state.scores[dim];
+                if (!dimScores) return 0;
+                const values = Object.values(dimScores);
+                if (values.length === 0) return 0;
+                const maxScore = Math.max(...values);
+                const totalScore = values.reduce((a, b) => a + b, 0);
+                return totalScore > 0 ? maxScore / totalScore : 0;
+            });
+        }
 
         ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
         ctx.lineWidth = 1;
