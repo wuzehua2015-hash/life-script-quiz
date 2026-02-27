@@ -73,7 +73,17 @@
             // 恢复测试结果
             const savedResult = localStorage.getItem('lsq_testResult');
             if (savedResult) {
-                state.result = JSON.parse(savedResult);
+                const result = JSON.parse(savedResult);
+                state.result = result;
+                // 同时恢复scores用于绘制雷达图
+                if (result.dimensions) {
+                    state.scores = {
+                        drive: { [result.dimensions.drive]: 10 },
+                        world: { [result.dimensions.world]: 10 },
+                        self: { [result.dimensions.self]: 10 },
+                        time: { [result.dimensions.time]: 10 }
+                    };
+                }
             }
         } catch (error) {
             console.error('恢复进度失败:', error);
@@ -1685,7 +1695,17 @@
             const savedResult = localStorage.getItem('lsq_testResult');
             if (savedResult) {
                 try {
-                    state.result = JSON.parse(savedResult);
+                    const result = JSON.parse(savedResult);
+                    state.result = result;
+                    // 同时恢复scores用于绘制雷达图
+                    if (result.dimensions) {
+                        state.scores = {
+                            drive: { [result.dimensions.drive]: 10 },
+                            world: { [result.dimensions.world]: 10 },
+                            self: { [result.dimensions.self]: 10 },
+                            time: { [result.dimensions.time]: 10 }
+                        };
+                    }
                     // 先初始化再显示结果
                     init();
                     // 延迟显示结果页，确保DOM渲染完成
