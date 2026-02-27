@@ -674,7 +674,7 @@ const QUESTIONS = [
         choices: [
             { text: "落后了，必须加速追赶", type: "chasing", score: 2 },
             { text: "好像错过了很多机会", type: "stagnation", score: 2 },
-            { text: "人生不是赛跑，每个人都有自己的节奏", type: "authenticity", score: 2 },
+            { text: "人生不是赛跑，每个人都有自己的节奏", type: "exploration", score: 2 },
             { text: "也许这就是命运的安排", type: "fate", score: 2 },
             { text: "过去的每一步都在塑造现在的我", type: "creation", score: 2 }
         ]
@@ -691,7 +691,7 @@ const QUESTIONS = [
         choices: [
             { text: "要更努力成功，让他们骄傲", type: "chasing", score: 2 },
             { text: "时间过得真快，我什么都没做", type: "stagnation", score: 2 },
-            { text: "珍惜现在的每一刻相处", type: "authenticity", score: 2 },
+            { text: "珍惜现在的每一刻相处", type: "exploration", score: 2 },
             { text: "生老病死，自然规律", type: "fate", score: 2 },
             { text: "我要创造更多美好的回忆", type: "creation", score: 2 }
         ]
@@ -708,7 +708,7 @@ const QUESTIONS = [
         choices: [
             { text: "又浪费了几小时，计划全乱了", type: "chasing", score: 2 },
             { text: "反正我也控制不了，随便吧", type: "stagnation", score: 2 },
-            { text: "也许这是让我停下来思考的机会", type: "authenticity", score: 2 },
+            { text: "也许这是让我停下来思考的机会", type: "exploration", score: 2 },
             { text: "航班延误也是命中注定的", type: "fate", score: 2 },
             { text: "利用这段时间做点什么有意义的事", type: "creation", score: 2 }
         ]
@@ -725,7 +725,7 @@ const QUESTIONS = [
         choices: [
             { text: "明年必须完成今年的目标", type: "chasing", score: 2 },
             { text: "一年又一年，好像没什么变化", type: "stagnation", score: 2 },
-            { text: "不知道明年会发生什么，期待", type: "authenticity", score: 2 },
+            { text: "不知道明年会发生什么，期待", type: "exploration", score: 2 },
             { text: "顺其自然，该来的会来", type: "fate", score: 2 },
             { text: "新的一年，我要主动创造改变", type: "creation", score: 2 }
         ]
@@ -742,7 +742,7 @@ const QUESTIONS = [
         choices: [
             { text: "时间宝贵，不能浪费一分一秒", type: "chasing", score: 2 },
             { text: "日复一日，好像被困在循环里", type: "stagnation", score: 2 },
-            { text: "每一天都是独特的，值得体验", type: "authenticity", score: 2 },
+            { text: "每一天都是独特的，值得体验", type: "exploration", score: 2 },
             { text: "日出日落，自有定数", type: "fate", score: 2 },
             { text: "今天是我创造未来的起点", type: "creation", score: 2 }
         ]
