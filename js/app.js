@@ -698,6 +698,9 @@
             // 渲染建议
             renderAdvice(character);
 
+            // 渲染相似角色推荐（新增）
+            renderSimilarCharacters(character, archetype);
+
             // 渲染原有的原型分析
             renderArchetypeAnalysis(archetype, dims, data);
 
@@ -1081,6 +1084,143 @@
                 <p class="advice-text">${character.advice || ''}</p>
             </div>
         `;
+    }
+
+    // 新增：相似角色推荐
+    function renderSimilarCharacters(currentCharacter, currentArchetype) {
+        const container = document.getElementById('similar-characters');
+        if (!container) return;
+
+        const data = window.QUIZ_DATA;
+        if (!data || !state.result) return;
+
+        // 获取所有原型匹配结果（已按匹配度排序）
+        const allMatches = state.result.allMatches || [];
+        
+        // 找出第二匹配的原型（跳过第一个，因为是当前匹配）
+        const secondMatch = allMatches[1];
+        if (!secondMatch || secondMatch.percentage < 30) return;
+
+        // 在第二匹配的原型中找最匹配的角色
+        const secondArchetype = data.ARCHETYPES[secondMatch.archetype];
+        const secondCharacter = matchCharacter(secondMatch.archetype);
+
+        // 找出第三匹配的原型
+        const thirdMatch = allMatches[2];
+        let thirdCharacter = null;
+        let thirdArchetype = null;
+        if (thirdMatch && thirdMatch.percentage >= 30) {
+            thirdArchetype = data.ARCHETYPES[thirdMatch.archetype];
+            thirdCharacter = matchCharacter(thirdMatch.archetype);
+        }
+
+        // 在当前原型中找第二匹配的角色
+        const currentArchetypeChars = data.CHARACTER_LIBRARY[currentArchetype?.key] || [];
+        let altCharacter = null;
+        if (currentArchetypeChars.length > 1) {
+            // 找得分第二高的角色
+            const scoredChars = currentArchetypeChars.map(char => {
+                let score = 0;
+                if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) score += 15;
+                if (char.age.includes(state.basicInfo.age)) score += 15;
+                if (char.career.includes(state.basicInfo.career)) score += 15;
+                if (char.stage.includes(state.basicInfo.life_stage)) score += 15;
+                return { character: char, score };
+            }).sort((a, b) => b.score - a.score);
+            
+            // 如果第一个是当前角色，取第二个
+            if (scoredChars[0]?.character.name === currentCharacter.name && scoredChars[1]) {
+                altCharacter = scoredChars[1].character;
+            }
+        }
+
+        // 生成推荐列表
+        const recommendations = [];
+        
+        if (secondCharacter && secondCharacter.name !== currentCharacter.name) {
+            recommendations.push({
+                type: 'secondArchetype',
+                title: '你可能也像...',
+                character: secondCharacter,
+                archetype: secondArchetype,
+                matchPercent: secondMatch.percentage,
+                reason: generateSimilarReason(secondMatch.archetype, currentArchetype?.key)
+            });
+        }
+
+        if (altCharacter) {
+            recommendations.push({
+                type: 'sameArchetype',
+                title: '同类型的另一个你',
+                character: altCharacter,
+                archetype: currentArchetype,
+                matchPercent: Math.round(state.result.matchPercentage * 0.9),
+                reason: `同样是${currentArchetype?.name}，但有着不同的故事和选择`
+            });
+        }
+
+        if (thirdCharacter && thirdCharacter.name !== currentCharacter.name) {
+            recommendations.push({
+                type: 'thirdArchetype',
+                title: '潜在的另一个剧本',
+                character: thirdCharacter,
+                archetype: thirdArchetype,
+                matchPercent: thirdMatch.percentage,
+                reason: generateSimilarReason(thirdMatch.archetype, currentArchetype?.key)
+            });
+        }
+
+        if (recommendations.length === 0) return;
+
+        container.innerHTML = `
+            <h4>🎭 其他可能的你</h4>
+            <p class="similar-intro">人生剧本不止一种，这些角色也可能与你产生共鸣：</p>
+            <div class="similar-characters-list">
+                ${recommendations.map(rec => `
+                    <div class="similar-character-card" data-archetype="${rec.archetype?.key}">
+                        <div class="similar-character-header">
+                            <span class="similar-type">${rec.title}</span>
+                            <span class="similar-match">${rec.matchPercent}% 匹配</span>
+                        </div>
+                        <div class="similar-character-info">
+                            <div class="similar-avatar">${rec.character.name.charAt(0)}</div>
+                            <div class="similar-details">
+                                <h5>${rec.character.name}</h5>
+                                <span class="similar-work">${rec.character.work}</span>
+                                <span class="similar-archetype">${rec.archetype?.name || ''}</span>
+                            </div>
+                        </div>
+                        <p class="similar-reason">${rec.reason}</p>
+                        <div class="similar-quote">「${rec.character.quote || ''}」</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    // 生成相似原因说明
+    function generateSimilarReason(archetypeKey, currentArchetypeKey) {
+        const relations = {
+            'lone_hero-controller': '都有强烈的掌控欲，只是表达方式不同',
+            'lone_hero-warrior': '都习惯独自面对挑战，只是战场不同',
+            'pleaser-healer': '都关注他人需求，只是方式不同',
+            'pleaser-rescuer': '都倾向于付出，只是动机不同',
+            'hermit-observer': '都选择保持距离，只是原因不同',
+            'hermit-wanderer': '都追求自由，只是形式不同',
+            'controller-performer': '都需要被看见，只是舞台不同',
+            'victim-pleaser': '都在关系中寻求安全感',
+            'performer-wanderer': '都渴望被关注，只是方式不同',
+            'rescuer-pleaser': '都通过付出来获得价值感',
+            'warrior-lone_hero': '都有战斗精神，只是目标不同',
+            'healer-rescuer': '都有治愈他人的愿望',
+            'observer-hermit': '都选择旁观，只是心态不同',
+            'awakened-observer': '都在寻找真相，只是路径不同'
+        };
+
+        const key1 = `${archetypeKey}-${currentArchetypeKey}`;
+        const key2 = `${currentArchetypeKey}-${archetypeKey}`;
+        
+        return relations[key1] || relations[key2] || '你们在某些维度上有着相似的倾向';
     }
 
     function renderArchetypeAnalysis(archetype, dims, data) {
