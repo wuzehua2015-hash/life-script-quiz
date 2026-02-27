@@ -760,46 +760,142 @@ const CHARACTER_LIBRARY = {
           similarity: ["坚持正义", "孤独前行", "不向黑暗妥协", "内心坚定"],
           story: "从意气风发的年轻刑警到满头白发的边缘警察，安欣用20年时间坚守正义，即使被孤立、被边缘化，也从未放弃对真相的追寻。",
           advice: "像安欣一样坚持信念很可贵，但也要学会保护自己，找到并肩作战的伙伴。",
-          imageKeyword: "安欣 狂飙 张译" },
+          imageKeyword: "安欣 狂飙 张译",
+          growthPath: {
+            early: "年轻热血的刑警，相信正义必胜，对师父曹闯充满敬仰，与高启强有过短暂友谊",
+            middle: "发现师父是内鬼，好友高启强成为黑老大，开始被孤立、被调离核心岗位",
+            late: "独自坚守20年，从意气风发到满头白发，最终等到督导组到来，将黑恶势力一网打尽"
+          },
+          turningPoint: {
+            event: "发现师父曹闯是内鬼，好友高启强成为黑老大",
+            impact: "彻底打破了对世界非黑即白的认知，选择独自坚守正义，即使付出被孤立的代价"
+          },
+          realCase: {
+            situation: "职场中坚持原则却被孤立",
+            example: "你拒绝参与部门的不正当操作，结果被调离核心项目，同事也疏远你。像安欣一样，你可以选择离开，也可以选择等待时机，但请记住：正义可能会迟到，但坚守本身就有价值"
+          }
+        },
         { name: "梅长苏", work: "《琅琊榜》", gender: ["male"], age: ["26-35", "36-45"], career: ["middle", "executive"], stage: ["working", "transition"],
           quote: "既然我活了下来，就不会白白活着。",
           similarity: ["背负使命", "隐忍不发", "智计无双", "孤注一掷"],
           story: "身中火寒之毒，改头换面，以病弱之躯搅动朝堂风云，只为平反赤焰冤案。他是谋士，也是复仇者。",
           advice: "梅长苏的智慧值得学习，但不要像他一样燃烧自己，记得留一些温暖给自己。",
-          imageKeyword: "梅长苏 琅琊榜 胡歌" },
+          imageKeyword: "梅长苏 琅琊榜 胡歌",
+          growthPath: {
+            early: "赤焰军少帅林殊，金陵城最明亮的少年，武功高强，家世显赫，前途无量",
+            middle: "梅岭惨案后身中火寒之毒，改头换面成为江左盟宗主梅长苏，隐忍12年布局",
+            late: "以病弱之躯搅动朝堂，成功平反赤焰冤案，但身体油尽灯枯，最终回归战场结束一生"
+          },
+          turningPoint: {
+            event: "梅岭惨案，赤焰军被诬陷叛国，七万将士葬身火海",
+            impact: "从阳光少年变成阴郁谋士，活着的唯一目标是为亡魂平反，个人幸福完全让位于使命"
+          },
+          realCase: {
+            situation: "遭遇重大变故后，将人生全部意义寄托于一个目标",
+            example: "创业失败后，你把所有精力都投入到复仇般的二次创业中，忽略了家人和健康。像梅长苏一样，完成使命很重要，但请不要燃烧殆尽，留一些生命给自己"
+          }
+        },
         // 美剧
         { name: "Tony Stark", work: "《钢铁侠》", gender: ["male"], age: ["26-35", "36-45"], career: ["executive", "entrepreneur"], stage: ["working", "stable"],
           quote: "I am Iron Man.",
           similarity: ["天才自负", "独自承担", "用成就证明自己", "内心孤独"],
           story: "天才发明家、亿万富翁、花花公子、慈善家，Tony Stark用盔甲保护自己脆弱的心，最终为保护世界牺牲自己。",
           advice: "像Tony一样承担责任很伟大，但也要学会依靠他人，你不是一个人在战斗。",
-          imageKeyword: "Iron Man Tony Stark" },
+          imageKeyword: "Iron Man Tony Stark",
+          growthPath: {
+            early: "天才军火商，玩世不恭，用酒精和派对麻痹自己，从未认真面对人生",
+            middle: "被绑架后制造第一套盔甲逃生，意识到武器的恶果，关闭武器部门成为钢铁侠",
+            late: "从自私的富翁变成真正的英雄，为保护世界牺牲自己，完成了从男孩到男人的蜕变"
+          },
+          turningPoint: {
+            event: "被恐怖分子绑架，在山洞中制造第一套盔甲逃生",
+            impact: "意识到自己的武器伤害了无辜的人，开始用钢铁侠的身份赎罪，从玩世不恭变得有责任感"
+          },
+          realCase: {
+            situation: "成功后感到空虚，用工作或享乐麻痹自己",
+            example: "你事业有成，但内心空虚，用加班或购物填补。像Tony一样，真正的转变往往来自危机。不要等到失去才懂得珍惜，现在就开始寻找真正重要的东西"
+          }
+        },
         { name: "Walter White", work: "《绝命毒师》", gender: ["male"], age: ["46+"], career: ["middle"], stage: ["transition"],
           quote: "I am the one who knocks!",
           similarity: ["被低估的才华", "渴望认可", "一步步走向黑暗", "证明自己"],
           story: "高中化学老师，身患绝症后制毒养家，从一个老实人变成毒枭Heisenberg，最终被自己的野心吞噬。",
           advice: "Walter的悲剧在于被自尊蒙蔽，才华不需要通过伤害他人来证明，找到健康的出口。",
-          imageKeyword: "Walter White Breaking Bad" },
+          imageKeyword: "Walter White Breaking Bad",
+          growthPath: {
+            early: "平凡的化学老师，才华被埋没，经济拮据，感到人生失败，连尊严都难以维持",
+            middle: "身患绝症后开始制毒，逐渐享受权力和掌控感，从被动求生变成主动追求",
+            late: "彻底变成毒枭Heisenberg，为权力不择手段，最终众叛亲离，在孤独中死去"
+          },
+          turningPoint: {
+            event: "被诊断出肺癌，同时发现曾经的学生在制毒",
+            impact: "决定用自己的化学知识制毒养家，但逐渐沉迷于权力，从受害者变成加害者"
+          },
+          realCase: {
+            situation: "感到被低估，渴望通过极端方式证明自己",
+            example: "你在职场被忽视，想通过灰色手段快速成功。请记住Walter的教训：一旦踏上那条路，就很难回头。才华值得被看见，但请用正当的方式"
+          }
+        },
         // 电影
         { name: "安迪", work: "《肖申克的救赎》", gender: ["male"], age: ["26-35", "36-45"], career: ["middle", "executive"], stage: ["working", "transition"],
           quote: "希望是美好的，也许是人间至善，而美好的事物永不消逝。",
           similarity: ["不屈不挠", "坚持希望", "智慧求生", "孤独但坚定"],
           story: "被冤枉入狱的银行家，用19年时间挖地道越狱，在绝望的环境中始终保持希望和尊严。",
           advice: "安迪的希望让人动容，但自由需要行动，不要只是等待，要为自己创造机会。",
-          imageKeyword: "Andy Shawshank Redemption" },
+          imageKeyword: "Andy Shawshank Redemption",
+          growthPath: {
+            early: "成功的银行家，有美满的家庭，生活安稳，突然被冤枉入狱，人生瞬间崩塌",
+            middle: "在监狱中保持尊严，用专业知识帮助狱警理财，为狱友争取啤酒和图书馆",
+            late: "用19年时间挖地道越狱，最终在太平洋边实现自由，完成了自我救赎"
+          },
+          turningPoint: {
+            event: "发现妻子出轨后被冤枉入狱，被判终身监禁",
+            impact: "从自由人变成阶下囚，但选择保持希望和尊严，用智慧和耐心计划越狱"
+          },
+          realCase: {
+            situation: "遭遇不公平待遇或困境，感到绝望",
+            example: "你被裁员或遭遇不公，感到人生无望。像安迪一样，即使在最黑暗的地方也要保持希望，同时用行动改变现状。19年很长，但每一天的坚持都在靠近自由"
+          }
+        },
         { name: "程蝶衣", work: "《霸王别姬》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["freelance"], stage: ["working", "stable", "transition"],
           quote: "不疯魔，不成活。",
           similarity: ["极致追求", "不疯魔不成活", "为艺术献身", "孤独执着"],
           story: "京剧名角，人戏不分，对艺术的极致追求让他分不清戏里戏外，最终为霸王别姬的虞姬画上句号。",
           advice: "蝶衣的专注令人敬佩，但艺术和生活需要平衡，不要让自己完全消失在角色中。",
-          imageKeyword: "程蝶衣 张国荣 霸王别姬" },
+          imageKeyword: "程蝶衣 张国荣 霸王别姬" ,
+          growthPath: {
+            early: "怀揣理想，相信正义必胜，充满热血和干劲",
+            middle: "遭遇现实打击，被孤立或背叛，开始独自前行",
+            late: "在孤独中坚守初心，最终等到转机或完成使命"
+          },
+          turningPoint: {
+            event: "发现世界并非非黑即白，信任的人背叛或离开",
+            impact: "从依赖外界认可转向内心坚定，选择独自承担"
+          },
+          realCase: {
+            situation: "职场中坚持原则却被孤立",
+            example: "你拒绝参与部门的不正当操作，结果被调离核心项目。像孤勇者一样，你可以选择离开，也可以选择等待时机，但请记住：坚守本身就有价值"
+          }},
         // 文学
         { name: "孙少安", work: "《平凡的世界》", gender: ["male"], age: ["18-25", "26-35", "36-45"], career: ["entrepreneur", "middle"], stage: ["working", "stable"],
           quote: "人的一生总应有一次为了理想而奋不顾身的时候。",
           similarity: ["艰苦奋斗", "不屈不挠", "为家人拼搏", "独自承担"],
           story: "农村青年，在贫困和挫折中奋斗，从生产队长到砖厂老板，用汗水改变命运，却永远失去了最爱的人。",
           advice: "少安的奋斗精神值得学习，但也要允许自己休息，成功不是人生的全部。",
-          imageKeyword: "平凡的世界 孙少安" }
+          imageKeyword: "平凡的世界 孙少安" ,
+          growthPath: {
+            early: "怀揣理想，相信正义必胜，充满热血和干劲",
+            middle: "遭遇现实打击，被孤立或背叛，开始独自前行",
+            late: "在孤独中坚守初心，最终等到转机或完成使命"
+          },
+          turningPoint: {
+            event: "发现世界并非非黑即白，信任的人背叛或离开",
+            impact: "从依赖外界认可转向内心坚定，选择独自承担"
+          },
+          realCase: {
+            situation: "职场中坚持原则却被孤立",
+            example: "你拒绝参与部门的不正当操作，结果被调离核心项目。像孤勇者一样，你可以选择离开，也可以选择等待时机，但请记住：坚守本身就有价值"
+          }}
     ],
 
     // 讨好者 (Pleaser) - 6个角色
@@ -811,40 +907,118 @@ const CHARACTER_LIBRARY = {
           similarity: ["被家庭索取", "渴望被爱", "委屈求全", "自我价值感低"],
           story: "外企HR，外表光鲜，却被原生家庭不断索取，为了得到父母的认可不断付出，却始终得不到真正的爱。",
           advice: "樊胜美的困境在于把付出当筹码，真正的爱不需要交换，学会先爱自己。",
-          imageKeyword: "樊胜美 欢乐颂" },
+          imageKeyword: "樊胜美 欢乐颂" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }},
         { name: "苏明玉", work: "《都挺好》", gender: ["female"], age: ["26-35", "36-45"], career: ["executive"], stage: ["working", "stable"],
           quote: "我努力了这么多年，就是为了不再像小时候那样看人脸色。",
           similarity: ["原生家庭创伤", "渴望认可", "用成功证明价值", "内心脆弱"],
           story: "从小被母亲嫌弃的女儿，靠自己的努力成为金领，却始终无法摆脱原生家庭的阴影，直到学会与过去和解。",
           advice: "明玉的坚强是盔甲，真正的强大是允许自己脆弱，不需要一直证明什么。",
-          imageKeyword: "苏明玉 都挺好 姚晨" },
+          imageKeyword: "苏明玉 都挺好 姚晨" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }},
         // 美剧
         { name: "Monica Geller", work: "《老友记》", gender: ["female"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "I know!",
           similarity: ["追求完美", "需要被认可", "控制欲强", "渴望被爱"],
           story: "曾经的胖女孩，长大后变成完美主义者，用 hostess 的热情和厨艺来维系友谊，渴望被需要和认可。",
           advice: "Monica的热情很珍贵，但不需要通过付出来换取爱，你的存在本身就值得被爱。",
-          imageKeyword: "Monica Friends" },
+          imageKeyword: "Monica Friends" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }},
         // 电影
         { name: "松子", work: "《被嫌弃的松子的一生》", gender: ["female"], age: ["18-25", "26-35", "36-45"], career: ["newbie", "middle"], stage: ["working", "transition"],
           quote: "生而为人，我很抱歉。",
           similarity: ["极度渴望爱", "不断讨好", "被伤害仍不放弃", "自我价值感极低"],
           story: "一生都在寻找爱的女人，不断讨好男人，不断被伤害，最终在孤独中死去，一生都在说对不起。",
           advice: "松子的悲剧在于把爱的希望寄托在他人身上，请先学会爱自己，你值得被好好对待。",
-          imageKeyword: "被嫌弃的松子的一生" },
+          imageKeyword: "被嫌弃的松子的一生" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }},
         // 文学
         { name: "祥子", work: "《骆驼祥子》", gender: ["male"], age: ["18-25", "26-35"], career: ["freelance"], stage: ["working"],
           quote: "他没有什么模样，但他可爱的是脸上的精神。",
           similarity: ["老实本分", "努力生活", "被命运打击", "逐渐失去希望"],
           story: "北平人力车夫，梦想拥有一辆自己的车，三次买车三次失去，最终被生活压垮，从勤劳善良变成行尸走肉。",
           advice: "祥子的悲剧是时代的悲剧，但在任何时代，都请保留内心的光，不要让环境完全定义你。",
-          imageKeyword: "骆驼祥子" },
+          imageKeyword: "骆驼祥子" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }},
         { name: "许三观", work: "《许三观卖血记》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["middle", "freelance"], stage: ["working", "stable"],
           quote: "力气这东西，和钱不一样，钱是越用越少，力气是越用越多。",
           similarity: ["为家庭牺牲", "默默付出", "用身体换生存", "责任感强"],
           story: "丝厂工人，用卖血度过人生难关，为家庭、为孩子一次次卖血，体现了底层人的坚韧与无奈。",
           advice: "许三观的责任感令人敬佩，但付出要有底线，你的身体和健康同样重要。",
-          imageKeyword: "许三观卖血记" }
+          imageKeyword: "许三观卖血记" ,
+          growthPath: {
+            early: "通过付出换取爱和认可，努力满足他人期待",
+            middle: "付出被当作理所当然，内心积累委屈和怨恨",
+            late: "意识到爱不是交易，开始学习设立边界"
+          },
+          turningPoint: {
+            event: "付出被忽视或利用，感到深深的委屈",
+            impact: "开始质疑「付出=被爱」的模式，意识到自我价值不需要证明"
+          },
+          realCase: {
+            situation: "在关系中总是委屈求全",
+            example: "你总是优先考虑伴侣的需求，压抑自己的感受。像讨好者一样，你害怕冲突，但请记住：真正的爱不需要用付出来兑换，学会先爱自己"
+          }}
     ],
 
     // 隐士 (Hermit) - 8个角色
@@ -856,52 +1030,156 @@ const CHARACTER_LIBRARY = {
           similarity: ["对人类失望", "选择孤独", "理性冷静", "与世界疏离"],
           story: "天体物理学家，因文革创伤对人类文明失望，向三体文明发送信号，成为地球三体组织的统帅，在孤独中等待救赎。",
           advice: "叶文洁的选择源于创伤，但封闭自己无法获得真正的平静，尝试打开心扉，世界没那么糟糕。",
-          imageKeyword: "叶文洁 三体" },
+          imageKeyword: "叶文洁 三体" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         { name: "范闲", work: "《庆余年》", gender: ["male"], age: ["18-25", "26-35"], career: ["middle", "executive"], stage: ["working"],
           quote: "我想做个好人，但这个世界不让我做好人。",
           similarity: ["表面洒脱", "内心孤独", "与世俗保持距离", "渴望简单"],
           story: "穿越者范闲，拥有现代思想，在封建王朝中格格不入，表面玩世不恭，内心渴望公平正义，却始终无法真正融入。",
           advice: "范闲的孤独源于与众不同，但差异不是隔离的理由，找到同类，建立连接。",
-          imageKeyword: "范闲 庆余年 张若昀" },
+          imageKeyword: "范闲 庆余年 张若昀" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         // 美剧
         { name: "Sherlock Holmes", work: "《神探夏洛克》", gender: ["male"], age: ["26-35", "36-45"], career: ["freelance"], stage: ["working"],
           quote: "I'm a high-functioning sociopath.",
           similarity: ["天才孤独", "社交障碍", "沉浸在自己的世界", "拒绝情感"],
           story: "咨询侦探，智商超群但情商欠费，用推理逃避情感，在221B的公寓里与华生建立了一段特殊的友谊。",
           advice: "Sherlock的智慧令人钦佩，但情感不是弱点，允许自己需要他人，这是人性的一部分。",
-          imageKeyword: "Sherlock Holmes Benedict Cumberbatch" },
+          imageKeyword: "Sherlock Holmes Benedict Cumberbatch" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         // 电影
         { name: "阿甘", work: "《阿甘正传》", gender: ["male"], age: ["18-25", "26-35", "36-45"], career: ["newbie", "middle"], stage: ["working", "stable"],
           quote: "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
           similarity: ["简单纯粹", "不与人争", "专注当下", "内心平静"],
           story: "智商只有75的男人，却经历了美国历史上最重要的时刻，用简单和真诚影响了身边的人，始终爱着珍妮。",
           advice: "阿甘的简单是智慧，保持内心的纯粹，但也不要害怕复杂，你有能力应对。",
-          imageKeyword: "Forrest Gump Tom Hanks" },
+          imageKeyword: "Forrest Gump Tom Hanks" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         // 文学
         { name: "贾宝玉", work: "《红楼梦》", gender: ["male"], age: ["18-25"], career: ["student"], stage: ["studying"],
           quote: "女儿是水做的骨肉，男人是泥做的骨肉。",
           similarity: ["逃避世俗", "追求精神", "与主流价值观冲突", "敏感多情"],
           story: "荣国府的贵公子，厌恶仕途经济，在大观园中寻找精神家园，最终看破红尘，出家为僧。",
           advice: "宝玉的逃避无法解决问题，理想主义需要现实基础，学会在世俗中守护精神家园。",
-          imageKeyword: "贾宝玉 红楼梦" },
+          imageKeyword: "贾宝玉 红楼梦" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         { name: "林黛玉", work: "《红楼梦》", gender: ["female"], age: ["18-25"], career: ["student"], stage: ["studying"],
           quote: "一年三百六十日，风刀霜剑严相逼。",
           similarity: ["敏感孤傲", "远离世俗", "才华横溢", "寄人篱下"],
           story: "寄人篱下的孤女，才华横溢却体弱多病，敏感多疑，不屑于讨好世俗，最终在孤独中泪尽而逝。",
           advice: "黛玉的敏感是天赋，但不要让敏感变成自我折磨，学会保护自己，也学会接纳温暖。",
-          imageKeyword: "林黛玉 红楼梦" },
+          imageKeyword: "林黛玉 红楼梦" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         { name: "悉达多", work: "《悉达多》", gender: ["male"], age: ["18-25", "26-35", "36-45"], career: ["student", "freelance"], stage: ["studying", "working", "transition"],
           quote: "知识可以传授，但智慧不能。",
           similarity: ["寻求真理", "独自修行", "经历世间百态", "内心探索"],
           story: "古印度贵族青年，放弃一切寻求真理，经历了苦行、财富、欲望，最终在河边悟道，成为智者。",
           advice: "悉达多的旅程是每个人的旅程，但悟道不必远离尘世，在日常生活中也能找到智慧。",
-          imageKeyword: "Siddhartha Hermann Hesse" },
+          imageKeyword: "Siddhartha Hermann Hesse" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }},
         { name: "渡边", work: "《挪威的森林》", gender: ["male"], age: ["18-25"], career: ["student"], stage: ["studying"],
           quote: "死并非生的对立面，而是作为生的一部分永存。",
           similarity: ["内向敏感", "沉浸回忆", "与死亡相伴", "情感疏离"],
           story: "大学生渡边，在直子和绿子之间徘徊，沉浸在对死去好友木月的回忆中，在孤独中寻找活着的意义。",
           advice: "渡边的忧郁是青春的一部分，但不要沉溺于悲伤，活着的人要继续活下去，这是对死者最好的纪念。",
-          imageKeyword: "挪威的森林 村上春树" }
+          imageKeyword: "挪威的森林 村上春树" ,
+          growthPath: {
+            early: "选择远离喧嚣，在独处中寻找平静",
+            middle: "享受孤独但偶尔感到寂寞，与世界保持距离",
+            late: "在内心找到安宁，学会选择性连接而非完全隔离"
+          },
+          turningPoint: {
+            event: "遭遇创伤或失望，选择退回到安全区",
+            impact: "从向外求索转向向内探索，但也可能过度隔离"
+          },
+          realCase: {
+            situation: "社交消耗能量，宁愿独处",
+            example: "你总是拒绝聚会邀请，觉得与人相处很累。像隐士一样，独处是你的充电方式，但请记得：偶尔打开心扉，世界没那么糟糕"
+          }}
     ],
 
     // 控制狂 (Controller) - 8个角色
@@ -913,52 +1191,156 @@ const CHARACTER_LIBRARY = {
           similarity: ["掌控全局", "步步为营", "从底层爬起", "控制欲强"],
           story: "从卖鱼小贩到京海黑老大，高启强用20年时间建立了自己的帝国，控制一切可以控制的人和事，最终被正义审判。",
           advice: "高启强的控制源于不安全感，但控制无法带来真正的安全，学会信任和放手。",
-          imageKeyword: "高启强 狂飙 张颂文" },
+          imageKeyword: "高启强 狂飙 张颂文" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         { name: "甄嬛", work: "《甄嬛传》", gender: ["female"], age: ["18-25", "26-35", "36-45"], career: ["newbie", "middle", "executive"], stage: ["working", "stable"],
           quote: "既然进宫，又岂能不争宠？既然争宠，又岂能不专宠？",
           similarity: ["精于算计", "掌控后宫", "步步为营", "控制局面"],
           story: "从天真烂漫的莞嫔到权倾后宫的太后，甄嬛在宫廷斗争中学会了控制一切，用智慧和手段掌控后宫，最终成为权力巅峰的女人。",
           advice: "甄嬛的蜕变是生存所需，但控制他人终将孤立自己，权力的巅峰往往是孤独的。",
-          imageKeyword: "甄嬛 孙俪" },
+          imageKeyword: "甄嬛 孙俪" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         { name: "魏璎珞", work: "《延禧攻略》", gender: ["female"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "我魏璎珞，天生脾气爆，不好惹。",
           similarity: ["精于算计", "掌控局面", "步步为营", "控制后宫"],
           story: "宫女出身，凭借机智和谋略在后宫崛起，善于控制局势，利用人心，最终成为令贵妃，掌控自己的命运。",
           advice: "魏璎珞的谋略值得学习，但控制欲过强会反噬自己，学会信任和授权，给自己留退路。",
-          imageKeyword: "魏璎珞 延禧攻略 吴谨言" },
+          imageKeyword: "魏璎珞 延禧攻略 吴谨言" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         // 美剧
         { name: "Cersei Lannister", work: "《权力的游戏》", gender: ["female"], age: ["26-35", "36-45", "46+"], career: ["executive"], stage: ["working", "stable"],
           quote: "When you play the game of thrones, you win or you die.",
           similarity: ["权力欲望", "控制一切", "不择手段", "偏执疯狂"],
           story: "兰尼斯特家族的长女，为了权力和保护孩子不择手段，最终登上铁王座，却在疯狂中走向毁灭。",
           advice: "Cersei的悲剧在于被权力蒙蔽，控制欲源于恐惧，真正的力量来自内心，而非权力。",
-          imageKeyword: "Cersei Lannister Game of Thrones" },
+          imageKeyword: "Cersei Lannister Game of Thrones" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         { name: "Gus Fring", work: "《绝命毒师》", gender: ["male"], age: ["36-45", "46+"], career: ["entrepreneur", "executive"], stage: ["stable"],
           quote: "I hide in plain sight, same as you.",
           similarity: ["表面完美", "精密控制", "复仇驱动", "冷酷无情"],
           story: "炸鸡店老板，实为毒枭，用20年时间精密策划复仇，控制新墨西哥州的毒品交易，最终被炸死。",
           advice: "Gus的控制令人恐惧，但复仇无法带来平静，放下执念才能获得真正的自由。",
-          imageKeyword: "Gus Fring Breaking Bad" },
+          imageKeyword: "Gus Fring Breaking Bad" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         // 电影
         { name: "汉尼拔", work: "《沉默的羔羊》", gender: ["male"], age: ["36-45", "46+"], career: ["executive"], stage: ["stable"],
           quote: "I do wish we could chat longer, but I'm having an old friend for dinner.",
           similarity: ["智商超群", "操控他人", "优雅冷酷", "掌控一切"],
           story: "精神病学家、食人魔，用心理学知识操控他人，即使在监狱中也能控制局面，是史上最迷人的反派之一。",
           advice: "汉尼拔的智慧被扭曲，控制他人是病态的，真正的强大是自我控制，而非控制他人。",
-          imageKeyword: "Hannibal Lecter Anthony Hopkins" },
+          imageKeyword: "Hannibal Lecter Anthony Hopkins" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         // 文学
         { name: "王熙凤", work: "《红楼梦》", gender: ["female"], age: ["26-35", "36-45"], career: ["executive", "middle"], stage: ["working", "stable"],
           quote: "我是从来不信什么阴司地狱报应的，凭是什么事，我说要行就行。",
           similarity: ["精明强干", "控制欲强", "手段狠辣", "机关算尽"],
           story: "荣国府的管家奶奶，精明强干，控制贾府大小事务，用手段维护自己的地位，最终机关算尽太聪明，反算了卿卿性命。",
           advice: "凤姐的能力令人佩服，但控制欲过强会反噬自己，学会信任和授权，给自己留退路。",
-          imageKeyword: "王熙凤 红楼梦" },
+          imageKeyword: "王熙凤 红楼梦" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }},
         { name: "麦克白夫人", work: "《麦克白》", gender: ["female"], age: ["26-35", "36-45"], career: ["executive"], stage: ["working", "stable"],
           quote: "Unsex me here, and fill me from the crown to the toe top-full of direst cruelty.",
           similarity: ["野心勃勃", "操控丈夫", "不择手段", "最终被罪恶吞噬"],
           story: "麦克白的妻子，野心勃勃，鼓动丈夫弑君篡位，最终被罪恶感逼疯，梦游中洗不净手上的血迹。",
           advice: "麦克白夫人的野心毁灭了一切，控制欲和野心需要道德底线，否则将自我毁灭。",
-          imageKeyword: "Lady Macbeth Shakespeare" }
+          imageKeyword: "Lady Macbeth Shakespeare" ,
+          growthPath: {
+            early: "相信掌控一切才能获得安全感，精心规划每一步",
+            middle: "计划被打乱时极度焦虑，控制欲影响关系",
+            late: "学会区分可控与不可控，在灵活中找到平衡"
+          },
+          turningPoint: {
+            event: "精心策划的事情彻底失控，或重要关系因控制欲破裂",
+            impact: "意识到控制是幻觉，真正的安全感来自内心而非掌控"
+          },
+          realCase: {
+            situation: "事情不按计划进行就焦虑",
+            example: "你制定了详细的旅行计划，但航班延误打乱了一切。像控制狂一样，你感到烦躁，但请记住：学会接纳不确定性，才能活得轻松"
+          }}
     ],
 
     // 受害者 (Victim) - 7个角色
@@ -970,40 +1352,118 @@ const CHARACTER_LIBRARY = {
           similarity: ["原生家庭伤害", "努力摆脱", "被索取", "自我价值感低"],
           story: "房产中介店长，能力出众却被原生家庭不断索取，母亲像吸血鬼一样压榨她，让她始终无法摆脱过去的阴影。",
           advice: "房似锦的困境需要设立边界，你有权利说不，不需要为原生家庭的无底洞买单。",
-          imageKeyword: "房似锦 安家 孙俪" },
+          imageKeyword: "房似锦 安家 孙俪" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }},
         // 美剧
         { name: "Jesse Pinkman", work: "《绝命毒师》", gender: ["male"], age: ["18-25", "26-35"], career: ["freelance"], stage: ["working", "transition"],
           quote: "I'm the bad guy.",
           similarity: ["被命运捉弄", "渴望被爱", "不断被伤害", "内心善良"],
           story: "小毒贩，被Walter White拖入制毒深渊，一次次想退出却被命运捉弄，失去所有爱的人，最终逃离。",
           advice: "Jesse的遭遇让人心疼，但不要把自己定义为受害者，你有选择的力量，可以重新开始。",
-          imageKeyword: "Jesse Pinkman Breaking Bad" },
+          imageKeyword: "Jesse Pinkman Breaking Bad" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }},
         // 电影
         { name: "小丑", work: "《Joker》", gender: ["male"], age: ["26-35", "36-45"], career: ["freelance"], stage: ["working", "transition"],
           quote: "I used to think that my life was a tragedy. But now I realize, it's a comedy.",
           similarity: ["被社会抛弃", "渴望关注", "精神崩溃", "从受害者到加害者"],
           story: "喜剧演员Arthur Fleck，被社会抛弃、被嘲笑、被殴打，最终在绝望中变成小丑，引发哥谭市暴动。",
           advice: "小丑的悲剧是社会的问题，但暴力不是答案，寻求帮助，不要独自承受。",
-          imageKeyword: "Joker Joaquin Phoenix" },
+          imageKeyword: "Joker Joaquin Phoenix" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }},
         // 文学
         { name: "苔丝", work: "《德伯家的苔丝》", gender: ["female"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "凡是有甜美的鸟歌唱的地方，也都有毒蛇嘶嘶地叫。",
           similarity: ["纯洁善良", "被命运摧残", "社会不公", "无力反抗"],
           story: "纯洁的乡村少女，被贵族少爷诱奸，失去孩子，婚后被丈夫抛弃，最终杀死少爷，被绞死。",
           advice: "苔丝的悲剧是时代的悲剧，但在今天，你有权利为自己发声，寻求帮助，不要独自承受。",
-          imageKeyword: "Tess of the d'Urbervilles" },
+          imageKeyword: "Tess of the d'Urbervilles" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }},
         { name: "孔乙己", work: "《孔乙己》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["freelance"], stage: ["working", "transition"],
           quote: "窃书不能算偷...窃书！读书人的事，能算偷么？",
           similarity: ["固守旧观念", "被时代抛弃", "自欺欺人", "悲剧性"],
           story: "科举制度下的落魄书生，固守读书人的尊严，却连饭都吃不饱，最终被时代抛弃，不知所踪。",
           advice: "孔乙己的悲剧在于无法适应变化，世界在变，你也要变，放下执念，拥抱新的可能。",
-          imageKeyword: "孔乙己 鲁迅" },
+          imageKeyword: "孔乙己 鲁迅" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }},
         { name: "闰土", work: "《故乡》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["freelance"], stage: ["working"],
           quote: "老爷！",
           similarity: ["被生活压垮", "失去希望", "阶级固化", "无力改变"],
           story: "少年时活泼机灵的农村孩子，中年时被生活压垮，变得麻木迟钝，与鲁迅重逢时只能恭敬地叫一声「老爷」。",
           advice: "闰土的悲剧是时代的悲剧，但即使在困境中，也不要放弃内心的光，寻求帮助，重新站起来。",
-          imageKeyword: "闰土 鲁迅" }
+          imageKeyword: "闰土 鲁迅" ,
+          growthPath: {
+            early: "遭遇不公平对待，感到委屈和无力",
+            middle: "沉浸在「为什么是我」的痛苦中，等待被拯救",
+            late: "意识到自己是生活的作者，开始主动改变"
+          },
+          turningPoint: {
+            event: "反复遭遇类似的伤害模式，或拯救者离开",
+            impact: "从被动受害者转向主动选择，意识到改变的力量在自己手中"
+          },
+          realCase: {
+            situation: "总觉得倒霉事都发生在自己身上",
+            example: "你又一次被同事抢功，感到世界不公平。像受害者一样，你感到无力，但请记住：你可以选择如何回应，而不是重复同样的模式"
+          }}
     ],
 
     // 表演者 (Performer) - 7个角色
@@ -1015,46 +1475,137 @@ const CHARACTER_LIBRARY = {
           similarity: ["高冷外表", "内心柔软", "追求认可", "渴望被爱"],
           story: "电竞俱乐部老板，外表高冷内心柔软，用冷酷的外表保护自己，在佟年的温暖下逐渐打开心扉。",
           advice: "韩商言的冷酷是面具，摘下面具，真实的你更值得被爱。",
-          imageKeyword: "韩商言 李现" },
+          imageKeyword: "韩商言 李现" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         { name: "王漫妮", work: "《三十而已》", gender: ["female"], age: ["26-35"], career: ["newbie", "middle"], stage: ["working", "transition"],
           quote: "我没有靠山，我就是我自己最稳的靠山。",
           similarity: ["追求更好", "在意形象", "渴望被看见", "不愿平凡"],
           story: "奢侈品柜姐，在上海打拼，渴望更好的生活，在意自己的形象和社会地位，经历感情挫折后出国深造。",
           advice: "漫妮的追求可以理解，但不要把自我价值建立在外在，找到内心的满足才是真正的自由。",
-          imageKeyword: "王漫妮 三十而已 江疏影" },
+          imageKeyword: "王漫妮 三十而已 江疏影" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         // 美剧
         { name: "Tyrion Lannister", work: "《权力的游戏》", gender: ["male"], age: ["26-35", "36-45"], career: ["executive"], stage: ["working", "stable"],
           quote: "Never forget what you are. The rest of the world will not. Wear it like armor, and it can never be used to hurt you.",
           similarity: ["用智慧弥补缺陷", "善于表演", "渴望认可", "内心敏感"],
           story: "兰尼斯特家族的侏儒，用智慧和幽默在权力游戏中生存，渴望被父亲认可，最终成为国王之手。",
           advice: "Tyrion的智慧令人钦佩，但不需要用表演来掩饰脆弱，真实的你同样值得被爱。",
-          imageKeyword: "Tyrion Lannister Game of Thrones" },
+          imageKeyword: "Tyrion Lannister Game of Thrones" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         { name: "Rachel Green", work: "《老友记》", gender: ["female"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "It's a metaphor, Daddy!",
           similarity: ["追求时尚", "渴望关注", "从依赖到独立", "在意形象"],
           story: "富家女，逃婚后独立生活，从服务员到时尚行业高管，在意自己的形象，渴望被认可。",
           advice: "Rachel的成长令人欣慰，但真正的自信来自内心，而非外表和他人认可。",
-          imageKeyword: "Rachel Friends Jennifer Aniston" },
+          imageKeyword: "Rachel Friends Jennifer Aniston" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         // 电影
         { name: "楚门", work: "《楚门的世界》", gender: ["male"], age: ["26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "In case I don't see you... good afternoon, good evening, and good night.",
           similarity: ["活在表演中", "渴望真实", "被注视", "追求自由"],
           story: "楚门，从出生就生活在真人秀中，所有人都是演员，只有他不知道。最终发现真相，勇敢走出虚假的世界。",
           advice: "楚门的勇气值得学习，你的生活不是表演，不需要观众的掌声，做真实的自己。",
-          imageKeyword: "Truman Show Jim Carrey" },
+          imageKeyword: "Truman Show Jim Carrey" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         // 文学
         { name: "包法利夫人", work: "《包法利夫人》", gender: ["female"], age: ["26-35"], career: ["middle"], stage: ["stable", "transition"],
           quote: "她想去巴黎，她也很想死。",
           similarity: ["追求浪漫", "不满现实", "渴望关注", "虚荣浮华"],
           story: "艾玛，不满平淡的婚姻生活，追求浪漫和奢华，不断出轨，债台高筑，最终服毒自杀。",
           advice: "艾玛的悲剧在于把幸福寄托在外在，真正的满足来自内心，学会欣赏当下的美好。",
-          imageKeyword: "Madame Bovary" },
+          imageKeyword: "Madame Bovary" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }},
         { name: "盖茨比", work: "《了不起的盖茨比》", gender: ["male"], age: ["26-35", "36-45"], career: ["entrepreneur"], stage: ["working", "stable"],
           quote: "So we beat on, boats against the current, borne back ceaselessly into the past.",
           similarity: ["追求梦想", "表演人生", "渴望认可", "执念过去"],
           story: "神秘富豪，举办奢华派对只为吸引旧爱黛西，用财富和表演构建梦想，最终梦想破灭，死于非命。",
           advice: "盖茨比的梦想令人动容，但不要为了他人的认可而活着，真正的价值不需要证明。",
-          imageKeyword: "Great Gatsby Leonardo DiCaprio" }
+          imageKeyword: "Great Gatsby Leonardo DiCaprio" ,
+          growthPath: {
+            early: "享受被关注的感觉，精心打造完美形象",
+            middle: "发现形象管理消耗巨大，内心感到空虚",
+            late: "摘下面具，发现真实的连接比完美的表演更有力量"
+          },
+          turningPoint: {
+            event: "精心维护的形象崩塌，或发现别人爱的只是面具",
+            impact: "开始质疑「被看见=有价值」的信念，探索真实自我"
+          },
+          realCase: {
+            situation: "很在意他人评价和关注",
+            example: "你发朋友圈后反复查看点赞数，没人点赞就感到失落。像表演者一样，你渴望被看见，但请记住：你的价值不需要观众来证明"
+          }}
     ],
 
     // 拯救者 (Savior) - 7个角色
@@ -1066,46 +1617,137 @@ const CHARACTER_LIBRARY = {
           similarity: ["智慧隐忍", "照顾家人", "解决问题", "责任感强"],
           story: "庶女明兰，在复杂的家庭中生存，用智慧保护自己和家人，成为盛家的主心骨，照顾身边的每一个人。",
           advice: "明兰的智慧值得学习，但不要把所有责任都扛在自己身上，学会求助和分享。",
-          imageKeyword: "明兰 知否 赵丽颖" },
+          imageKeyword: "明兰 知否 赵丽颖" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         { name: "罗子君", work: "《我的前半生》", gender: ["female"], age: ["26-35", "36-45"], career: ["newbie", "middle"], stage: ["working", "transition"],
           quote: "人活一辈子，没有下一次的。",
           similarity: ["从依赖到独立", "重新站起", "帮助他人", "成长蜕变"],
           story: "全职太太被离婚后，在闺蜜和贺涵的帮助下重新站起来，从依附他人到独立自主，最终成为职场女性。",
           advice: "罗子君的成长令人欣慰，但成长不是为了拯救他人，先照顾好自己，才能更好地帮助他人。",
-          imageKeyword: "罗子君 我的前半生 马伊琍" },
+          imageKeyword: "罗子君 我的前半生 马伊琍" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         // 美剧
         { name: "Daenerys Targaryen", work: "《权力的游戏》", gender: ["female"], age: ["18-25", "26-35"], career: ["executive"], stage: ["working"],
           quote: "I am not going to stop the wheel. I am going to break the wheel.",
           similarity: ["解放者", "拯救他人", "使命感强", "从弱到强"],
           story: "龙母，从被卖的公主到解放奴隶的女王，用龙和军队解放奴隶城邦，渴望打破旧秩序，建立新世界。",
           advice: "Daenerys的使命感令人敬佩，但拯救他人不能失去自我，权力需要制衡，理想需要现实支撑。",
-          imageKeyword: "Daenerys Game of Thrones Emilia Clarke" },
+          imageKeyword: "Daenerys Game of Thrones Emilia Clarke" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         { name: "Ted Mosby", work: "《老爸老妈的浪漫史》", gender: ["male"], age: ["26-35"], career: ["middle"], stage: ["working"],
           quote: "I think for the most part, if you're really honest with yourself about what you want out of life, life gives it to you.",
           similarity: ["浪漫理想", "照顾朋友", "寻找真爱", "相信美好"],
           story: "建筑师，用9年时间向孩子讲述如何遇见他们的母亲，相信真爱，照顾朋友，最终找到幸福。",
           advice: "Ted的浪漫很美好，但不要为了寻找爱情而忽略当下，珍惜眼前人。",
-          imageKeyword: "Ted Mosby How I Met Your Mother" },
+          imageKeyword: "Ted Mosby How I Met Your Mother" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         // 电影
         { name: "辛德勒", work: "《辛德勒的名单》", gender: ["male"], age: ["36-45", "46+"], career: ["entrepreneur", "executive"], stage: ["working", "stable"],
           quote: "凡救一命，即救全世界。",
           similarity: ["拯救他人", "责任感", "从商人到义人", "人性光辉"],
           story: "德国商人，起初为了利润雇佣犹太人，最终散尽家财拯救1100名犹太人，从投机者变成义人。",
           advice: "辛德勒的选择令人敬佩，但拯救他人需要量力而行，不要为了他人牺牲自己的一切。",
-          imageKeyword: "Schindler's List Liam Neeson" },
+          imageKeyword: "Schindler's List Liam Neeson" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         // 文学
         { name: "简·爱", work: "《简·爱》", gender: ["female"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "你以为我贫穷、相貌平平就没有感情吗？我向你发誓，如果上帝赋予我财富和美貌，我会让你难以离开我。",
           similarity: ["独立自主", "精神平等", "帮助他人", "坚守原则"],
           story: "孤女简·爱，在寄宿学校长大，成为家庭教师，与罗切斯特相爱，发现他有妻子后离开，最终继承遗产后回来照顾失明的罗切斯特。",
           advice: "简·爱的独立令人敬佩，但独立不等于孤立，学会接受他人的爱和帮助。",
-          imageKeyword: "Jane Eyre" },
+          imageKeyword: "Jane Eyre" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }},
         { name: "白求恩", work: "《纪念白求恩》", gender: ["male"], age: ["36-45", "46+"], career: ["middle", "executive"], stage: ["working"],
           quote: "一个外国人，毫无利己的动机，把中国人民的解放事业当作他自己的事业。",
           similarity: ["无私奉献", "拯救他人", "国际主义", "牺牲精神"],
           story: "加拿大医生，不远万里来到中国，在抗日战争前线救治伤员，最终因感染牺牲，成为中国人民的英雄。",
           advice: "白求恩的精神令人敬佩，但奉献需要量力而行，照顾好自己才能更好地帮助他人。",
-          imageKeyword: "Norman Bethune" }
+          imageKeyword: "Norman Bethune" ,
+          growthPath: {
+            early: "通过帮助他人获得价值感，享受被需要",
+            middle: "付出过度导致精疲力竭，关系不平等",
+            late: "学会设立边界，明白真正的帮助是赋能而非牺牲"
+          },
+          turningPoint: {
+            event: "帮助的人依赖成性或恩将仇报，自己精疲力竭",
+            impact: "意识到被需要不等于有价值，学会在帮助他人的同时照顾自己"
+          },
+          realCase: {
+            situation: "很难拒绝别人的求助",
+            example: "你已经忙不过来了，但还是答应帮同事做PPT。像拯救者一样，你无法说不，但请记住：照顾好自己才能更好地帮助他人"
+          }}
     ],
 
     // 漫游者 (Wanderer) - 7个角色
@@ -1117,46 +1759,137 @@ const CHARACTER_LIBRARY = {
           similarity: ["隐藏身份", "不断适应", "内心孤独", "寻找归属"],
           story: "地下党员，潜伏在军统内部，不断变换身份，在危险中生存，最终离开大陆，与爱人分离。",
           advice: "余则成的隐忍是使命所需，但生活中不需要一直伪装，找到可以真实做自己的地方。",
-          imageKeyword: "余则成 潜伏 孙红雷" },
+          imageKeyword: "余则成 潜伏 孙红雷" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         // 美剧
         { name: "Phoebe Buffay", work: "《老友记》", gender: ["female"], age: ["26-35"], career: ["freelance"], stage: ["working"],
           quote: "I don't even have a 'pla'.",
           similarity: ["自由随性", "与众不同", "拒绝规则", "活在当下"],
           story: "按摩师、歌手，童年流浪街头，长大后依然保持自由随性的生活方式，用独特的视角看待世界。",
           advice: "Phoebe的随性很迷人，但适度的规划能让自由更持久，找到平衡。",
-          imageKeyword: "Phoebe Friends Lisa Kudrow" },
+          imageKeyword: "Phoebe Friends Lisa Kudrow" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         // 电影
         { name: "杰克", work: "《泰坦尼克号》", gender: ["male"], age: ["18-25"], career: ["freelance"], stage: ["working"],
           quote: "I'm the king of the world!",
           similarity: ["自由不羁", "活在当下", "追求体验", "不愿被束缚"],
           story: "穷画家，赢得船票登上泰坦尼克号，与Rose相爱，最终为救她牺牲自己，用生命诠释了自由和爱。",
           advice: "杰克的自由令人向往，但自由需要责任，真正的自由是在爱中找到归属。",
-          imageKeyword: "Jack Titanic Leonardo DiCaprio" },
+          imageKeyword: "Jack Titanic Leonardo DiCaprio" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         // 文学
         { name: "堂吉诃德", work: "《堂吉诃德》", gender: ["male"], age: ["36-45", "46+"], career: ["freelance"], stage: ["transition"],
           quote: "太胆小是懦弱，太胆大是鲁莽，勇敢是恰好适中。",
           similarity: ["追求理想", "漫游四方", "与众不同", "不被理解"],
           story: "疯癫的骑士，带着侍从桑丘漫游西班牙，与风车作战，追求不可能的理想，最终清醒后死去。",
           advice: "堂吉诃德的理想主义很珍贵，但理想需要现实基础，找到可以实现的梦想。",
-          imageKeyword: "Don Quixote" },
+          imageKeyword: "Don Quixote" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         { name: "霍尔顿", work: "《麦田里的守望者》", gender: ["male"], age: ["18-25"], career: ["student"], stage: ["studying"],
           quote: "一个不成熟男子的标志是他愿意为某种事业英勇地死去，一个成熟男子的标志是他愿意为某种事业卑贱地活着。",
           similarity: ["叛逆少年", "逃离学校", "寻找真实", "拒绝虚伪"],
           story: "16岁少年，被学校开除后游荡纽约，厌恶成人世界的虚伪，渴望保护孩子们的纯真，最终精神崩溃。",
           advice: "霍尔顿的叛逆是成长的一部分，但不要拒绝成长，保持纯真和承担责任可以并存。",
-          imageKeyword: "Catcher in the Rye Holden" },
+          imageKeyword: "Catcher in the Rye Holden" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         { name: "孙悟空", work: "《西游记》", gender: ["male"], age: ["18-25", "26-35", "36-45"], career: ["freelance"], stage: ["working", "transition"],
           quote: "皇帝轮流做，明年到我家。",
           similarity: ["追求自由", "漫游四方", "拒绝束缚", "寻找归属"],
           story: "从石猴到美猴王，从齐天大圣到斗战胜佛，孙悟空用五百年的漫游寻找自己的位置，最终在西行中找到归属。",
           advice: "悟空的自由精神值得学习，但自由需要责任，找到值得守护的东西，自由才有意义。",
-          imageKeyword: "孙悟空 西游记" },
+          imageKeyword: "孙悟空 西游记" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }},
         { name: "鲁智深", work: "《水浒传》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["middle", "freelance"], stage: ["working", "transition"],
           quote: "平生不修善果，只爱杀人放火。",
           similarity: ["率性而为", "漫游江湖", "拒绝束缚", "最终顿悟"],
           story: "从提辖到和尚，从五台山到梁山，鲁智深用一生漫游江湖，最终在钱塘江潮信中顿悟，坐化圆寂。",
           advice: "鲁智深的率性很珍贵，但率性需要智慧，找到内心的平静，漫游才有归宿。",
-          imageKeyword: "鲁智深 水浒传" }
+          imageKeyword: "鲁智深 水浒传" ,
+          growthPath: {
+            early: "渴望自由和体验，不断探索新的可能",
+            middle: "经历丰富但缺乏深度，开始感到存在主义空虚",
+            late: "找到自由与归属的平衡，明白探索也可以是内在的"
+          },
+          turningPoint: {
+            event: "发现自己在重复「开始-逃离」的模式，或感到深深的孤独",
+            impact: "从向外探索转向向内寻找，意识到答案可能不在远方"
+          },
+          realCase: {
+            situation: "很难在一个地方或关系中停留太久",
+            example: "你换了五份工作，每段关系都不超过半年。像漫游者一样，你渴望自由，但请记住：真正的冒险是建立深度连接，而不是不断逃离"
+          }}
     ],
 
     // 战士 (Warrior) - 8个角色
@@ -1168,52 +1901,156 @@ const CHARACTER_LIBRARY = {
           similarity: ["勇敢无畏", "战斗精神", "重情重义", "永不退缩"],
           story: "八路军独立团团长，性格粗犷，作战勇猛，带领部队打胜仗，从士兵成长为将军，最终因性格刚烈而悲剧收场。",
           advice: "李云龙的亮剑精神令人敬佩，但战斗不是唯一选择，学会智慧地战斗，保护自己和爱的人。",
-          imageKeyword: "李云龙 亮剑 李幼斌" },
+          imageKeyword: "李云龙 亮剑 李幼斌" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         { name: "许三多", work: "《士兵突击》", gender: ["male"], age: ["18-25", "26-35"], career: ["newbie", "middle"], stage: ["working"],
           quote: "不抛弃，不放弃。",
           similarity: ["执着坚持", "不断突破", "真诚善良", "永不放弃"],
           story: "农村士兵，从孬兵到兵王，用执着和坚持证明自己，影响了身边的每一个人，成为真正的战士。",
           advice: "许三多的坚持令人动容，但坚持需要方向，不要为了坚持而坚持，找到值得的目标。",
-          imageKeyword: "许三多 士兵突击 王宝强" },
+          imageKeyword: "许三多 士兵突击 王宝强" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         // 美剧
         { name: "Jon Snow", work: "《权力的游戏》", gender: ["male"], age: ["18-25", "26-35"], career: ["middle", "executive"], stage: ["working"],
           quote: "The man who passes the sentence should swing the sword.",
           similarity: ["荣誉至上", "责任感强", "勇敢正直", "愿意牺牲"],
           story: "史塔克家的私生子，加入守夜人，成为总司令，联合野人对抗异鬼，发现真实身份后杀死龙母，被流放。",
           advice: "Jon的荣誉令人敬佩，但世界不是非黑即白，学会灵活应对，保护自己。",
-          imageKeyword: "Jon Snow Game of Thrones Kit Harington" },
+          imageKeyword: "Jon Snow Game of Thrones Kit Harington" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         { name: "Rick Grimes", work: "《行尸走肉》", gender: ["male"], age: ["26-35", "36-45"], career: ["middle"], stage: ["working", "transition"],
           quote: "We are the walking dead.",
           similarity: [ "领导能力", "保护家人", "在绝境中战斗", "不断进化"],
           story: "小镇警长，在丧尸末日中带领幸存者生存，从正义的警察变成冷酷的领袖，最终为保护家人牺牲。",
           advice: "Rick的领导力令人钦佩，但不要为了战斗失去人性，保持内心的善良。",
-          imageKeyword: "Rick Grimes Walking Dead Andrew Lincoln" },
+          imageKeyword: "Rick Grimes Walking Dead Andrew Lincoln" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         { name: "Arya Stark", work: "《权力的游戏》", gender: ["female"], age: ["18-25"], career: ["freelance"], stage: ["working", "transition"],
           quote: "A girl is Arya Stark of Winterfell. And I'm going home.",
           similarity: ["拒绝束缚", "独自战斗", "寻找自我", "不愿被定义"],
           story: "史塔克家族的小女儿，拒绝成为淑女，独自流浪，学习暗杀，复仇后选择出海探索未知的世界。",
           advice: "Arya的勇气令人钦佩，但探索之后也要记得回家，归属感同样重要。",
-          imageKeyword: "Arya Stark Game of Thrones Maisie Williams" },
+          imageKeyword: "Arya Stark Game of Thrones Maisie Williams" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         // 电影
         { name: "Maximus", work: "《角斗士》", gender: ["male"], age: ["36-45", "46+"], career: ["executive"], stage: ["working", "transition"],
           quote: "My name is Maximus Decimus Meridius, commander of the Armies of the North...",
           similarity: ["复仇驱动", "战斗技巧", "荣誉信念", "为正义而战"],
           story: "罗马将军，被背叛后沦为奴隶，成为角斗士，最终复仇成功，在竞技场中死去，成为传奇。",
           advice: "Maximus的复仇令人痛快，但复仇不能带来真正的平静，放下仇恨，选择宽恕。",
-          imageKeyword: "Maximus Gladiator Russell Crowe" },
+          imageKeyword: "Maximus Gladiator Russell Crowe" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         // 文学
         { name: "鲁滨逊", work: "《鲁滨逊漂流记》", gender: ["male"], age: ["26-35", "36-45"], career: ["entrepreneur", "freelance"], stage: ["working", "transition"],
           quote: "一个人只是呆呆地坐着，空想自己所得不到的东西，是没有用的。",
           similarity: ["生存能力", "永不放弃", "独自战斗", "适应环境"],
           story: "英国水手，海难后漂流到荒岛，独自生存28年，最终获救回国，成为冒险文学的经典形象。",
           advice: "鲁滨逊的生存能力令人惊叹，但人不是孤岛，学会与他人合作，共同面对困难。",
-          imageKeyword: "Robinson Crusoe" },
+          imageKeyword: "Robinson Crusoe" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }},
         { name: "保尔·柯察金", work: "《钢铁是怎样炼成的》", gender: ["male"], age: ["18-25", "26-35"], career: ["middle"], stage: ["working"],
           quote: "人最宝贵的是生命，生命每个人只有一次。",
           similarity: ["革命理想", "坚强意志", "为信仰战斗", "不畏艰难"],
           story: "乌克兰工人，参加红军，在战斗中受伤，最终瘫痪失明，但坚持写作，用笔继续战斗。",
           advice: "保尔的意志令人敬佩，但身体是革命的本钱，照顾好自己才能更好地战斗。",
-          imageKeyword: "Pavel Korchagin" }
+          imageKeyword: "Pavel Korchagin" ,
+          growthPath: {
+            early: "充满战斗精神，把生活看作需要打赢的战役",
+            middle: "赢得胜利但感到孤独，开始质疑战斗的意义",
+            late: "学会选择值得的战斗，明白为何而战比赢更重要"
+          },
+          turningPoint: {
+            event: "为战斗失去重要的人，或发现胜利带来的满足转瞬即逝",
+            impact: "从「赢得一切」转向「选择值得的战斗」，建立真正的同盟"
+          },
+          realCase: {
+            situation: "享受竞争，把生活当作战场",
+            example: "你在会议上总要证明自己是对的，与同事关系紧张。像战士一样，你热爱挑战，但请记住：真正的强大是知道何时该放下剑"
+          }}
     ],
 
     // 治愈者 (Healer) - 7个角色
@@ -1225,46 +2062,137 @@ const CHARACTER_LIBRARY = {
           similarity: ["智慧成熟", "帮助他人", "理性冷静", "引导成长"],
           story: "咨询业精英，帮助罗子君重新站起来，从理性的职场导师变成感性的爱人，最终选择离开。",
           advice: "贺涵的智慧值得学习，但帮助他人不能代替自己的成长，找到属于自己的幸福。",
-          imageKeyword: "贺涵 我的前半生 靳东" },
+          imageKeyword: "贺涵 我的前半生 靳东" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         { name: "童文洁", work: "《小欢喜》", gender: ["female"], age: ["36-45"], career: ["middle", "executive"], stage: ["working", "stable"],
           quote: "孩子，妈妈永远是你的后盾。",
           similarity: ["关爱家人", "理解支持", "温暖包容", "化解矛盾"],
           story: "职场妈妈，面对高考压力和家庭矛盾，用理解和包容化解危机，成为家庭的粘合剂。",
           advice: "童文洁的温暖很珍贵，但不要把所有精力都给家人，留一些给自己。",
-          imageKeyword: "童文洁 小欢喜 海清" },
+          imageKeyword: "童文洁 小欢喜 海清" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         // 美剧
         { name: "Meredith Grey", work: "《实习医生格蕾》", gender: ["female"], age: ["26-35", "36-45"], career: ["middle", "executive"], stage: ["working"],
           quote: "It's good to be scared. It means you still have something to lose.",
           similarity: ["医者仁心", "治愈他人", "面对创伤", "不断成长"],
           story: "外科医生，在手术室里拯救生命，同时面对自己的创伤，从实习生成长为医院主任。",
           advice: "Meredith的坚韧令人敬佩，但治愈他人前先治愈自己，不要忽视自己的伤口。",
-          imageKeyword: "Meredith Grey Grey's Anatomy Ellen Pompeo" },
+          imageKeyword: "Meredith Grey Grey's Anatomy Ellen Pompeo" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         { name: "Chandler Bing", work: "《老友记》", gender: ["male"], age: ["26-35"], career: ["middle"], stage: ["working"],
           quote: "I'm not great at the advice. Can I interest you in a sarcastic comment?",
           similarity: ["幽默化解", "支持朋友", "内心温暖", "害怕承诺"],
           story: "数据分析师，用幽默掩饰不安，是朋友们的开心果，最终与Monica建立家庭，学会承担责任。",
           advice: "Chandler的幽默很珍贵，但不要用幽默逃避真实，允许自己脆弱。",
-          imageKeyword: "Chandler Friends Matthew Perry" },
+          imageKeyword: "Chandler Friends Matthew Perry" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         // 电影
         { name: "马修", work: "《心灵捕手》", gender: ["male"], age: ["36-45", "46+"], career: ["middle"], stage: ["working"],
           quote: "It's not your fault.",
           similarity: ["治愈创伤", "智慧引导", "理解包容", "帮助他人"],
           story: "心理学教授，治愈天才少年Will的心灵创伤，帮助他面对过去，找到人生方向。",
           advice: "马修的智慧令人敬佩，但治愈他人需要边界，不要过度卷入。",
-          imageKeyword: "Good Will Hunting Robin Williams" },
+          imageKeyword: "Good Will Hunting Robin Williams" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         // 文学
         { name: "史铁生", work: "《我与地坛》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["freelance"], stage: ["working", "transition"],
           quote: "死是一件不必急于求成的事，死是一个必然会降临的节日。",
           similarity: ["面对苦难", "思考生命", "治愈他人", "文字力量"],
           story: "作家，21岁双腿瘫痪，在地坛公园思考生命，用文字治愈自己和读者，成为当代文学的重要声音。",
           advice: "史铁生的智慧令人敬佩，但不要把苦难浪漫化，寻求帮助，不要独自承受。",
-          imageKeyword: "史铁生" },
+          imageKeyword: "史铁生" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }},
         { name: "夏洛", work: "《夏洛的网》", gender: ["female"], age: ["18-25", "26-35", "36-45", "46+"], career: ["freelance"], stage: ["working", "stable"],
           quote: "你一直是我的朋友，这件事本身就是一件了不起的事。",
           similarity: ["无私奉献", "拯救他人", "智慧善良", "默默付出"],
           story: "蜘蛛夏洛，用蛛网编织文字拯救小猪威尔伯，最终耗尽生命，用生命诠释了友谊和牺牲。",
           advice: "夏洛的友谊令人感动，但付出要有边界，不要为了他人耗尽自己。",
-          imageKeyword: "Charlotte's Web" }
+          imageKeyword: "Charlotte's Web" ,
+          growthPath: {
+            early: "天生善于倾听和支持他人，关系中的照顾者",
+            middle: "忽视自己的需求，在付出中感到疲惫",
+            late: "学会接受帮助，明白爱是双向流动"
+          },
+          turningPoint: {
+            event: "精疲力竭时发现自己难以求助，或关系因单向付出失衡",
+            impact: "意识到治愈他人前需要先治愈自己，学会接受和给予同样重要"
+          },
+          realCase: {
+            situation: "善于倾听但难以表达自己的需求",
+            example: "你总是朋友倾诉的对象，但当你难过时却不知道怎么开口。像治愈者一样，你温暖他人，但请记住：你也值得被温暖"
+          }}
     ],
 
     // 观察者 (Observer) - 7个角色
@@ -1276,39 +2204,117 @@ const CHARACTER_LIBRARY = {
           similarity: ["思想深刻", "观察时代", "理性分析", "保持距离"],
           story: "新文化运动领袖，创办《新青年》，观察中国命运，用思想唤醒民众，是时代的观察者和引领者。",
           advice: "陈独秀的思想令人敬佩，但观察之后要行动，不要只做旁观者。",
-          imageKeyword: "陈独秀 觉醒年代" },
+          imageKeyword: "陈独秀 觉醒年代" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }},
         { name: "林奚", work: "《琅琊榜之风起长林》", gender: ["female"], age: ["18-25", "26-35"], career: ["freelance"], stage: ["working"],
           quote: "我的心可以热，但我的脑袋要冷。",
           similarity: ["冷静理性", "观察分析", "保持距离", "独立思考"],
           story: "医女，冷静理性，用医术救人，观察朝堂风云，与萧平旌相爱却不依附，保持独立人格。",
           advice: "林奚的独立令人敬佩，但冷静不等于冷漠，允许自己投入情感。",
-          imageKeyword: "林奚 琅琊榜之风起长林" },
+          imageKeyword: "林奚 琅琊榜之风起长林" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }},
         // 美剧
         { name: "Spock", work: "《星际迷航》", gender: ["male"], age: ["26-35", "36-45"], career: ["middle", "executive"], stage: ["working"],
           quote: "Live long and prosper.",
           similarity: ["逻辑至上", "观察分析", "抑制情感", "理性决策"],
           story: "半人类半瓦肯人，企业号大副，用逻辑分析一切，观察人类行为，在理性与情感之间寻找平衡。",
           advice: "Spock的逻辑很有价值，但情感也是人性的一部分，不要完全压抑。",
-          imageKeyword: "Spock Star Trek" },
+          imageKeyword: "Spock Star Trek" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }},
         { name: "Ross Geller", work: "《老友记》", gender: ["male"], age: ["26-35"], career: ["middle", "executive"], stage: ["working"],
           quote: "We were on a break!",
           similarity: ["学术思维", "观察分析", "理性解释", "情感笨拙"],
           story: "古生物学家，用学术思维分析感情，观察朋友关系，理性但情感笨拙，经历三次婚姻最终找到幸福。",
           advice: "Ross的理性很珍贵，但感情不能用理性分析，学会用心感受。",
-          imageKeyword: "Ross Friends David Schwimmer" },
+          imageKeyword: "Ross Friends David Schwimmer" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }},
         // 文学
         { name: "福尔摩斯", work: "《福尔摩斯探案集》", gender: ["male"], age: ["26-35", "36-45"], career: ["freelance"], stage: ["working"],
           quote: "当你排除了所有不可能的因素，剩下的，无论你多么不愿意相信，那就是真相。",
           similarity: ["观察入微", "逻辑推理", "保持距离", "理性分析"],
           story: "咨询侦探，用观察和推理解决案件，保持情感距离，理性分析一切，是观察者的极致代表。",
           advice: "福尔摩斯的观察力令人惊叹，但生活不是案件，允许自己投入情感。",
-          imageKeyword: "Sherlock Holmes" },
+          imageKeyword: "Sherlock Holmes" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }},
         { name: "吴用", work: "《水浒传》", gender: ["male"], age: ["26-35", "36-45", "46+"], career: ["middle", "executive"], stage: ["working"],
           quote: "谋略当先，智取为上。",
           similarity: ["智谋深远", "观察局势", "理性谋划", "幕后布局"],
           story: "梁山泊军师，人称智多星，善于观察局势，用计谋帮助梁山好汉，是观察者和谋划者的典范。",
           advice: "吴用的智慧值得学习，但观察之后要行动，不要只做旁观者。",
-          imageKeyword: "吴用 水浒传" }
+          imageKeyword: "吴用 水浒传" ,
+          growthPath: {
+            early: "喜欢观察和分析，用理性理解世界",
+            middle: "发现观察无法替代体验，感到与生活的疏离",
+            late: "学会在观察和参与之间找到平衡，深度体验生活"
+          },
+          turningPoint: {
+            event: "意识到知道很多但体验很少，或观察让自己错过重要时刻",
+            impact: "从「只观察」转向「选择性参与」，用体验丰富认知"
+          },
+          realCase: {
+            situation: "喜欢观察分析，参与时感到消耗",
+            example: "你在聚会上总是静静观察，很少参与话题。像观察者一样，你喜欢思考，但请记住：生活不是电影，不能只看不动"
+          }}
     ],
 
     // 觉醒者 (Awakened) - 7个角色
@@ -1320,46 +2326,137 @@ const CHARACTER_LIBRARY = {
           similarity: ["看透人性", "冷静计算", "觉醒黑暗", "掌控局面"],
           story: "数学老师，表面温和，实则冷静计算，觉醒后掌控局面，用智慧实施完美犯罪，最终被少年击败。",
           advice: "张东升的觉醒走向了黑暗，觉醒应该是为了更好，而不是更坏。",
-          imageKeyword: "张东升 隐秘的角落 秦昊" },
+          imageKeyword: "张东升 隐秘的角落 秦昊" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         { name: "李必", work: "《长安十二时辰》", gender: ["male"], age: ["18-25", "26-35"], career: ["middle", "executive"], stage: ["working"],
           quote: "我要做宰相，我要让这长安，万世长安。",
           similarity: ["理想主义", "看透时局", "坚守信念", "智慧行动"],
           story: "靖安司司丞，少年天才，看透朝堂黑暗，仍坚守理想，用智慧拯救长安，是觉醒者的正面代表。",
           advice: "李必的理想令人敬佩，但理想需要现实支撑，学会灵活应对。",
-          imageKeyword: "李必 长安十二时辰 易烊千玺" },
+          imageKeyword: "李必 长安十二时辰 易烊千玺" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         // 美剧
         { name: "Walter White（觉醒后）", work: "《绝命毒师》", gender: ["male"], age: ["46+"], career: ["middle"], stage: ["transition"],
           quote: "I did it for me. I liked it. I was good at it. And I was really... I was alive.",
           similarity: ["自我觉醒", "掌控人生", "打破束缚", "真实面对"],
           story: "化学老师，身患绝症后觉醒，承认自己制毒是为了自己，不是为了家庭，最终真实面对自己。",
           advice: "Walter的觉醒走向了极端，觉醒应该是解放，不是毁灭。",
-          imageKeyword: "Walter White Breaking Bad Heisenberg" },
+          imageKeyword: "Walter White Breaking Bad Heisenberg" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         { name: "Elliot Alderson", work: "《黑客军团》", gender: ["male"], age: ["26-35"], career: ["freelance"], stage: ["working", "transition"],
           quote: "Hello, friend.",
           similarity: ["看透系统", "反抗控制", "寻找真实", "内心挣扎"],
           story: "黑客，看透社会系统的控制，用技术反抗，同时面对自己的精神疾病，在觉醒中挣扎。",
           advice: "Elliot的反抗令人共鸣，但破坏不是出路，建设才是。",
-          imageKeyword: "Elliot Mr Robot Rami Malek" },
+          imageKeyword: "Elliot Mr Robot Rami Malek" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         // 电影
         { name: "尼奥", work: "《黑客帝国》", gender: ["male"], age: ["26-35", "36-45"], career: ["middle", "freelance"], stage: ["working", "transition"],
           quote: "There is no spoon.",
           similarity: ["觉醒真相", "打破幻象", "选择自由", "承担责任"],
           story: "程序员Neo，觉醒后发现世界是矩阵，选择红色药丸，成为救世主，用觉醒改变世界。",
           advice: "尼奥的选择令人震撼，但觉醒后要行动，不要停留在知道。",
-          imageKeyword: "Neo Matrix Keanu Reeves" },
+          imageKeyword: "Neo Matrix Keanu Reeves" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         // 文学
         { name: "悉达多（悟道后）", work: "《悉达多》", gender: ["male"], age: ["36-45", "46+"], career: ["freelance"], stage: ["transition"],
           quote: "智慧无法言传，智者试图传授智慧，总像痴人说梦。",
           similarity: [ "悟道觉醒", "看透本质", "接纳一切", "内心平静"],
           story: "悟道后的悉达多，看透世间本质，成为智者，用沉默和微笑影响他人，是觉醒者的最高境界。",
           advice: "悉达多的智慧令人向往，但悟道不是终点，而是新的开始。",
-          imageKeyword: "Siddhartha enlightened" },
+          imageKeyword: "Siddhartha enlightened" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }},
         { name: "贾宝玉（悟道后）", work: "《红楼梦》", gender: ["male"], age: ["26-35"], career: ["freelance"], stage: ["transition"],
           quote: "好了歌注：陋室空堂，当年笏满床...",
           similarity: ["看破红尘", "放下执念", "选择出家", "超脱世俗"],
           story: "悟道后的宝玉，看破红尘繁华，放下对黛玉的执念，选择出家，是觉醒者的悲剧结局。",
           advice: "宝玉的觉醒走向了逃避，觉醒应该是融入，不是逃离。",
-          imageKeyword: "贾宝玉 出家 红楼梦" }
+          imageKeyword: "贾宝玉 出家 红楼梦" ,
+          growthPath: {
+            early: "开始觉察自己的行为模式，对「剧本」产生质疑",
+            middle: "在觉醒和融入之间摇摆，感到与周围人格格不入",
+            late: "用编剧的视角创造人生，既清醒又投入"
+          },
+          turningPoint: {
+            event: "看透某个长期困扰自己的模式，或意识到自己在重复「清醒但不动」",
+            impact: "从「看透一切」转向「选择参与」，用觉醒创造而非逃避"
+          },
+          realCase: {
+            situation: "对自己有深入觉察，但难以行动",
+            example: "你清楚自己为什么拖延，但还是改不了。像觉醒者一样，你有洞察力，但请记住：觉醒不是终点，行动才是"
+          }}
     ]
 };
 

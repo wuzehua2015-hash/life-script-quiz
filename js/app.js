@@ -800,9 +800,53 @@
     function renderCharacterStory(character) {
         if (!character || !elements.result.characterStory) return;
 
+        const hasExtension = character.growthPath && character.turningPoint && character.realCase;
+        
+        let extensionHTML = '';
+        if (hasExtension) {
+            extensionHTML = `
+                <div class="character-extension">
+                    <div class="extension-section">
+                        <h5>🌱 成长路径</h5>
+                        <div class="growth-path">
+                            <div class="growth-stage">
+                                <span class="stage-label">早期</span>
+                                <p>${character.growthPath.early}</p>
+                            </div>
+                            <div class="growth-stage">
+                                <span class="stage-label">中期</span>
+                                <p>${character.growthPath.middle}</p>
+                            </div>
+                            <div class="growth-stage">
+                                <span class="stage-label">后期</span>
+                                <p>${character.growthPath.late}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-section">
+                        <h5>⚡ 人生转折点</h5>
+                        <div class="turning-point">
+                            <p><strong>关键事件：</strong>${character.turningPoint.event}</p>
+                            <p><strong>深远影响：</strong>${character.turningPoint.impact}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-section">
+                        <h5>🎯 现实映照</h5>
+                        <div class="real-case">
+                            <p><strong>你可能遇到的情况：</strong>${character.realCase.situation}</p>
+                            <p class="case-example"><strong>启示：</strong>${character.realCase.example}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         elements.result.characterStory.innerHTML = `
             <h4>📖 ${character.name || '角色'}的人生剧本</h4>
             <p class="story-text">${character.story || ''}</p>
+            ${extensionHTML}
         `;
     }
 

@@ -1599,3 +1599,105 @@ body {
         font-size: 1.75rem;
     }
 }
+
+/* ========================================
+   角色详情扩展 - P2-T1新增
+   ======================================== */
+
+.character-extension {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--film-border);
+}
+
+.extension-section {
+    margin-bottom: 1.5rem;
+}
+
+.extension-section:last-child {
+    margin-bottom: 0;
+}
+
+.extension-section h5 {
+    font-size: 1rem;
+    color: var(--accent-gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.growth-path {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.growth-stage {
+    background: var(--bg-secondary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.growth-stage .stage-label {
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.growth-stage p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.turning-point {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.turning-point p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.turning-point p:last-child {
+    margin-bottom: 0;
+}
+
+.real-case {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.real-case p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.real-case .case-example {
+    background: var(--bg-card);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent-blue);
+    font-style: italic;
+}
+
+@media (min-width: 768px) {
+    .growth-path {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .growth-stage {
+        flex: 1;
+    }
+}
