@@ -515,10 +515,10 @@ const QUESTIONS = [
         narration: "在拥挤的地铁里，你的感受是？",
         choices: [
             { text: "这些人都是我的竞争对手，我要脱颖而出", type: "battle", score: 2 },
-            { text: "大家都挺不容易的，互相体谅吧", type: "collaboration", score: 2 },
-            { text: "好想逃离这一切，找个安静的地方", type: "retreat", score: 2 },
-            { text: "每个人都在上演自己的故事，真有趣", type: "observation", score: 2 },
-            { text: "如果我能帮助谁就好了", type: "care", score: 2 }
+            { text: "大家都挺不容易的，互相体谅吧", type: "cooperation", score: 2 },
+            { text: "好想逃离这一切，找个安静的地方", type: "detachment", score: 2 },
+            { text: "每个人都在上演自己的故事，真有趣", type: "detachment", score: 2 },
+            { text: "如果我能帮助谁就好了", type: "cooperation", score: 2 }
         ]
     },
     {
@@ -533,10 +533,10 @@ const QUESTIONS = [
         narration: "面对网络上的负面言论，你会？",
         choices: [
             { text: "弱者才抱怨，强者改变环境", type: "battle", score: 2 },
-            { text: "大家都有难处，互相理解吧", type: "collaboration", score: 2 },
-            { text: "关掉手机，眼不见为净", type: "retreat", score: 2 },
-            { text: "人性的复杂，真是耐人寻味", type: "observation", score: 2 },
-            { text: "也许我可以做点什么来改变", type: "care", score: 2 }
+            { text: "大家都有难处，互相理解吧", type: "cooperation", score: 2 },
+            { text: "关掉手机，眼不见为净", type: "detachment", score: 2 },
+            { text: "人性的复杂，真是耐人寻味", type: "detachment", score: 2 },
+            { text: "也许我可以做点什么来改变", type: "cooperation", score: 2 }
         ]
     },
     {
@@ -550,10 +550,10 @@ const QUESTIONS = [
         narration: "面对消费主义的诱惑，你的想法是？",
         choices: [
             { text: "我也要拥有，不能落后于人", type: "battle", score: 2 },
-            { text: "大家都买的东西，应该不会错", type: "collaboration", score: 2 },
-            { text: "这些喧嚣与我无关", type: "retreat", score: 2 },
-            { text: "人们在追逐什么？值得思考", type: "observation", score: 2 },
-            { text: "我的钱可以帮助更需要的人", type: "care", score: 2 }
+            { text: "大家都买的东西，应该不会错", type: "cooperation", score: 2 },
+            { text: "这些喧嚣与我无关", type: "detachment", score: 2 },
+            { text: "人们在追逐什么？值得思考", type: "detachment", score: 2 },
+            { text: "我的钱可以帮助更需要的人", type: "cooperation", score: 2 }
         ]
     },
     {
@@ -567,10 +567,10 @@ const QUESTIONS = [
         narration: "陌生老人向你求助，你第一反应是？",
         choices: [
             { text: "会不会是骗子？先保持距离", type: "battle", score: 2 },
-            { text: "当然帮忙，谁都有老的时候", type: "collaboration", score: 2 },
-            { text: "抱歉，我不太会...（想离开）", type: "retreat", score: 2 },
-            { text: "老人与科技的鸿沟，社会的缩影", type: "observation", score: 2 },
-            { text: "耐心教他，让他不再无助", type: "care", score: 2 }
+            { text: "当然帮忙，谁都有老的时候", type: "cooperation", score: 2 },
+            { text: "抱歉，我不太会...（想离开）", type: "detachment", score: 2 },
+            { text: "老人与科技的鸿沟，社会的缩影", type: "detachment", score: 2 },
+            { text: "耐心教他，让他不再无助", type: "cooperation", score: 2 }
         ]
     },
 
@@ -586,10 +586,10 @@ const QUESTIONS = [
         narration: "每天照镜子时，你对自己的感觉是？",
         choices: [
             { text: "还可以更好，不能松懈", type: "perfection", score: 2 },
-            { text: "不管什么样，我接受自己", type: "acceptance", score: 2 },
-            { text: "不想看，反正就这样了", type: "avoidance", score: 2 },
-            { text: "今天的我和昨天有什么不同？", type: "exploration", score: 2 },
-            { text: "我值得被善待，包括被自己", type: "compassion", score: 2 }
+            { text: "不管什么样，我接受自己", type: "authenticity", score: 2 },
+            { text: "不想看，反正就这样了", type: "lost", score: 2 },
+            { text: "今天的我和昨天有什么不同？", type: "authenticity", score: 2 },
+            { text: "我值得被善待，包括被自己", type: "authenticity", score: 2 }
         ]
     },
     {
@@ -603,10 +603,10 @@ const QUESTIONS = [
         narration: "失眠时自我对话，你倾向于？",
         choices: [
             { text: "复盘今天的失误，明天不能再犯", type: "perfection", score: 2 },
-            { text: "没关系，明天又是新的一天", type: "acceptance", score: 2 },
-            { text: "想那么多干嘛，反正没用", type: "avoidance", score: 2 },
-            { text: "这些情绪想告诉我什么？", type: "exploration", score: 2 },
-            { text: "我辛苦了，需要好好休息", type: "compassion", score: 2 }
+            { text: "没关系，明天又是新的一天", type: "authenticity", score: 2 },
+            { text: "想那么多干嘛，反正没用", type: "lost", score: 2 },
+            { text: "这些情绪想告诉我什么？", type: "authenticity", score: 2 },
+            { text: "我辛苦了，需要好好休息", type: "authenticity", score: 2 }
         ]
     },
     {
@@ -620,10 +620,10 @@ const QUESTIONS = [
         narration: "许愿时，你内心真正的愿望是？",
         choices: [
             { text: "成为更好的自己，不再犯错", type: "perfection", score: 2 },
-            { text: "希望爱我的人都能幸福", type: "acceptance", score: 2 },
-            { text: "愿望反正不会实现，随便吧", type: "avoidance", score: 2 },
-            { text: "明年这个时候我会在哪里？", type: "exploration", score: 2 },
-            { text: "希望自己能对自己好一点", type: "compassion", score: 2 }
+            { text: "希望爱我的人都能幸福", type: "authenticity", score: 2 },
+            { text: "愿望反正不会实现，随便吧", type: "lost", score: 2 },
+            { text: "明年这个时候我会在哪里？", type: "authenticity", score: 2 },
+            { text: "希望自己能对自己好一点", type: "authenticity", score: 2 }
         ]
     },
     {
@@ -637,10 +637,10 @@ const QUESTIONS = [
         narration: "面对这个问题，你的真实答案是？",
         choices: [
             { text: "还不够，我知道自己可以更好", type: "perfection", score: 2 },
-            { text: "有满意也有不满意，这就是我吧", type: "acceptance", score: 2 },
-            { text: "没什么好说的，就这样", type: "avoidance", score: 2 },
-            { text: "我在慢慢了解自己是谁", type: "exploration", score: 2 },
-            { text: "我学会了原谅自己的不完美", type: "compassion", score: 2 }
+            { text: "有满意也有不满意，这就是我吧", type: "authenticity", score: 2 },
+            { text: "没什么好说的，就这样", type: "lost", score: 2 },
+            { text: "我在慢慢了解自己是谁", type: "authenticity", score: 2 },
+            { text: "我学会了原谅自己的不完美", type: "authenticity", score: 2 }
         ]
     },
     {
@@ -654,10 +654,10 @@ const QUESTIONS = [
         narration: "看到过去的自己，你的感受是？",
         choices: [
             { text: "那时候真傻，浪费了多少时间", type: "perfection", score: 2 },
-            { text: "每一步都是必经之路", type: "acceptance", score: 2 },
-            { text: "不想看，过去的就过去吧", type: "avoidance", score: 2 },
-            { text: "原来我经历了这么多变化", type: "exploration", score: 2 },
-            { text: "那个孩子已经尽力了", type: "compassion", score: 2 }
+            { text: "每一步都是必经之路", type: "authenticity", score: 2 },
+            { text: "不想看，过去的就过去吧", type: "lost", score: 2 },
+            { text: "原来我经历了这么多变化", type: "authenticity", score: 2 },
+            { text: "那个孩子已经尽力了", type: "authenticity", score: 2 }
         ]
     },
 
@@ -674,7 +674,7 @@ const QUESTIONS = [
         choices: [
             { text: "落后了，必须加速追赶", type: "chasing", score: 2 },
             { text: "好像错过了很多机会", type: "stagnation", score: 2 },
-            { text: "人生不是赛跑，每个人都有自己的节奏", type: "exploration", score: 2 },
+            { text: "人生不是赛跑，每个人都有自己的节奏", type: "authenticity", score: 2 },
             { text: "也许这就是命运的安排", type: "fate", score: 2 },
             { text: "过去的每一步都在塑造现在的我", type: "creation", score: 2 }
         ]
@@ -691,7 +691,7 @@ const QUESTIONS = [
         choices: [
             { text: "要更努力成功，让他们骄傲", type: "chasing", score: 2 },
             { text: "时间过得真快，我什么都没做", type: "stagnation", score: 2 },
-            { text: "珍惜现在的每一刻相处", type: "exploration", score: 2 },
+            { text: "珍惜现在的每一刻相处", type: "authenticity", score: 2 },
             { text: "生老病死，自然规律", type: "fate", score: 2 },
             { text: "我要创造更多美好的回忆", type: "creation", score: 2 }
         ]
@@ -708,7 +708,7 @@ const QUESTIONS = [
         choices: [
             { text: "又浪费了几小时，计划全乱了", type: "chasing", score: 2 },
             { text: "反正我也控制不了，随便吧", type: "stagnation", score: 2 },
-            { text: "也许这是让我停下来思考的机会", type: "exploration", score: 2 },
+            { text: "也许这是让我停下来思考的机会", type: "authenticity", score: 2 },
             { text: "航班延误也是命中注定的", type: "fate", score: 2 },
             { text: "利用这段时间做点什么有意义的事", type: "creation", score: 2 }
         ]
@@ -725,7 +725,7 @@ const QUESTIONS = [
         choices: [
             { text: "明年必须完成今年的目标", type: "chasing", score: 2 },
             { text: "一年又一年，好像没什么变化", type: "stagnation", score: 2 },
-            { text: "不知道明年会发生什么，期待", type: "exploration", score: 2 },
+            { text: "不知道明年会发生什么，期待", type: "authenticity", score: 2 },
             { text: "顺其自然，该来的会来", type: "fate", score: 2 },
             { text: "新的一年，我要主动创造改变", type: "creation", score: 2 }
         ]
@@ -742,7 +742,7 @@ const QUESTIONS = [
         choices: [
             { text: "时间宝贵，不能浪费一分一秒", type: "chasing", score: 2 },
             { text: "日复一日，好像被困在循环里", type: "stagnation", score: 2 },
-            { text: "每一天都是独特的，值得体验", type: "exploration", score: 2 },
+            { text: "每一天都是独特的，值得体验", type: "authenticity", score: 2 },
             { text: "日出日落，自有定数", type: "fate", score: 2 },
             { text: "今天是我创造未来的起点", type: "creation", score: 2 }
         ]
