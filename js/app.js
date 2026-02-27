@@ -665,7 +665,12 @@
                 return;
             }
             
-            console.log('开始渲染基础信息');
+            if (!character) {
+                console.error('character不存在');
+                return;
+            }
+            
+            console.log('开始渲染基础信息，角色:', character.name);
 
             // 基础信息
             elements.result.movieTitle.textContent = archetype.movieTitle || '';
