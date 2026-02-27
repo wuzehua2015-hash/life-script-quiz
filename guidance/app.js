@@ -15,8 +15,12 @@
                 if (result.archetype) {
                     // 有测试结果，自动选中该原型
                     localStorage.setItem('lsq_selected_archetype', result.archetype);
+                    // 隐藏21天计划部分（预选时不需要显示）
+                    hidePlanSection();
                     // 显示预选提示
                     showPreselectedArchetype(result.archetype);
+                    // 绑定返回测试事件
+                    bindBackLinkEvent();
                     return;
                 }
             } catch (e) {
@@ -28,6 +32,30 @@
         renderArchetypeGrid();
         loadPlanStatus();
         bindEvents();
+    }
+    
+    // 隐藏21天计划部分
+    function hidePlanSection() {
+        const planSection = document.querySelector('.plan-section');
+        if (planSection) {
+            planSection.style.display = 'none';
+        }
+    }
+    
+    // 绑定返回测试链接事件（单独提取，供预选场景使用）
+    function bindBackLinkEvent() {
+        const backLink = document.getElementById('back-link');
+        if (backLink) {
+            backLink.addEventListener('click', (e) => {
+                const testResult = localStorage.getItem('lsq_testResult');
+                if (testResult) {
+                    e.preventDefault();
+                    // 有测试结果，回到结果页
+                    window.location.href = '../index.html#result';
+                }
+                // 没有结果，正常跳转到测试首页
+            });
+        }
     }
     
     // 显示预选中的原型
@@ -72,6 +100,11 @@
             // 清除预选，恢复原始HTML并显示全部原型
             localStorage.removeItem('lsq_selected_archetype');
             container.innerHTML = originalHTML;
+            // 恢复21天计划部分的显示
+            const planSection = document.querySelector('.plan-section');
+            if (planSection) {
+                planSection.style.display = '';
+            }
             renderArchetypeGrid();
             loadPlanStatus();
             bindEvents();
@@ -140,19 +173,8 @@
             startBtn.addEventListener('click', start21DayPlan);
         }
         
-        // 返回测试链接 - 如果有结果则回到结果页
-        const backLink = document.getElementById('back-link');
-        if (backLink) {
-            backLink.addEventListener('click', (e) => {
-                const testResult = localStorage.getItem('lsq_testResult');
-                if (testResult) {
-                    e.preventDefault();
-                    // 有测试结果，回到结果页
-                    window.location.href = '../index.html#result';
-                }
-                // 没有结果，正常跳转到测试首页
-            });
-        }
+        // 返回测试链接
+        bindBackLinkEvent();
     }
 
     // 显示原型详情
