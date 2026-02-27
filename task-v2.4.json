@@ -1,0 +1,226 @@
+{
+  "project": "人生剧本测试系统 - v2.4 可停留性与实用性升级",
+  "description": "增加用户回访理由，让产品从玩具变成有用工具",
+  "version": "2.4.0",
+  "lastUpdated": "2026-02-27",
+  "domain": "lifescript.lynkedu.com",
+  "phases": [
+    {
+      "name": "Phase 1 - 成就与收集系统",
+      "description": "增加游戏化元素，提升可玩性和回访率",
+      "tasks": [
+        {
+          "id": "P1-T1",
+          "title": "角色收集图鉴系统",
+          "description": "84个角色卡片收集，增加探索动力",
+          "steps": [
+            "设计角色卡片UI组件",
+            "创建角色解锁逻辑（测试后解锁对应原型角色）",
+            "实现角色详情弹窗（故事、特质、成长路径）",
+            "添加角色收集进度统计",
+            "在结果页添加'查看所有角色'入口",
+            "本地存储用户已解锁角色"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时",
+          "notes": "参考Pokemon图鉴设计，增加收集乐趣"
+        },
+        {
+          "id": "P1-T2",
+          "title": "成就徽章系统",
+          "description": "完成任务获得徽章，增加成就感",
+          "steps": [
+            "设计徽章体系（首次测试、完成21天、连续打卡等）",
+            "创建徽章数据结构（id, name, icon, condition）",
+            "实现徽章解锁检测逻辑",
+            "设计徽章展示页面",
+            "添加徽章获得动画效果",
+            "在结果页和个人中心展示徽章"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时",
+          "notes": "徽章类型：探索类、坚持类、分享类"
+        },
+        {
+          "id": "P1-T3",
+          "title": "个人中心页面",
+          "description": "用户主页，集中展示成就和进度",
+          "steps": [
+            "创建个人中心页面框架",
+            "展示用户测试结果历史",
+            "展示已解锁角色收集",
+            "展示获得徽章",
+            "展示21天计划进度",
+            "添加重新测试入口"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2 - 日记与觉察系统",
+      "description": "让用户记录和追踪自己的改变",
+      "tasks": [
+        {
+          "id": "P2-T1",
+          "title": "每日觉察日记",
+          "description": "简单的日记功能，关联原型和21天任务",
+          "steps": [
+            "设计日记数据结构（日期、内容、关联原型、情绪标签）",
+            "创建日记编辑界面",
+            "实现日记列表展示",
+            "添加日记与21天任务的关联",
+            "本地存储日记数据",
+            "在行动指导页面添加日记入口"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时",
+          "notes": "日记是回访的核心理由"
+        },
+        {
+          "id": "P2-T2",
+          "title": "情绪追踪打卡",
+          "description": "简单情绪记录，可视化情绪变化",
+          "steps": [
+            "设计情绪选择器（5级情绪量表）",
+            "创建情绪打卡组件",
+            "实现情绪趋势图表（7天/30天）",
+            "关联情绪与原型触发点",
+            "在日记页面集成情绪打卡"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2.5小时"
+        },
+        {
+          "id": "P2-T3",
+          "title": "改变轨迹可视化",
+          "description": "展示用户的成长和改变",
+          "steps": [
+            "设计时间轴组件",
+            "整合测试历史、日记、打卡数据",
+            "创建改变轨迹页面",
+            "添加里程碑标记（首次测试、完成21天等）",
+            "支持导出改变报告"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "3小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3 - 实用工具与资源",
+      "description": "提供真正有用的工具，解决实际问题",
+      "tasks": [
+        {
+          "id": "P3-T1",
+          "title": "情境化应对指南",
+          "description": "工作/感情/家庭场景下的具体建议",
+          "steps": [
+            "创建场景分类（工作冲突、亲密关系、家庭矛盾等）",
+            "为每种原型+场景编写应对策略",
+            "设计场景选择界面",
+            "实现应对建议展示",
+            "添加快速收藏功能"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "4小时",
+          "notes": "从知道到做到的桥梁"
+        },
+        {
+          "id": "P3-T2",
+          "title": "紧急干预工具箱",
+          "description": "情绪低谷时的快速应对",
+          "steps": [
+            "设计紧急干预入口（明显但不过于醒目）",
+            "创建快速平复技巧（呼吸练习、 grounding技巧）",
+            "添加紧急联系资源（心理援助热线）",
+            "实现简单的自我对话引导",
+            "添加'我现在安全'确认机制"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时",
+          "notes": "安全网功能，体现产品责任"
+        },
+        {
+          "id": "P3-T3",
+          "title": "资源推荐库",
+          "description": "书籍、文章、视频推荐",
+          "steps": [
+            "创建资源数据结构（标题、类型、链接、适用原型）",
+            "为12原型整理推荐资源",
+            "设计资源展示页面",
+            "实现按原型筛选",
+            "添加外部链接跳转"
+          ],
+          "passes": false,
+          "priority": "low",
+          "estimatedTime": "2小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4 - 社区功能（可选高级）",
+      "description": "用户间互动，但保持匿名性",
+      "tasks": [
+        {
+          "id": "P4-T1",
+          "title": "匿名社区基础",
+          "description": "简单的匿名发帖和浏览",
+          "steps": [
+            "评估技术方案（Vercel + MongoDB Atlas免费方案）",
+            "创建社区数据模型",
+            "实现匿名发帖功能",
+            "实现帖子浏览和筛选（按原型）",
+            "添加简单的点赞和举报"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "6小时",
+          "notes": "使用免费方案，控制成本"
+        },
+        {
+          "id": "P4-T2",
+          "title": "社区内容安全",
+          "description": "敏感词过滤和举报机制",
+          "steps": [
+            "实现前端敏感词过滤",
+            "添加后端内容审核（如有后端）",
+            "实现用户举报功能",
+            "创建简单的内容管理后台"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "3小时"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "developmentMode": "strict",
+    "testBeforeCommit": true,
+    "useBranch": false,
+    "maxConcurrentTasks": 1
+  },
+  "notes": {
+    "principles": [
+      "每个功能必须有用，不只是好玩",
+      "优先做让用户回访的功能（日记、打卡）",
+      "保持匿名性，保护隐私",
+      "控制成本，优先使用免费资源"
+    ],
+    "successMetrics": [
+      "用户回访率 > 30%",
+      "21天计划完成率 > 20%",
+      "日记功能使用率 > 15%"
+    ]
+  }
+}
