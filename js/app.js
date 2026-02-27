@@ -75,8 +75,11 @@
             if (savedResult) {
                 const result = JSON.parse(savedResult);
                 state.result = result;
-                // 同时恢复scores用于绘制雷达图
-                if (result.dimensions) {
+                // 恢复scores用于绘制雷达图（优先使用保存的scores）
+                if (result.scores) {
+                    state.scores = result.scores;
+                } else if (result.dimensions) {
+                    // 兼容旧数据，从dimensions重建
                     state.scores = {
                         drive: { [result.dimensions.drive]: 10 },
                         world: { [result.dimensions.world]: 10 },
@@ -156,7 +159,12 @@
     function saveTestResult() {
         try {
             if (state.result) {
-                localStorage.setItem('lsq_testResult', JSON.stringify(state.result));
+                // 同时保存scores用于恢复雷达图
+                const resultWithScores = {
+                    ...state.result,
+                    scores: state.scores
+                };
+                localStorage.setItem('lsq_testResult', JSON.stringify(resultWithScores));
             }
         } catch (error) {
             console.error('保存结果失败:', error);
@@ -1707,8 +1715,11 @@
                 try {
                     const result = JSON.parse(savedResult);
                     state.result = result;
-                    // 同时恢复scores用于绘制雷达图
-                    if (result.dimensions) {
+                    // 恢复scores用于绘制雷达图（优先使用保存的scores）
+                    if (result.scores) {
+                        state.scores = result.scores;
+                    } else if (result.dimensions) {
+                        // 兼容旧数据
                         state.scores = {
                             drive: { [result.dimensions.drive]: 10 },
                             world: { [result.dimensions.world]: 10 },
