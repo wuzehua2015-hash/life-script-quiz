@@ -710,6 +710,13 @@
         const container = document.getElementById('dimension-analysis');
         if (!container) return;
 
+        // 使用传入的data或全局QUIZ_DATA
+        const quizData = data || window.QUIZ_DATA;
+        if (!quizData || !quizData.DIMENSIONS) {
+            console.error('QUIZ_DATA 或 DIMENSIONS 不存在');
+            return;
+        }
+
         const dimNames = {
             drive: { name: '核心驱动力', icon: '🔥' },
             world: { name: '与世界的关系', icon: '🌍' },
@@ -728,9 +735,9 @@
         let html = '<h3>📊 四维深度解读</h3><div class="dimension-analysis-list">';
 
         Object.entries(dims).forEach(([dim, type]) => {
-            const dimConfig = data?.DIMENSIONS?.[dim];
+            const dimConfig = quizData.DIMENSIONS[dim];
             const typeConfig = dimConfig?.types?.[type];
-            const detail = dimensionDetails?.[dim];
+            const detail = dimensionDetails[dim];
             
             // 使用安全访问，如果配置缺失则使用默认值
             const percentage = detail?.percentage || 0;
@@ -741,7 +748,7 @@
                     <div class="dim-analysis-header">
                         <span class="dim-analysis-icon">${dimName.icon}</span>
                         <div class="dim-analysis-title">
-                            <h4>${dimConfig?.name || dim}</h4>
+                            <h4>${dimConfig?.name || dimName.name || dim}</h4>
                             <span class="dim-analysis-type">${typeConfig?.name || type}</span>
                         </div>
                         <div class="dim-analysis-score">${percentage}%</div>
