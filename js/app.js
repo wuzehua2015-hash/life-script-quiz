@@ -584,28 +584,23 @@
 
         if (characters.length === 0) return null;
 
-        // 根据基础信息筛选和排序
+        // 只在匹配的原型中选择角色
+        // 角色匹配考虑：基础信息 + 四维倾向契合度
         let scoredCharacters = characters.map(char => {
             let score = 0;
 
-            // 性别匹配 (15%)
-            if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) {
-                score += 15;
-            }
+            // 基础信息匹配 (40%)
+            if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) score += 10;
+            if (char.age.includes(state.basicInfo.age)) score += 10;
+            if (char.career.includes(state.basicInfo.career)) score += 10;
+            if (char.stage.includes(state.basicInfo.life_stage)) score += 10;
 
-            // 年龄匹配 (15%)
-            if (char.age.includes(state.basicInfo.age)) {
-                score += 15;
-            }
-
-            // 职业匹配 (15%)
-            if (char.career.includes(state.basicInfo.career)) {
-                score += 15;
-            }
-
-            // 人生阶段匹配 (15%)
-            if (char.stage.includes(state.basicInfo.life_stage)) {
-                score += 15;
+            // 四维倾向契合度 (60%) - 根据角色的similarity与用户最高维度的匹配
+            const userTopDim = getUserTopDimension();
+            if (userTopDim && char.similarity) {
+                // 检查角色的similarity是否与用户最高维度相关
+                const relevance = calculateDimensionRelevance(char, userTopDim);
+                score += relevance * 0.6;
             }
 
             return { character: char, score: score };
@@ -614,6 +609,72 @@
         // 按分数排序，返回最佳匹配
         scoredCharacters.sort((a, b) => b.score - a.score);
         return scoredCharacters[0]?.character || characters[0];
+    }
+
+    // 获取用户最高维度
+    function getUserTopDimension() {
+        if (!state.result?.dimensionDetails) return null;
+        
+        let topDim = null;
+        let topPercent = 0;
+        
+        Object.entries(state.result.dimensionDetails).forEach(([dim, detail]) => {
+            if (detail.percentage > topPercent) {
+                topPercent = detail.percentage;
+                topDim = { dimension: dim, type: detail.type, percentage: detail.percentage };
+            }
+        });
+        
+        return topDim;
+    }
+
+    // 计算角色与维度的相关度
+    function calculateDimensionRelevance(character, userDim) {
+        // 根据角色的similarity关键词判断与维度的相关度
+        const dimKeywords = {
+            drive: {
+                achievement: ['追求', '成功', '证明', '目标', '竞争', '卓越'],
+                relationship: ['关系', '连接', '接纳', '陪伴', '温暖', '归属'],
+                security: ['稳定', '安全', '保护', '谨慎', '保守', '可预期'],
+                unique: ['独特', '不同', '个性', '创意', '特别', '与众不同'],
+                service: ['帮助', '付出', '关怀', '服务', '贡献', '利他']
+            },
+            world: {
+                battle: ['战斗', '竞争', '挑战', '对抗', '胜利', '强者'],
+                victim: ['不公平', '伤害', '无力', '被动', '抱怨', '命运'],
+                cooperation: ['合作', '共赢', '共识', '和谐', '团队', '连接'],
+                detachment: ['疏离', '旁观', '距离', '独立', '冷静', '抽离'],
+                control: ['控制', '规划', '掌控', '秩序', '预测', '安排']
+            },
+            self: {
+                perfection: ['完美', '苛刻', '标准', '批评', '改进', '更好'],
+                inferiority: ['自卑', '不够好', '比较', '怀疑', ' insecure', '低价值'],
+                narcissism: ['关注', '焦点', '赞美', '认可', '特殊', '优越'],
+                authenticity: ['真实', '接纳', '自我', '本色', '真诚', '自然'],
+                lost: ['迷茫', '不确定', '寻找', '迷失', '方向', '身份']
+            },
+            time: {
+                chasing: ['追赶', '紧迫', '时间不够', '忙碌', '效率', '加速'],
+                stagnation: ['停滞', '定型', '无力改变', '循环', '困住', '无望'],
+                exploration: ['探索', '体验', '旅程', '好奇', '尝试', '过程'],
+                fate: ['命运', '顺其自然', '接受', '注定', '安排', '缘分'],
+                creation: ['创造', '主动', '决定', '目标', '努力', '改变']
+            }
+        };
+
+        const keywords = dimKeywords[userDim.dimension]?.[userDim.type] || [];
+        let matchCount = 0;
+        
+        character.similarity?.forEach(trait => {
+            keywords.forEach(keyword => {
+                if (trait.includes(keyword) || keyword.includes(trait)) {
+                    matchCount++;
+                }
+            });
+        });
+
+        // 返回0-100的相关度分数
+        return Math.min(100, matchCount * 25);
     }
 
     function calculateTotalMatchPercentage(archetypePercentage, character) {
@@ -1094,103 +1155,69 @@
         const data = window.QUIZ_DATA;
         if (!data || !state.result) return;
 
-        // 获取所有原型匹配结果（已按匹配度排序）
+        // 获取所有原型匹配结果
         const allMatches = state.result.allMatches || [];
         
-        // 找出第二匹配的原型（跳过第一个，因为是当前匹配）
-        const secondMatch = allMatches[1];
-        if (!secondMatch || secondMatch.percentage < 30) return;
-
-        // 在第二匹配的原型中找最匹配的角色
-        const secondArchetype = data.ARCHETYPES[secondMatch.archetype];
-        const secondCharacter = matchCharacter(secondMatch.archetype);
-
-        // 找出第三匹配的原型
-        const thirdMatch = allMatches[2];
-        let thirdCharacter = null;
-        let thirdArchetype = null;
-        if (thirdMatch && thirdMatch.percentage >= 30) {
-            thirdArchetype = data.ARCHETYPES[thirdMatch.archetype];
-            thirdCharacter = matchCharacter(thirdMatch.archetype);
-        }
-
-        // 在当前原型中找第二匹配的角色
+        // 只推荐同一原型内的其他角色（避免跨原型推荐的尴尬）
         const currentArchetypeChars = data.CHARACTER_LIBRARY[currentArchetype?.key] || [];
-        let altCharacter = null;
-        if (currentArchetypeChars.length > 1) {
-            // 找得分第二高的角色
-            const scoredChars = currentArchetypeChars.map(char => {
-                let score = 0;
-                if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) score += 15;
-                if (char.age.includes(state.basicInfo.age)) score += 15;
-                if (char.career.includes(state.basicInfo.career)) score += 15;
-                if (char.stage.includes(state.basicInfo.life_stage)) score += 15;
-                return { character: char, score };
-            }).sort((a, b) => b.score - a.score);
-            
-            // 如果第一个是当前角色，取第二个
-            if (scoredChars[0]?.character.name === currentCharacter.name && scoredChars[1]) {
-                altCharacter = scoredChars[1].character;
-            }
-        }
-
-        // 生成推荐列表
-        const recommendations = [];
         
-        if (secondCharacter && secondCharacter.name !== currentCharacter.name) {
-            recommendations.push({
-                type: 'secondArchetype',
-                title: '你可能也像...',
-                character: secondCharacter,
-                archetype: secondArchetype,
-                matchPercent: secondMatch.percentage,
-                reason: generateSimilarReason(secondMatch.archetype, currentArchetype?.key)
-            });
-        }
+        if (currentArchetypeChars.length <= 1) return;
 
-        if (altCharacter) {
-            recommendations.push({
-                type: 'sameArchetype',
-                title: '同类型的另一个你',
-                character: altCharacter,
-                archetype: currentArchetype,
-                matchPercent: Math.round(state.result.matchPercentage * 0.9),
-                reason: `同样是${currentArchetype?.name}，但有着不同的故事和选择`
-            });
-        }
+        // 在当前原型中找其他匹配的角色（排除当前角色）
+        const scoredChars = currentArchetypeChars.map(char => {
+            let score = 0;
+            
+            // 基础信息匹配
+            if (char.gender.includes(state.basicInfo.gender) || char.gender.includes('other')) score += 25;
+            if (char.age.includes(state.basicInfo.age)) score += 25;
+            if (char.career.includes(state.basicInfo.career)) score += 25;
+            if (char.stage.includes(state.basicInfo.life_stage)) score += 25;
+            
+            // 四维契合度
+            const userTopDim = getUserTopDimension();
+            if (userTopDim && char.similarity) {
+                const relevance = calculateDimensionRelevance(char, userTopDim);
+                score += relevance * 0.5;
+            }
+            
+            return { character: char, score: score };
+        }).filter(item => item.character.name !== currentCharacter.name)
+          .sort((a, b) => b.score - a.score);
 
-        if (thirdCharacter && thirdCharacter.name !== currentCharacter.name) {
-            recommendations.push({
-                type: 'thirdArchetype',
-                title: '潜在的另一个剧本',
-                character: thirdCharacter,
-                archetype: thirdArchetype,
-                matchPercent: thirdMatch.percentage,
-                reason: generateSimilarReason(thirdMatch.archetype, currentArchetype?.key)
-            });
-        }
+        if (scoredChars.length === 0) return;
 
-        if (recommendations.length === 0) return;
+        // 取前3个推荐
+        const recommendations = scoredChars.slice(0, 3).map(item => {
+            // 计算综合匹配度：原型匹配度 * 0.6 + 角色契合度 * 0.4
+            const currentArchetypeMatch = allMatches.find(m => m.archetype === currentArchetype?.key);
+            const archetypePercent = currentArchetypeMatch?.percentage || 70;
+            const totalMatch = Math.round(archetypePercent * 0.6 + item.score * 0.4);
+            
+            return {
+                character: item.character,
+                matchPercent: totalMatch,
+                score: item.score
+            };
+        });
 
         container.innerHTML = `
-            <h4>🎭 其他可能的你</h4>
-            <p class="similar-intro">人生剧本不止一种，这些角色也可能与你产生共鸣：</p>
+            <h4>🎭 同类型的其他角色</h4>
+            <p class="similar-intro">作为${currentArchetype?.name || '这个类型'}，这些角色也可能与你产生共鸣：</p>
             <div class="similar-characters-list">
                 ${recommendations.map(rec => `
-                    <div class="similar-character-card" data-archetype="${rec.archetype?.key}">
+                    <div class="similar-character-card">
                         <div class="similar-character-header">
-                            <span class="similar-type">${rec.title}</span>
+                            <span class="similar-type">${rec.character.name}</span>
                             <span class="similar-match">${rec.matchPercent}% 匹配</span>
                         </div>
                         <div class="similar-character-info">
                             <div class="similar-avatar">${rec.character.name.charAt(0)}</div>
                             <div class="similar-details">
-                                <h5>${rec.character.name}</h5>
                                 <span class="similar-work">${rec.character.work}</span>
-                                <span class="similar-archetype">${rec.archetype?.name || ''}</span>
+                                <span class="similar-archetype">${currentArchetype?.name || ''}</span>
                             </div>
                         </div>
-                        <p class="similar-reason">${rec.reason}</p>
+                        <p class="similar-reason">${rec.character.similarity?.slice(0, 2).join('、') || '有着相似的特质'}</p>
                         <div class="similar-quote">「${rec.character.quote || ''}」</div>
                     </div>
                 `).join('')}
