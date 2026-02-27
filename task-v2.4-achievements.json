@@ -1,0 +1,267 @@
+{
+  "project": "人生剧本测试系统 - v2.4 成就系统",
+  "description": "通过成就系统提升用户回访率和产品实用性",
+  "version": "2.4.0",
+  "lastUpdated": "2026-02-27",
+  "domain": "lifescript.lynkedu.com",
+  "storage": "localStorage",
+  "phases": [
+    {
+      "name": "Phase 1 - 成就系统核心",
+      "description": "建立成就体系，让用户有明确的成长目标",
+      "tasks": [
+        {
+          "id": "P1-T1",
+          "title": "设计成就体系",
+          "description": "设计完整的成就徽章体系",
+          "steps": [
+            "定义成就类型：探索类、坚持类、觉察类、分享类",
+            "设计每个成就的解锁条件",
+            "设计成就徽章的视觉风格",
+            "创建成就数据结构（id, name, icon, description, condition, unlockedAt）",
+            "编写成就说明文案"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "2小时",
+          "notes": "成就类型详见下方achievement-types.md"
+        },
+        {
+          "id": "P1-T2",
+          "title": "实现成就数据层",
+          "description": "使用localStorage实现成就存储和检测",
+          "steps": [
+            "创建achievements.js数据文件（所有成就定义）",
+            "实现achievementService（检测解锁、保存进度）",
+            "设计localStorage存储结构（lsq_achievements, lsq_achievementProgress）",
+            "实现成就解锁检测逻辑",
+            "实现成就进度追踪"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时"
+        },
+        {
+          "id": "P1-T3",
+          "title": "成就展示页面",
+          "description": "创建成就墙，展示已获得和未获得的成就",
+          "steps": [
+            "创建成就墙页面（achievements.html或弹窗）",
+            "设计成就卡片组件（已解锁/未解锁状态）",
+            "实现成就分类展示（探索/坚持/觉察/分享）",
+            "添加成就获得时间显示",
+            "添加成就分享功能（分享获得的成就）"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时"
+        },
+        {
+          "id": "P1-T4",
+          "title": "成就解锁动画",
+          "description": "成就获得时的视觉反馈，增强成就感",
+          "steps": [
+            "设计成就解锁弹窗/动画",
+            "实现解锁时的庆祝效果（confetti动画）",
+            "添加解锁音效（可选）",
+            "实现连续解锁的队列处理",
+            "在结果页、行动指导页等关键位置触发解锁检测"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2 - 个人中心与进度",
+      "description": "建立用户主页，集中展示成长轨迹",
+      "tasks": [
+        {
+          "id": "P2-T1",
+          "title": "个人中心页面",
+          "description": "用户主页，展示所有进度和成就",
+          "steps": [
+            "创建个人中心页面（profile.html）",
+            "展示用户基本信息（原型、测试时间）",
+            "展示成就统计（已获得/总数）",
+            "展示21天计划进度",
+            "添加导航入口（从首页、结果页进入）"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "2.5小时"
+        },
+        {
+          "id": "P2-T2",
+          "title": "成长轨迹时间轴",
+          "description": "可视化展示用户的成长历程",
+          "steps": [
+            "设计时间轴组件",
+            "整合关键事件（首次测试、成就解锁、21天里程碑）",
+            "实现时间轴页面",
+            "支持按月份筛选",
+            "添加里程碑标记和说明"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "3小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3 - 实用功能",
+      "description": "让成就真正有用，而不只是装饰",
+      "tasks": [
+        {
+          "id": "P3-T1",
+          "title": "每日觉察打卡",
+          "description": "简单的每日打卡，关联成就系统",
+          "steps": [
+            "设计每日打卡组件",
+            "创建打卡数据存储（lsq_dailyCheckIn）",
+            "实现连续打卡检测（关联成就）",
+            "添加打卡提醒（可选，浏览器通知）",
+            "在个人中心展示打卡日历"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "3小时",
+          "notes": "这是回访的核心理由"
+        },
+        {
+          "id": "P3-T2",
+          "title": "情境应对工具箱",
+          "description": "根据原型提供具体场景的应对建议",
+          "steps": [
+            "定义常见场景（工作冲突、亲密关系、社交焦虑等）",
+            "为12原型×6场景编写应对策略",
+            "创建工具箱页面",
+            "实现场景选择器",
+            "添加收藏功能（收藏有用的建议）"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "4小时",
+          "notes": "从知道到做到的桥梁"
+        },
+        {
+          "id": "P3-T3",
+          "title": "紧急平复工具",
+          "description": "情绪低谷时的快速应对",
+          "steps": [
+            "设计紧急入口（明显但不过于醒目）",
+            "实现呼吸练习引导动画",
+            "添加grounding技巧（5-4-3-2-1感官练习）",
+            "添加自我对话引导",
+            "添加心理援助热线信息"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2.5小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4 - 整合优化",
+      "description": "整合所有功能，优化用户体验",
+      "tasks": [
+        {
+          "id": "P4-T1",
+          "title": "首页改版",
+          "description": "重新设计首页，突出成就和实用功能",
+          "steps": [
+            "添加成就进度展示",
+            "添加快速入口（每日打卡、工具箱、紧急平复）",
+            "展示最近获得的成就",
+            "优化视觉层次和引导"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2小时"
+        },
+        {
+          "id": "P4-T2",
+          "title": "数据导出",
+          "description": "让用户可以导出自己的成长数据",
+          "steps": [
+            "实现数据导出功能（JSON/图片报告）",
+            "生成成长报告（测试历史、成就、打卡记录）",
+            "添加分享报告功能"
+          ],
+          "passes": false,
+          "priority": "low",
+          "estimatedTime": "2小时"
+        }
+      ]
+    }
+  ],
+  "achievementTypes": {
+    "exploration": {
+      "name": "探索类",
+      "description": "探索自我，了解不同面向",
+      "examples": [
+        "初次觉醒 - 完成首次测试",
+        "深度探索 - 查看完整结果分析",
+        "原型大师 - 查看所有12原型介绍",
+        "角色研究员 - 查看5个角色详情"
+      ]
+    },
+    "persistence": {
+      "name": "坚持类",
+      "description": "持续行动，养成习惯",
+      "examples": [
+        "开始改变 - 开始21天计划",
+        "第一周 - 完成7天计划",
+        "坚持到底 - 完成21天计划",
+        "连续3天 - 每日打卡3天",
+        "连续7天 - 每日打卡7天",
+        "连续21天 - 每日打卡21天"
+      ]
+    },
+    "insight": {
+      "name": "觉察类",
+      "description": "觉察自我，记录成长",
+      "examples": [
+        "第一次觉察 - 完成首次每日打卡",
+        "情绪记录者 - 记录7天情绪",
+        "改变见证者 - 查看成长轨迹"
+      ]
+    },
+    "sharing": {
+      "name": "分享类",
+      "description": "帮助他人，传播价值",
+      "examples": [
+        "分享者 - 首次分享测试结果",
+        "传播者 - 分享3次",
+        "成就展示 - 分享获得的成就"
+      ]
+    }
+  },
+  "config": {
+    "developmentMode": "strict",
+    "testBeforeCommit": true,
+    "useBranch": false,
+    "storage": "localStorage",
+    "maxConcurrentTasks": 1
+  },
+  "notes": {
+    "principles": [
+      "成就必须有意义，不只是装饰",
+      "优先做让用户回访的功能（每日打卡）",
+      "成就引导用户完成有价值的行为",
+      "保持简单，避免过度游戏化"
+    ],
+    "successMetrics": [
+      "用户回访率 > 30%",
+      "每日打卡参与率 > 15%",
+      "平均成就解锁数 > 5个"
+    ],
+    "storageStructure": {
+      "lsq_achievements": "已解锁成就列表",
+      "lsq_achievementProgress": "成就进度追踪",
+      "lsq_dailyCheckIn": "每日打卡记录",
+      "lsq_favoriteTools": "收藏的工具和建议"
+    }
+  }
+}
