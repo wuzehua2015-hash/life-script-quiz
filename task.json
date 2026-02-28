@@ -61,7 +61,7 @@
             "创建移动端汉堡按钮",
             "创建移动端抽屉菜单"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "1.5小时"
         },
