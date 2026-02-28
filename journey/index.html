@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>改变轨迹 - 人生剧本测试</title>
+    <meta name="description" content="查看你的成长历程，回顾重要里程碑">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/journey.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="journey-page">
+        <!-- 返回按钮 -->
+        <a href="../profile/index.html" class="back-btn">
+            ← 返回个人中心
+        </a>
+
+        <!-- 头部 -->
+        <header class="journey-header">
+            <h1>📈 改变轨迹</h1>
+            <p>记录你的每一步成长，见证改变的力量</p>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="journey-content">
+            <!-- 统计面板 -->
+            <section class="stats-section">
+                <div id="stats-container">
+                    <!-- 动态渲染统计 -->
+                </div>
+            </section>
+
+            <!-- 里程碑 -->
+            <section class="milestones-section">
+                <h2 class="section-title">🏆 重要里程碑</h2>
+                <div id="milestones-container" class="milestones-grid">
+                    <!-- 动态渲染里程碑 -->
+                </div>
+            </section>
+
+            <!-- 导出按钮 -->
+            <section class="export-section">
+                <h2 class="section-title">📤 导出改变报告</h2>
+                <div class="export-buttons">
+                    <button class="export-btn primary" onclick="JourneyUI.exportReportAsImage()">
+                        <span>🖼️</span>
+                        <span>保存为图片</span>
+                    </button>
+                    <button class="export-btn" onclick="JourneyUI.exportReportAsPDF()">
+                        <span>📄</span>
+                        <span>打印/PDF</span>
+                    </button>
+                    <button class="export-btn" onclick="JourneyUI.shareReport()">
+                        <span>📢</span>
+                        <span>分享</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 过滤器 -->
+            <section class="filters-section">
+                <div id="filters-container" class="filters-container">
+                    <!-- 动态渲染过滤器 -->
+                </div>
+            </section>
+
+            <!-- 时间轴 -->
+            <section class="timeline-section">
+                <h2 class="section-title">📋 成长时间轴</h2>
+                <div id="timeline-container">
+                    <!-- 动态渲染时间轴 -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="../js/achievements.js"></script>
+    <script src="../js/journey-service.js"></script>
+    <script src="../js/journey-ui.js"></script>
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 渲染统计面板
+            JourneyUI.renderStatsPanel('stats-container');
+            
+            // 渲染里程碑
+            JourneyUI.renderMilestones('milestones-container');
+            
+            // 设置过滤器
+            JourneyUI.setupFilters('filters-container', 'timeline-container');
+            
+            // 渲染时间轴
+            JourneyUI.renderTimeline('timeline-container');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+/** 改变轨迹页面样式 */
+
+/* 页面整体 */
+.journey-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    padding-bottom: 3rem;
+}
+
+/* 头部 */
+.journey-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.journey-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+}
+
+.journey-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.journey-header p {
+    opacity: 0.9;
+    font-size: 1rem;
+    position: relative;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateX(-2px);
+}
+
+/* 内容容器 */
+.journey-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    margin-top: -2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 统计面板 */
+.stats-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-card.highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.stat-card.highlight .stat-label {
+    color: rgba(255,255,255,0.8);
+}
+
+/* 里程碑区域 */
+.milestones-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #333;
+}
+
+.milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.milestone-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid transparent;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.milestone-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.milestone-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.milestone-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.milestone-info p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.milestone-date {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.no-milestones {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* 过滤器 */
+.filters-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    background: white;
+    color: #666;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* 时间轴 */
+.timeline-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.journey-timeline {
+    position: relative;
+}
+
+.journey-timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.timeline-month {
+    margin-bottom: 2rem;
+}
+
+.timeline-month:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-month-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    margin-left: 50px;
+}
+
+.month-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.month-count {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.timeline-events {
+    position: relative;
+}
+
+.timeline-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.timeline-event.milestone .event-marker {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+.event-marker {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.event-icon {
+    font-size: 1rem;
+}
+
+.event-content {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.event-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.event-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.event-date {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.event-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.event-meta-row {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.event-meta {
+    font-size: 0.75rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* 事件类型颜色 */
+.timeline-event.type-test .event-content {
+    border-left: 3px solid #FFD700;
+}
+
+.timeline-event.type-role .event-content {
+    border-left: 3px solid #9b59b6;
+}
+
+.timeline-event.type-badge .event-content {
+    border-left: 3px solid #e74c3c;
+}
+
+.timeline-event.type-diary .event-content {
+    border-left: 3px solid #27ae60;
+}
+
+.timeline-event.type-mood .event-content {
+    border-left: 3px solid #3498db;
+}
+
+.timeline-event.type-plan .event-content {
+    border-left: 3px solid #f39c12;
+}
+
+/* 空状态 */
+.journey-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.journey-empty h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.journey-empty p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 导出按钮区域 */
+.export-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.export-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    color: #333;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.export-btn:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.export-btn.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.export-btn.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* 报告预览区域 */
+.journey-report {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.report-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.report-header p {
+    color: #666;
+}
+
+/* Toast提示 */
+.journey-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #333;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.journey-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+    .journey-header {
+        padding: 2rem 1rem;
+    }
+    
+    .journey-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .milestones-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters-container {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 0.5rem;
+    }
+    
+    .filter-btn {
+        white-space: nowrap;
+    }
+    
+    .journey-timeline::before {
+        left: 18px;
+    }
+    
+    .timeline-month-header {
+        margin-left: 40px;
+    }
+    
+    .timeline-event.milestone .event-marker {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .event-marker {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .export-buttons {
+        flex-direction: column;
+    }
+    
+    .export-btn {
+        width: 100%;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .back-btn,
+    .filters-section,
+    .export-section,
+    .journey-toast {
+        display: none !important;
+    }
+    
+    .journey-page {
+        background: white;
+    }
+    
+    .journey-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .stats-section,
+    .milestones-section,
+    .timeline-section {
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+        break-inside: avoid;
+    }
+}

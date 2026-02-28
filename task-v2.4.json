@@ -108,7 +108,7 @@
             "添加里程碑标记（首次测试、完成21天等）",
             "支持导出改变报告"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "medium",
           "estimatedTime": "3小时"
         }

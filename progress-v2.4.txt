@@ -137,7 +137,7 @@
 - [x] P1-T3: 个人中心页面 ✅
 - [x] P2-T1: 每日觉察日记 ✅
 - [x] P2-T2: 情绪追踪打卡 ✅
-- [ ] P2-T3: 改变轨迹可视化
+- [x] P2-T3: 改变轨迹可视化 ✅
 - [ ] P3-T1: 情境化应对指南
 - [ ] P3-T2: 紧急干预工具箱
 - [ ] P3-T3: 资源推荐库
@@ -149,6 +149,127 @@
 - 优先做让用户回访的功能（每日打卡）
 - 成就引导用户完成有价值的行为
 - 保持简单，避免过度游戏化
+
+---
+
+### [2026-02-28] - P2-T3: 改变轨迹可视化 ✅ 完成
+
+#### What was done:
+- ✅ 设计时间轴组件
+  - 垂直时间轴布局，按月分组显示
+  - 事件卡片展示（图标、标题、描述、日期）
+  - 里程碑事件特殊标记（金色边框、动画效果）
+  - 事件类型颜色区分（测试、日记、情绪、徽章、角色、计划）
+- ✅ 整合测试历史、日记、打卡数据
+  - JourneyService.getTimelineEvents() 整合6类数据源
+  - 测试历史事件（首次测试、重新测试）
+  - 角色解锁事件（12原型角色收集）
+  - 徽章获得事件（20个成就徽章）
+  - 日记记录事件（第一篇、重要日记）
+  - 情绪打卡事件（连续打卡里程碑）
+  - 21天计划里程碑（第7天、第21天）
+- ✅ 创建改变轨迹页面 (journey/index.html)
+  - 统计面板（探索天数、记录事件、里程碑等6项统计）
+  - 里程碑展示区（最多6个重要里程碑卡片）
+  - 过滤器（全部、里程碑、测试、日记、情绪、徽章）
+  - 时间轴展示（按月分组的事件列表）
+  - 导出功能区（图片、PDF、分享）
+- ✅ 添加里程碑标记
+  - 首次测试 🌟（发现原型）
+  - 角色解锁（12原型角色）
+  - 徽章获得（里程碑类徽章）
+  - 第一篇日记 📝
+  - 开始情绪追踪 😊
+  - 连续打卡3/7/14/21/30天 🔥
+  - 完成第一周 🌱（第7天）
+  - 完成21天计划 🏆
+- ✅ 支持导出改变报告
+  - 导出为图片（使用SVG生成PNG）
+  - 导出为PDF（使用浏览器打印功能）
+  - 分享功能（使用Web Share API或复制文案）
+  - 报告包含：头部统计、里程碑列表、底部信息
+
+#### 创建的文件:
+1. `js/journey-service.js` - 改变轨迹核心服务
+   - getTimelineEvents() - 整合所有数据源生成时间轴事件
+   - getJourneyStats() - 计算改变轨迹统计
+   - 测试事件获取 (getTestEvents)
+   - 角色解锁事件获取 (getRoleUnlockEvents)
+   - 徽章事件获取 (getBadgeEvents)
+   - 日记事件获取 (getDiaryEvents)
+   - 情绪事件获取 (getMoodEvents)
+   - 21天计划里程碑 (getPlanMilestoneEvents)
+2. `js/journey-ui.js` - 改变轨迹UI组件
+   - renderTimeline() - 渲染时间轴
+   - renderMilestones() - 渲染里程碑
+   - renderStatsPanel() - 渲染统计面板
+   - setupFilters() - 设置过滤器
+   - exportReportAsImage() - 导出图片
+   - exportReportAsPDF() - 导出PDF
+   - shareReport() - 分享报告
+3. `css/journey.css` - 改变轨迹页面样式
+   - 时间轴样式（垂直线、事件卡片、月份分组）
+   - 里程碑卡片样式（动画、颜色标记）
+   - 统计面板样式（6宫格布局）
+   - 过滤器样式（按钮组）
+   - 导出按钮样式
+   - 响应式适配（移动端优化）
+   - 打印样式
+4. `journey/index.html` - 改变轨迹页面主入口
+   - 统计面板区域
+   - 里程碑展示区域
+   - 导出按钮区域
+   - 过滤器区域
+   - 时间轴展示区域
+
+#### 修改的文件:
+1. `profile/index.html` - 更新成长轨迹入口链接（指向journey/index.html）
+2. `profile/profile.js` - 移除timeline-link的临时提示
+3. `task-v2.4.json` - 更新P2-T3 passes为true
+4. `progress-v2.4.txt` - 更新进度记录
+
+#### 数据结构:
+```javascript
+{
+  id: 'test_1234567890',
+  type: 'test',  // test, role, badge, diary, mood, plan
+  subtype: 'first_test',
+  date: '2026-02-28T10:00:00.000Z',
+  title: '完成人生剧本测试',
+  description: '发现你的原型：孤勇者',
+  icon: '🌟',
+  color: '#FFD700',
+  data: { ... },
+  milestone: true
+}
+```
+
+#### 统计数据:
+- totalEvents: 总事件数
+- milestones: 里程碑数
+- journeyDays: 探索天数
+- tests: 测试次数
+- diaries: 日记篇数
+- badges: 获得徽章数
+
+#### 存储键名（读取）:
+- `lsq_tests` - 测试历史
+- `lsq_testResult` - 当前测试结果
+- `lsq_unlockedRoles` - 已解锁角色
+- `lsq_achievements` - 已解锁徽章
+- `lsq_diaries` - 日记数据
+- `lsq_moodCheckins` - 情绪打卡
+- `lsq_achievementProgress` - 21天计划进度
+
+#### Testing:
+- 语法检查: ✅ 通过
+- 数据结构验证: ✅ 完整
+- 本地存储读取: ✅ 使用lsq_前缀
+- 时间轴渲染: ✅ 按月分组正常显示
+- 里程碑标记: ✅ 自动识别里程碑事件
+- 导出功能: ✅ SVG生成PNG正常
+- 响应式适配: ✅ 移动端优化
+- 打印样式: ✅ 支持打印/PDF导出
 
 ---
 

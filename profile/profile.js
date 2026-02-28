@@ -471,14 +471,7 @@
 
     // 设置事件监听
     function setupEventListeners() {
-        // 成长轨迹链接（暂未实现）
-        const timelineLink = document.getElementById('timeline-link');
-        if (timelineLink) {
-            timelineLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showToast('成长轨迹功能即将上线');
-            });
-        }
+        // 事件监听已设置
     }
 
     // 显示提示
