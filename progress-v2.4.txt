@@ -8,6 +8,131 @@
 
 ## 当前执行
 
+### [2026-02-28] - P3-T2: 紧急干预工具箱 ✅ 完成
+
+#### What was done:
+- ✅ 设计紧急干预入口（明显但不过于醒目）
+  - 首页添加"🆘 紧急支持"按钮（红色边框，与其他按钮并列）
+  - 按钮hover时有轻微放大和阴影效果
+  - 不突兀但容易被找到
+- ✅ 实现呼吸练习引导动画
+  - 盒式呼吸（4-4-4-4）：吸气-屏息-呼气-屏息
+  - 4-7-8呼吸：吸气4秒-屏息7秒-呼气8秒
+  - 共振呼吸（5.5-5.5）：平衡神经系统
+  - 动态圆圈缩放动画配合呼吸节奏
+  - SVG进度环显示当前阶段进度
+  - 支持多轮循环练习
+- ✅ 实现5-4-3-2-1 grounding技巧
+  - 5-4-3-2-1感官grounding：看5样、触4样、听3样、闻2样、尝1样
+  - 冷水grounding：用冷水激活身体
+  - 身体扫描grounding：从脚到头感受身体
+  - 步骤进度指示器
+  - 每步提供示例和引导语
+- ✅ 添加自我对话引导卡片
+  - 4种情境：恐慌来袭、不堪重负、感到孤独、自我批评
+  - 每种情境5条引导消息（觉察→接纳→现实→行动→鼓励）
+  - 渐进式消息展示，模拟对话体验
+  - 消息类型颜色区分
+- ✅ 添加心理援助热线信息
+  - 24小时危机干预热线（北京心理危机研究与干预中心等）
+  - 青少年心理援助热线（12355）
+  - 妇女儿童保护热线（12338）
+  - 在线心理支持平台（简单心理、壹心理、KnowYourself）
+  - 紧急提醒：120/110
+  - 支持直接拨打电话
+- ✅ 添加"我现在安全"确认机制
+  - 安全确认卡片在页面顶部
+  - 随机显示安全确认语句（10条）
+  - 大按钮"我现在是安全的"
+  - 点击后显示确认动画和统计
+  - 记录确认历史（本地存储）
+  - 可切换不同确认语句
+
+#### 创建的文件:
+1. `js/emergency-service.js` - 紧急干预服务（数据定义、存储管理）
+   - BREATHING_EXERCISES: 3种呼吸练习配置
+   - GROUNDING_TECHNIQUES: 3种grounding技巧
+   - SELF_TALK_GUIDES: 4种自我对话引导
+   - CRISIS_RESOURCES: 4类心理援助资源
+   - SAFETY_MESSAGES: 10条安全确认语句
+   - EmergencyService: 工具使用记录、安全确认记录
+2. `js/emergency-ui.js` - 紧急干预UI组件
+   - BreathingUI: 呼吸练习界面和动画控制
+   - GroundingUI: grounding技巧步骤引导
+   - SelfTalkUI: 自我对话消息展示
+   - CrisisResourceUI: 危机资源列表
+   - SafetyCheckUI: 安全确认界面
+   - EmergencyUI: 主面板管理
+3. `css/emergency.css` - 紧急干预样式（24KB）
+   - 深色主题设计
+   - 呼吸动画（圆圈缩放、进度环）
+   - grounding步骤卡片样式
+   - 自我对话消息样式
+   - 危机资源卡片样式
+   - 安全确认动画
+   - 响应式适配
+4. `emergency/index.html` - 紧急干预页面主入口
+
+#### 修改的文件:
+1. `index.html` - 首页添加"🆘 紧急支持"入口按钮
+2. `css/style.css` - 添加紧急支持按钮hover样式
+3. `task-v2.4.json` - 更新P3-T2 passes为true
+4. `progress-v2.4.txt` - 更新进度记录
+
+#### 数据结构:
+```javascript
+// 呼吸练习
+{
+  id: 'box_breathing',
+  name: '盒式呼吸',
+  steps: [
+    { phase: 'inhale', text: '吸气', duration: 4000 },
+    { phase: 'hold1', text: '屏息', duration: 4000 },
+    { phase: 'exhale', text: '呼气', duration: 4000 },
+    { phase: 'hold2', text: '屏息', duration: 4000 }
+  ],
+  cycles: 3
+}
+
+// grounding技巧
+{
+  id: '54321',
+  name: '5-4-3-2-1 感官 grounding',
+  steps: [
+    { number: 5, sense: '看', prompt: '环顾四周，说出5样你能看到的东西' }
+    // ...
+  ]
+}
+
+// 自我对话
+{
+  id: 'panic',
+  title: '当恐慌来袭时',
+  messages: [
+    { type: 'acknowledge', text: '我注意到我现在感到恐慌' },
+    { type: 'validate', text: '这种感觉很不舒服，但它会过去的' }
+    // ...
+  ]
+}
+```
+
+#### 存储键名:
+- `lsq_safetyChecks` - 安全确认历史
+- `lsq_emergencyToolUses` - 紧急工具使用记录
+
+#### 页面路径:
+- 紧急干预: `/emergency/index.html`
+
+#### Testing:
+- 语法检查: ✅ 通过
+- 呼吸动画: ✅ 圆圈缩放与进度环同步
+- grounding步骤: ✅ 可前进/后退
+- 自我对话: ✅ 渐进式消息展示
+- 安全确认: ✅ 动画反馈正常
+- 响应式适配: ✅ 移动端优化
+
+---
+
 ### [2026-02-28] - P3-T1: 情境化应对指南 ✅ 完成
 
 #### What was done:
@@ -262,7 +387,7 @@
 - [x] P2-T2: 情绪追踪打卡 ✅
 - [x] P2-T3: 改变轨迹可视化 ✅
 - [x] P3-T1: 情境化应对指南 ✅
-- [ ] P3-T2: 紧急干预工具箱
+- [x] P3-T2: 紧急干预工具箱 ✅
 - [ ] P3-T3: 资源推荐库
 - [ ] P4-T1: 匿名社区基础
 - [ ] P4-T2: 社区内容安全

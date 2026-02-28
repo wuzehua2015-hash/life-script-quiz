@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>紧急干预工具箱 - 人生剧本</title>
+    <meta name="description" content="情绪低谷时的快速应对工具，包括呼吸练习、grounding技巧、自我对话引导和心理援助热线">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/emergency.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="emergency-page">
+    <div class="emergency-container">
+        <!-- 头部 -->
+        <header class="emergency-header">
+            <div class="emergency-header-icon">🆘</div>
+            <h1>紧急干预工具箱</h1>
+            <p>当你感到情绪难以承受时，这些工具在这里陪伴你</p>
+            
+            <div class="emergency-header-notice">
+                <span class="notice-icon">⚠️</span>
+                <div class="notice-content">
+                    <p><strong>如果你正在经历紧急情况</strong></p>
+                    <p>请立即拨打 120（急救）或 110（报警）</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <main class="emergency-content" id="emergency-content">
+            <!-- 内容将由 JavaScript 动态生成 -->
+            <div class="loading-placeholder">
+                <p>加载中...</p>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="emergency-footer">
+            <p>这些工具不能替代专业心理治疗</p>
+            <p class="footer-highlight">如果你持续感到痛苦，请寻求专业帮助</p>
+            <p style="margin-top: 15px;">
+                <a href="../index.html" style="color: #d4af37; text-decoration: none;">← 返回首页</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="../js/emergency-service.js"></script>
+    <script src="../js/emergency-ui.js"></script>
+    <script>
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            EmergencyUI.init();
+        });
+    </script>
+</body>
+</html>

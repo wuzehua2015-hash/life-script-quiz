@@ -1,0 +1,1289 @@
+/**
+ * 紧急干预工具箱样式
+ * Emergency Intervention Toolkit Styles
+ */
+
+/* ==================== 页面基础 ==================== */
+.emergency-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e8e8e8;
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+.emergency-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ==================== 头部 ==================== */
+.emergency-header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
+}
+
+.emergency-header-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+.emergency-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.emergency-header p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+}
+
+.emergency-header-notice {
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+}
+
+.emergency-header-notice .notice-icon {
+    font-size: 1.5rem;
+}
+
+.emergency-header-notice p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ==================== 内容区域 ==================== */
+.emergency-content {
+    min-height: 400px;
+}
+
+/* ==================== 区块标题 ==================== */
+.emergency-section {
+    margin-bottom: 40px;
+}
+
+.emergency-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.section-icon {
+    font-size: 1.5rem;
+}
+
+.emergency-section-desc {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+/* ==================== 安全确认 ==================== */
+.safety-check-section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.safety-check-card {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.safety-message {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 30px 25px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.safety-quote {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1;
+}
+
+.safety-message p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0;
+    line-height: 1.6;
+    transition: opacity 0.2s ease;
+}
+
+.btn-safety-confirm {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    margin-bottom: 15px;
+}
+
+.btn-safety-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.btn-safety-confirm:active {
+    transform: translateY(0);
+}
+
+.confirm-icon {
+    font-size: 1.3rem;
+}
+
+.btn-safety-refresh {
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-safety-refresh:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.safety-history {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 20px;
+}
+
+.history-title {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 5px;
+}
+
+.history-encourage {
+    color: #2ecc71;
+    font-size: 0.95rem;
+}
+
+/* 安全确认完成 */
+.safety-confirmed {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.confirmed-animation {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.confirmed-ring {
+    position: absolute;
+    inset: 0;
+    border: 4px solid #2ecc71;
+    border-radius: 50%;
+    animation: ring-expand 1s ease-out forwards;
+}
+
+.confirmed-icon {
+    position: absolute;
+    inset: 15px;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    animation: check-pop 0.5s ease 0.3s both;
+}
+
+.safety-confirmed h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.safety-confirmed p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.confirmed-count {
+    color: #2ecc71 !important;
+    font-weight: 500;
+}
+
+.confirmed-actions {
+    margin-top: 30px;
+}
+
+/* ==================== 工具网格 ==================== */
+.emergency-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.tool-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 25px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.tool-card:active {
+    transform: translateY(0);
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.tool-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: #fff;
+}
+
+.tool-card p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+}
+
+/* ==================== 呼吸练习列表 ==================== */
+.breathing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.breathing-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--card-color, #4A90E2);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.breathing-card:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.breathing-card-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+.breathing-card-info {
+    flex: 1;
+}
+
+.breathing-card-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.breathing-card-info p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 5px;
+}
+
+.breathing-meta {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+}
+
+.btn-breathing-start {
+    background: var(--card-color, #4A90E2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-breathing-start:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* ==================== 呼吸练习界面 ==================== */
+.breathing-exercise-active {
+    padding: 20px 0;
+}
+
+.breathing-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.breathing-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.breathing-cycle {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+.breathing-visual {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 30px;
+}
+
+.breathing-circle {
+    position: absolute;
+    inset: 25px;
+    background: linear-gradient(135deg, var(--breath-color, #4A90E2) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s linear;
+}
+
+.breathing-inner {
+    text-align: center;
+}
+
+.breathing-phase {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.breathing-desc {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+}
+
+/* 呼吸动画 */
+.breathing-circle.phase-inhale {
+    animation: breathe-in 4000ms ease-in-out forwards;
+}
+
+.breathing-circle.phase-exhale {
+    animation: breathe-out 4000ms ease-in-out forwards;
+}
+
+.breathing-circle.phase-hold,
+.breathing-circle.phase-hold1,
+.breathing-circle.phase-hold2 {
+    animation: breathe-hold 4000ms linear forwards;
+}
+
+@keyframes breathe-in {
+    from { transform: scale(1); }
+    to { transform: scale(1.3); }
+}
+
+@keyframes breathe-out {
+    from { transform: scale(1.3); }
+    to { transform: scale(1); }
+}
+
+@keyframes breathe-hold {
+    from { transform: scale(var(--current-scale, 1)); }
+    to { transform: scale(var(--current-scale, 1)); }
+}
+
+/* 进度环 */
+.breathing-progress-ring {
+    position: absolute;
+    inset: 0;
+}
+
+.breathing-progress-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 4;
+}
+
+.progress-fill {
+    fill: none;
+    stroke: var(--breath-color, #4A90E2);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+}
+
+@keyframes progress-ring {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.breathing-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-breathing-control {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-breathing-control:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.btn-breathing-control.secondary {
+    background: transparent;
+}
+
+.breathing-instruction {
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+/* 呼吸完成 */
+.breathing-complete {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.breathing-complete .complete-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.breathing-complete h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.breathing-complete p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.complete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* ==================== Grounding 技巧 ==================== */
+.grounding-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.grounding-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--card-color, #FF6B6B);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.grounding-card:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.grounding-card-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+.grounding-card-info {
+    flex: 1;
+}
+
+.grounding-card-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.grounding-card-info p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 5px;
+}
+
+.grounding-meta {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+}
+
+.btn-grounding-start {
+    background: var(--card-color, #FF6B6B);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-grounding-start:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* Grounding 练习界面 */
+.grounding-technique-active {
+    padding: 20px 0;
+}
+
+.grounding-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.grounding-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.grounding-progress {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.grounding-step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.grounding-step-dot.active {
+    background: var(--card-color, #FF6B6B);
+    transform: scale(1.2);
+}
+
+.grounding-content {
+    margin-bottom: 30px;
+}
+
+.grounding-step-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 30px 25px;
+    text-align: center;
+}
+
+.step-number-badge {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--step-color, #FF6B6B) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon {
+    font-size: 1.5rem;
+}
+
+.step-number {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.step-title {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.step-prompt {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.prompt-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.step-prompt p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    margin: 0;
+}
+
+.step-examples {
+    text-align: left;
+}
+
+.examples-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+}
+
+.step-examples ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-examples li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+.step-examples li::before {
+    content: '•';
+    position: absolute;
+    left: 5px;
+    color: var(--step-color, #FF6B6B);
+}
+
+.grounding-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.btn-nav-prev,
+.btn-nav-next {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-nav-prev:hover:not(:disabled),
+.btn-nav-next:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.btn-nav-prev:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.step-counter {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+}
+
+.grounding-complete {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.grounding-complete .complete-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.grounding-complete h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.grounding-complete p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.complete-tip {
+    color: rgba(255,255,255,0.5) !important;
+    font-size: 0.95rem !important;
+}
+
+/* ==================== 自我对话 ==================== */
+.selftalk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.selftalk-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--card-color, #9B59B6);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.selftalk-card:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.selftalk-card-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+.selftalk-card-info {
+    flex: 1;
+}
+
+.selftalk-card-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.selftalk-meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.btn-selftalk-start {
+    background: var(--card-color, #9B59B6);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-selftalk-start:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* 自我对话界面 */
+.selftalk-active {
+    padding: 20px 0;
+}
+
+.selftalk-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.selftalk-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.selftalk-progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.selftalk-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #9B59B6 0%, #E91E63 100%);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.selftalk-messages {
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.selftalk-message {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.08);
+    text-align: left;
+}
+
+.selftalk-message.acknowledge {
+    border-left: 4px solid #3498DB;
+}
+
+.selftalk-message.validate {
+    border-left: 4px solid #9B59B6;
+}
+
+.selftalk-message.reality {
+    border-left: 4px solid #2ECC71;
+}
+
+.selftalk-message.action {
+    border-left: 4px solid #F39C12;
+}
+
+.selftalk-message.encourage {
+    border-left: 4px solid #E91E63;
+}
+
+.message-type-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+}
+
+.selftalk-message p {
+    font-size: 1.1rem;
+    color: #fff;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.selftalk-input-area {
+    text-align: center;
+}
+
+.btn-selftalk-next {
+    background: linear-gradient(135deg, #9B59B6 0%, #E91E63 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-selftalk-next:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+}
+
+.selftalk-complete {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.selftalk-complete .complete-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.selftalk-complete h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.selftalk-complete p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* ==================== 危机资源 ==================== */
+.crisis-notice {
+    background: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.crisis-notice .notice-icon {
+    font-size: 1.8rem;
+}
+
+.crisis-notice .notice-content p {
+    margin: 0 0 5px;
+    color: rgba(255,255,255,0.9);
+}
+
+.crisis-notice .notice-content p:last-child {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+.crisis-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.crisis-category {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 4px solid var(--category-color, #E74C3C);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.category-icon {
+    font-size: 1.5rem;
+}
+
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resource-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.resource-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.resource-info h5 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.resource-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 5px;
+}
+
+.resource-hours {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+
+.btn-call {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-call:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.call-icon {
+    font-size: 1.1rem;
+}
+
+.call-number {
+    font-weight: 600;
+}
+
+.btn-visit {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-visit:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ==================== 通用按钮 ==================== */
+.btn-back {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    color: #1a1a2e;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 14px 35px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* ==================== 动画 ==================== */
+@keyframes pulse-gentle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes ring-expand {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0; }
+}
+
+@keyframes check-pop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slide-in-up {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== 响应式 ==================== */
+@media (max-width: 600px) {
+    .emergency-header {
+        padding: 30px 15px;
+    }
+    
+    .emergency-header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .emergency-tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .breathing-visual {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .breathing-circle {
+        inset: 20px;
+    }
+    
+    .breathing-phase {
+        font-size: 1.3rem;
+    }
+    
+    .grounding-navigation {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .step-counter {
+        order: -1;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .resource-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .btn-call,
+    .btn-visit {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==================== 页脚 ==================== */
+.emergency-footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 40px;
+}
+
+.emergency-footer p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.emergency-footer .footer-highlight {
+    color: rgba(255,255,255,0.7);
+}
