@@ -1,0 +1,522 @@
+/** 情绪追踪打卡系统样式 */
+
+/* ========== 情绪选择器 ========== */
+.mood-selector {
+    margin: 20px 0;
+}
+
+.mood-selector-title {
+    font-size: 16px;
+    color: #d4af37;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.mood-levels {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mood-level-option {
+    flex: 1;
+    min-width: 60px;
+    max-width: 80px;
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-level-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.mood-level-option.selected {
+    border-color: var(--mood-color);
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+}
+
+.mood-emoji {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.mood-name {
+    font-size: 13px;
+    color: #f5f5f5;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.mood-desc {
+    font-size: 11px;
+    color: #6a6a6a;
+    line-height: 1.3;
+}
+
+/* ========== 触发点选择器 ========== */
+.trigger-selector {
+    margin: 20px 0;
+}
+
+.trigger-selector-title {
+    font-size: 14px;
+    color: #a0a0a0;
+    margin-bottom: 12px;
+}
+
+.trigger-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.trigger-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.trigger-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.trigger-option.selected {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+}
+
+.trigger-icon {
+    font-size: 14px;
+}
+
+.trigger-name {
+    font-size: 13px;
+    color: #f5f5f5;
+}
+
+/* ========== 情绪打卡表单 ========== */
+.mood-checkin-form {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.mood-checkin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mood-checkin-header h3 {
+    color: #d4af37;
+    margin: 0;
+    font-size: 18px;
+}
+
+.mood-checkin-date {
+    font-size: 13px;
+    color: #6a6a6a;
+}
+
+.mood-note-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    color: #f5f5f5;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.mood-note-input:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.mood-checkin-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.mood-checkin-actions button {
+    flex: 1;
+}
+
+.mood-save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ========== 情绪趋势图表 ========== */
+.mood-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.mood-chart-title {
+    font-size: 16px;
+    color: #d4af37;
+    font-weight: 500;
+}
+
+.mood-chart-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.chart-tab {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: #a0a0a0;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chart-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chart-tab.active {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.mood-trend-chart {
+    width: 100%;
+    height: auto;
+}
+
+/* ========== 情绪统计 ========== */
+.mood-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.mood-stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px 8px;
+    text-align: center;
+}
+
+.mood-stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 4px;
+}
+
+.mood-stat-label {
+    font-size: 12px;
+    color: #6a6a6a;
+}
+
+.mood-trigger-insight {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.insight-label {
+    color: #a0a0a0;
+}
+
+.insight-value {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+/* ========== 快速打卡组件 ========== */
+.quick-checkin {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.quick-checkin.completed {
+    background: rgba(76, 175, 80, 0.05);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.quick-checkin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.quick-checkin-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #f5f5f5;
+}
+
+.checkin-status {
+    font-size: 13px;
+    color: #4caf50;
+}
+
+.quick-checkin-hint {
+    font-size: 13px;
+    color: #6a6a6a;
+    margin: 0 0 16px 0;
+}
+
+.quick-mood-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.quick-mood-btn {
+    flex: 1;
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quick-mood-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--mood-color);
+    transform: scale(1.05);
+}
+
+.today-mood-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.today-mood-emoji {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.today-mood-info {
+    flex: 1;
+}
+
+.today-mood-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.today-mood-note {
+    font-size: 13px;
+    color: #6a6a6a;
+    line-height: 1.4;
+}
+
+.today-triggers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.quick-trigger-tag {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #a0a0a0;
+}
+
+/* ========== 情绪历史 ========== */
+.mood-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mood-history-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.mood-history-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.history-date {
+    font-size: 13px;
+    color: #6a6a6a;
+    width: 60px;
+}
+
+.history-mood {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+}
+
+.history-emoji {
+    font-size: 20px;
+}
+
+.history-mood-name {
+    font-size: 14px;
+}
+
+.history-triggers {
+    display: flex;
+    gap: 4px;
+}
+
+.history-trigger {
+    font-size: 14px;
+}
+
+.history-level {
+    font-size: 12px;
+    color: #6a6a6a;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+.mood-history-empty {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.mood-history-empty .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.mood-history-empty p {
+    color: #a0a0a0;
+    margin: 0;
+}
+
+.mood-history-empty .empty-hint {
+    font-size: 13px;
+    color: #6a6a6a;
+    margin-top: 8px;
+}
+
+/* ========== 情绪追踪页面 ========== */
+.mood-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding-bottom: 40px;
+}
+
+.mood-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.mood-header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    color: #d4af37;
+    margin: 0 0 8px 0;
+}
+
+.mood-header p {
+    color: #6a6a6a;
+    margin: 0;
+    font-size: 14px;
+}
+
+.mood-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mood-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.mood-section-title {
+    font-size: 16px;
+    color: #d4af37;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 响应式适配 */
+@media (max-width: 480px) {
+    .mood-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mood-levels {
+        gap: 6px;
+    }
+    
+    .mood-level-option {
+        min-width: 55px;
+        padding: 12px 8px;
+    }
+    
+    .mood-emoji {
+        font-size: 24px;
+    }
+    
+    .mood-name {
+        font-size: 11px;
+    }
+    
+    .mood-desc {
+        font-size: 10px;
+    }
+    
+    .quick-mood-btn {
+        font-size: 20px;
+    }
+}

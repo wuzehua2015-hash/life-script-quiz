@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情绪追踪 - 人生剧本</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mood.css">
+</head>
+<body>
+    <div class="mood-page">
+        <!-- 头部 -->
+        <header class="mood-header">
+            <a href="../profile/index.html" class="back-link">← 返回个人中心</a>
+            <h1>😊 情绪追踪</h1>
+            <p>记录情绪，看见模式，理解自己</p>
+        </header>
+
+        <div class="mood-content">
+            <!-- 今日打卡 -->
+            <div class="mood-section">
+                <div id="today-checkin-container"></div>
+            </div>
+
+            <!-- 统计概览 -->
+            <div class="mood-section">
+                <h2 class="mood-section-title">📊 统计概览</h2>
+                <div id="mood-stats-container"></div>
+            </div>
+
+            <!-- 情绪趋势 -->
+            <div class="mood-section">
+                <div id="mood-trend-container"></div>
+            </div>
+
+            <!-- 打卡历史 -->
+            <div class="mood-section">
+                <h2 class="mood-section-title">📜 打卡历史</h2>
+                <div id="mood-history-container"></div>
+            </div>
+        </div>
+
+        <!-- 打卡表单弹窗 -->
+        <div id="checkin-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 500px;">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <div id="checkin-form-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/mood-service.js"></script>
+    <script src="../js/mood-ui.js"></script>
+    <script>
+        (function() {
+            let currentChartDays = 7;
+            let editingCheckin = null;
+
+            // 初始化
+            function init() {
+                renderTodayCheckin();
+                renderStats();
+                renderTrend();
+                renderHistory();
+                bindEvents();
+            }
+
+            // 渲染今日打卡
+            function renderTodayCheckin() {
+                const container = document.getElementById('today-checkin-container');
+                MoodUI.renderQuickCheckin(container, {
+                    onCheckin: (data) => {
+                        if (data && data.level) {
+                            // 快速打卡
+                            MoodService.createCheckin({
+                                level: data.level,
+                                triggers: [],
+                                note: ''
+                            });
+                            renderAll();
+                        } else {
+                            // 打开完整打卡表单
+                            editingCheckin = data;
+                            openCheckinModal(data);
+                        }
+                    }
+                });
+            }
+
+            // 渲染统计
+            function renderStats() {
+                const container = document.getElementById('mood-stats-container');
+                MoodUI.renderMoodStats(container);
+            }
+
+            // 渲染趋势图表
+            function renderTrend() {
+                const container = document.getElementById('mood-trend-container');
+                MoodUI.renderMoodTrendChart(container, {
+                    days: currentChartDays,
+                    onDaysChange: (days) => {
+                        currentChartDays = days;
+                        renderTrend();
+                    }
+                });
+            }
+
+            // 渲染历史
+            function renderHistory() {
+                const container = document.getElementById('mood-history-container');
+                MoodUI.renderMoodHistory(container, { limit: 10 });
+            }
+
+            // 打开打卡弹窗
+            function openCheckinModal(checkin = null) {
+                const modal = document.getElementById('checkin-modal');
+                const container = document.getElementById('checkin-form-container');
+                
+                MoodUI.renderMoodCheckinForm(container, {
+                    existingCheckin: checkin,
+                    onSave: (data) => {
+                        MoodService.createCheckin(data);
+                        closeCheckinModal();
+                        renderAll();
+                    },
+                    onCancel: closeCheckinModal
+                });
+                
+                modal.style.display = 'flex';
+            }
+
+            // 关闭打卡弹窗
+            function closeCheckinModal() {
+                document.getElementById('checkin-modal').style.display = 'none';
+                editingCheckin = null;
+            }
+
+            // 渲染所有组件
+            function renderAll() {
+                renderTodayCheckin();
+                renderStats();
+                renderTrend();
+                renderHistory();
+            }
+
+            // 绑定事件
+            function bindEvents() {
+                document.getElementById('close-modal').addEventListener('click', closeCheckinModal);
+                
+                document.getElementById('checkin-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'checkin-modal') {
+                        closeCheckinModal();
+                    }
+                });
+            }
+
+            // 页面加载完成后初始化
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>

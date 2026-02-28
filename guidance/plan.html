@@ -254,6 +254,21 @@
             </div>
         </div>
         
+        <!-- 情绪打卡入口 -->
+        <div class="diary-entry-section" id="mood-entry" style="display: none; margin-bottom: 20px;">
+            <div class="diary-entry-info">
+                <h3>😊 情绪打卡</h3>
+                <p>记录今日情绪，追踪情绪模式</p>
+                <div class="diary-stats-mini">
+                    <span class="diary-stat-mini">已打卡 <span id="mood-count">0</span> 天</span>
+                    <span class="diary-stat-mini">连续 <span id="mood-streak">0</span> 天</span>
+                </div>
+            </div>
+            <a href="../mood/index.html" class="diary-entry-btn" style="background: linear-gradient(135deg, #FF6B6B, #FF8E8E);">
+                去打卡 →
+            </a>
+        </div>
+
         <!-- 日记入口 -->
         <div class="diary-entry-section" id="diary-entry" style="display: none;">
             <div class="diary-entry-info">
@@ -350,6 +365,31 @@
             renderPlan(plan);
             updateProgress(plan);
             loadDiaryStats();
+            loadMoodStats();
+            
+            function loadMoodStats() {
+                const checkins = JSON.parse(localStorage.getItem('lsq_moodCheckins') || '[]');
+                document.getElementById('mood-count').textContent = checkins.length;
+                document.getElementById('mood-entry').style.display = 'flex';
+                
+                // 计算连续打卡
+                let streak = 0;
+                if (checkins.length > 0) {
+                    const dates = checkins.map(c => c.date).sort().reverse();
+                    const today = new Date().toISOString().split('T')[0];
+                    let checkDate = today;
+                    
+                    for (let i = 0; i < dates.length; i++) {
+                        if (dates[i] === checkDate || (i === 0 && isYesterday(dates[i], checkDate))) {
+                            streak++;
+                            checkDate = getPrevDate(checkDate);
+                        } else if (dates[i] !== checkDate) {
+                            break;
+                        }
+                    }
+                }
+                document.getElementById('mood-streak').textContent = streak;
+            }
             
             function loadDiaryStats() {
                 const diaries = JSON.parse(localStorage.getItem('lsq_diaries') || '[]');

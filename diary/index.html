@@ -6,6 +6,7 @@
     <title>每日觉察日记 - 人生剧本</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/diary.css">
+    <link rel="stylesheet" href="../css/mood.css">
 </head>
 <body>
     <div class="diary-page">
@@ -18,6 +19,11 @@
 
         <!-- 统计面板 -->
         <div class="diary-stats" id="diary-stats"></div>
+
+        <!-- 情绪打卡快速入口 -->
+        <div class="diary-mood-section" id="diary-mood-section">
+            <div class="mood-quick-entry" id="mood-quick-entry"></div>
+        </div>
 
         <!-- 标签页切换 -->
         <div class="diary-tabs">
@@ -40,6 +46,8 @@
 
     <script src="../js/diary-service.js"></script>
     <script src="../js/diary-ui.js"></script>
+    <script src="../js/mood-service.js"></script>
+    <script src="../js/mood-ui.js"></script>
     <script>
         (function() {
             let currentTab = 'list';
@@ -50,8 +58,32 @@
             // 初始化
             function init() {
                 renderStats();
+                renderMoodQuickEntry();
                 renderDiaryList();
                 bindEvents();
+            }
+
+            // 渲染情绪打卡快速入口
+            function renderMoodQuickEntry() {
+                const container = document.getElementById('mood-quick-entry');
+                if (!container) return;
+                
+                MoodUI.renderQuickCheckin(container, {
+                    onCheckin: (data) => {
+                        if (data && data.level) {
+                            // 快速打卡
+                            MoodService.createCheckin({
+                                level: data.level,
+                                triggers: [],
+                                note: ''
+                            });
+                            renderMoodQuickEntry();
+                        } else {
+                            // 跳转到情绪追踪页面
+                            window.location.href = '../mood/index.html';
+                        }
+                    }
+                });
             }
 
             // 渲染统计

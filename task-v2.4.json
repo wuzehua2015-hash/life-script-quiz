@@ -93,7 +93,7 @@
             "关联情绪与原型触发点",
             "在日记页面集成情绪打卡"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "medium",
           "estimatedTime": "2.5小时"
         },

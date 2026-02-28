@@ -25,6 +25,17 @@
     color: #6a6a6a;
 }
 
+/* 情绪打卡区域 */
+.diary-mood-section {
+    margin-bottom: 30px;
+}
+
+.mood-quick-entry {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+}
+
 /* 统计面板 */
 .diary-stats {
     margin-bottom: 30px;
