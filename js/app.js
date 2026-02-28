@@ -606,7 +606,13 @@
                 // 清除进行中的进度（已完成）
                 localStorage.removeItem('lsq_testProgress');
                 
+                // 检测并解锁徽章
+                const newlyUnlocked = checkAndUnlockAchievements();
+                
                 renderResult();
+                
+                // 在结果页渲染徽章展示
+                renderResultBadges(newlyUnlocked);
                 
                 switchScreen('result');
                 
@@ -614,6 +620,63 @@
                 console.error('错误:', e.message);
             }
         }, 500);
+    }
+
+    // ==================== 成就徽章系统 ====================
+    
+    /**
+     * 检测并解锁成就徽章
+     */
+    function checkAndUnlockAchievements() {
+        if (typeof AchievementService === 'undefined') {
+            console.warn('AchievementService 未加载');
+            return [];
+        }
+        
+        // 检测首次测试成就
+        const newlyUnlocked = AchievementService.checkAndUnlock('first_test', { testCompleted: true });
+        
+        // 检测查看结果详情成就
+        AchievementService.checkAndUnlock('view_result_detail', { viewedDetail: true });
+        
+        console.log('新解锁的徽章:', newlyUnlocked);
+        return newlyUnlocked;
+    }
+    
+    /**
+     * 在结果页渲染徽章展示
+     */
+    function renderResultBadges(newlyUnlocked) {
+        const container = document.getElementById('result-badges-section');
+        if (!container) return;
+        
+        if (typeof BadgeUI !== 'undefined') {
+            container.innerHTML = BadgeUI.renderResultBadges(newlyUnlocked);
+        } else {
+            // BadgeUI未加载时的简单展示
+            const stats = typeof AchievementService !== 'undefined' ? 
+                AchievementService.getStats() : { unlocked: 0, total: 20, progress: 0 };
+            
+            container.innerHTML = `
+                <div class="result-badges-section">
+                    <div class="result-badges-header">
+                        <h3>🏅 成就徽章</h3>
+                        <a href="achievements/index.html" class="view-all-link">查看全部 →</a>
+                    </div>
+                    <div class="result-badges-progress">
+                        <span>已解锁 ${stats.unlocked}/${stats.total} 个徽章</span>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: ${stats.progress}%"></div>
+                        </div>
+                    </div>
+                    ${newlyUnlocked.length > 0 ? `
+                        <div class="new-badges-notice">
+                            <span class="new-badge">✨ 新获得 ${newlyUnlocked.length} 个徽章！</span>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
     }
 
     // ==================== 结果计算 ====================
@@ -710,6 +773,17 @@
         
         // 同时保存原型到localStorage，供行动指导页面使用
         localStorage.setItem('lsq_selected_archetype', bestMatch.archetype);
+        
+        // 解锁角色到图鉴
+        if (typeof RoleCollection !== 'undefined') {
+            RoleCollection.init();
+            const unlockResult = RoleCollection.unlockRole(
+                bestMatch.archetype,
+                matchedCharacter,
+                totalMatchPercentage
+            );
+            console.log('角色解锁结果:', unlockResult);
+        }
         
         console.log('calculateResult完成:', state.result);
     }

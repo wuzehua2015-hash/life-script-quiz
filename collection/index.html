@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色图鉴 - 人生剧本测试</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/role-collection.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .collection-page-header {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid var(--film-border);
+        }
+        
+        .collection-page-header h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.75rem;
+            color: var(--accent-gold);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .collection-page-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--film-border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .start-test-btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: var(--gradient-gold);
+            color: var(--bg-primary);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .start-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">
+        ← 返回测试
+    </a>
+
+    <div class="collection-page-header">
+        <h1>📚 角色图鉴</h1>
+        <p>收集12种人生剧本原型，探索不同的生命可能</p>
+    </div>
+
+    <div id="role-collection-container">
+        <!-- 动态渲染角色图鉴 -->
+    </div>
+
+    <script src="../js/role-collection.js"></script>
+    <script src="../js/role-collection-ui.js"></script>
+    <script>
+        // 初始化角色收集系统
+        RoleCollection.init();
+        
+        // 检查是否有解锁的角色
+        const progress = RoleCollection.getProgress();
+        const container = document.getElementById('role-collection-container');
+        
+        if (progress.unlocked === 0) {
+            // 显示空状态
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">🔒</div>
+                    <h3>还没有解锁任何角色</h3>
+                    <p>完成人生剧本测试，解锁属于你的角色图鉴</p>
+                    <a href="../index.html" class="start-test-btn">开始测试</a>
+                </div>
+            `;
+        } else {
+            // 渲染角色图鉴
+            RoleCollectionUI.renderCollectionPage('role-collection-container');
+        }
+    </script>
+</body>
+</html>

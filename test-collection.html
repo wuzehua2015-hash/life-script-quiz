@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色收集系统测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/role-collection.css">
+    <style>
+        body {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .test-section h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-gold);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+        .test-result {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎭 角色收集系统测试页面</h1>
+
+    <div class="test-section">
+        <h2>1. 系统初始化</h2>
+        <button class="btn" onclick="initSystem()">初始化角色收集系统</button>
+        <div id="init-result" class="test-result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 模拟解锁角色</h2>
+        <button class="btn" onclick="unlockTestRole('lone_hero')">解锁孤勇者</button>
+        <button class="btn" onclick="unlockTestRole('pleaser')">解锁讨好者</button>
+        <button class="btn" onclick="unlockTestRole('warrior')">解锁战士</button>
+        <button class="btn" onclick="unlockTestRole('healer')">解锁治愈者</button>
+        <div id="unlock-result" class="test-result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 查看收集进度</h2>
+        <button class="btn" onclick="showProgress()">显示进度</button>
+        <div id="progress-result" class="test-result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. 查看已解锁角色</h2>
+        <button class="btn" onclick="showUnlockedRoles()">显示已解锁角色</button>
+        <div id="roles-result" class="test-result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. 清除测试数据</h2>
+        <button class="btn btn-secondary" onclick="clearTestData()">清除所有角色数据</button>
+        <div id="clear-result" class="test-result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. 跳转到图鉴页面</h2>
+        <a href="collection/index.html" class="btn">查看角色图鉴</a>
+        <a href="index.html" class="btn btn-secondary">返回测试首页</a>
+    </div>
+
+    <script src="js/role-collection.js"></script>
+    <script>
+        function initSystem() {
+            RoleCollection.init();
+            const result = {
+                status: 'success',
+                message: '角色收集系统已初始化',
+                storageKeys: [
+                    'lsq_unlockedRoles',
+                    'lsq_collectionStats',
+                    'lsq_lastViewedRole'
+                ]
+            };
+            document.getElementById('init-result').style.display = 'block';
+            document.getElementById('init-result').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function unlockTestRole(archetypeId) {
+            RoleCollection.init();
+            
+            // 模拟角色数据
+            const testCharacters = {
+                lone_hero: {
+                    name: '安欣',
+                    work: '《狂飙》',
+                    quote: '我无亲无故，敢跟他耗一辈子。',
+                    similarity: ['坚持正义', '孤独前行', '不向黑暗妥协', '内心坚定'],
+                    story: '从意气风发的年轻刑警到满头白发的边缘警察，安欣用20年时间坚守正义...',
+                    advice: '像安欣一样坚持信念很可贵，但也要学会保护自己，找到并肩作战的伙伴。',
+                    growthPath: {
+                        early: '年轻热血的刑警，相信正义必胜',
+                        middle: '发现师父是内鬼，开始被孤立',
+                        late: '独自坚守20年，最终将黑恶势力一网打尽'
+                    },
+                    turningPoint: {
+                        event: '发现师父曹闯是内鬼',
+                        impact: '彻底打破了对世界非黑即白的认知'
+                    },
+                    realCase: {
+                        situation: '职场中坚持原则却被孤立',
+                        example: '你拒绝参与部门的不正当操作，结果被调离核心项目...'
+                    }
+                },
+                pleaser: {
+                    name: '樊胜美',
+                    work: '《欢乐颂》',
+                    quote: '我樊胜美，一个人在上海打拼，容易吗我？',
+                    similarity: ['被家庭索取', '渴望被爱', '委屈求全', '自我价值感低'],
+                    story: '外企HR，外表光鲜，却被原生家庭不断索取...',
+                    advice: '樊胜美的困境在于把付出当筹码，真正的爱不需要交换。',
+                    growthPath: {
+                        early: '通过付出换取爱和认可',
+                        middle: '付出被当作理所当然',
+                        late: '意识到爱不是交易，开始学习设立边界'
+                    },
+                    turningPoint: {
+                        event: '付出被忽视或利用',
+                        impact: '开始质疑「付出=被爱」的模式'
+                    },
+                    realCase: {
+                        situation: '在关系中总是委屈求全',
+                        example: '你总是优先考虑伴侣的需求，压抑自己的感受...'
+                    }
+                },
+                warrior: {
+                    name: '李云龙',
+                    work: '《亮剑》',
+                    quote: '面对强大的对手，明知不敌，也要毅然亮剑。',
+                    similarity: ['勇敢无畏', '战斗精神', '重情重义', '永不退缩'],
+                    story: '八路军独立团团长，性格粗犷，作战勇猛...',
+                    advice: '李云龙的亮剑精神令人敬佩，但战斗不是唯一选择。',
+                    growthPath: {
+                        early: '充满战斗精神，把生活看作战场',
+                        middle: '赢得胜利但感到孤独',
+                        late: '学会选择值得的战斗'
+                    },
+                    turningPoint: {
+                        event: '为战斗失去重要的人',
+                        impact: '开始质疑战斗的意义'
+                    },
+                    realCase: {
+                        situation: '享受竞争，把生活当作战场',
+                        example: '你在会议上总要证明自己是对的...'
+                    }
+                },
+                healer: {
+                    name: '贺涵',
+                    work: '《我的前半生》',
+                    quote: '你已经不年轻了，不能再靠刷脸去做人生的摆渡船了。',
+                    similarity: ['智慧成熟', '帮助他人', '理性冷静', '引导成长'],
+                    story: '咨询业精英，帮助罗子君重新站起来...',
+                    advice: '贺涵的智慧值得学习，但帮助他人不能代替自己的成长。',
+                    growthPath: {
+                        early: '天生善于倾听和支持他人',
+                        middle: '忽视自己的需求，感到疲惫',
+                        late: '学会接受帮助，明白爱是双向流动'
+                    },
+                    turningPoint: {
+                        event: '精疲力竭时发现自己难以求助',
+                        impact: '意识到治愈他人前需要先治愈自己'
+                    },
+                    realCase: {
+                        situation: '善于倾听但难以表达自己的需求',
+                        example: '你总是朋友倾诉的对象，但当你难过时却不知道怎么开口...'
+                    }
+                }
+            };
+            
+            const character = testCharacters[archetypeId];
+            const matchPercentage = Math.floor(Math.random() * 30) + 70; // 70-99%
+            
+            const result = RoleCollection.unlockRole(archetypeId, character, matchPercentage);
+            
+            document.getElementById('unlock-result').style.display = 'block';
+            document.getElementById('unlock-result').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function showProgress() {
+            const progress = RoleCollection.getProgress();
+            document.getElementById('progress-result').style.display = 'block';
+            document.getElementById('progress-result').textContent = JSON.stringify(progress, null, 2);
+        }
+
+        function showUnlockedRoles() {
+            const roles = RoleCollection.getUnlockedRoles();
+            document.getElementById('roles-result').style.display = 'block';
+            document.getElementById('roles-result').textContent = JSON.stringify(roles, null, 2);
+        }
+
+        function clearTestData() {
+            RoleCollection.clearAll();
+            document.getElementById('clear-result').style.display = 'block';
+            document.getElementById('clear-result').textContent = '所有角色收集数据已清除';
+        }
+    </script>
+</body>
+</html>

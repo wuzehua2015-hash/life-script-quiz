@@ -1,0 +1,892 @@
+/**
+ * 成就徽章系统 - 样式表
+ * v2.4 成就徽章系统
+ */
+
+/* ========================================
+   成就徽章系统 - 样式表
+   ======================================== */
+
+/* ------------------ 徽章解锁动画覆盖层 ------------------ */
+.badge-unlock-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.badge-unlock-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.badge-unlock-modal {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.badge-unlock-content {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 24px;
+    padding: 40px 30px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.2);
+    animation: badge-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes badge-pop-in {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.unlock-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 24px;
+    animation: title-glow 2s ease-in-out infinite;
+}
+
+@keyframes title-glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4); }
+}
+
+.badge-showcase {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
+}
+
+.badge-icon-large {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #d4af37 0%, #f0d878 50%, #d4af37 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+    animation: badge-pulse 2s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.badge-rays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(212, 175, 55, 0.3) 10deg,
+        transparent 20deg,
+        transparent 40deg,
+        rgba(212, 175, 55, 0.3) 50deg,
+        transparent 60deg,
+        transparent 80deg,
+        rgba(212, 175, 55, 0.3) 90deg,
+        transparent 100deg,
+        transparent 120deg,
+        rgba(212, 175, 55, 0.3) 130deg,
+        transparent 140deg,
+        transparent 160deg,
+        rgba(212, 175, 55, 0.3) 170deg,
+        transparent 180deg,
+        transparent 200deg,
+        rgba(212, 175, 55, 0.3) 210deg,
+        transparent 220deg,
+        transparent 240deg,
+        rgba(212, 175, 55, 0.3) 250deg,
+        transparent 260deg,
+        transparent 280deg,
+        rgba(212, 175, 55, 0.3) 290deg,
+        transparent 300deg,
+        transparent 320deg,
+        rgba(212, 175, 55, 0.3) 330deg,
+        transparent 340deg,
+        transparent 360deg
+    );
+    animation: rays-rotate 10s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rays-rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.badge-unlock-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 12px;
+}
+
+.badge-unlock-description {
+    font-size: 1rem;
+    color: #a0a0b0;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.badge-unlock-points {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.more-badges {
+    color: #a0a0b0;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.unlock-confirm-btn {
+    min-width: 150px;
+}
+
+/* ------------------ Confetti 效果 ------------------ */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    will-change: transform;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+/* ------------------ 成就页面布局 ------------------ */
+.achievements-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+}
+
+/* 页面头部 */
+.achievements-header {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: rgba(26, 26, 37, 0.8);
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.achievements-title-section {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.achievements-title-section h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 8px;
+}
+
+.achievements-subtitle {
+    color: #a0a0b0;
+    font-size: 1rem;
+}
+
+/* 统计卡片 */
+.achievements-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: rgba(18, 18, 26, 0.6);
+    border-radius: 16px;
+    padding: 16px 8px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.stat-card.highlight {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 4px;
+}
+
+.stat-card.highlight .stat-value {
+    color: #f0d878;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #a0a0b0;
+}
+
+/* 进度条 */
+.achievements-progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37 0%, #f0d878 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-percent {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #d4af37;
+    min-width: 40px;
+    text-align: right;
+}
+
+/* ------------------ 徽章分类区块 ------------------ */
+.badge-category {
+    margin-bottom: 32px;
+    background: rgba(26, 26, 37, 0.6);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-icon {
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 4px;
+}
+
+.category-description {
+    font-size: 0.85rem;
+    color: #a0a0b0;
+}
+
+.category-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.progress-ring {
+    width: 40px;
+    height: 40px;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 3;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: #d4af37;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+/* ------------------ 徽章网格 ------------------ */
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* 徽章卡片 */
+.badge-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(18, 18, 26, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.badge-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.badge-card.unlocked {
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1) 0%, rgba(26, 26, 37, 0.8) 100%);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.badge-card.locked {
+    opacity: 0.7;
+}
+
+.badge-card.locked:hover {
+    opacity: 0.9;
+}
+
+.badge-icon-wrapper {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.badge-icon {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #d4af37 0%, #f0d878 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.badge-card.locked .badge-icon {
+    background: linear-gradient(145deg, #3a3a4a 0%, #2a2a3a 100%);
+    box-shadow: none;
+}
+
+.badge-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 60%
+    );
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.badge-lock {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 24px;
+    height: 24px;
+    background: #2a2a3a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    border: 2px solid #1a1a2e;
+}
+
+.badge-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.badge-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.badge-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge-card.locked .badge-name {
+    color: #a0a0b0;
+}
+
+.badge-description {
+    font-size: 0.8rem;
+    color: #a0a0b0;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.badge-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-points {
+    font-size: 0.75rem;
+    color: #d4af37;
+    font-weight: 600;
+    background: rgba(212, 175, 55, 0.15);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.badge-date {
+    font-size: 0.7rem;
+    color: #6a6a7a;
+}
+
+/* ------------------ 结果页徽章展示 ------------------ */
+.result-badges-section {
+    margin-top: 32px;
+    padding: 24px;
+    background: rgba(26, 26, 37, 0.6);
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.result-badges-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.result-badges-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f5f5f5;
+}
+
+.view-all-link {
+    font-size: 0.85rem;
+    color: #d4af37;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.view-all-link:hover {
+    color: #f0d878;
+}
+
+.result-badges-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.result-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(18, 18, 26, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.result-badge-item.unlocked {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.result-badge-icon {
+    font-size: 1.5rem;
+}
+
+.result-badge-name {
+    font-size: 0.85rem;
+    color: #f5f5f5;
+    font-weight: 500;
+}
+
+.result-badges-empty {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    color: #6a6a7a;
+    font-size: 0.9rem;
+}
+
+.result-badges-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-badges-progress span {
+    font-size: 0.85rem;
+    color: #a0a0b0;
+}
+
+.mini-progress {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37 0%, #f0d878 100%);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+.new-badges-notice {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.new-badge {
+    display: inline-block;
+    background: linear-gradient(145deg, #d4af37 0%, #f0d878 100%);
+    color: #1a1a2e;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    animation: badge-notice-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-notice-pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.2); }
+}
+
+/* ------------------ 徽章详情弹窗 ------------------ */
+.badge-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.badge-detail-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.badge-detail-content {
+    position: relative;
+    width: 90%;
+    max-width: 360px;
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 24px;
+    padding: 32px 24px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+    animation: modal-slide-up 0.3s ease;
+}
+
+@keyframes modal-slide-up {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.badge-detail-content .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: #a0a0b0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.badge-detail-content .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #f5f5f5;
+}
+
+.badge-detail-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+}
+
+.badge-detail-icon.unlocked {
+    background: linear-gradient(145deg, #d4af37 0%, #f0d878 100%);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+.badge-detail-icon.locked {
+    background: linear-gradient(145deg, #3a3a4a 0%, #2a2a3a 100%);
+}
+
+.lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 26, 37, 0.8);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.badge-detail-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 12px;
+}
+
+.badge-detail-description {
+    font-size: 0.95rem;
+    color: #a0a0b0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.badge-detail-meta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.badge-detail-meta .points {
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.badge-detail-meta .unlock-date {
+    color: #6a6a7a;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+.unlock-hint {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.unlock-hint p {
+    color: #d4af37;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ------------------ 响应式适配 ------------------ */
+@media (max-width: 768px) {
+    .achievements-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .badges-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    
+    .category-progress {
+        align-self: flex-end;
+    }
+    
+    .badge-unlock-content {
+        padding: 32px 20px;
+    }
+    
+    .badge-showcase {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .badge-icon-large {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievements-container {
+        padding: 12px;
+    }
+    
+    .achievements-header {
+        padding: 16px;
+    }
+    
+    .badge-category {
+        padding: 16px;
+    }
+    
+    .badge-card {
+        padding: 12px;
+    }
+    
+    .badge-icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .badge-icon {
+        font-size: 1.5rem;
+        border-radius: 12px;
+    }
+}

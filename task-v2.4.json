@@ -21,7 +21,7 @@
             "在结果页添加'查看所有角色'入口",
             "本地存储用户已解锁角色"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "3小时",
           "notes": "参考Pokemon图鉴设计，增加收集乐趣"
@@ -38,7 +38,7 @@
             "添加徽章获得动画效果",
             "在结果页和个人中心展示徽章"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "3小时",
           "notes": "徽章类型：探索类、坚持类、分享类"

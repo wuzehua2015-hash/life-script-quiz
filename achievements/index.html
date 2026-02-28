@@ -6,22 +6,68 @@
     <title>我的成就 - 人生剧本测试</title>
     <meta name="description" content="查看你在人生剧本测试中获得的成就徽章">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        /* 成就页面专用样式 */
-        .achievements-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/badges.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="achievements-container">
-        <h1>我的成就</h1>
-        <p>成就页面开发中...</p>
-        <a href="../index.html">返回测试</a>
+    <div id="achievements-container" class="achievements-container">
+        <!-- 页面头部 -->
+        <div class="achievements-header">
+            <div class="achievements-title-section">
+                <h1>🏅 我的成就</h1>
+                <p class="achievements-subtitle">完成目标，解锁徽章，记录成长</p>
+            </div>
+            
+            <!-- 统计卡片 -->
+            <div class="achievements-stats">
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-unlocked">0</span>
+                    <span class="stat-label">已解锁</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-total">20</span>
+                    <span class="stat-label">总徽章</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-points">0</span>
+                    <span class="stat-label">总积分</span>
+                </div>
+                <div class="stat-card highlight">
+                    <span class="stat-value" id="stat-progress">0%</span>
+                    <span class="stat-label">完成度</span>
+                </div>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="achievements-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-percent" id="progress-percent">0%</span>
+            </div>
+        </div>
+        
+        <!-- 徽章分类内容 -->
+        <div class="achievements-content" id="achievements-content">
+            <!-- 动态生成 -->
+        </div>
+        
+        <!-- 返回按钮 -->
+        <div style="text-align: center; margin-top: 32px; padding-bottom: 40px;">
+            <a href="../index.html" class="btn-secondary" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 32px;border-radius:8px;background:transparent;color:#d4af37;border:1px solid #d4af37;text-decoration:none;">
+                <span>← 返回测试</span>
+            </a>
+        </div>
     </div>
+
+    <script src="../js/achievements.js"></script>
+    <script src="../js/achievement-service.js"></script>
+    <script src="../js/badge-ui.js"></script>
+    <script>
+        // 初始化成就页面
+        document.addEventListener('DOMContentLoaded', function() {
+            BadgeUI.initAchievementsPage();
+        });
+    </script>
 </body>
 </html>

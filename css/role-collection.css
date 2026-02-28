@@ -1,0 +1,550 @@
+/* ========================================
+   角色收集图鉴系统样式
+   ======================================== */
+
+/* 角色图鉴页面容器 */
+.role-collection-page {
+    padding: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 收集进度条 */
+.collection-progress {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--film-border);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-title {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.progress-count {
+    font-size: 1rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+.progress-bar-container {
+    height: 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-gold);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* 角色卡片网格 */
+.role-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+/* 角色卡片 */
+.role-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.role-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.role-card.unlocked {
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.role-card.unlocked:hover {
+    border-color: var(--accent-gold);
+}
+
+.role-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.role-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.role-card-icon.locked-icon {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+}
+
+.role-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.role-card-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.role-card-character {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.role-card-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.role-card-match {
+    margin-top: 0.5rem;
+}
+
+.match-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--accent-gold);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.role-card-unlock-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.role-card-progress {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* 角色详情弹窗 */
+.role-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    animation: fade-in 0.3s ease;
+}
+
+.role-modal-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slide-up 0.3s ease;
+}
+
+.role-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.role-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+/* 弹窗头部 */
+.role-modal-header {
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--film-border);
+}
+
+.role-modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.role-modal-title {
+    flex: 1;
+}
+
+.role-modal-title h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.role-modal-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.role-modal-match {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+}
+
+.match-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.match-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* 弹窗内容 */
+.role-modal-body {
+    padding: 1.5rem;
+}
+
+.role-modal-body h3 {
+    font-size: 1rem;
+    color: var(--accent-gold);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.role-modal-body p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* 角色信息区块 */
+.role-character-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--film-border);
+}
+
+.character-info {
+    margin-bottom: 1rem;
+}
+
+.character-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.character-work {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.character-quote {
+    margin: 0;
+    padding: 1rem;
+    background: rgba(212, 175, 55, 0.05);
+    border-left: 3px solid var(--accent-gold);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 相似点 */
+.role-similarity-section {
+    margin-bottom: 1.5rem;
+}
+
+.similarity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.similarity-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+}
+
+.similarity-dot {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* 角色故事 */
+.role-story-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+/* 成长路径 */
+.role-growth-section {
+    margin-bottom: 1.5rem;
+}
+
+.growth-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.growth-stage {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.stage-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.growth-stage p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 转折点 */
+.role-turning-section {
+    margin-bottom: 1.5rem;
+}
+
+.turning-point {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.turning-point p {
+    margin-bottom: 0.5rem;
+}
+
+.turning-point p:last-child {
+    margin-bottom: 0;
+}
+
+/* 现实案例 */
+.role-realcase-section {
+    margin-bottom: 1.5rem;
+}
+
+.real-case {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.real-case p {
+    margin-bottom: 0.75rem;
+}
+
+.case-example {
+    background: var(--bg-card);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent-blue);
+    font-style: italic;
+    margin: 0;
+}
+
+/* 建议 */
+.role-advice-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(76, 201, 122, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-green);
+}
+
+.advice-text {
+    font-style: italic;
+    margin: 0;
+}
+
+/* 解锁信息 */
+.role-unlock-info {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--film-border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* 响应式适配 */
+@media (max-width: 480px) {
+    .role-collection-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .role-modal-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    
+    .role-modal-match {
+        margin-top: 0.5rem;
+    }
+    
+    .growth-timeline {
+        gap: 0.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .role-collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .growth-timeline {
+        flex-direction: row;
+    }
+    
+    .growth-stage {
+        flex: 1;
+    }
+}
+
+/* 结果页角色收集入口按钮 */
+.view-collection-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border: 1px solid var(--accent-gold);
+    border-radius: 8px;
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.view-collection-btn:hover {
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+}
+
+/* 新解锁动画 */
+@keyframes unlock-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px 10px rgba(212, 175, 55, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+.role-card.new-unlocked {
+    animation: unlock-pulse 0.6s ease;
+    border-color: var(--accent-gold);
+}
+
+/* 新解锁提示 */
+.new-unlock-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
