@@ -217,15 +217,21 @@
         const names = {
             'orphan': '孤勇者',
             'caregiver': '讨好者',
+            'pleaser': '讨好者',
             'hermit': '隐士',
             'ruler': '控制狂',
+            'controller': '控制狂',
             'victim': '受害者',
             'jester': '表演者',
+            'performer': '表演者',
             'savior': '拯救者',
+            'rescuer': '拯救者',
             'explorer': '漫游者',
+            'wanderer': '漫游者',
             'warrior': '战士',
             'healer': '治愈者',
             'sage': '观察者',
+            'observer': '观察者',
             'awakener': '觉醒者'
         };
         return names[key] || key;
