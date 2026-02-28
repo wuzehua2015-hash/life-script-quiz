@@ -27,7 +27,7 @@
         "测试PC端显示",
         "测试手机端抽屉菜单"
       ],
-      "passes": false,
+      "passes": true,
       "priority": "high",
       "estimatedTime": "1小时"
     }

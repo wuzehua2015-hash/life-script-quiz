@@ -12,8 +12,247 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 统一导航组件 -->
-    <div id="nav-container"></div>
+    <!-- ========================================
+       人生剧本测试系统 v2.4 - 统一导航组件
+       Life Script Quiz - Unified Navigation
+       ======================================== -->
+
+    <!-- 导航容器 -->
+    <nav id="main-nav" class="main-nav" role="navigation" aria-label="主导航">
+        <!-- 品牌Logo -->
+        <div class="nav-brand">
+            <a href="index.html" class="nav-logo-link">
+                <span class="nav-logo-icon">✦</span>
+                <span class="nav-logo-text">人生剧本</span>
+            </a>
+        </div>
+
+        <!-- PC端导航菜单 -->
+        <ul class="nav-menu" id="nav-menu">
+            <!-- 首页 -->
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-page="index">
+                    <span class="nav-link-icon">⌂</span>
+                    <span class="nav-link-text">首页</span>
+                </a>
+            </li>
+
+            <!-- 开始测试 -->
+            <li class="nav-item">
+                <a href="index.html#test" class="nav-link" data-page="test">
+                    <span class="nav-link-icon">✧</span>
+                    <span class="nav-link-text">开始测试</span>
+                </a>
+            </li>
+
+            <!-- 角色图鉴 -->
+            <li class="nav-item">
+                <a href="collection/index.html" class="nav-link" data-page="collection">
+                    <span class="nav-link-icon">⚜</span>
+                    <span class="nav-link-text">角色图鉴</span>
+                </a>
+            </li>
+
+            <!-- 成就徽章 -->
+            <li class="nav-item">
+                <a href="achievements/index.html" class="nav-link" data-page="achievements">
+                    <span class="nav-link-icon">★</span>
+                    <span class="nav-link-text">成就徽章</span>
+                </a>
+            </li>
+
+            <!-- 个人中心 -->
+            <li class="nav-item">
+                <a href="profile/index.html" class="nav-link" data-page="profile">
+                    <span class="nav-link-icon">◉</span>
+                    <span class="nav-link-text">个人中心</span>
+                </a>
+            </li>
+
+            <!-- 每日觉察 - 下拉菜单 -->
+            <li class="nav-item nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                    <span class="nav-link-icon">◈</span>
+                    <span class="nav-link-text">每日觉察</span>
+                    <span class="nav-dropdown-arrow">▼</span>
+                </button>
+                <ul class="nav-dropdown-menu" role="menu">
+                    <li class="nav-dropdown-item">
+                        <a href="diary/index.html" class="nav-dropdown-link" data-page="diary">
+                            <span class="nav-dropdown-icon">📝</span>
+                            <span>日记</span>
+                        </a>
+                    </li>
+                    <li class="nav-dropdown-item">
+                        <a href="mood/index.html" class="nav-dropdown-link" data-page="mood">
+                            <span class="nav-dropdown-icon">🌙</span>
+                            <span>情绪</span>
+                        </a>
+                    </li>
+                    <li class="nav-dropdown-item">
+                        <a href="journey/index.html" class="nav-dropdown-link" data-page="journey">
+                            <span class="nav-dropdown-icon">🌿</span>
+                            <span>成长轨迹</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- 实用工具 - 下拉菜单 -->
+            <li class="nav-item nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                    <span class="nav-link-icon">⚒</span>
+                    <span class="nav-link-text">实用工具</span>
+                    <span class="nav-dropdown-arrow">▼</span>
+                </button>
+                <ul class="nav-dropdown-menu" role="menu">
+                    <li class="nav-dropdown-item">
+                        <a href="guide/index.html" class="nav-dropdown-link" data-page="guide">
+                            <span class="nav-dropdown-icon">📖</span>
+                            <span>应对指南</span>
+                        </a>
+                    </li>
+                    <li class="nav-dropdown-item">
+                        <a href="emergency/index.html" class="nav-dropdown-link" data-page="emergency">
+                            <span class="nav-dropdown-icon">🆘</span>
+                            <span>紧急支持</span>
+                        </a>
+                    </li>
+                    <li class="nav-dropdown-item">
+                        <a href="resources/index.html" class="nav-dropdown-link" data-page="resources">
+                            <span class="nav-dropdown-icon">📚</span>
+                            <span>资源库</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- 手机端汉堡按钮 -->
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="打开菜单" aria-expanded="false">
+            <span class="nav-hamburger-line"></span>
+            <span class="nav-hamburger-line"></span>
+            <span class="nav-hamburger-line"></span>
+        </button>
+
+        <!-- 遮罩层 -->
+        <div class="nav-overlay" id="nav-overlay"></div>
+    </nav>
+
+    <!-- 手机端抽屉菜单 -->
+    <aside class="nav-drawer" id="nav-drawer" aria-hidden="true">
+        <div class="nav-drawer-header">
+            <div class="nav-drawer-brand">
+                <span class="nav-drawer-icon">✦</span>
+                <span class="nav-drawer-title">人生剧本</span>
+            </div>
+            <button class="nav-drawer-close" id="nav-drawer-close" aria-label="关闭菜单">
+                <span class="nav-drawer-close-icon">✕</span>
+            </button>
+        </div>
+
+        <div class="nav-drawer-body">
+            <ul class="nav-drawer-menu">
+                <!-- 首页 -->
+                <li class="nav-drawer-item">
+                    <a href="index.html" class="nav-drawer-link" data-page="index">
+                        <span class="nav-drawer-link-icon">⌂</span>
+                        <span>首页</span>
+                    </a>
+                </li>
+
+                <!-- 开始测试 -->
+                <li class="nav-drawer-item">
+                    <a href="index.html#test" class="nav-drawer-link" data-page="test">
+                        <span class="nav-drawer-link-icon">✧</span>
+                        <span>开始测试</span>
+                    </a>
+                </li>
+
+                <!-- 角色图鉴 -->
+                <li class="nav-drawer-item">
+                    <a href="collection/index.html" class="nav-drawer-link" data-page="collection">
+                        <span class="nav-drawer-link-icon">⚜</span>
+                        <span>角色图鉴</span>
+                    </a>
+                </li>
+
+                <!-- 成就徽章 -->
+                <li class="nav-drawer-item">
+                    <a href="achievements/index.html" class="nav-drawer-link" data-page="achievements">
+                        <span class="nav-drawer-link-icon">★</span>
+                        <span>成就徽章</span>
+                    </a>
+                </li>
+
+                <!-- 个人中心 -->
+                <li class="nav-drawer-item">
+                    <a href="profile/index.html" class="nav-drawer-link" data-page="profile">
+                        <span class="nav-drawer-link-icon">◉</span>
+                        <span>个人中心</span>
+                    </a>
+                </li>
+
+                <!-- 每日觉察 - 手风琴 -->
+                <li class="nav-drawer-item nav-drawer-accordion">
+                    <button class="nav-drawer-accordion-toggle" aria-expanded="false">
+                        <span class="nav-drawer-link-icon">◈</span>
+                        <span>每日觉察</span>
+                        <span class="nav-drawer-accordion-arrow">▼</span>
+                    </button>
+                    <ul class="nav-drawer-accordion-content">
+                        <li>
+                            <a href="diary/index.html" class="nav-drawer-sublink" data-page="diary">
+                                <span>📝</span>
+                                <span>日记</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mood/index.html" class="nav-drawer-sublink" data-page="mood">
+                                <span>🌙</span>
+                                <span>情绪</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="journey/index.html" class="nav-drawer-sublink" data-page="journey">
+                                <span>🌿</span>
+                                <span>成长轨迹</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 实用工具 - 手风琴 -->
+                <li class="nav-drawer-item nav-drawer-accordion">
+                    <button class="nav-drawer-accordion-toggle" aria-expanded="false">
+                        <span class="nav-drawer-link-icon">⚒</span>
+                        <span>实用工具</span>
+                        <span class="nav-drawer-accordion-arrow">▼</span>
+                    </button>
+                    <ul class="nav-drawer-accordion-content">
+                        <li>
+                            <a href="guide/index.html" class="nav-drawer-sublink" data-page="guide">
+                                <span>📖</span>
+                                <span>应对指南</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="emergency/index.html" class="nav-drawer-sublink" data-page="emergency">
+                                <span>🆘</span>
+                                <span>紧急支持</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="resources/index.html" class="nav-drawer-sublink" data-page="resources">
+                                <span>📚</span>
+                                <span>资源库</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
     <!-- 开场动画 -->
     <div id="intro-screen" class="screen active">
@@ -341,20 +580,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="js/nav.js"></script>
-    <script>
-        // 加载导航组件
-        fetch('components/nav.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('nav-container').innerHTML = html;
-                // 触发导航初始化
-                if (window.LifeScriptNav) {
-                    // 重新初始化导航
-                    document.dispatchEvent(new CustomEvent('nav:loaded'));
-                }
-            })
-            .catch(err => console.error('导航加载失败:', err));
-    </script>
     <script src="js/achievements.js"></script>
     <script src="js/achievement-service.js"></script>
     <script src="js/badge-ui.js"></script>
