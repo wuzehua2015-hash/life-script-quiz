@@ -8,9 +8,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/role-collection.css">
     <link rel="stylesheet" href="css/badges.css">
+    <link rel="stylesheet" href="css/nav.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 统一导航组件 -->
+    <div id="nav-container"></div>
+
     <!-- 开场动画 -->
     <div id="intro-screen" class="screen active">
         <div class="film-grain"></div>
@@ -336,6 +340,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="js/nav.js"></script>
+    <script>
+        // 加载导航组件
+        fetch('components/nav.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('nav-container').innerHTML = html;
+                // 触发导航初始化
+                if (window.LifeScriptNav) {
+                    // 重新初始化导航
+                    document.dispatchEvent(new CustomEvent('nav:loaded'));
+                }
+            })
+            .catch(err => console.error('导航加载失败:', err));
+    </script>
     <script src="js/achievements.js"></script>
     <script src="js/achievement-service.js"></script>
     <script src="js/badge-ui.js"></script>

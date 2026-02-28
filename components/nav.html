@@ -1,0 +1,261 @@
+<!-- ========================================
+   人生剧本测试系统 v2.4 - 统一导航组件
+   Life Script Quiz Navigation Component
+   ======================================== -->
+
+<!-- 顶部导航栏 -->
+<header class="nav-header" id="nav-header">
+    <!-- 移动端汉堡按钮 -->
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="打开菜单">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🎬</span>
+        <span class="logo-text">人生剧本</span>
+    </a>
+
+    <!-- 桌面端主导航 -->
+    <nav class="nav-main" id="nav-main">
+        <ul class="nav-menu">
+            <!-- 首页 -->
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-page="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">首页</span>
+                </a>
+            </li>
+
+            <!-- 开始测试 -->
+            <li class="nav-item">
+                <a href="index.html#start" class="nav-link" data-page="quiz">
+                    <span class="nav-icon">🎭</span>
+                    <span class="nav-text">开始测试</span>
+                </a>
+            </li>
+
+            <!-- 角色图鉴 -->
+            <li class="nav-item">
+                <a href="collection/index.html" class="nav-link" data-page="collection">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">角色图鉴</span>
+                </a>
+            </li>
+
+            <!-- 成就徽章 -->
+            <li class="nav-item">
+                <a href="achievements/index.html" class="nav-link" data-page="achievements">
+                    <span class="nav-icon">🏅</span>
+                    <span class="nav-text">成就徽章</span>
+                </a>
+            </li>
+
+            <!-- 每日觉察下拉菜单 -->
+            <li class="nav-item nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false">
+                    <span class="nav-icon">🌱</span>
+                    <span class="nav-text">每日觉察</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="diary/index.html" class="dropdown-link" data-page="diary">
+                            <span class="dropdown-icon">📔</span>
+                            <span>日记</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mood/index.html" class="dropdown-link" data-page="mood">
+                            <span class="dropdown-icon">😊</span>
+                            <span>情绪</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="journey/index.html" class="dropdown-link" data-page="journey">
+                            <span class="dropdown-icon">📈</span>
+                            <span>成长轨迹</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- 实用工具下拉菜单 -->
+            <li class="nav-item nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false">
+                    <span class="nav-icon">🧰</span>
+                    <span class="nav-text">实用工具</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="guide/index.html" class="dropdown-link" data-page="guide">
+                            <span class="dropdown-icon">🌉</span>
+                            <span>应对指南</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="emergency/index.html" class="dropdown-link dropdown-emergency" data-page="emergency">
+                            <span class="dropdown-icon">🆘</span>
+                            <span>紧急支持</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="resources/index.html" class="dropdown-link" data-page="resources">
+                            <span class="dropdown-icon">📚</span>
+                            <span>资源库</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- 个人中心 -->
+            <li class="nav-item">
+                <a href="profile/index.html" class="nav-link" data-page="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">个人中心</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 右侧功能按钮 -->
+    <div class="nav-actions">
+        <!-- 紧急支持快速入口 -->
+        <a href="emergency/index.html" class="nav-action-btn nav-emergency-btn" title="紧急支持">
+            <span class="action-icon">🆘</span>
+            <span class="action-text">紧急</span>
+        </a>
+        <!-- 个人中心快速入口 -->
+        <a href="profile/index.html" class="nav-action-btn" title="个人中心">
+            <span class="action-icon">👤</span>
+        </a>
+    </div>
+</header>
+
+<!-- 移动端抽屉菜单遮罩 -->
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<!-- 移动端抽屉菜单 -->
+<aside class="nav-drawer" id="nav-drawer">
+    <div class="drawer-header">
+        <a href="index.html" class="drawer-logo">
+            <span class="logo-icon">🎬</span>
+            <span class="logo-text">人生剧本</span>
+        </a>
+        <button class="drawer-close" id="drawer-close" aria-label="关闭菜单">
+            <span>×</span>
+        </button>
+    </div>
+
+    <nav class="drawer-nav">
+        <ul class="drawer-menu">
+            <!-- 首页 -->
+            <li class="drawer-item">
+                <a href="index.html" class="drawer-link" data-page="home">
+                    <span class="drawer-icon">🏠</span>
+                    <span class="drawer-text">首页</span>
+                </a>
+            </li>
+
+            <!-- 开始测试 -->
+            <li class="drawer-item">
+                <a href="index.html#start" class="drawer-link" data-page="quiz">
+                    <span class="drawer-icon">🎭</span>
+                    <span class="drawer-text">开始测试</span>
+                </a>
+            </li>
+
+            <!-- 角色图鉴 -->
+            <li class="drawer-item">
+                <a href="collection/index.html" class="drawer-link" data-page="collection">
+                    <span class="drawer-icon">👤</span>
+                    <span class="drawer-text">角色图鉴</span>
+                </a>
+            </li>
+
+            <!-- 成就徽章 -->
+            <li class="drawer-item">
+                <a href="achievements/index.html" class="drawer-link" data-page="achievements">
+                    <span class="drawer-icon">🏅</span>
+                    <span class="drawer-text">成就徽章</span>
+                </a>
+            </li>
+
+            <!-- 分隔线 -->
+            <li class="drawer-divider">
+                <span>每日觉察</span>
+            </li>
+
+            <!-- 日记 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="diary/index.html" class="drawer-link" data-page="diary">
+                    <span class="drawer-icon">📔</span>
+                    <span class="drawer-text">日记</span>
+                </a>
+            </li>
+
+            <!-- 情绪 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="mood/index.html" class="drawer-link" data-page="mood">
+                    <span class="drawer-icon">😊</span>
+                    <span class="drawer-text">情绪</span>
+                </a>
+            </li>
+
+            <!-- 成长轨迹 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="journey/index.html" class="drawer-link" data-page="journey">
+                    <span class="drawer-icon">📈</span>
+                    <span class="drawer-text">成长轨迹</span>
+                </a>
+            </li>
+
+            <!-- 分隔线 -->
+            <li class="drawer-divider">
+                <span>实用工具</span>
+            </li>
+
+            <!-- 应对指南 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="guide/index.html" class="drawer-link" data-page="guide">
+                    <span class="drawer-icon">🌉</span>
+                    <span class="drawer-text">应对指南</span>
+                </a>
+            </li>
+
+            <!-- 紧急支持 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="emergency/index.html" class="drawer-link drawer-emergency" data-page="emergency">
+                    <span class="drawer-icon">🆘</span>
+                    <span class="drawer-text">紧急支持</span>
+                </a>
+            </li>
+
+            <!-- 资源库 -->
+            <li class="drawer-item drawer-subitem">
+                <a href="resources/index.html" class="drawer-link" data-page="resources">
+                    <span class="drawer-icon">📚</span>
+                    <span class="drawer-text">资源库</span>
+                </a>
+            </li>
+
+            <!-- 分隔线 -->
+            <li class="drawer-divider"></li>
+
+            <!-- 个人中心 -->
+            <li class="drawer-item">
+                <a href="profile/index.html" class="drawer-link" data-page="profile">
+                    <span class="drawer-icon">👤</span>
+                    <span class="drawer-text">个人中心</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="drawer-footer">
+        <p class="drawer-version">v2.4 角色觉醒</p>
+    </div>
+</aside>

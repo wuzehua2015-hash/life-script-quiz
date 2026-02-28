@@ -1,0 +1,63 @@
+{
+  "project": "人生剧本测试系统 - 统一导航组件",
+  "description": "创建哈利波特风格的PC/手机响应式导航",
+  "version": "2.4.1",
+  "lastUpdated": "2026-02-28",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "创建导航组件文件",
+      "description": "创建导航HTML、CSS、JS组件",
+      "steps": [
+        "创建 components/nav.html - 导航HTML模板",
+        "创建 css/nav.css - 导航样式（PC横向+手机抽屉）",
+        "创建 js/nav.js - 导航交互逻辑"
+      ],
+      "passes": false,
+      "priority": "high",
+      "estimatedTime": "1.5小时"
+    },
+    {
+      "id": "T2",
+      "title": "集成到首页",
+      "description": "在index.html中集成新导航",
+      "steps": [
+        "引入nav.css和nav.js",
+        "替换原有导航",
+        "测试PC端显示",
+        "测试手机端抽屉菜单"
+      ],
+      "passes": false,
+      "priority": "high",
+      "estimatedTime": "1小时"
+    }
+  ],
+  "design": {
+    "style": "哈利波特官网风格",
+    "pcNav": "顶部横向菜单，深蓝背景，金色高亮",
+    "mobileNav": "左侧抽屉菜单，汉堡按钮触发",
+    "items": [
+      { "name": "首页", "url": "index.html" },
+      { "name": "开始测试", "url": "index.html#test" },
+      { "name": "角色图鉴", "url": "collection/index.html" },
+      { "name": "成就徽章", "url": "achievements/index.html" },
+      { "name": "个人中心", "url": "profile/index.html" },
+      { "name": "每日觉察", "children": [
+        { "name": "日记", "url": "diary/index.html" },
+        { "name": "情绪", "url": "mood/index.html" },
+        { "name": "成长轨迹", "url": "journey/index.html" }
+      ]},
+      { "name": "实用工具", "children": [
+        { "name": "应对指南", "url": "guide/index.html" },
+        { "name": "紧急支持", "url": "emergency/index.html" },
+        { "name": "资源库", "url": "resources/index.html" }
+      ]}
+    ]
+  },
+  "config": {
+    "developmentMode": "strict",
+    "testBeforeCommit": true,
+    "useBranch": false,
+    "maxConcurrentTasks": 1
+  }
+}
