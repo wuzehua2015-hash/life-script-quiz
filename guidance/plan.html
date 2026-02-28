@@ -173,6 +173,69 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
+        
+        /* 日记入口样式 */
+        .diary-entry-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .diary-entry-info h3 {
+            color: #d4af37;
+            margin: 0 0 8px 0;
+            font-size: 18px;
+        }
+        
+        .diary-entry-info p {
+            color: #6a6a6a;
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .diary-entry-btn {
+            background: linear-gradient(135deg, #d4af37, #b8960c);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .diary-entry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .diary-stats-mini {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .diary-stat-mini {
+            font-size: 13px;
+            color: #a0a0a0;
+        }
+        
+        .diary-stat-mini span {
+            color: #d4af37;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -189,6 +252,21 @@
             <div class="progress-bar-large">
                 <div id="progress-fill" class="progress-fill-large" style="width: 0%"></div>
             </div>
+        </div>
+        
+        <!-- 日记入口 -->
+        <div class="diary-entry-section" id="diary-entry" style="display: none;">
+            <div class="diary-entry-info">
+                <h3>📝 每日觉察日记</h3>
+                <p>记录你的觉察、情绪和改变</p>
+                <div class="diary-stats-mini">
+                    <span class="diary-stat-mini">已写 <span id="diary-count">0</span> 篇</span>
+                    <span class="diary-stat-mini">连续 <span id="diary-streak">0</span> 天</span>
+                </div>
+            </div>
+            <a href="../diary/index.html" class="diary-entry-btn">
+                写日记 →
+            </a>
         </div>
     </header>
 
@@ -271,6 +349,43 @@
             
             renderPlan(plan);
             updateProgress(plan);
+            loadDiaryStats();
+            
+            function loadDiaryStats() {
+                const diaries = JSON.parse(localStorage.getItem('lsq_diaries') || '[]');
+                document.getElementById('diary-count').textContent = diaries.length;
+                
+                // 计算连续打卡
+                let streak = 0;
+                if (diaries.length > 0) {
+                    const dates = diaries.map(d => d.date).sort().reverse();
+                    const today = new Date().toISOString().split('T')[0];
+                    let checkDate = today;
+                    
+                    for (let i = 0; i < dates.length; i++) {
+                        if (dates[i] === checkDate || (i === 0 && isYesterday(dates[i], checkDate))) {
+                            streak++;
+                            checkDate = getPrevDate(checkDate);
+                        } else if (dates[i] !== checkDate) {
+                            break;
+                        }
+                    }
+                }
+                document.getElementById('diary-streak').textContent = streak;
+                document.getElementById('diary-entry').style.display = 'flex';
+            }
+            
+            function isYesterday(dateStr, todayStr) {
+                const yesterday = new Date(todayStr);
+                yesterday.setDate(yesterday.getDate() - 1);
+                return dateStr === yesterday.toISOString().split('T')[0];
+            }
+            
+            function getPrevDate(dateStr) {
+                const d = new Date(dateStr);
+                d.setDate(d.getDate() - 1);
+                return d.toISOString().split('T')[0];
+            }
             
             function createPlan(arch) {
                 // 获取原型专属的21天任务

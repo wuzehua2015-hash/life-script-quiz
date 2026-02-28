@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日觉察日记 - 人生剧本</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/diary.css">
+</head>
+<body>
+    <div class="diary-page">
+        <!-- 头部 -->
+        <header class="diary-header">
+            <a href="../guidance/plan.html" class="back-link">← 返回21天计划</a>
+            <h1>📝 每日觉察日记</h1>
+            <p>记录觉察，见证改变</p>
+        </header>
+
+        <!-- 统计面板 -->
+        <div class="diary-stats" id="diary-stats"></div>
+
+        <!-- 标签页切换 -->
+        <div class="diary-tabs">
+            <button class="diary-tab active" data-tab="list">日记列表</button>
+            <button class="diary-tab" data-tab="calendar">日历视图</button>
+        </div>
+
+        <!-- 日记列表视图 -->
+        <div id="diary-list-view" class="diary-list"></div>
+
+        <!-- 日历视图 -->
+        <div id="diary-calendar-view" class="diary-calendar" style="display: none;"></div>
+
+        <!-- 编辑器容器 -->
+        <div id="diary-editor" style="display: none;"></div>
+    </div>
+
+    <!-- 新建日记按钮 -->
+    <button class="diary-fab" id="new-diary-btn" title="写日记">+</button>
+
+    <script src="../js/diary-service.js"></script>
+    <script src="../js/diary-ui.js"></script>
+    <script>
+        (function() {
+            let currentTab = 'list';
+            let currentCalendarYear = new Date().getFullYear();
+            let currentCalendarMonth = new Date().getMonth();
+            let editingDiaryId = null;
+
+            // 初始化
+            function init() {
+                renderStats();
+                renderDiaryList();
+                bindEvents();
+            }
+
+            // 渲染统计
+            function renderStats() {
+                const container = document.getElementById('diary-stats');
+                DiaryUI.renderStats(container);
+            }
+
+            // 渲染日记列表
+            function renderDiaryList() {
+                const container = document.getElementById('diary-list-view');
+                DiaryUI.renderDiaryList(container, {
+                    onEdit: handleEditDiary,
+                    onDelete: handleDeleteDiary
+                });
+            }
+
+            // 渲染日历
+            function renderCalendar() {
+                const container = document.getElementById('diary-calendar-view');
+                DiaryUI.renderCalendar(container, {
+                    year: currentCalendarYear,
+                    month: currentCalendarMonth,
+                    onDateClick: handleDateClick,
+                    onMonthChange: handleMonthChange
+                });
+            }
+
+            // 渲染编辑器
+            function renderEditor(diary = null) {
+                const container = document.getElementById('diary-editor');
+                editingDiaryId = diary ? diary.id : null;
+                
+                DiaryUI.renderDiaryEditor(container, {
+                    diary: diary,
+                    onSave: handleSaveDiary,
+                    onCancel: handleCancelEdit
+                });
+                
+                container.style.display = 'block';
+                document.getElementById('diary-list-view').style.display = 'none';
+                document.getElementById('diary-calendar-view').style.display = 'none';
+                document.querySelector('.diary-tabs').style.display = 'none';
+                document.getElementById('diary-stats').style.display = 'none';
+                document.getElementById('new-diary-btn').style.display = 'none';
+            }
+
+            // 隐藏编辑器
+            function hideEditor() {
+                const container = document.getElementById('diary-editor');
+                container.style.display = 'none';
+                container.innerHTML = '';
+                
+                document.querySelector('.diary-tabs').style.display = 'flex';
+                document.getElementById('diary-stats').style.display = 'block';
+                document.getElementById('new-diary-btn').style.display = 'flex';
+                
+                if (currentTab === 'list') {
+                    document.getElementById('diary-list-view').style.display = 'flex';
+                } else {
+                    document.getElementById('diary-calendar-view').style.display = 'block';
+                }
+                
+                editingDiaryId = null;
+            }
+
+            // 处理保存日记
+            function handleSaveDiary(data) {
+                if (editingDiaryId) {
+                    DiaryService.updateDiary(editingDiaryId, data);
+                } else {
+                    DiaryService.createDiary(data);
+                }
+                
+                hideEditor();
+                renderStats();
+                
+                if (currentTab === 'list') {
+                    renderDiaryList();
+                } else {
+                    renderCalendar();
+                }
+            }
+
+            // 处理取消编辑
+            function handleCancelEdit() {
+                hideEditor();
+            }
+
+            // 处理编辑日记
+            function handleEditDiary(diaryId) {
+                const diary = DiaryService.getDiaryById(diaryId);
+                if (diary) {
+                    renderEditor(diary);
+                }
+            }
+
+            // 处理删除日记
+            function handleDeleteDiary(diaryId) {
+                const diary = DiaryService.getDiaryById(diaryId);
+                if (diary) {
+                    DiaryUI.confirmDelete(diary, () => {
+                        DiaryService.deleteDiary(diaryId);
+                        renderStats();
+                        renderDiaryList();
+                    });
+                }
+            }
+
+            // 处理日期点击
+            function handleDateClick(date) {
+                const existingDiary = DiaryService.getDiaryByDate(date);
+                renderEditor(existingDiary || { date: date });
+            }
+
+            // 处理月份切换
+            function handleMonthChange(year, month) {
+                currentCalendarYear = year;
+                currentCalendarMonth = month;
+                renderCalendar();
+            }
+
+            // 绑定事件
+            function bindEvents() {
+                // 标签页切换
+                document.querySelectorAll('.diary-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('.diary-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        
+                        currentTab = tab.dataset.tab;
+                        
+                        if (currentTab === 'list') {
+                            document.getElementById('diary-list-view').style.display = 'flex';
+                            document.getElementById('diary-calendar-view').style.display = 'none';
+                            renderDiaryList();
+                        } else {
+                            document.getElementById('diary-list-view').style.display = 'none';
+                            document.getElementById('diary-calendar-view').style.display = 'block';
+                            renderCalendar();
+                        }
+                    });
+                });
+
+                // 新建日记按钮
+                document.getElementById('new-diary-btn').addEventListener('click', () => {
+                    renderEditor();
+                });
+            }
+
+            // 页面加载完成后初始化
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>

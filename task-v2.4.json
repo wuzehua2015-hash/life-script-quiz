@@ -77,7 +77,7 @@
             "本地存储日记数据",
             "在行动指导页面添加日记入口"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "3小时",
           "notes": "日记是回访的核心理由"
