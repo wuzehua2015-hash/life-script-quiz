@@ -1,46 +1,61 @@
 /**
  * ========================================
- * 人生剧本测试系统 v2.4 - 导航组件交互逻辑
- * Life Script Quiz Navigation Component JS
+ * 人生剧本测试系统 v2.4 - 导航组件交互
+ * Life Script Quiz - Navigation Component
  * ========================================
  */
 
 (function() {
     'use strict';
 
-    // DOM 元素引用
-    const elements = {
-        hamburger: document.getElementById('nav-hamburger'),
-        drawer: document.getElementById('nav-drawer'),
-        overlay: document.getElementById('nav-overlay'),
-        drawerClose: document.getElementById('drawer-close'),
-        dropdowns: document.querySelectorAll('.nav-dropdown'),
-        navLinks: document.querySelectorAll('.nav-link[data-page], .drawer-link[data-page]'),
-        dropdownToggles: document.querySelectorAll('.nav-dropdown-toggle')
+    // ========================================
+    // 配置
+    // ========================================
+    const CONFIG = {
+        drawerWidth: 280,
+        breakpoint: 768,
+        animationDuration: 300
     };
 
-    // 状态管理
-    const state = {
-        drawerOpen: false,
-        activeDropdown: null
-    };
+    // ========================================
+    // DOM 元素缓存
+    // ========================================
+    let elements = {};
 
-    /**
-     * 初始化导航组件
-     */
+    // ========================================
+    // 初始化
+    // ========================================
     function init() {
+        cacheElements();
         bindEvents();
         highlightCurrentPage();
-        addBodyClass();
+        initDropdowns();
+        initAccordions();
     }
 
-    /**
-     * 绑定事件处理器
-     */
+    // ========================================
+    // 缓存 DOM 元素
+    // ========================================
+    function cacheElements() {
+        elements = {
+            nav: document.getElementById('main-nav'),
+            hamburger: document.getElementById('nav-hamburger'),
+            drawer: document.getElementById('nav-drawer'),
+            overlay: document.getElementById('nav-overlay'),
+            drawerClose: document.getElementById('nav-drawer-close'),
+            dropdownToggles: document.querySelectorAll('.nav-dropdown-toggle'),
+            accordionToggles: document.querySelectorAll('.nav-drawer-accordion-toggle'),
+            navLinks: document.querySelectorAll('.nav-link[data-page], .nav-dropdown-link[data-page], .nav-drawer-link[data-page], .nav-drawer-sublink[data-page]')
+        };
+    }
+
+    // ========================================
+    // 绑定事件
+    // ========================================
     function bindEvents() {
-        // 汉堡菜单点击 - 打开抽屉
+        // 汉堡菜单按钮
         if (elements.hamburger) {
-            elements.hamburger.addEventListener('click', openDrawer);
+            elements.hamburger.addEventListener('click', toggleDrawer);
         }
 
         // 抽屉关闭按钮
@@ -48,229 +63,257 @@
             elements.drawerClose.addEventListener('click', closeDrawer);
         }
 
-        // 遮罩层点击 - 关闭抽屉
+        // 遮罩层点击
         if (elements.overlay) {
-            elements.overlay.addEventListener('click', closeAllMenus);
+            elements.overlay.addEventListener('click', closeDrawer);
         }
 
-        // 下拉菜单交互
-        elements.dropdownToggles.forEach(toggle => {
-            // 点击展开/收起
-            toggle.addEventListener('click', handleDropdownToggle);
-            
-            // 悬停展开（仅PC端）
-            toggle.addEventListener('mouseenter', handleDropdownHover);
-        });
-
-        // 下拉菜单容器悬停保持展开
-        elements.dropdowns.forEach(dropdown => {
-            dropdown.addEventListener('mouseleave', handleDropdownLeave);
-        });
-
-        // ESC键关闭菜单
+        // ESC 键关闭抽屉
         document.addEventListener('keydown', handleKeyDown);
 
-        // 点击页面其他区域关闭菜单
-        document.addEventListener('click', handleDocumentClick);
-
-        // 窗口大小改变时重置状态
+        // 窗口大小改变
         window.addEventListener('resize', handleResize);
+
+        // 导航链接点击（手机端关闭抽屉）
+        document.querySelectorAll('.nav-drawer-link, .nav-drawer-sublink').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < CONFIG.breakpoint) {
+                    closeDrawer();
+                }
+            });
+        });
     }
 
-    /**
-     * 打开抽屉菜单
-     */
+    // ========================================
+    // 抽屉菜单控制
+    // ========================================
+    function toggleDrawer() {
+        const isOpen = elements.drawer.getAttribute('aria-hidden') === 'false';
+        if (isOpen) {
+            closeDrawer();
+        } else {
+            openDrawer();
+        }
+    }
+
     function openDrawer() {
-        state.drawerOpen = true;
-        elements.hamburger?.classList.add('active');
-        elements.drawer?.classList.add('active');
-        elements.overlay?.classList.add('active');
+        if (!elements.drawer || !elements.overlay || !elements.hamburger) return;
+
+        elements.drawer.setAttribute('aria-hidden', 'false');
+        elements.overlay.classList.add('active');
+        elements.hamburger.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
+
+        // 聚焦到抽屉第一个可聚焦元素
+        setTimeout(() => {
+            const firstFocusable = elements.drawer.querySelector('button, a');
+            if (firstFocusable) firstFocusable.focus();
+        }, CONFIG.animationDuration);
     }
 
-    /**
-     * 关闭抽屉菜单
-     */
     function closeDrawer() {
-        state.drawerOpen = false;
-        elements.hamburger?.classList.remove('active');
-        elements.drawer?.classList.remove('active');
-        elements.overlay?.classList.remove('active');
+        if (!elements.drawer || !elements.overlay || !elements.hamburger) return;
+
+        elements.drawer.setAttribute('aria-hidden', 'true');
+        elements.overlay.classList.remove('active');
+        elements.hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+
+        // 返回焦点到汉堡按钮
+        elements.hamburger.focus();
     }
 
-    /**
-     * 关闭所有菜单（抽屉和下拉）
-     */
-    function closeAllMenus() {
-        closeDrawer();
-        closeAllDropdowns();
-    }
+    // ========================================
+    // 下拉菜单控制 (PC端)
+    // ========================================
+    function initDropdowns() {
+        elements.dropdownToggles.forEach(toggle => {
+            // 点击事件（移动端/键盘导航）
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth < CONFIG.breakpoint) return;
+                
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                // 关闭其他下拉菜单
+                elements.dropdownToggles.forEach(other => {
+                    if (other !== this) {
+                        other.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                this.setAttribute('aria-expanded', !isExpanded);
+                e.stopPropagation();
+            });
 
-    /**
-     * 处理下拉菜单点击切换
-     */
-    function handleDropdownToggle(e) {
-        e.preventDefault();
-        e.stopPropagation();
+            // 键盘导航支持
+            toggle.addEventListener('keydown', function(e) {
+                const menu = this.nextElementSibling;
+                const items = menu ? menu.querySelectorAll('.nav-dropdown-link') : [];
+                
+                switch(e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        this.setAttribute('aria-expanded', 'true');
+                        if (items.length > 0) items[0].focus();
+                        break;
+                    case 'Escape':
+                        this.setAttribute('aria-expanded', 'false');
+                        this.focus();
+                        break;
+                }
+            });
+        });
 
-        const dropdown = this.closest('.nav-dropdown');
-        const isActive = dropdown.classList.contains('active');
-
-        // 关闭其他下拉菜单
-        closeAllDropdowns();
-
-        // 切换当前下拉菜单
-        if (!isActive) {
-            dropdown.classList.add('active');
-            this.setAttribute('aria-expanded', 'true');
-            state.activeDropdown = dropdown;
-        }
-    }
-
-    /**
-     * 处理下拉菜单悬停展开（PC端）
-     */
-    function handleDropdownHover() {
-        // 仅在非触摸设备上启用悬停效果
-        if (window.matchMedia('(hover: hover)').matches) {
-            const dropdown = this.closest('.nav-dropdown');
-            closeAllDropdowns();
-            dropdown.classList.add('active');
-            this.setAttribute('aria-expanded', 'true');
-            state.activeDropdown = dropdown;
-        }
-    }
-
-    /**
-     * 处理下拉菜单离开
-     */
-    function handleDropdownLeave() {
-        // 仅在非触摸设备上启用悬停效果
-        if (window.matchMedia('(hover: hover)').matches) {
-            closeAllDropdowns();
-        }
-    }
-
-    /**
-     * 关闭所有下拉菜单
-     */
-    function closeAllDropdowns() {
-        elements.dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('active');
-            const toggle = dropdown.querySelector('.nav-dropdown-toggle');
-            if (toggle) {
-                toggle.setAttribute('aria-expanded', 'false');
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-dropdown')) {
+                elements.dropdownToggles.forEach(toggle => {
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
             }
         });
-        state.activeDropdown = null;
+
+        // 下拉菜单项键盘导航
+        document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+            const items = menu.querySelectorAll('.nav-dropdown-link');
+            
+            items.forEach((item, index) => {
+                item.addEventListener('keydown', function(e) {
+                    switch(e.key) {
+                        case 'ArrowDown':
+                            e.preventDefault();
+                            if (index < items.length - 1) items[index + 1].focus();
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            if (index > 0) items[index - 1].focus();
+                            else menu.previousElementSibling.focus();
+                            break;
+                        case 'Escape':
+                            menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+                            menu.previousElementSibling.focus();
+                            break;
+                    }
+                });
+            });
+        });
     }
 
-    /**
-     * 处理键盘事件
-     */
-    function handleKeyDown(e) {
-        if (e.key === 'Escape') {
-            closeAllMenus();
-        }
+    // ========================================
+    // 手风琴控制 (手机端抽屉)
+    // ========================================
+    function initAccordions() {
+        elements.accordionToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const parent = this.closest('.nav-drawer-accordion');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                // 可选：关闭其他手风琴
+                // elements.accordionToggles.forEach(other => {
+                //     if (other !== this) {
+                //         other.setAttribute('aria-expanded', 'false');
+                //         other.closest('.nav-drawer-accordion').setAttribute('aria-expanded', 'false');
+                //     }
+                // });
+                
+                this.setAttribute('aria-expanded', !isExpanded);
+                parent.setAttribute('aria-expanded', !isExpanded);
+            });
+        });
     }
 
-    /**
-     * 处理文档点击事件（点击外部关闭）
-     */
-    function handleDocumentClick(e) {
-        // 如果点击的不是下拉菜单内部，关闭所有下拉菜单
-        const isDropdownClick = e.target.closest('.nav-dropdown');
-        if (!isDropdownClick) {
-            closeAllDropdowns();
-        }
-    }
-
-    /**
-     * 处理窗口大小改变
-     */
-    function handleResize() {
-        // 如果窗口扩大到桌面尺寸，关闭移动端抽屉
-        if (window.innerWidth > 1024 && state.drawerOpen) {
-            closeDrawer();
-        }
-    }
-
-    /**
-     * 高亮当前页面导航项
-     */
+    // ========================================
+    // 当前页面高亮
+    // ========================================
     function highlightCurrentPage() {
         const currentPath = window.location.pathname;
         const currentHash = window.location.hash;
-        
-        // 获取当前页面标识
-        const currentPage = getCurrentPageIdentifier(currentPath, currentHash);
+        const pageName = getPageName(currentPath);
 
-        // 高亮导航链接
+        // 清除所有高亮
+        document.querySelectorAll('.nav-link, .nav-dropdown-link, .nav-drawer-link, .nav-drawer-sublink').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // 高亮当前页面
         elements.navLinks.forEach(link => {
-            const page = link.getAttribute('data-page');
-            if (page === currentPage) {
+            const linkPage = link.getAttribute('data-page');
+            const linkHref = link.getAttribute('href');
+            
+            // 首页特殊处理
+            if (linkPage === 'index' && (pageName === 'index' || pageName === '')) {
+                // 如果有hash，检查是否是测试区域
+                if (currentHash === '#test' && linkHref.includes('#test')) {
+                    link.classList.add('active');
+                } else if (!currentHash && !linkHref.includes('#')) {
+                    link.classList.add('active');
+                }
+            }
+            // 其他页面
+            else if (linkPage === pageName) {
                 link.classList.add('active');
-            } else {
-                link.classList.remove('active');
             }
         });
     }
 
-    /**
-     * 获取当前页面标识符
-     */
-    function getCurrentPageIdentifier(path, hash) {
-        // 首页
-        if (path === '/' || path.endsWith('/index.html') || path.endsWith('/')) {
-            if (hash === '#start') {
-                return 'quiz';
-            }
-            return 'home';
-        }
-
-        // 根据路径判断页面
-        const pathMap = {
-            '/collection/': 'collection',
-            '/achievements/': 'achievements',
-            '/diary/': 'diary',
-            '/mood/': 'mood',
-            '/journey/': 'journey',
-            '/guide/': 'guide',
-            '/emergency/': 'emergency',
-            '/resources/': 'resources',
-            '/profile/': 'profile'
-        };
-
-        for (const [key, value] of Object.entries(pathMap)) {
-            if (path.includes(key)) {
-                return value;
-            }
-        }
-
-        return null;
+    // ========================================
+    // 获取页面名称
+    // ========================================
+    function getPageName(path) {
+        // 移除开头的斜杠和结尾的 index.html
+        let cleanPath = path.replace(/^\//, '').replace(/\/index\.html$/, '').replace(/\.html$/, '');
+        
+        // 获取最后一部分作为页面名
+        const parts = cleanPath.split('/');
+        return parts[parts.length - 1] || 'index';
     }
 
-    /**
-     * 为 body 添加导航类
-     */
-    function addBodyClass() {
-        document.body.classList.add('has-nav');
+    // ========================================
+    // 键盘事件处理
+    // ========================================
+    function handleKeyDown(e) {
+        if (e.key === 'Escape') {
+            // 关闭抽屉
+            if (elements.drawer && elements.drawer.getAttribute('aria-hidden') === 'false') {
+                closeDrawer();
+            }
+            // 关闭下拉菜单
+            elements.dropdownToggles.forEach(toggle => {
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        }
     }
 
-    // 暴露全局 API
-    window.NavComponent = {
+    // ========================================
+    // 窗口大小改变处理
+    // ========================================
+    function handleResize() {
+        // 如果从手机切换到PC，关闭抽屉
+        if (window.innerWidth >= CONFIG.breakpoint) {
+            if (elements.drawer && elements.drawer.getAttribute('aria-hidden') === 'false') {
+                closeDrawer();
+            }
+        }
+    }
+
+    // ========================================
+    // 公共 API
+    // ========================================
+    window.LifeScriptNav = {
         openDrawer,
         closeDrawer,
-        closeAllMenus,
-        closeAllDropdowns,
-        refresh: highlightCurrentPage
+        toggleDrawer,
+        highlightCurrentPage,
+        refresh: init
     };
 
+    // ========================================
     // DOM 就绪后初始化
+    // ========================================
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
     }
+
 })();
