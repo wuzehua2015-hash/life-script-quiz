@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>情境化应对指南 - 人生剧本</title>
+    <meta name="description" content="基于你的人生剧本原型，提供工作、亲密关系、家庭等场景的具体应对策略">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="guide.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="guide-header">
+        <div class="container">
+            <a href="../index.html" class="back-link">← 返回首页</a>
+            <h1>🎯 情境化应对指南</h1>
+            <p class="subtitle">从知道到做到的桥梁</p>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="guide-main">
+        <div class="container">
+            <!-- 简介 -->
+            <section class="intro-section">
+                <div class="intro-card">
+                    <div class="intro-icon">🌉</div>
+                    <h2>为什么需要情境化应对指南？</h2>
+                    <p>
+                        了解自己的人生剧本只是第一步。当真正的挑战来临时——
+                        工作冲突、亲密关系矛盾、家庭压力——我们需要<strong>具体的应对策略</strong>。
+                    </p>
+                    <p>
+                        这里为12种人生剧本原型，在6种常见场景下提供针对性的应对建议，
+                        帮助你在关键时刻做出更好的选择。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 原型选择 -->
+            <section class="archetype-section" id="archetype-section">
+                <h2>选择你的人生剧本原型</h2>
+                <p class="section-desc">根据你的测试结果，选择对应的原型</p>
+                
+                <div id="archetype-grid" class="archetype-grid">
+                    <!-- 动态加载12原型 -->
+                </div>
+            </section>
+
+            <!-- 场景选择（选择原型后显示） -->
+            <section class="scenario-section" id="scenario-section" style="display: none;">
+                <div class="selected-archetype" id="selected-archetype">
+                    <!-- 显示已选中原型 -->
+                </div>
+                
+                <h3>选择你当前的场景</h3>
+                <p class="section-desc">选择你正在面对的具体情境</p>
+                
+                <div id="scenario-grid" class="scenario-grid">
+                    <!-- 动态加载6场景 -->
+                </div>
+            </section>
+
+            <!-- 应对策略（选择场景后显示） -->
+            <section class="strategy-section" id="strategy-section" style="display: none;">
+                <div class="strategy-header" id="strategy-header">
+                    <!-- 显示策略标题 -->
+                </div>
+                
+                <div class="strategy-content" id="strategy-content">
+                    <!-- 动态加载应对策略 -->
+                </div>
+                
+                <!-- 收藏按钮 -->
+                <div class="strategy-actions">
+                    <button id="favorite-btn" class="btn-favorite">
+                        <span class="favorite-icon">🤍</span>
+                        <span class="favorite-text">收藏此建议</span>
+                    </button>
+                    <button id="back-scenario-btn" class="btn-secondary">返回场景选择</button>
+                    <button id="share-strategy-btn" class="btn-secondary">分享建议</button>
+                </div>
+            </section>
+
+            <!-- 我的收藏 -->
+            <section class="favorites-section" id="favorites-section">
+                <h2>⭐ 我的收藏</h2>
+                <p class="section-desc">你收藏的有用建议</p>
+                
+                <div id="favorites-list" class="favorites-list">
+                    <!-- 动态加载收藏 -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部 -->
+    <footer class="guide-footer">
+        <div class="container">
+            <p>改变，从觉察开始，在行动中发生</p>
+            <div class="footer-links">
+                <a href="../profile/index.html">个人中心</a>
+                <a href="../guidance/index.html">21天计划</a>
+                <a href="../diary/index.html">觉察日记</a>
+                <a href="../mood/index.html">情绪打卡</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 提示消息 -->
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/guide-data.js"></script>
+    <script src="guide.js"></script>
+</body>
+</html>

@@ -129,7 +129,7 @@
             "实现应对建议展示",
             "添加快速收藏功能"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "4小时",
           "notes": "从知道到做到的桥梁"
