@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>资源推荐库 - 人生剧本测试</title>
+    <meta name="description" content="为12种人生剧本原型精选的书籍、文章、视频、播客资源，助力你的成长之旅">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/resources.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="resources-page">
+        <!-- 返回按钮 -->
+        <a href="../index.html" class="back-btn">
+            ← 返回首页
+        </a>
+
+        <!-- 头部 -->
+        <header class="resources-header">
+            <h1>📚 资源推荐库</h1>
+            <p>为每一种人生剧本原型精选的成长资源</p>
+        </header>
+
+        <!-- 搜索区域 -->
+        <section class="resources-search-section">
+            <div id="search-container"></div>
+        </section>
+
+        <!-- 筛选区域 -->
+        <section class="resources-filter-section">
+            <span class="filter-label">选择原型：</span>
+            <div id="archetype-selector-container"></div>
+            
+            <span class="filter-label">资源类型：</span>
+            <div id="type-filter-container"></div>
+        </section>
+
+        <!-- 结果区域 -->
+        <section class="resources-results-section">
+            <div class="results-header">
+                <h2 id="results-title">全部资源</h2>
+                <span class="results-count">共 <span id="results-count">0</span> 个资源</span>
+            </div>
+            <div id="resources-list-container"></div>
+        </section>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="../js/resource-data.js"></script>
+    <script src="../js/resource-ui.js"></script>
+    <script>
+        // 页面状态
+        let currentState = {
+            archetype: 'all',
+            type: 'all',
+            searchQuery: ''
+        };
+
+        // 初始化页面
+        function init() {
+            renderSearch();
+            renderArchetypeSelector();
+            renderTypeFilter();
+            renderResources();
+        }
+
+        // 渲染搜索框
+        function renderSearch() {
+            ResourceSearch.render('search-container', (query) => {
+                currentState.searchQuery = query;
+                renderResources();
+            });
+        }
+
+        // 渲染原型选择器
+        function renderArchetypeSelector() {
+            ArchetypeSelector.render('archetype-selector-container', (archetypeId) => {
+                currentState.archetype = archetypeId;
+                renderResources();
+            });
+        }
+
+        // 渲染类型筛选器
+        function renderTypeFilter() {
+            TypeFilter.render('type-filter-container', (type) => {
+                currentState.type = type;
+                renderResources();
+            });
+        }
+
+        // 渲染资源列表
+        function renderResources() {
+            const container = document.getElementById('resources-list-container');
+            const titleEl = document.getElementById('results-title');
+            const countEl = document.getElementById('results-count');
+
+            let resources = [];
+            let title = '全部资源';
+
+            // 搜索模式
+            if (currentState.searchQuery) {
+                title = `搜索结果："${currentState.searchQuery}"`;
+                const searchResults = ResourceService.searchResources(currentState.searchQuery);
+                searchResults.forEach(result => {
+                    result.resources.forEach(r => {
+                        resources.push({
+                            ...r,
+                            archetypeName: result.archetype.archetypeName,
+                            archetypeIcon: result.archetype.archetypeIcon
+                        });
+                    });
+                });
+            } else {
+                // 筛选模式
+                if (currentState.archetype === 'all') {
+                    // 获取所有原型资源
+                    Object.values(ARCHETYPE_RESOURCES).forEach(archetypeData => {
+                        archetypeData.resources.forEach(r => {
+                            resources.push({
+                                ...r,
+                                archetypeName: archetypeData.archetypeName,
+                                archetypeIcon: archetypeData.archetypeIcon
+                            });
+                        });
+                    });
+                    // 添加通用资源
+                    GENERAL_RESOURCES.resources.forEach(r => {
+                        resources.push({
+                            ...r,
+                            archetypeName: '通用资源',
+                            archetypeIcon: '📚'
+                        });
+                    });
+                } else {
+                    const archetypeData = ARCHETYPE_RESOURCES[currentState.archetype];
+                    if (archetypeData) {
+                        title = `${archetypeData.archetypeIcon} ${archetypeData.archetypeName}专属资源`;
+                        resources = archetypeData.resources.map(r => ({
+                            ...r,
+                            archetypeName: archetypeData.archetypeName,
+                            archetypeIcon: archetypeData.archetypeIcon
+                        }));
+                    }
+                }
+            }
+
+            // 按类型筛选
+            if (currentState.type !== 'all') {
+                resources = resources.filter(r => r.type === currentState.type);
+            }
+
+            // 更新标题和计数
+            titleEl.textContent = title;
+            countEl.textContent = resources.length;
+
+            // 渲染资源列表
+            ResourceList.render('resources-list-container', resources, { showArchetype: currentState.archetype === 'all' });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

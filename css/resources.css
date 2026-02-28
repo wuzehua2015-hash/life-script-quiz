@@ -1,0 +1,587 @@
+/** 资源推荐库样式 **/
+
+/* 页面整体 */
+.resources-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+/* 头部 */
+.resources-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.resources-header h1 {
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-family: 'Noto Serif SC', serif;
+}
+
+.resources-header p {
+    color: #888;
+    font-size: 1rem;
+}
+
+/* 返回按钮 */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: #d4af37;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* 搜索区域 */
+.resources-search-section {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+}
+
+.resource-search {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #d4af37;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-input::placeholder {
+    color: #666;
+}
+
+.search-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #d4af37, #b8941f);
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* 筛选区域 */
+.resources-filter-section {
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* 原型选择器 */
+.archetype-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.archetype-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.archetype-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+    color: #d4af37;
+}
+
+.archetype-btn.active {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.archetype-btn-icon {
+    font-size: 1.1rem;
+}
+
+.archetype-btn-name {
+    font-size: 0.9rem;
+}
+
+/* 类型筛选器 */
+.type-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.type-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.type-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--type-color, #d4af37);
+    color: var(--type-color, #d4af37);
+}
+
+.type-btn.active {
+    background: var(--type-color, #d4af37);
+    border-color: var(--type-color, #d4af37);
+    color: #1a1a2e;
+}
+
+.type-icon {
+    font-size: 1rem;
+}
+
+/* 资源网格 */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.resource-grid.compact {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    padding: 0;
+}
+
+/* 资源卡片 */
+.resource-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.resource-type-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.resource-archetype {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.resource-title {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.resource-author,
+.resource-source,
+.resource-platform {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.author-label,
+.source-label,
+.platform-label {
+    color: #666;
+}
+
+.author-name,
+.source-name,
+.platform-name {
+    color: #aaa;
+}
+
+.resource-description {
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.6;
+    margin: 12px 0;
+    flex: 1;
+}
+
+.resource-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.resource-tag {
+    padding: 3px 10px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    color: #d4af37;
+}
+
+.resource-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn-resource-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #d4af37, #b8941f);
+    color: #1a1a2e;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-resource-link:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-copy-link {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-copy-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e0e0e0;
+}
+
+/* 原型资源区块 */
+.archetype-resource-section {
+    margin-bottom: 40px;
+}
+
+.archetype-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.archetype-icon-large {
+    font-size: 3rem;
+}
+
+.archetype-info h2 {
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin-bottom: 8px;
+}
+
+.growth-theme {
+    color: #888;
+    font-size: 1rem;
+}
+
+.resource-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+/* 推荐资源 */
+.recommended-resources {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.recommended-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recommended-header h3 {
+    font-size: 1.2rem;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.recommended-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.recommended-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    color: #d4af37;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-view-all:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* 空状态 */
+.resource-empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.empty-hint {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Toast提示 */
+.resource-toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #d4af37;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.resource-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 搜索结果区域 */
+.resources-results-section {
+    padding: 20px;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.results-count {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.results-count span {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .resources-header {
+        padding: 30px 15px;
+    }
+
+    .resources-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .archetype-selector {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .archetype-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .archetype-btn-name {
+        font-size: 0.8rem;
+    }
+
+    .type-filter {
+        gap: 8px;
+    }
+
+    .type-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .resource-card {
+        padding: 15px;
+    }
+
+    .resource-title {
+        font-size: 1rem;
+    }
+
+    .archetype-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 15px;
+    }
+
+    .archetype-icon-large {
+        font-size: 2.5rem;
+    }
+
+    .recommended-resources {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .resource-search {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .resource-actions {
+        flex-direction: column;
+    }
+
+    .btn-copy-link {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* 动画 */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resource-card {
+    animation: fade-in-up 0.4s ease-out;
+}

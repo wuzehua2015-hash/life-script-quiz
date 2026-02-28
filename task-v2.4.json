@@ -161,7 +161,7 @@
             "实现按原型筛选",
             "添加外部链接跳转"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "low",
           "estimatedTime": "2小时"
         }
