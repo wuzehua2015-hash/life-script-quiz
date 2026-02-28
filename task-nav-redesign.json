@@ -6,30 +6,11 @@
   "reference": "https://www.harrypotter.com/",
   "phases": [
     {
-      "name": "Phase 1 - 环境初始化",
-      "description": "确保开发环境已准备好",
-      "tasks": [
-        {
-          "id": "P1-T1",
-          "title": "环境初始化",
-          "description": "运行init.sh确保环境就绪",
-          "steps": [
-            "运行./init.sh安装依赖",
-            "检查Node.js版本",
-            "验证环境变量"
-          ],
-          "passes": true,
-          "priority": "high",
-          "estimatedTime": "10分钟"
-        }
-      ]
-    },
-    {
-      "name": "Phase 2 - 设计分析",
+      "name": "Phase 1 - 设计分析",
       "description": "详细分析哈利波特官网导航设计",
       "tasks": [
         {
-          "id": "P2-T1",
+          "id": "P1-T1",
           "title": "设计分析文档",
           "description": "分析哈利波特官网导航的视觉设计和交互",
           "steps": [
@@ -38,7 +19,7 @@
             "分析颜色方案（深蓝背景+金色文字+悬停效果）",
             "分析字体和间距",
             "分析移动端汉堡菜单设计",
-            "创建设计分析文档docs/NAV_DESIGN.md"
+            "创建设计分析文档"
           ],
           "passes": false,
           "priority": "high",
@@ -47,11 +28,11 @@
       ]
     },
     {
-      "name": "Phase 3 - 导航组件开发",
+      "name": "Phase 2 - 导航组件开发",
       "description": "开发哈利波特风格的导航组件",
       "tasks": [
         {
-          "id": "P3-T1",
+          "id": "P2-T1",
           "title": "导航HTML结构",
           "description": "创建语义化的导航HTML结构",
           "steps": [
@@ -66,7 +47,7 @@
           "estimatedTime": "1.5小时"
         },
         {
-          "id": "P3-T2",
+          "id": "P2-T2",
           "title": "导航CSS样式",
           "description": "实现哈利波特风格的CSS样式",
           "steps": [
@@ -82,7 +63,7 @@
           "estimatedTime": "2小时"
         },
         {
-          "id": "P3-T3",
+          "id": "P2-T3",
           "title": "导航JS交互",
           "description": "实现导航交互逻辑",
           "steps": [
@@ -99,80 +80,59 @@
       ]
     },
     {
-      "name": "Phase 4 - 浏览器测试",
-      "description": "对导航进行浏览器测试",
+      "name": "Phase 3 - 集成测试",
+      "description": "将导航集成到首页并测试",
       "tasks": [
         {
-          "id": "P4-T1",
-          "title": "PC端浏览器测试",
-          "description": "测试PC端导航显示和交互",
-          "steps": [
-            "打开首页",
-            "截图检查导航样式",
-            "测试下拉菜单",
-            "测试悬停效果"
-          ],
-          "passes": false,
-          "priority": "high",
-          "estimatedTime": "30分钟"
-        },
-        {
-          "id": "P4-T2",
-          "title": "移动端浏览器测试",
-          "description": "测试移动端导航显示和交互",
-          "steps": [
-            "模拟移动端视口",
-            "截图检查汉堡菜单",
-            "测试抽屉展开/收起",
-            "测试菜单项点击"
-          ],
-          "passes": false,
-          "priority": "high",
-          "estimatedTime": "30分钟"
-        }
-      ]
-    },
-    {
-      "name": "Phase 5 - 集成与提交",
-      "description": "集成到首页并提交更改",
-      "tasks": [
-        {
-          "id": "P5-T1",
+          "id": "P3-T1",
           "title": "首页集成",
           "description": "将新导航集成到index.html",
           "steps": [
             "引入新的导航CSS和JS",
             "替换原有导航代码",
-            "测试显示效果"
+            "测试PC端显示效果",
+            "测试移动端显示效果",
+            "修复样式冲突"
           ],
           "passes": false,
           "priority": "high",
           "estimatedTime": "1小时"
-        },
-        {
-          "id": "P5-T2",
-          "title": "提交更改",
-          "description": "提交所有更改到GitHub",
-          "steps": [
-            "更新task.json标记任务完成",
-            "更新progress.txt记录进度",
-            "git add所有更改",
-            "git commit提交",
-            "git push推送到GitHub"
-          ],
-          "passes": false,
-          "priority": "high",
-          "estimatedTime": "15分钟"
         }
       ]
     }
   ],
+  "designSpecs": {
+    "header": {
+      "background": "#0a0a1a",
+      "height": "70px",
+      "logo": "居中显示",
+      "borderBottom": "1px solid rgba(212, 175, 55, 0.3)"
+    },
+    "nav": {
+      "background": "#0f0f2e",
+      "height": "50px",
+      "textColor": "#ffffff",
+      "hoverColor": "#d4af37",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "letterSpacing": "1px",
+      "textTransform": "uppercase"
+    },
+    "dropdown": {
+      "background": "#1a1a3e",
+      "border": "1px solid rgba(212, 175, 55, 0.3)",
+      "shadow": "0 10px 40px rgba(0, 0, 0, 0.5)"
+    },
+    "mobile": {
+      "drawerWidth": "280px",
+      "drawerBackground": "#0f0f2e",
+      "overlay": "rgba(0, 0, 0, 0.7)"
+    }
+  },
   "config": {
     "developmentMode": "strict",
     "testBeforeCommit": true,
     "useBranch": false,
-    "maxConcurrentTasks": 1,
-    "enableBrowserTesting": true,
-    "autoCommit": true
+    "maxConcurrentTasks": 1
   }
 }
