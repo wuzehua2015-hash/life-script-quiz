@@ -13,7 +13,7 @@
         "创建 css/nav.css - 导航样式（PC横向+手机抽屉）",
         "创建 js/nav.js - 导航交互逻辑"
       ],
-      "passes": false,
+      "passes": true,
       "priority": "high",
       "estimatedTime": "1.5小时"
     },
