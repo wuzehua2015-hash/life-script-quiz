@@ -1,0 +1,226 @@
+{
+  "project": "人生剧本测试系统 - v2.4 UI系统优化工程",
+  "description": "统一UI风格，参考哈利波特官网魔法氛围设计",
+  "version": "2.4.1",
+  "lastUpdated": "2026-02-28",
+  "domain": "lifescript.lynkedu.com",
+  "phases": [
+    {
+      "name": "Phase 1 - 设计系统建立",
+      "description": "创建统一的设计规范和CSS变量系统",
+      "tasks": [
+        {
+          "id": "P1-T1",
+          "title": "UI设计系统文档",
+          "description": "创建完整的设计系统文档，包含颜色、字体、间距、组件规范",
+          "steps": [
+            "分析哈利波特官网设计风格",
+            "定义颜色系统（主色、强调色、中性色）",
+            "定义字体系统（标题、正文、特殊字体）",
+            "定义间距系统",
+            "定义阴影和圆角规范",
+            "创建组件规范（按钮、卡片、输入框等）"
+          ],
+          "passes": true,
+          "priority": "high",
+          "estimatedTime": "2小时"
+        },
+        {
+          "id": "P1-T2",
+          "title": "CSS变量系统",
+          "description": "创建CSS变量文件，统一全站样式变量",
+          "steps": [
+            "创建css/variables.css",
+            "定义颜色变量（--color-primary, --color-accent等）",
+            "定义字体变量（--font-heading, --font-body等）",
+            "定义间距变量（--space-xs到--space-xl）",
+            "定义断点变量（--breakpoint-sm/md/lg）",
+            "定义动画变量（--transition-fast/normal/slow）"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "1.5小时"
+        },
+        {
+          "id": "P1-T3",
+          "title": "统一组件库",
+          "description": "创建可复用的UI组件样式",
+          "steps": [
+            "创建css/components.css",
+            "按钮组件（primary, secondary, ghost, danger）",
+            "卡片组件（role-card, achievement-card, diary-card）",
+            "输入框组件（text, textarea, select）",
+            "导航组件（header, footer, breadcrumb）",
+            "弹窗组件（modal, toast, tooltip）",
+            "标签和徽章组件"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "2小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2 - 页面样式统一",
+      "description": "将所有页面样式统一到设计系统",
+      "tasks": [
+        {
+          "id": "P2-T1",
+          "title": "首页和结果页优化",
+          "description": "优化首页和结果页的UI一致性",
+          "steps": [
+            "引入variables.css和components.css",
+            "统一按钮样式",
+            "统一卡片样式",
+            "优化响应式布局",
+            "测试移动端显示"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "1.5小时"
+        },
+        {
+          "id": "P2-T2",
+          "title": "个人中心页面优化",
+          "description": "优化profile页面的UI",
+          "steps": [
+            "应用新的组件样式",
+            "统一统计卡片样式",
+            "优化快速入口网格",
+            "改进响应式适配"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "1小时"
+        },
+        {
+          "id": "P2-T3",
+          "title": "功能页面统一优化",
+          "description": "优化collection, achievements, diary, mood等页面",
+          "steps": [
+            "角色图鉴页面样式统一",
+            "成就徽章页面样式统一",
+            "日记页面样式统一",
+            "情绪追踪页面样式统一",
+            "改变轨迹页面样式统一"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2.5小时"
+        },
+        {
+          "id": "P2-T4",
+          "title": "工具页面统一优化",
+          "description": "优化guide, emergency, resources页面",
+          "steps": [
+            "应对指南页面样式统一",
+            "紧急干预页面样式统一",
+            "资源库页面样式统一",
+            "确保所有页面风格一致"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "2小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3 - 响应式优化",
+      "description": "优化不同终端的显示效果",
+      "tasks": [
+        {
+          "id": "P3-T1",
+          "title": "移动端适配优化",
+          "description": "针对手机端进行专门的UI优化",
+          "steps": [
+            "优化触摸目标大小（最小44px）",
+            "调整字体大小（移动端更大）",
+            "优化导航栏（汉堡菜单）",
+            "调整卡片布局（单列显示）",
+            "优化表单输入体验"
+          ],
+          "passes": false,
+          "priority": "high",
+          "estimatedTime": "2小时"
+        },
+        {
+          "id": "P3-T2",
+          "title": "平板适配优化",
+          "description": "优化平板设备的显示",
+          "steps": [
+            "调整网格布局（2列显示）",
+            "优化侧边栏显示",
+            "调整字体和间距"
+          ],
+          "passes": false,
+          "priority": "low",
+          "estimatedTime": "1小时"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4 - 性能优化",
+      "description": "优化加载性能和动画性能",
+      "tasks": [
+        {
+          "id": "P4-T1",
+          "title": "CSS优化",
+          "description": "优化CSS文件大小和加载",
+          "steps": [
+            "合并CSS文件",
+            "移除未使用的样式",
+            "使用CSS压缩",
+            "优化选择器性能"
+          ],
+          "passes": false,
+          "priority": "medium",
+          "estimatedTime": "1.5小时"
+        },
+        {
+          "id": "P4-T2",
+          "title": "动画性能优化",
+          "description": "优化动画的流畅度",
+          "steps": [
+            "使用transform和opacity进行动画",
+            "添加will-hint提示",
+            "优化confetti动画性能",
+            "减少重绘和重排"
+          ],
+          "passes": false,
+          "priority": "low",
+          "estimatedTime": "1小时"
+        }
+      ]
+    }
+  ],
+  "designSystem": {
+    "inspiration": "哈利波特官网 (harrypotter.com)",
+    "theme": "魔法/神秘/成长",
+    "colors": {
+      "primary": "深邃蓝紫 - 代表神秘和内省",
+      "accent": "古铜金 - 代表成就和魔法",
+      "background": "深色系 - 营造沉浸感",
+      "text": "暖白色 - 保证可读性"
+    },
+    "typography": {
+      "heading": "衬线字体 - 优雅复古",
+      "body": "无衬线字体 - 清晰易读"
+    },
+    "mood": "神秘、温暖、有力量感"
+  },
+  "config": {
+    "developmentMode": "strict",
+    "testBeforeCommit": true,
+    "useBranch": false,
+    "maxConcurrentTasks": 1
+  },
+  "notes": {
+    "principles": [
+      "保持视觉一致性",
+      "优先保证可读性",
+      "移动端优先设计",
+      "性能与美观平衡"
+    ],
+    "priority": "Phase 1 > Phase 2 > Phase 3 > Phase 4"
+  }
+}
