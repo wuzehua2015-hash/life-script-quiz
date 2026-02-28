@@ -55,7 +55,7 @@
             "展示21天计划进度",
             "添加重新测试入口"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "medium",
           "estimatedTime": "2小时"
         }

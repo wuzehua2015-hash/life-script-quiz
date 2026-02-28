@@ -1,0 +1,598 @@
+/* ========================================
+   个人中心页面样式
+   ======================================== */
+
+/* 个人中心主容器 */
+.profile-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    padding-bottom: 2rem;
+}
+
+/* 头部区域 */
+.profile-header {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--film-border);
+    position: relative;
+}
+
+.profile-header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.75rem;
+    color: var(--accent-gold);
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--film-border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+/* 用户概览卡片 */
+.profile-overview {
+    background: var(--bg-card);
+    border-radius: 16px;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--film-border);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--film-border);
+}
+
+.user-avatar {
+    width: 64px;
+    height: 64px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--bg-primary);
+    flex-shrink: 0;
+}
+
+.user-details h2 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.user-details p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* 统计概览 */
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* 内容区块 */
+.profile-section {
+    background: var(--bg-card);
+    border-radius: 16px;
+    margin: 1rem 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--film-border);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.section-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-header .section-icon {
+    font-size: 1.25rem;
+}
+
+.view-all-link {
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.view-all-link:hover {
+    opacity: 0.8;
+}
+
+/* 测试结果历史 */
+.test-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.test-history-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.test-history-item:hover {
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.test-history-item .test-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    min-width: 70px;
+}
+
+.test-history-item .test-archetype {
+    flex: 1;
+}
+
+.test-history-item .test-archetype .archetype-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+}
+
+.test-history-item .test-archetype .character-name {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.test-history-item .test-match {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.empty-history {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+.empty-history p {
+    margin-bottom: 1rem;
+}
+
+/* 角色收集预览 */
+.collection-preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.collection-item {
+    aspect-ratio: 1;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.collection-item:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+}
+
+.collection-item.unlocked {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.collection-item.locked {
+    opacity: 0.5;
+}
+
+.collection-item .role-icon {
+    font-size: 1.75rem;
+}
+
+.collection-item .role-name {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.collection-progress {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--film-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-progress .progress-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.collection-progress .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+.collection-progress .progress-fill {
+    height: 100%;
+    background: var(--gradient-gold);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.collection-progress .progress-percent {
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* 徽章展示 */
+.badges-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.875rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.badge-item.unlocked {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 55, 55, 0.2);
+}
+
+.badge-item.locked {
+    opacity: 0.4;
+}
+
+.badge-item .badge-icon {
+    font-size: 1.25rem;
+}
+
+.badge-item .badge-name {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.badges-summary {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--film-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badges-summary .summary-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.badges-summary .points {
+    font-size: 0.9rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* 21天计划进度 */
+.plan-progress-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.plan-header .plan-title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.plan-header .plan-status {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    background: rgba(76, 201, 122, 0.1);
+    color: var(--accent-green);
+}
+
+.plan-header .plan-status.inactive {
+    background: rgba(106, 106, 122, 0.1);
+    color: var(--text-muted);
+}
+
+.plan-days {
+    display: flex;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.plan-day {
+    flex: 1;
+    height: 32px;
+    background: var(--bg-card);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.plan-day.completed {
+    background: var(--accent-green);
+    color: var(--bg-primary);
+}
+
+.plan-day.current {
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+    font-weight: 600;
+}
+
+.plan-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.plan-stats .stat-highlight {
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* 快速操作区 */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.action-card .action-icon {
+    font-size: 1.75rem;
+}
+
+.action-card .action-label {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.action-card .action-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* 重新测试按钮 */
+.retest-section {
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.btn-retest {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--accent-gold);
+    border-radius: 50px;
+    color: var(--accent-gold);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-retest:hover {
+    background: var(--gradient-gold);
+    color: var(--bg-primary);
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--text-muted);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 响应式适配 */
+@media (max-width: 480px) {
+    .stats-overview {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .stat-item {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1.25rem;
+    }
+    
+    .collection-preview {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .collection-item .role-icon {
+        font-size: 1.25rem;
+    }
+    
+    .collection-item .role-name {
+        font-size: 0.65rem;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-days {
+        flex-wrap: wrap;
+    }
+    
+    .plan-day {
+        flex: 0 0 calc(14.28% - 0.3rem);
+        height: 28px;
+    }
+}
+
+@media (min-width: 768px) {
+    .profile-overview {
+        max-width: 600px;
+        margin: 1.5rem auto;
+    }
+    
+    .profile-section {
+        max-width: 600px;
+        margin: 1rem auto;
+    }
+    
+    .retest-section {
+        max-width: 600px;
+        margin: 1.5rem auto;
+    }
+}
