@@ -16,13 +16,28 @@
     function init() {
         console.log('[Guide] 初始化开始...');
         
-        // 检查 GuideData 是否加载
+        // 延迟检查 GuideData，确保数据文件已加载
         if (!window.GuideData) {
-            console.error('[Guide] GuideData 未加载，显示错误信息');
-            showDataError();
+            console.log('[Guide] GuideData 未立即加载，等待100ms后重试...');
+            setTimeout(() => {
+                if (!window.GuideData) {
+                    console.error('[Guide] GuideData 加载失败');
+                    showDataError();
+                    return;
+                }
+                console.log('[Guide] GuideData 延迟加载成功');
+                continueInit();
+            }, 100);
             return;
         }
-        console.log('[Guide] GuideData 加载成功', Object.keys(window.GuideData));
+        
+        console.log('[Guide] GuideData 立即加载成功');
+        continueInit();
+    }
+    
+    // 继续初始化
+    function continueInit() {
+        console.log('[Guide] GuideData 可用，继续初始化', Object.keys(window.GuideData));
 
         // 检查是否有测试结果中的原型
         const testResult = localStorage.getItem('lsq_testResult');
