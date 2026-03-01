@@ -58,7 +58,7 @@
             "实现移动端抽屉样式",
             "添加过渡动画效果"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "2小时"
         },
@@ -73,7 +73,7 @@
             "实现点击外部关闭",
             "实现ESC键关闭"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "1.5小时"
         }
