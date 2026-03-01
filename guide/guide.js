@@ -14,6 +14,16 @@
 
     // 初始化
     function init() {
+        console.log('[Guide] 初始化开始...');
+        
+        // 检查 GuideData 是否加载
+        if (!window.GuideData) {
+            console.error('[Guide] GuideData 未加载，显示错误信息');
+            showDataError();
+            return;
+        }
+        console.log('[Guide] GuideData 加载成功', Object.keys(window.GuideData));
+
         // 检查是否有测试结果中的原型
         const testResult = localStorage.getItem('lsq_testResult');
         
@@ -22,9 +32,10 @@
                 const result = JSON.parse(testResult);
                 if (result.archetype) {
                     currentState.archetype = result.archetype;
+                    console.log('[Guide] 从测试结果获取原型:', result.archetype);
                 }
             } catch (e) {
-                console.error('解析测试结果失败:', e);
+                console.error('[Guide] 解析测试结果失败:', e);
             }
         }
 
@@ -35,9 +46,24 @@
         
         if (archetypeParam) {
             currentState.archetype = archetypeParam;
+            console.log('[Guide] 从URL参数获取原型:', archetypeParam);
         }
         if (scenarioParam) {
             currentState.scenario = scenarioParam;
+        }
+
+        // 检查 localStorage 中是否有选中的原型
+        const savedArchetype = localStorage.getItem('lsq_selected_archetype');
+        if (savedArchetype && !currentState.archetype) {
+            currentState.archetype = savedArchetype;
+            console.log('[Guide] 从localStorage获取原型:', savedArchetype);
+        }
+
+        // 验证原型数据是否存在
+        if (currentState.archetype && !window.GuideData.archetypes[currentState.archetype]) {
+            console.error('[Guide] 原型数据不存在:', currentState.archetype);
+            currentState.archetype = null;
+            localStorage.removeItem('lsq_selected_archetype');
         }
 
         // 根据状态渲染页面
@@ -46,9 +72,11 @@
             showStrategy(currentState.archetype, currentState.scenario);
         } else if (currentState.archetype) {
             // 显示场景选择
+            console.log('[Guide] 显示场景选择，原型:', currentState.archetype);
             showScenarioSelection(currentState.archetype);
         } else {
             // 显示原型选择
+            console.log('[Guide] 显示原型选择');
             renderArchetypeGrid();
         }
 
@@ -57,6 +85,23 @@
 
         // 绑定事件
         bindEvents();
+        
+        console.log('[Guide] 初始化完成');
+    }
+    
+    // 显示数据加载错误
+    function showDataError() {
+        const container = document.querySelector('.guide-main .container');
+        if (container) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div style="font-size: 64px; margin-bottom: 20px;">⚠️</div>
+                    <h2 style="color: #d4af37; margin-bottom: 15px;">数据加载失败</h2>
+                    <p style="color: #6a6a6a; margin-bottom: 30px;">无法加载应对指南数据，请刷新页面重试</p>
+                    <button onclick="location.reload()" class="btn-primary">刷新页面</button>
+                </div>
+            `;
+        }
     }
 
     // 渲染原型网格
@@ -89,7 +134,11 @@
 
     // 显示场景选择
     function showScenarioSelection(archetypeKey) {
+        console.log('[Guide] 显示场景选择:', archetypeKey);
         currentState.archetype = archetypeKey;
+        
+        // 保存到 localStorage
+        localStorage.setItem('lsq_selected_archetype', archetypeKey);
         
         const archetypeSection = document.getElementById('archetype-section');
         const scenarioSection = document.getElementById('scenario-section');
@@ -101,9 +150,25 @@
 
         // 显示已选中原型
         const selectedArchetypeEl = document.getElementById('selected-archetype');
+        
+        if (!window.GuideData || !window.GuideData.archetypes) {
+            console.error('[Guide] GuideData 未加载，无法显示原型信息');
+            showDataError();
+            return;
+        }
+        
         const archetypeData = window.GuideData.archetypes[archetypeKey];
         
-        if (selectedArchetypeEl && archetypeData) {
+        if (!archetypeData) {
+            console.error('[Guide] 原型数据不存在:', archetypeKey);
+            // 回退到原型选择
+            if (archetypeSection) archetypeSection.style.display = 'block';
+            if (scenarioSection) scenarioSection.style.display = 'none';
+            renderArchetypeGrid();
+            return;
+        }
+        
+        if (selectedArchetypeEl) {
             selectedArchetypeEl.innerHTML = `
                 <div class="selected-info">
                     <span class="selected-icon">${archetypeData.icon}</span>
@@ -119,6 +184,7 @@
             document.getElementById('change-archetype-btn')?.addEventListener('click', () => {
                 currentState.archetype = null;
                 currentState.scenario = null;
+                localStorage.removeItem('lsq_selected_archetype');
                 archetypeSection.style.display = 'block';
                 scenarioSection.style.display = 'none';
                 renderArchetypeGrid();
@@ -134,31 +200,51 @@
 
     // 渲染场景网格
     function renderScenarioGrid() {
+        console.log('[Guide] 渲染场景网格');
         const grid = document.getElementById('scenario-grid');
-        if (!grid || !window.GuideData) return;
+        if (!grid) {
+            console.error('[Guide] 找不到 scenario-grid 元素');
+            return;
+        }
+        
+        if (!window.GuideData || !window.GuideData.scenarios) {
+            console.error('[Guide] GuideData.scenarios 未加载');
+            grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #ff6b6b;">场景数据加载失败，请刷新页面重试</div>';
+            return;
+        }
 
         const scenarios = window.GuideData.scenarios;
+        console.log('[Guide] 场景数据:', Object.keys(scenarios));
         
-        grid.innerHTML = Object.entries(scenarios).map(([key, data]) => `
-            <div class="scenario-card" data-scenario="${key}" style="--scenario-color: ${data.color}">
-                <div class="scenario-icon" style="background: ${data.color}20; color: ${data.color}">
-                    ${data.icon}
+        try {
+            const html = Object.entries(scenarios).map(([key, data]) => `
+                <div class="scenario-card" data-scenario="${key}" style="--scenario-color: ${data.color}">
+                    <div class="scenario-icon" style="background: ${data.color}20; color: ${data.color}">
+                        ${data.icon}
+                    </div>
+                    <div class="scenario-name">${data.name}</div>
+                    <div class="scenario-desc">${data.desc}</div>
+                    <div class="scenario-examples">
+                        ${data.examples.map(ex => `<span class="example-tag">${ex}</span>`).join('')}
+                    </div>
                 </div>
-                <div class="scenario-name">${data.name}</div>
-                <div class="scenario-desc">${data.desc}</div>
-                <div class="scenario-examples">
-                    ${data.examples.map(ex => `<span class="example-tag">${ex}</span>`).join('')}
-                </div>
-            </div>
-        `).join('');
+            `).join('');
+            
+            grid.innerHTML = html;
+            console.log('[Guide] 场景网格渲染完成，共', Object.keys(scenarios).length, '个场景');
 
-        // 绑定点击事件
-        grid.querySelectorAll('.scenario-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const scenario = card.dataset.scenario;
-                showStrategy(currentState.archetype, scenario);
+            // 绑定点击事件
+            grid.querySelectorAll('.scenario-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const scenario = card.dataset.scenario;
+                    console.log('[Guide] 选择场景:', scenario);
+                    showStrategy(currentState.archetype, scenario);
+                });
             });
-        });
+        } catch (e) {
+            console.error('[Guide] 渲染场景网格失败:', e);
+            grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #ff6b6b;">场景渲染失败，请刷新页面重试</div>';
+        }
     }
 
     // 显示应对策略
@@ -291,6 +377,31 @@
 
         // 分享按钮
         document.getElementById('share-strategy-btn')?.addEventListener('click', shareStrategy);
+        
+        // 重置选择按钮 - 使用 querySelectorAll 绑定所有重置按钮
+        document.querySelectorAll('#reset-selection-btn').forEach(btn => {
+            btn.addEventListener('click', resetSelection);
+        });
+    }
+    
+    // 重置选择
+    function resetSelection() {
+        console.log('[Guide] 重置选择');
+        currentState.archetype = null;
+        currentState.scenario = null;
+        localStorage.removeItem('lsq_selected_archetype');
+        
+        // 显示原型选择，隐藏其他部分
+        const archetypeSection = document.getElementById('archetype-section');
+        const scenarioSection = document.getElementById('scenario-section');
+        const strategySection = document.getElementById('strategy-section');
+        
+        if (archetypeSection) archetypeSection.style.display = 'block';
+        if (scenarioSection) scenarioSection.style.display = 'none';
+        if (strategySection) strategySection.style.display = 'none';
+        
+        renderArchetypeGrid();
+        showToast('已重置选择');
     }
 
     // 切换收藏
