@@ -94,7 +94,7 @@
             "测试移动端显示效果",
             "修复样式冲突"
           ],
-          "passes": false,
+          "passes": true,
           "priority": "high",
           "estimatedTime": "1小时"
         }
