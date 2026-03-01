@@ -13,8 +13,16 @@
 </head>
 <body>
 <!-- 顶部栏 (Header Bar) - 高度70px -->
+<!-- ============================================
+     人生剧本导航组件 - 哈利波特风格 v2.4.2 (子页面版本)
+     文件: components/nav.html
+     描述: 参考harrypotter.com的专业级导航
+     ============================================ -->
+
+<!-- 顶部栏 (Header Bar) - 高度70px -->
 <header class="nav-header-bar" role="banner">
   <div class="nav-header-container">
+    <!-- 左侧: 社交图标 -->
     <div class="nav-social-links" aria-label="社交媒体链接">
       <a href="#" class="nav-social-link" aria-label="YouTube" title="YouTube">
         <svg class="nav-social-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -37,12 +45,17 @@
         </svg>
       </a>
     </div>
+
+    <!-- 中间: Logo -->
     <div class="nav-logo-wrapper">
       <a href="../index.html" class="nav-logo-link" aria-label="人生剧本首页">
         <span class="nav-logo-text">人生剧本</span>
       </a>
     </div>
+
+    <!-- 右侧: 搜索和用户操作 -->
     <div class="nav-header-actions">
+      <!-- 搜索框 -->
       <div class="nav-search-wrapper">
         <input type="search" class="nav-search-input" placeholder="Search..." aria-label="搜索">
         <button class="nav-search-btn" aria-label="搜索按钮">
@@ -52,29 +65,115 @@
           </svg>
         </button>
       </div>
+
     </div>
   </div>
 </header>
 
+<!-- 主导航栏 (Main Navigation) - 高度50px -->
 <nav class="nav-main-nav" role="navigation" aria-label="主导航">
   <div class="nav-main-container">
+    <!-- 移动端汉堡按钮 -->
     <button class="nav-hamburger" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-drawer">
       <span class="nav-hamburger-line"></span>
       <span class="nav-hamburger-line"></span>
       <span class="nav-hamburger-line"></span>
     </button>
+
+    <!-- 桌面端导航菜单 -->
     <ul class="nav-menu" role="menubar">
-      <li class="nav-menu-item" role="none"><a href="../index.html" class="nav-menu-link" role="menuitem">首页</a></li>
-      <li class="nav-menu-item" role="none"><a href="../index.html#test" class="nav-menu-link" role="menuitem">开始测试</a></li>
-      <li class="nav-menu-item" role="none"><a href="../collection/index.html" class="nav-menu-link" role="menuitem">角色图鉴</a></li>
-      <li class="nav-menu-item" role="none"><a href="../achievements/index.html" class="nav-menu-link" role="menuitem">成就徽章</a></li>
-      <li class="nav-menu-item" role="none"><a href="../profile/index.html" class="nav-menu-link" role="menuitem">个人中心</a></li>
+      <!-- 首页 -->
+      <li class="nav-menu-item" role="none">
+        <a href="../index.html" class="nav-menu-link" role="menuitem">首页</a>
+      </li>
+
+      <!-- 开始测试 -->
+      <li class="nav-menu-item" role="none">
+        <a href="../index.html#test" class="nav-menu-link" role="menuitem">开始测试</a>
+      </li>
+
+      <!-- 角色图鉴 -->
+      <li class="nav-menu-item" role="none">
+        <a href="../collection/index.html" class="nav-menu-link" role="menuitem">角色图鉴</a>
+      </li>
+
+      <!-- 成就徽章 -->
+      <li class="nav-menu-item" role="none">
+        <a href="../achievements/index.html" class="nav-menu-link" role="menuitem">成就徽章</a>
+      </li>
+
+      <!-- 个人中心 -->
+      <li class="nav-menu-item" role="none">
+        <a href="../profile/index.html" class="nav-menu-link" role="menuitem">个人中心</a>
+      </li>
+
+      <!-- 每日觉察 (下拉菜单) -->
+      <li class="nav-menu-item nav-has-dropdown" role="none">
+        <button class="nav-menu-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false" role="menuitem">
+          每日觉察
+          <svg class="nav-dropdown-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 4l4 4 4-4"/>
+          </svg>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu" aria-label="每日觉察子菜单">
+          <li class="nav-dropdown-item" role="none">
+            <a href="../diary/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">📝</span>
+              <span class="nav-dropdown-text">日记</span>
+            </a>
+          </li>
+          <li class="nav-dropdown-item" role="none">
+            <a href="../mood/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">😊</span>
+              <span class="nav-dropdown-text">情绪</span>
+            </a>
+          </li>
+          <li class="nav-dropdown-item" role="none">
+            <a href="../journey/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">🌱</span>
+              <span class="nav-dropdown-text">成长轨迹</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 实用工具 (下拉菜单) -->
+      <li class="nav-menu-item nav-has-dropdown" role="none">
+        <button class="nav-menu-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false" role="menuitem">
+          实用工具
+          <svg class="nav-dropdown-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 4l4 4 4-4"/>
+          </svg>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu" aria-label="实用工具子菜单">
+          <li class="nav-dropdown-item" role="none">
+            <a href="../guide/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">📖</span>
+              <span class="nav-dropdown-text">应对指南</span>
+            </a>
+          </li>
+          <li class="nav-dropdown-item" role="none">
+            <a href="../emergency/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">🆘</span>
+              <span class="nav-dropdown-text">紧急支持</span>
+            </a>
+          </li>
+          <li class="nav-dropdown-item" role="none">
+            <a href="../resources/index.html" class="nav-dropdown-link" role="menuitem">
+              <span class="nav-dropdown-icon">📚</span>
+              <span class="nav-dropdown-text">资源库</span>
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>
 
+<!-- 移动端抽屉菜单 (Mobile Drawer) -->
 <div class="nav-drawer-overlay" id="nav-drawer-overlay" aria-hidden="true"></div>
 <aside class="nav-drawer" id="nav-drawer" role="dialog" aria-label="移动端导航菜单" aria-modal="true" aria-hidden="true">
+  <!-- 抽屉头部 -->
   <div class="nav-drawer-header">
     <span class="nav-drawer-title">人生剧本</span>
     <button class="nav-drawer-close" aria-label="关闭菜单">
@@ -83,16 +182,97 @@
       </svg>
     </button>
   </div>
+
+  <!-- 抽屉内容 -->
   <div class="nav-drawer-content">
     <ul class="nav-drawer-menu" role="menu">
-      <li class="nav-drawer-item" role="none"><a href="../index.html" class="nav-drawer-link" role="menuitem">首页</a></li>
-      <li class="nav-drawer-item" role="none"><a href="../index.html#test" class="nav-drawer-link" role="menuitem">开始测试</a></li>
+      <!-- 首页 -->
+      <li class="nav-drawer-item" role="none">
+        <a href="../index.html" class="nav-drawer-link" role="menuitem">首页</a>
+      </li>
+
+      <!-- 开始测试 -->
+      <li class="nav-drawer-item" role="none">
+        <a href="../index.html#test" class="nav-drawer-link" role="menuitem">开始测试</a>
+      </li>
+
+      <!-- 分隔线 -->
       <li class="nav-drawer-divider" role="separator"></li>
-      <li class="nav-drawer-item" role="none"><a href="../collection/index.html" class="nav-drawer-link" role="menuitem">角色图鉴</a></li>
-      <li class="nav-drawer-item" role="none"><a href="../achievements/index.html" class="nav-drawer-link" role="menuitem">成就徽章</a></li>
-      <li class="nav-drawer-item" role="none"><a href="../profile/index.html" class="nav-drawer-link" role="menuitem">个人中心</a></li>
+
+      <!-- 角色图鉴 -->
+      <li class="nav-drawer-item" role="none">
+        <a href="../collection/index.html" class="nav-drawer-link" role="menuitem">角色图鉴</a>
+      </li>
+
+      <!-- 成就徽章 -->
+      <li class="nav-drawer-item" role="none">
+        <a href="../achievements/index.html" class="nav-drawer-link" role="menuitem">成就徽章</a>
+      </li>
+
+      <!-- 个人中心 -->
+      <li class="nav-drawer-item" role="none">
+        <a href="../profile/index.html" class="nav-drawer-link" role="menuitem">个人中心</a>
+      </li>
+
+      <!-- 分隔线 -->
+      <li class="nav-drawer-divider" role="separator"></li>
+
+      <!-- 每日觉察 (可展开) -->
+      <li class="nav-drawer-item nav-drawer-has-submenu" role="none">
+        <button class="nav-drawer-link nav-drawer-submenu-toggle" aria-expanded="false" aria-controls="drawer-submenu-awareness">
+          <span>每日觉察</span>
+          <svg class="nav-drawer-submenu-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 2l4 4-4 4"/>
+          </svg>
+        </button>
+        <ul class="nav-drawer-submenu" id="drawer-submenu-awareness" role="menu" aria-label="每日觉察子菜单">
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../diary/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">📝</span>日记
+            </a>
+          </li>
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../mood/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">😊</span>情绪
+            </a>
+          </li>
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../journey/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">🌱</span>成长轨迹
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 实用工具 (可展开) -->
+      <li class="nav-drawer-item nav-drawer-has-submenu" role="none">
+        <button class="nav-drawer-link nav-drawer-submenu-toggle" aria-expanded="false" aria-controls="drawer-submenu-tools">
+          <span>实用工具</span>
+          <svg class="nav-drawer-submenu-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 2l4 4-4 4"/>
+          </svg>
+        </button>
+        <ul class="nav-drawer-submenu" id="drawer-submenu-tools" role="menu" aria-label="实用工具子菜单">
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../guide/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">📖</span>应对指南
+            </a>
+          </li>
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../emergency/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">🆘</span>紧急支持
+            </a>
+          </li>
+          <li class="nav-drawer-submenu-item" role="none">
+            <a href="../resources/index.html" class="nav-drawer-submenu-link" role="menuitem">
+              <span class="nav-drawer-icon">📚</span>资源库
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
+
 </aside>
 
     <div class="resources-page">
