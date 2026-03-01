@@ -103,20 +103,20 @@
     
     /* 页面边距 */
     --page-padding: 1rem;
-    --content-max-width: 800px;
-    --card-max-width: 500px;
+    --content-max-width: 1200px;
+    --card-max-width: 600px;
     
     /* ========================================
        5. 阴影系统 - Shadows
        ======================================== */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
-    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
-    --shadow-gold-lg: 0 8px 40px rgba(212, 175, 55, 0.3);
-    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-success: 0 4px 15px rgba(76, 201, 122, 0.3);
-    --shadow-error: 0 4px 15px rgba(231, 76, 60, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+    --shadow-gold: 0 4px 24px rgba(212, 175, 55, 0.25);
+    --shadow-gold-lg: 0 8px 32px rgba(212, 175, 55, 0.35);
+    --shadow-inner: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-success: 0 4px 20px rgba(76, 201, 122, 0.35);
+    --shadow-error: 0 4px 20px rgba(231, 76, 60, 0.35);
     
     /* ========================================
        6. 圆角系统 - Border Radius
