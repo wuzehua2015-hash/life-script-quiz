@@ -3165,3 +3165,8 @@ const GuideData = {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = GuideData;
 }
+
+// 浏览器环境：挂载到 window
+if (typeof window !== 'undefined') {
+  window.GuideData = GuideData;
+}
